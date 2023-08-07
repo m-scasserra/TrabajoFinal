@@ -1,0 +1,41 @@
+Change Value of Parameter LCSC Part # in Part C1 Old= New=C110229
+Change Value of Parameter PackageDescription in Part C1 Old=Radial Cap, Thru-Hole; 2 Leads; 0.3 in Pin Spacing New=SMD,D6.3xL5.4mm
+Change Value of Parameter PackageReference in Part C1 Old=RAD-0.3 New=SMD,D6.3xL5.4mm
+Change Value of Parameter LCSC Part # in Part C2 Old= New=C110229
+Change Value of Parameter PackageDescription in Part C2 Old=Radial Cap, Thru-Hole; 2 Leads; 0.3 in Pin Spacing New=SMD,D6.3xL5.4mm
+Change Value of Parameter PackageReference in Part C2 Old=RAD-0.3 New=SMD,D6.3xL5.4mm
+Change Value of Parameter LCSC Part # in Part C3 Old= New=C110229
+Change Value of Parameter PackageDescription in Part C3 Old=Radial Cap, Thru-Hole; 2 Leads; 0.3 in Pin Spacing New=SMD,D6.3xL5.4mm
+Change Value of Parameter PackageReference in Part C3 Old=RAD-0.3 New=SMD,D6.3xL5.4mm
+Change Value of Parameter PackageDescription in Part D2 Old=Diode, Thru-Hole; 2 Leads; 0.7 in Pin Spacing New=DO-214-AA/SMB; 2 C-Bend Leads; Body 5.3 x 3.6 mm, inc. leads (LxW)
+Change Value of Parameter PackageReference in Part D2 Old=DIODE-0.7 New=SMB
+Change Value of Parameter PackageDescription in Part R1 Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part R1 Old=AXIAL-0.4 New=0805
+Change Value of Parameter PackageDescription in Part R2 Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part R2 Old=AXIAL-0.4 New=0805
+Change Value of Parameter PackageDescription in Part R3 Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part R3 Old=AXIAL-0.4 New=0805
+Change Value of Parameter PackageDescription in Part R4 Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part R4 Old=AXIAL-0.4 New=0805
+Change Value of Parameter PackageDescription in Part R5 Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part R5 Old=AXIAL-0.4 New=0805
+Change Value of Parameter PackageDescription in Part R6 Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part R6 Old=AXIAL-0.4 New=0805
+Change Value of Parameter PackageDescription in Part R7 Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part R7 Old=AXIAL-0.4 New=0805
+Change Value of Parameter PackageDescription in Part R8 Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part R8 Old=AXIAL-0.4 New=0805
+Change Value of Parameter PackageDescription in Part R9 Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part R9 Old=AXIAL-0.4 New=0805
+Change Value of Parameter PackageDescription in Part R10 Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part R10 Old=AXIAL-0.4 New=0805
+Change Value of Parameter PackageDescription in Part R11 Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part R11 Old=AXIAL-0.4 New=0805
+Change Value of Parameter PackageDescription in Part R12 Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part R12 Old=AXIAL-0.4 New=0805
+Change Value of Parameter PackageDescription in Part R13 Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part R13 Old=AXIAL-0.4 New=0805
+Change Value of Parameter PackageDescription in Part R14 Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part R14 Old=AXIAL-0.4 New=0805
+Change Value of Parameter PackageDescription in Part RP Old=Axial Device, Thru-Hole; 2 Leads; 0.4 in Pin Spacing New=0805
+Change Value of Parameter PackageReference in Part RP Old=AXIAL-0.4 New=0805

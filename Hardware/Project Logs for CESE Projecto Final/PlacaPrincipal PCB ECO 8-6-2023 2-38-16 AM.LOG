@@ -1,0 +1,27 @@
+Removed Pin From Net: NetName=GND Pin=ALEXT-2
+Removed Pin From Net: NetName=ADC Pin=SENSORADC-1
+Removed Pin From Net: NetName=GND Pin=SENSORADC-3
+Removed Pin From Net: NetName=SCK Pin=SENSORSPI-1
+Removed Pin From Net: NetName=MISO Pin=SENSORSPI-2
+Removed Pin From Net: NetName=MOSI Pin=SENSORSPI-3
+Removed Pin From Net: NetName=CSSensor Pin=SENSORSPI-4
+Removed Pin From Net: NetName=GND Pin=SENSORSPI-5
+Removed Pin From Net: NetName=UARTRX Pin=UART-1
+Removed Pin From Net: NetName=UARTTX Pin=UART-2
+Removed Pin From Net: NetName=GND Pin=UART-3
+Added Pin To Net: NetName=GND Pin=ALEXT-1
+Added Pin To Net: NetName=GND Pin=SENSORADC-1
+Added Pin To Net: NetName=ADC Pin=SENSORADC-3
+Added Pin To Net: NetName=GND Pin=SENSORSPI-1
+Added Pin To Net: NetName=CSSensor Pin=SENSORSPI-2
+Added Pin To Net: NetName=MISO Pin=SENSORSPI-3
+Added Pin To Net: NetName=MOSI Pin=SENSORSPI-4
+Added Pin To Net: NetName=SCK Pin=SENSORSPI-5
+Added Pin To Net: NetName=GND Pin=UART-1
+Added Pin To Net: NetName=UARTRX Pin=UART-2
+Added Pin To Net: NetName=UARTTX Pin=UART-3
+Added Pin To Net: NetName=NetALEXT_2 Pin=ALEXT-2
+Added Pin To Net: NetName=NetALEXT_2 Pin=D1-1
+Added Net: Name=NetALEXT_2
+Added Member To Class: ClassName=PlacaPrincipal Member=Component IC3 E22-900M30S
+Added Room: Name=PlacaPrincipal

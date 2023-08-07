@@ -1,0 +1,3 @@
+Change Component Footprint: Designator=ANT Old Footprint=HDR1X5 New Footprint=SMA Conn 90
+Added Member To Class: ClassName=PlacaPrincipal Member=Component ANT Header 5
+Added Room: Name=PlacaPrincipal
