@@ -1,10 +1,12 @@
-Output: Bill of Materials
-Type  : BOM
-From  : Variant [[No Variations]] of Schematic Document [PlacaPrincipal.SchDoc]
-   Generated File[Bill of Materials-PlacaPrincipal.csv]
+Output: NC Drill Files
+Type  : NC Drill
+From  : PCB Document [PlacaPrincipal.PcbDoc]
+   Generated File[PlacaPrincipal.TXT]
+   Generated File[PlacaPrincipal.LDP]
+   Generated File[PlacaPrincipal.DRR]
 
 
-Files Generated   : 1
+Files Generated   : 3
 Documents Printed : 0
 
-Finished Output Generation At 1:09:03 AM On 8/7/2023
+Finished Output Generation At 12:14:26 AM On 8/8/2023
