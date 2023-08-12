@@ -47,23 +47,6 @@ PrefsVaultGUID=
 PrefsRevisionGUID=
 
 [Document1]
-DocumentPath=PlacaPrincipal.SchDoc
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=0
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=YDQAXDPV
-
-[Document2]
 DocumentPath=Library\Pcb\E22-900M30S.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -80,7 +63,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=NSSAUSBX
 
-[Document3]
+[Document2]
 DocumentPath=Library\Sch\E22-900M30S.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -97,7 +80,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=IWQWTUSZ
 
-[Document4]
+[Document3]
 DocumentPath=Library\Sch\ESP32-C3-DevKitC-02.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -114,7 +97,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=LIQAEYND
 
-[Document5]
+[Document4]
 DocumentPath=Library\Sch\ESP32-C3-DevKitC-02.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -131,7 +114,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=TDMIBWRR
 
-[Document6]
+[Document5]
 DocumentPath=Library\Pcb\RES0805.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -148,7 +131,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=AIDFWKPO
 
-[Document7]
+[Document6]
 DocumentPath=Library\Pcb\RES1206.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -165,7 +148,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QHSCCEVC
 
-[Document8]
+[Document7]
 DocumentPath=Library\Pcb\CAPSMDD6.3xL5.4.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -182,7 +165,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ABFODXTR
 
-[Document9]
+[Document8]
 DocumentPath=Library\Sch\LM2676S-ADJ.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -199,7 +182,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=EERMLCAU
 
-[Document10]
+[Document9]
 DocumentPath=Library\Pcb\LM2676S-ADJ.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -216,7 +199,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=MWCXVWTY
 
-[Document11]
+[Document10]
 DocumentPath=Library\Pcb\CAP0805.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -233,7 +216,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=TVFLRUYQ
 
-[Document12]
+[Document11]
 DocumentPath=Library\Pcb\Molex KK(2.54).100.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -250,7 +233,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ELXUMJNN
 
-[Document13]
+[Document12]
 DocumentPath=Library\Pcb\CONN HEADER VERT 2POS 3.96MM.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -267,7 +250,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=YRHYDBGX
 
-[Document14]
+[Document13]
 DocumentPath=Library\Pcb\SMA Conn 90.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -284,7 +267,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=OXKQLFJL
 
-[Document15]
+[Document14]
 DocumentPath=Library\Pcb\SMB Diode.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -301,7 +284,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=MRICELPL
 
-[Document16]
+[Document15]
 DocumentPath=Library\Pcb\RL6050.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -318,7 +301,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=OPSGRIHG
 
-[Document17]
+[Document16]
 DocumentPath=PlacaPrincipal.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -335,7 +318,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=FTJTUPYH
 
-[Document18]
+[Document17]
 DocumentPath=OuputJob.OutJob
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -352,129 +335,107 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[GeneratedDocument1]
-DocumentPath=Project Outputs for Free Documents\BOM\Bill of Materials-PlacaPrincipal.csv
+[Document18]
+DocumentPath=PlacaPrincipal.SchDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=0
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
 DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=YDQAXDPV
 
-[GeneratedDocument2]
-DocumentPath=Project Outputs for CESE Projecto Final\Design Rule Check - PlacaPrincipal.html
+[Document19]
+DocumentPath=PowerSupply.SchDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
 DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=ZINYEDQC
 
-[GeneratedDocument3]
-DocumentPath=Project Outputs for Free Documents\Pick Place\Pick Place for PlacaPrincipal.csv
+[Document20]
+DocumentPath=Microcontroller.SchDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
 DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=CKRPLLML
 
-[GeneratedDocument4]
-DocumentPath=Project Outputs for Free Documents\Pick Place\Pick Place for PlacaPrincipal.txt
+[Document21]
+DocumentPath=LoRaModule.SchDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
 DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=KSNNPGKM
 
-[GeneratedDocument5]
-DocumentPath=Project Outputs for CESE Projecto Final\PlacaPrincipal.EXTREP
+[Document22]
+DocumentPath=Library\Pcb\IPEX Board Conn.PcbLib
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
 DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=BGIGTUQE
 
-[GeneratedDocument6]
-DocumentPath=Project Outputs for Free Documents\Gerber\PlacaPrincipal.EXTREP
+[Document23]
+DocumentPath=Library\Pcb\SMB.PcbLib
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
 DItemRevisionGUID=
-
-[GeneratedDocument7]
-DocumentPath=Project Outputs for CESE Projecto Final\PlacaPrincipal.GBL
-DItemRevisionGUID=
-
-[GeneratedDocument8]
-DocumentPath=Project Outputs for Free Documents\Gerber\PlacaPrincipal.GBL
-DItemRevisionGUID=
-
-[GeneratedDocument9]
-DocumentPath=Project Outputs for CESE Projecto Final\PlacaPrincipal.GBO
-DItemRevisionGUID=
-
-[GeneratedDocument10]
-DocumentPath=Project Outputs for Free Documents\Gerber\PlacaPrincipal.GBO
-DItemRevisionGUID=
-
-[GeneratedDocument11]
-DocumentPath=Project Outputs for CESE Projecto Final\PlacaPrincipal.GBS
-DItemRevisionGUID=
-
-[GeneratedDocument12]
-DocumentPath=Project Outputs for Free Documents\Gerber\PlacaPrincipal.GBS
-DItemRevisionGUID=
-
-[GeneratedDocument13]
-DocumentPath=Project Outputs for CESE Projecto Final\PlacaPrincipal.GKO
-DItemRevisionGUID=
-
-[GeneratedDocument14]
-DocumentPath=Project Outputs for Free Documents\Gerber\PlacaPrincipal.GKO
-DItemRevisionGUID=
-
-[GeneratedDocument15]
-DocumentPath=Project Outputs for CESE Projecto Final\PlacaPrincipal.GM1
-DItemRevisionGUID=
-
-[GeneratedDocument16]
-DocumentPath=Project Outputs for Free Documents\Gerber\PlacaPrincipal.GM1
-DItemRevisionGUID=
-
-[GeneratedDocument17]
-DocumentPath=Project Outputs for Free Documents\Gerber\PlacaPrincipal.GM15
-DItemRevisionGUID=
-
-[GeneratedDocument18]
-DocumentPath=Project Outputs for CESE Projecto Final\PlacaPrincipal.GPB
-DItemRevisionGUID=
-
-[GeneratedDocument19]
-DocumentPath=Project Outputs for Free Documents\Gerber\PlacaPrincipal.GPB
-DItemRevisionGUID=
-
-[GeneratedDocument20]
-DocumentPath=Project Outputs for CESE Projecto Final\PlacaPrincipal.GPT
-DItemRevisionGUID=
-
-[GeneratedDocument21]
-DocumentPath=Project Outputs for Free Documents\Gerber\PlacaPrincipal.GPT
-DItemRevisionGUID=
-
-[GeneratedDocument22]
-DocumentPath=Project Outputs for CESE Projecto Final\PlacaPrincipal.GTL
-DItemRevisionGUID=
-
-[GeneratedDocument23]
-DocumentPath=Project Outputs for Free Documents\Gerber\PlacaPrincipal.GTL
-DItemRevisionGUID=
-
-[GeneratedDocument24]
-DocumentPath=Project Outputs for CESE Projecto Final\PlacaPrincipal.GTO
-DItemRevisionGUID=
-
-[GeneratedDocument25]
-DocumentPath=Project Outputs for Free Documents\Gerber\PlacaPrincipal.GTO
-DItemRevisionGUID=
-
-[GeneratedDocument26]
-DocumentPath=Project Outputs for CESE Projecto Final\PlacaPrincipal.GTS
-DItemRevisionGUID=
-
-[GeneratedDocument27]
-DocumentPath=Project Outputs for Free Documents\Gerber\PlacaPrincipal.GTS
-DItemRevisionGUID=
-
-[GeneratedDocument28]
-DocumentPath=Project Outputs for CESE Projecto Final\PlacaPrincipal.REP
-DItemRevisionGUID=
-
-[GeneratedDocument29]
-DocumentPath=Project Outputs for Free Documents\Gerber\PlacaPrincipal.REP
-DItemRevisionGUID=
-
-[GeneratedDocument30]
-DocumentPath=Project Outputs for CESE Projecto Final\PlacaPrincipal.RUL
-DItemRevisionGUID=
-
-[GeneratedDocument31]
-DocumentPath=Project Outputs for Free Documents\Gerber\PlacaPrincipal.RUL
-DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=EMQTEOBE
 
 [Configuration1]
 Name=Sources

@@ -2,64 +2,8 @@
 FileName = PlacaPrincipal.GBR
 AutoAperture = True
 *************************************************************
-Generating : Mechanical 1
-      File : PlacaPrincipal.GM1
-
-    Adding Layer      : Mechanical 1
-
-
-Used DCodes :
-    D12
-    D54
-*************************************************************
-
-*************************************************************
-Generating : Mechanical 15
-      File : PlacaPrincipal.GM15
-
-    Adding Layer      : Mechanical 15
-
-
-Used DCodes :
-    D54
-    D55
-*************************************************************
-
-*************************************************************
-Generating : Bottom Pad Master
-      File : PlacaPrincipal.GPB
-
-    Adding Layer      : Bottom Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D43
-    D44
-    D45
-    D46
-    D47
-    D48
-    D49
-    D50
-    D51
-    D52
-*************************************************************
-
-*************************************************************
-Generating : Bottom Overlay
-      File : PlacaPrincipal.GBO
-
-    Adding Layer      : Bottom Overlay
-
-
-Used DCodes :
-*************************************************************
-
-*************************************************************
-Generating : Top Layer
-      File : PlacaPrincipal.GTL
+Generating : Top Pad Master
+      File : PlacaPrincipal.GPT
 
     Adding Layer      : Top Layer
 
@@ -67,8 +11,6 @@ Generating : Top Layer
 
 
 Used DCodes :
-    D12
-    D33
     D34
     D35
     D36
@@ -80,7 +22,6 @@ Used DCodes :
     D42
     D43
     D44
-    D45
     D46
     D47
     D48
@@ -89,16 +30,6 @@ Used DCodes :
     D51
     D52
     D53
-*************************************************************
-
-*************************************************************
-Generating : Keep-Out Layer
-      File : PlacaPrincipal.GKO
-
-    Adding Layer      : Keep-Out Layer
-
-
-Used DCodes :
 *************************************************************
 
 *************************************************************
@@ -112,13 +43,12 @@ Used DCodes :
     D10
     D11
     D12
+    D13
 *************************************************************
 
 *************************************************************
-Generating : Bottom Solder
-      File : PlacaPrincipal.GBS
-
-    Adding Layer      : Bottom Solder
+Generating : Bottom Pad Master
+      File : PlacaPrincipal.GPB
 
     Adding Layer      : Bottom Layer
 
@@ -126,65 +56,6 @@ Generating : Bottom Solder
 
 
 Used DCodes :
-    D22
-    D23
-    D24
-    D25
-    D26
-    D27
-    D28
-    D29
-    D30
-    D31
-    D32
-*************************************************************
-
-*************************************************************
-Generating : Top Pad Master
-      File : PlacaPrincipal.GPT
-
-    Adding Layer      : Top Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D33
-    D34
-    D35
-    D36
-    D37
-    D38
-    D39
-    D40
-    D41
-    D43
-    D44
-    D45
-    D46
-    D47
-    D48
-    D49
-    D50
-    D51
-    D52
-*************************************************************
-
-*************************************************************
-Generating : Bottom Layer
-      File : PlacaPrincipal.GBL
-
-    Adding Layer      : Bottom Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D12
-    D42
-    D43
-    D44
-    D45
     D46
     D47
     D48
@@ -207,7 +78,6 @@ Generating : Top Solder
 
 
 Used DCodes :
-    D13
     D14
     D15
     D16
@@ -227,5 +97,130 @@ Used DCodes :
     D30
     D31
     D32
+    D33
+*************************************************************
+
+*************************************************************
+Generating : Bottom Solder
+      File : PlacaPrincipal.GBS
+
+    Adding Layer      : Bottom Solder
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 1
+      File : PlacaPrincipal.GM1
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+    D11
+    D55
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 15
+      File : PlacaPrincipal.GM15
+
+    Adding Layer      : Mechanical 15
+
+
+Used DCodes :
+    D55
+    D56
+*************************************************************
+
+*************************************************************
+Generating : Bottom Layer
+      File : PlacaPrincipal.GBL
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D11
+    D45
+    D46
+    D47
+    D48
+    D49
+    D50
+    D51
+    D52
+    D53
+    D54
+*************************************************************
+
+*************************************************************
+Generating : Top Layer
+      File : PlacaPrincipal.GTL
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D11
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+    D43
+    D44
+    D45
+    D46
+    D47
+    D48
+    D49
+    D50
+    D51
+    D52
+    D53
+    D54
+*************************************************************
+
+*************************************************************
+Generating : Bottom Overlay
+      File : PlacaPrincipal.GBO
+
+    Adding Layer      : Bottom Overlay
+
+
+Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Keep-Out Layer
+      File : PlacaPrincipal.GKO
+
+    Adding Layer      : Keep-Out Layer
+
+
+Used DCodes :
 *************************************************************
 
