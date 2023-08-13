@@ -1,1 +1,4 @@
 Record=TopLevelDocument|FileName=PlacaPrincipal.SchDoc|SheetNumber=1
+Record=SheetSymbol|SourceDocument=PlacaPrincipal.SchDoc|Designator=U_LoRaModule|SchDesignator=U_LoRaModule|FileName=LoRaModule.SchDoc|SheetNumber=4|SymbolType=Normal|RawFileName=LoRaModule.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=PlacaPrincipal.SchDoc|Designator=U_Microcontroller|SchDesignator=U_Microcontroller|FileName=Microcontroller.SchDoc|SheetNumber=3|SymbolType=Normal|RawFileName=Microcontroller.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=PlacaPrincipal.SchDoc|Designator=U_PowerSupply|SchDesignator=U_PowerSupply|FileName=PowerSupply.SchDoc|SheetNumber=2|SymbolType=Normal|RawFileName=PowerSupply.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 

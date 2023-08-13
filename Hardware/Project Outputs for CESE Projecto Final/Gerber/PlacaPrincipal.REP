@@ -131,7 +131,7 @@ Generating : Mechanical 1
 
 
 Used DCodes :
-    D11
+    D12
     D55
 *************************************************************
 
@@ -157,7 +157,7 @@ Generating : Bottom Layer
 
 
 Used DCodes :
-    D11
+    D12
     D45
     D46
     D47
@@ -180,7 +180,7 @@ Generating : Top Layer
 
 
 Used DCodes :
-    D11
+    D12
     D34
     D35
     D36

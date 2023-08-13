@@ -437,6 +437,90 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=EMQTEOBE
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for CESE Projecto Final\BOM\Bill of Materials-CESE Projecto Final.csv
+DItemRevisionGUID=
+
+[GeneratedDocument2]
+DocumentPath=Project Outputs for CESE Projecto Final\BOM\Bill of Materials-PlacaPrincipal.csv
+DItemRevisionGUID=
+
+[GeneratedDocument3]
+DocumentPath=Project Outputs for CESE Projecto Final\Design Rule Check - PlacaPrincipal.html
+DItemRevisionGUID=
+
+[GeneratedDocument4]
+DocumentPath=Project Outputs for CESE Projecto Final\Pick Place\Pick Place for PlacaPrincipal.csv
+DItemRevisionGUID=
+
+[GeneratedDocument5]
+DocumentPath=Project Outputs for CESE Projecto Final\NC Drill\PlacaPrincipal.DRR
+DItemRevisionGUID=
+
+[GeneratedDocument6]
+DocumentPath=Project Outputs for CESE Projecto Final\Gerber\PlacaPrincipal.EXTREP
+DItemRevisionGUID=
+
+[GeneratedDocument7]
+DocumentPath=Project Outputs for CESE Projecto Final\Gerber\PlacaPrincipal.GBL
+DItemRevisionGUID=
+
+[GeneratedDocument8]
+DocumentPath=Project Outputs for CESE Projecto Final\Gerber\PlacaPrincipal.GBO
+DItemRevisionGUID=
+
+[GeneratedDocument9]
+DocumentPath=Project Outputs for CESE Projecto Final\Gerber\PlacaPrincipal.GBS
+DItemRevisionGUID=
+
+[GeneratedDocument10]
+DocumentPath=Project Outputs for CESE Projecto Final\Gerber\PlacaPrincipal.GKO
+DItemRevisionGUID=
+
+[GeneratedDocument11]
+DocumentPath=Project Outputs for CESE Projecto Final\Gerber\PlacaPrincipal.GM1
+DItemRevisionGUID=
+
+[GeneratedDocument12]
+DocumentPath=Project Outputs for CESE Projecto Final\Gerber\PlacaPrincipal.GM15
+DItemRevisionGUID=
+
+[GeneratedDocument13]
+DocumentPath=Project Outputs for CESE Projecto Final\Gerber\PlacaPrincipal.GPB
+DItemRevisionGUID=
+
+[GeneratedDocument14]
+DocumentPath=Project Outputs for CESE Projecto Final\Gerber\PlacaPrincipal.GPT
+DItemRevisionGUID=
+
+[GeneratedDocument15]
+DocumentPath=Project Outputs for CESE Projecto Final\Gerber\PlacaPrincipal.GTL
+DItemRevisionGUID=
+
+[GeneratedDocument16]
+DocumentPath=Project Outputs for CESE Projecto Final\Gerber\PlacaPrincipal.GTO
+DItemRevisionGUID=
+
+[GeneratedDocument17]
+DocumentPath=Project Outputs for CESE Projecto Final\Gerber\PlacaPrincipal.GTS
+DItemRevisionGUID=
+
+[GeneratedDocument18]
+DocumentPath=Project Outputs for CESE Projecto Final\NC Drill\PlacaPrincipal.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument19]
+DocumentPath=Project Outputs for CESE Projecto Final\Gerber\PlacaPrincipal.REP
+DItemRevisionGUID=
+
+[GeneratedDocument20]
+DocumentPath=Project Outputs for CESE Projecto Final\Gerber\PlacaPrincipal.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument21]
+DocumentPath=Project Outputs for CESE Projecto Final\NC Drill\PlacaPrincipal.TXT
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0
