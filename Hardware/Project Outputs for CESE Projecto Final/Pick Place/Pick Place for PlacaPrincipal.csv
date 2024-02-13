@@ -4,20 +4,23 @@ C:\Users\Lenovo\Documents\Proyecto_Final\TrabajoFinal\Hardware\Project Outputs f
 ========================================================================================================================
 File Design Information:
 
-Date:       15-09-23
-Time:       02:50
-Revision:   4cb1ff1e474f31c4bcf41138914559b4ecd2dcab
+Date:       01-10-23
+Time:       02:24
+Revision:   33a5c435db59f5ca0a1f4f6285e5dd9e3b6fe141
 Variant:    No variations
 Units used: mm
 
 "Designator","Center-X(mm)","Center-Y(mm)","Layer","Rotation"
+"Rpd3","83.0580mm","74.1680mm","TopLayer","0"
+"Rpd2","80.0100mm","106.6800mm","TopLayer","0"
+"Rpd1","83.0580mm","71.8820mm","TopLayer","0"
 "R17","39.3035mm","73.9140mm","TopLayer","180"
 "R16","45.2120mm","73.9140mm","TopLayer","180"
 "R15","36.8300mm","91.4400mm","TopLayer","180"
 "UART","30.7340mm","112.2680mm","TopLayer","180"
 "IC3","59.9690mm","58.8660mm","TopLayer","270"
 "ANT","33.7054mm","73.9140mm","TopLayer","90"
-"RP","80.0100mm","114.3000mm","TopLayer","180"
+"RPower","80.0100mm","114.3000mm","TopLayer","180"
 "C8","80.5180mm","47.7520mm","TopLayer","270"
 "SENSORSPI","89.9160mm","49.0220mm","TopLayer","270"
 "SENSORADC","30.7340mm","101.6000mm","TopLayer","180"
@@ -47,7 +50,7 @@ Units used: mm
 "C6","100.0760mm","60.1980mm","TopLayer","270"
 "C5","97.2460mm","60.1980mm","TopLayer","270"
 "C4","114.3000mm","75.1840mm","TopLayer","0"
-"C3","95.2500mm","102.1080mm","TopLayer","270"
+"C3","95.2500mm","102.3620mm","TopLayer","270"
 "C2","104.6480mm","102.1080mm","TopLayer","270"
 "C1","114.3000mm","102.1080mm","TopLayer","270"
 "ALEXT","115.5700mm","117.2910mm","TopLayer","0"
