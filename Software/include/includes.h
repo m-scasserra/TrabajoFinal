@@ -1,5 +1,5 @@
-#ifndef INCLUDES
-#define INCLUDES
+#ifndef INCLUDES_H
+#define INCLUDES_H
 
 // Standard Libraries
 #include <stdio.h>
@@ -37,11 +37,14 @@
 #include "esp_vfs.h"
 #include "esp_ota_ops.h"
 #include "esp_check.h"
+#include "soc/clk_tree_defs.h"
 
 // Private Libraries
 #include "Led.h"
 #include "CLI.h"
 #include "cmd_system.h"
+#include "Hardware.h"
+#include "SPI.h"
 
 
-#endif
+#endif //INCLUDES_H
