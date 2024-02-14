@@ -4,8 +4,12 @@
 #include "includes.h"
 #include "driver/spi_master.h"
 #include "esp_intr_alloc.h"
- 
 
+#define SPITAG "SPI"
+
+// Configuracion del SPI Bus
+#define SPI_MAX_TRANSFER 1024
+#define SPI_INTR_BUS_FLAGS 0
 
 class SPI
 {
@@ -21,15 +25,14 @@ public:
         return instance;
     }
 
-bool Begin(void);
-bool GetStatus(void);
+    bool Begin(void);
+    spi_device_handle_t * GetSPIHandle(void);
 
 private:
     // Constructor privado
     SPI() {}
 
     spi_device_handle_t SPIHandle;
-    
 };
 
 #endif // SPI_H
