@@ -30,7 +30,7 @@ public:
         return instance;
     }
 
-    static void ConsoleInit(void);
+    static void Begin(void);
     static void PrintLogo(void);
 
 private:

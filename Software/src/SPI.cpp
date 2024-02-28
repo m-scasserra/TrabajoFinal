@@ -1,29 +1,12 @@
 #include "SPI.h"
 
-bool SPI::Begin(void)
+spi_device_handle_t SPI::SPIHandle = NULL;
+
+bool SPI::Begin(spi_bus_config_t *SPIBusCfg)
 {
-    esp_err_t ret;
-
-    // Configuracion del bus SPI
-    spi_bus_config_t SPIBusCfg;
-    memset(&SPIBusCfg, 0, sizeof(spi_bus_config_t));     // Seteo el SPIBus en 0 para asegurarme que ningun parametro esta pre iniciado
-    SPIBusCfg.mosi_io_num = SPI_MOSI_PIN;         // Pin del MOSI
-    SPIBusCfg.miso_io_num = SPI_MISO_PIN;         // Pin del MiSO
-    SPIBusCfg.sclk_io_num = SPI_SCK_PIN;          // Pin del SCK
-    SPIBusCfg.quadhd_io_num = -1;                 // No se usa el Write Protect
-    SPIBusCfg.quadwp_io_num = -1;                 // No se usa el Hold
-    SPIBusCfg.data4_io_num = -1;                  // No se usa el spi Data 4 signal porque no estamos en OSPI
-    SPIBusCfg.data5_io_num = -1;                  // No se usa el spi Data 5 signal porque no estamos en OSPI
-    SPIBusCfg.data6_io_num = -1;                  // No se usa el spi Data 6 signal porque no estamos en OSPI
-    SPIBusCfg.data7_io_num = -1;                  // No se usa el spi Data 7 signal porque no estamos en OSPI
-    SPIBusCfg.max_transfer_sz = SPI_MAX_TRANSFER; // Maximo tamaño de transferencia
-    SPIBusCfg.flags = SPICOMMON_BUSFLAG_MASTER;   // Flag para indicar que el µC es el master en SPI
-    SPIBusCfg.isr_cpu_id = INTR_CPU_ID_AUTO;      // CPU que se encarga de las interrupciones, en el ESP32-C3 hay un solo CPU
-    SPIBusCfg.intr_flags = SPI_INTR_BUS_FLAGS;    // Flags de configuracion para el bus SPI
-
     // Initialize the SPI bus
-    ESP_LOGI(SPITAG, "Iniciando el bus SPI.");
-    if (spi_bus_initialize(SPI2_HOST, &SPIBusCfg, SPI_DMA_DISABLED) != ESP_OK)
+    ESP_LOGI(SPITAG, "Inicio el bus SPI.");
+    if (spi_bus_initialize(SPI2_HOST, SPIBusCfg, SPI_DMA_DISABLED) != ESP_OK)
     {
         ESP_LOGE(SPITAG, "Error al inicializar el SPI Bus.");
         return false;
@@ -33,9 +16,57 @@ bool SPI::Begin(void)
     return true;
 }
 
-
-
-spi_device_handle_t * SPI::GetSPIHandle(void)
+bool SPI::AddDevice(spi_device_interface_config_t *SPISlaveCfg)
 {
-    return &SPIHandle;
+    // Attach the E22 to the SPI bus
+    ESP_LOGI(SPITAG, "Agrego el dispositivo SPI");
+
+    if (spi_bus_add_device(SPI2_HOST, SPISlaveCfg, &SPIHandle) != ESP_OK)
+    {
+        ESP_LOGE(SPITAG, "Error al agregar el dispositivo esclavo al SPI Bus");
+        return false;
+    }
+    ESP_LOGI(SPITAG, "El dispositivo esclavo fue agregado correctamente.");
+
+    return true;
+}
+
+bool SPI::SendMessage(uint8_t *tx_msg, uint8_t tx_len, uint8_t *rx_msg, uint8_t rx_len)
+{
+    spi_transaction_t message;
+    memset(&message, 0, sizeof(spi_transaction_t));
+
+    //message.cmd = E22_CMD_GetStatus;
+    message.length = 8 * tx_len;
+    message.rxlength = 8 * rx_len;
+    message.user = NULL;
+    message.tx_buffer = NULL;
+    message.tx_buffer = tx_msg;
+    message.rx_buffer = rx_msg;
+
+    if (spi_device_polling_transmit(SPIHandle, &message) != ESP_OK)
+    {
+        ESP_LOGE("SPI", "Error en spi_device_polling_transmit()");
+        return false;
+    }
+    return true;
+}
+
+bool SPI::SendMessage(uint8_t *tx_msg, uint8_t tx_len)
+{
+    spi_transaction_t message;
+    memset(&message, 0, sizeof(spi_transaction_t));
+
+    message.length = 8 * tx_len;
+    message.user = NULL;
+    message.tx_buffer = tx_msg;
+    message.rx_buffer = NULL;
+
+    if (spi_device_polling_transmit(SPIHandle, &message) != ESP_OK)
+    {
+        ESP_LOGE("SPI", "Error en spi_device_polling_transmit()");
+        return false;
+    }
+    return true;
+
 }

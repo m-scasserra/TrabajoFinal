@@ -3,6 +3,8 @@
 
 #include "includes.h"
 
+#define IOTAG "IO"
+
 class IO
 {
 public:
@@ -18,11 +20,15 @@ public:
     }
 
     bool Begin(void);
+    bool SetConfig(uint64_t pin_bit_mask, gpio_mode_t mode, gpio_pullup_t pull_up_en, gpio_pulldown_t pull_down_en, gpio_int_type_t intr_type);
     bool SetLevel(gpio_num_t gpio_num, uint32_t level);
+    bool GetLevel(gpio_num_t gpio_num);
 
 private:
     // Constructor privado
     IO() {}
+
+    bool Initial_configuration(void);
 
 };
 

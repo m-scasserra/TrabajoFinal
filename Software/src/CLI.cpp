@@ -247,7 +247,7 @@ void CLI::esp_console_register_all_commands(void)
     register_system();
 }
 
-void CLI::ConsoleInit(void)
+void CLI::Begin(void)
 {
 
     memset(&timer_args, 0, sizeof(timer_args));

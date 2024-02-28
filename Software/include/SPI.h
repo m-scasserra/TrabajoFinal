@@ -25,14 +25,18 @@ public:
         return instance;
     }
 
-    bool Begin(void);
-    spi_device_handle_t * GetSPIHandle(void);
+    bool Begin(spi_bus_config_t *SPIBusCfg);
+    bool AddDevice(spi_device_interface_config_t *SPISlaveCfg);
+    bool SendMessage(uint8_t *tx_msg, uint8_t tx_len, uint8_t *rx_msg, uint8_t rx_len);
+    bool SendMessage(uint8_t *tx_msg, uint8_t tx_len);
 
 private:
     // Constructor privado
     SPI() {}
 
-    spi_device_handle_t SPIHandle;
+    static bool SPIInitiated;
+
+    static spi_device_handle_t SPIHandle;
 };
 
 #endif // SPI_H
