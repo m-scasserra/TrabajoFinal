@@ -30,7 +30,7 @@ bool E22::Begin(void)
 
     // Creo la queue de mensajes
 
-    xE22CmdQueue = xQueueCreate(MAX_E22_CMD_QUEUE, sizeof(uint8_t));
+    xE22CmdQueue = xQueueCreate(MAX_E22_CMD_QUEUE, sizeof(E22Command_t));
 
     if (xE22CmdQueue == NULL)
     {
@@ -129,16 +129,20 @@ bool E22::getRssiInst(void)
 
 bool E22::setBufferBaseAddress(uint8_t TxBaseAddr, uint8_t RxBaseAddr)
 {
-    SPI &spi = SPI::getInstance();
-    uint8_t TxBuffer[3] = {E22_CMD_SetBufferBaseAddress, TxBaseAddr, RxBaseAddr};
+    E22Command_t command;
+    memset(&command, 0, sizeof(E22Command_t));
+    command.command_code = E22_CMD_SetBufferBaseAddress;
+    command.param_count = 2;
+    command.params[0] = TxBaseAddr;
+    command.params[1] = RxBaseAddr;
 
-    if (!spi.SendMessage(TxBuffer, 3))
+    if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
-        ESP_LOGE(E22TAG, "Error al enviar el comando setBufferBaseAddress");
-        return false;
+        return true;
     }
 
-    return true;
+    ESP_LOGE(E22TAG, "Error al enviar el comando setBufferBaseAddress a la queue.");
+    return false;
 }
 
 bool E22::setRx(uint32_t Timeout)
@@ -150,7 +154,7 @@ bool E22::setRx(uint32_t Timeout)
         return false;
     }
 
-    uint8_t TxBuffer[4] = {E22_CMD_SetRX, (uint8_t)(Timeout >> 16), (uint8_t)(Timeout >> 8), (uint8_t)(Timeout & 0xFF)};
+    uint8_t TxBuffer[4] = {E22_OpCode_SetRX, (uint8_t)(Timeout >> 16), (uint8_t)(Timeout >> 8), (uint8_t)(Timeout & 0xFF)};
 
     if (!spi.SendMessage(TxBuffer, 4))
     {
@@ -165,7 +169,7 @@ bool E22::setStandBy(StdByMode_t mode)
 {
     SPI &spi = SPI::getInstance();
 
-    uint8_t TxBuffer[2] = {E22_CMD_SetStandby, (uint8_t)mode};
+    uint8_t TxBuffer[2] = {E22_OpCode_SetStandby, (uint8_t)mode};
 
     if (!spi.SendMessage(TxBuffer, 2))
     {
@@ -284,11 +288,152 @@ bool E22::resetOn(void)
     return false;
 }
 
-void E22::processCmd(void)
+bool E22::processCmd(void)
 {
-    uint8_t cmdToProcess = 0;
+    SPI &spi = SPI::getInstance();
+    E22Command_t cmdToProcess;
+    memset(&cmdToProcess, 0, sizeof(E22Command_t));
+
     if (xQueueReceive(xE22CmdQueue, &(cmdToProcess), 0) == pdPASS)
     {
         /* Proceso el mensaje de la tarea que lo solicite */
+
+        switch (cmdToProcess.command_code)
+        {
+        case E22_CMD_SetSleep:
+            break;
+
+        case E22_CMD_SetStandBy:
+            break;
+
+        case E22_CMD_SetFs:
+            break;
+
+        case E22_CMD_SetTx:
+            break;
+
+        case E22_CMD_SetRx:
+            break;
+
+        case E22_CMD_StopTimerOnPreamble:
+            break;
+
+        case E22_CMD_SetRxDutyCycle:
+            break;
+
+        case E22_CMD_SetCad:
+            break;
+
+        case E22_CMD_SetTxContinousWave:
+            break;
+
+        case E22_CMD_SetTxInfinitePreamble:
+            break;
+
+        case E22_CMD_SetRegulatorMode:
+            break;
+
+        case E22_CMD_Calibrate:
+            break;
+
+        case E22_CMD_CalibrateImage:
+            break;
+
+        case E22_CMD_SetPaConfig:
+            break;
+
+        case E22_CMD_SetRxTxFallbackMode:
+            break;
+
+        case E22_CMD_WriteRegister:
+            break;
+
+        case E22_CMD_ReadRegister:
+            break;
+
+        case E22_CMD_WriteBuffer:
+            break;
+
+        case E22_CMD_ReadBuffe:
+            break;
+
+        case E22_CMD_SetDioIrqParams:
+            break;
+
+        case E22_CMD_GetIrqStatus:
+            break;
+
+        case E22_CMD_ClearIrqStatus:
+            break;
+
+        case E22_CMD_SetDIO2AsRfSwitchCtrl:
+            break;
+
+        case E22_CMD_SetDIO3asTcxoCtrl:
+            break;
+
+        case E22_CMD_SetRfFrequency:
+            break;
+
+        case E22_CMD_SetPacketType:
+            break;
+
+        case E22_CMD_GetPacketType:
+            break;
+
+        case E22_CMD_SetTxParams:
+            break;
+
+        case E22_CMD_SetModulationParams:
+            break;
+
+        case E22_CMD_SetPacketParams:
+            break;
+
+        case E22_CMD_SetCadParams:
+            break;
+
+        case E22_CMD_SetBufferBaseAddress:
+            uint8_t TxBuffer[3] = {E22_CMD_SetBufferBaseAddress, cmdToProcess.params[0], cmdToProcess.params[1]};
+
+            if (!spi.SendMessage(TxBuffer, 3))
+            {
+                ESP_LOGE(E22TAG, "Error al enviar el comando setBufferBaseAddress al spi.");
+                return false;
+            }
+
+            return true;
+            break;
+
+        case E22_CMD_SetLoRaSymbNumTimeout:
+            break;
+
+        case E22_CMD_GetStatus:
+            break;
+
+        case E22_CMD_GetRssiInst:
+            break;
+
+        case E22_CMD_GetRxBufferStatus:
+            break;
+
+        case E22_CMD_GetPacketStatus:
+            break;
+
+        case E22_CMD_GetDeviceErrors:
+            break;
+
+        case E22_CMD_ClearDeviceErrors:
+            break;
+
+        case E22_CMD_GetStats:
+            break;
+
+        case E22_CMD_ResetStats:
+            break;
+
+        default:
+            break;
+        }
     }
 }
