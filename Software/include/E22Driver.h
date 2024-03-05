@@ -8,6 +8,7 @@
 // Defines generales
 
 #define MAX_CMD_PARAMS 10
+#define MAX_RESPONSES 10
 
 // Defines para la tarea de FRTOS del E22
 
@@ -46,6 +47,25 @@ public:
         STDBY_XOSC
     };
 
+    enum PacketType_t
+    {
+        PACKET_TYPE_GFSK = 0x0,
+        PACKET_TYPE_LORA = 0x1,
+        PACKET_TYPE_LR_FHSS = 0x3
+    };
+
+    enum tcxoVoltage_t
+    {
+        TCXOVOLTAGE_1_6 = 0x0,
+        TCXOVOLTAGE_1_7 = 0x1,
+        TCXOVOLTAGE_1_8 = 0x2,
+        TCXOVOLTAGE_2_2 = 0x3,
+        TCXOVOLTAGE_2_4 = 0x4,
+        TCXOVOLTAGE_2_7 = 0x5,
+        TCXOVOLTAGE_3_0 = 0x6,
+        TCXOVOLTAGE_3_3 = 0x7
+    };
+
     enum E22Cmd_t
     {
         E22_CMD_SetSleep,
@@ -66,7 +86,7 @@ public:
         E22_CMD_WriteRegister,
         E22_CMD_ReadRegister,
         E22_CMD_WriteBuffer,
-        E22_CMD_ReadBuffe,
+        E22_CMD_ReadBuffer,
         E22_CMD_SetDioIrqParams,
         E22_CMD_GetIrqStatus,
         E22_CMD_ClearIrqStatus,
@@ -93,25 +113,49 @@ public:
 
     typedef struct
     {
-        E22Cmd_t command_code;
-        uint8_t param_count;            // Number of parameters present
-        uint8_t params[MAX_CMD_PARAMS]; // Array to hold various parameter types
+        E22Cmd_t commandCode;
+        uint8_t paramCount; // Number of parameters present
+        union params_t
+        {
+            uint8_t paramsArray[MAX_CMD_PARAMS]; // Array to hold various parameter types
+            uint8_t *paramsPtr;                  // Pointer to hold various parameter types
+        } params;
+
+        bool hasResponse;
+        uint8_t responsesCount; // Number of responses of the command
+        union responses_t
+        {
+            uint8_t responsesArray[MAX_RESPONSES]; // Array to hold various parameter types
+            uint8_t *responsesPtr;                 // Pointer to hold various parameter types
+        } responses;
     } E22Command_t;
 
     bool Begin(void);
+
+    bool setPacketType(PacketType_t packetType);
+    bool getPacketType(PacketType_t *packetType);
+    bool writeRegister(uint16_t addr, uint8_t dataIn);
+    bool readRegister(uint16_t addr, uint8_t *dataOut);
+    bool writeBuffer(uint8_t offset, uint8_t dataIn);
+    bool readBuffer(uint8_t offset, uint8_t *dataOut);
+    bool getStatus(void);
+    bool getRssiInst(void);
+    bool setBufferBaseAddress(uint8_t TxBaseAddr, uint8_t RxBaseAddr);
+    bool setRx(uint32_t Timeout);
+    bool setStandBy(StdByMode_t mode);
+    bool setDIO3asTCXOCtrl(tcxoVoltage_t voltage, uint32_t delay);
 
 private:
     // Constructor privado
     E22() {}
 
     static void E22Task(void *pvParameters);
-    bool processStatus(uint8_t msg);
+
     bool processCmd(void);
-    bool getStatus(void);
-    bool getRssiInst(void);
-    bool setBufferBaseAddress(uint8_t TxBaseAddr, uint8_t RxBaseAddr);
-    bool setRx(uint32_t Timeout);
-    bool setStandBy(StdByMode_t mode);
+    bool processResponse(void);
+
+    bool processStatus(uint8_t msg);
+
     bool isBusy(void);
     bool resetOn(void);
     bool resetOff(void);
