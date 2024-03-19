@@ -4,6 +4,8 @@
 #include "includes.h"
 
 #define IOTAG "IO"
+#define IO_LOW 0
+#define IO_HIGH 0
 
 class IO
 {

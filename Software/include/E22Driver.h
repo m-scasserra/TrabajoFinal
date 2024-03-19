@@ -3,29 +3,33 @@
 
 #include "includes.h"
 
-#define E22TAG "E22"
+#define E22TAG                      "E22"
 
 // Defines generales
 
-#define MAX_CMD_PARAMS 10
-#define MAX_RESPONSES 10
+#define MAX_CMD_PARAMS              10
+#define MAX_RESPONSES               10
 
 // Defines para la tarea de FRTOS del E22
 
-#define MAX_E22_CMD_QUEUE 10
+#define MAX_E22_CMD_QUEUE           10
 
 // Configuracion del SPI Device E22
-#define SPI_COMMAND_LEN 8
-#define SPI_ADDR_LEN 16
-#define SPI_DUMMY_BITS 0
-#define SPI_MODE 0
-#define SPI_DUTY_CYCLE 0
-#define CYCLES_CS_BEFORE_TRANS 1
-#define CYCLES_CS_AFTER_TRANS 1
-#define SPI_CLOCK 5000000 // 10MHz SPI Clock
-#define SPI_QUEUE_SIZE 10
-#define SPI_INPUT_DELAY 0
-#define SPI_DEVICE_CONFIG_FLAGS SPI_DEVICE_NO_DUMMY
+#define SPI_COMMAND_LEN             8
+#define SPI_ADDR_LEN                16
+#define SPI_DUMMY_BITS              0
+#define SPI_MODE                    0
+#define SPI_DUTY_CYCLE              0
+#define CYCLES_CS_BEFORE_TRANS      1
+#define CYCLES_CS_AFTER_TRANS       1
+#define SPI_CLOCK                   5000000 // 10MHz SPI Clock
+#define SPI_QUEUE_SIZE              10
+#define SPI_INPUT_DELAY             0
+#define SPI_DEVICE_CONFIG_FLAGS     SPI_DEVICE_NO_DUMMY
+
+// Configuraciones del E22
+#define SX126X_RF_FREQUENCY_XTAL    32000000    // XTAL frequency used for RF frequency calculation
+#define SX126X_RF_FREQUENCY_SHIFT   25          // RF frequency = RF Freq * F XTAL / 2^25
 
 class E22
 {
@@ -64,6 +68,63 @@ public:
         TCXOVOLTAGE_2_7 = 0x5,
         TCXOVOLTAGE_3_0 = 0x6,
         TCXOVOLTAGE_3_3 = 0x7
+    };
+
+    enum RC64kCalibration_t
+    {
+        RC64K_CALIBRATION_DISABLE = 0x0,
+        RC64K_CALIBRATION_ENABLE = 0x1
+    };
+
+    enum RC13MCalibration_t
+    {
+        RC13M_CALIBRATION_DISABLE = 0x0,
+        RC13M_CALIBRATION_ENABLE = 0x1
+    };
+
+    enum PLLCalibration_t
+    {
+        PLL_CALIBRATION_DISABLE = 0x0,
+        PLL_CALIBRATION_ENABLE = 0x1
+    };
+
+    enum ADCPulseCalibration_t
+    {
+        ADCPULSE_CALIBRATION_DISABLE = 0x0,
+        ADCPULSE_CALIBRATION_ENABLE = 0x1
+    };
+
+    enum ADCBulkNCalibration_t
+    {
+        ADCBULKN_CALIBRATION_DISABLE = 0x0,
+        ADCBULKN_CALIBRATION_ENABLE = 0x1
+    };
+
+    enum ADCBulkPCalibration_t
+    {
+        ADCBULKP_CALIBRATION_DISABLE = 0x0,
+        ADCBULKP_CALIBRATION_ENABLE = 0x1
+    };
+
+    enum ImageCalibration_t
+    {
+        IMAGE_CALIBRATION_DISABLE = 0x0,
+        IMAGE_CALIBRATION_ENABLE = 0x1
+    };
+    
+    enum ImageCalibrationFreq_t
+    {
+        FREQ_430_440,
+        FREQ_470_510,
+        FREQ_779_787,
+        FREQ_863_870,
+        FREQ_902_928
+    };
+
+    enum RxGain_t
+    {
+        RX_POWER_SAVE = 0x94,
+        RX_BOOST = 0x96
     };
 
     enum E22Cmd_t
@@ -111,6 +172,110 @@ public:
         E22_CMD_ResetStats,
     };
 
+    enum SpredingFactor_t
+    {
+        SF_5,
+        SF_6,
+        SF_7,
+        SF_8,
+        SF_9,
+        SF_10,
+        SF_11,
+        SF_12
+    };
+
+    enum BandWidth_t
+    {
+        BW_0,
+        BW_1,
+        BW_2,
+        BW_3,
+        BW_4,
+        BW_5,
+        BW_6,
+        BW_7,
+        BW_8,
+        BW_9
+    };
+
+    enum CodingRate_t
+    {
+        CR_1,
+        CR_2,
+        CR_3,
+        CR_4
+    };
+
+    typedef struct
+    {
+        SpredingFactor_t spredingFactor;
+        BandWidth_t bandwidth;
+        CodingRate_t codingRate;
+    } ModulationParameters_t;
+    
+    enum PacketHeaderType_t
+    {
+        EXPLICIT_HEADER = 0x0,
+        IMPLICIT_HEADER = 0x1
+    };
+
+    enum PacketCRCType_t
+    {
+        CRC_OFF = 0x0,
+        CRC_ON  = 0x1
+    };
+
+    enum PacketIQType_t
+    {
+        STANDARD_IQ = 0x0,
+        INVERTED_IQ = 0x1
+    };
+
+    typedef struct 
+    {
+        uint16_t preambleLength;
+        PacketHeaderType_t headerType;
+        uint8_t payloadLenght;
+        PacketCRCType_t crcType;
+        PacketIQType_t iqType;
+    } LoraPacketParams_t;
+
+    enum SyncWordType_t
+    {
+        PUBLIC_SYNCWORD,
+        PRIVATE_SYNCWORD
+    };
+
+    enum IRQRegBits_t
+    {
+        TX_DONE = 0x1,
+        RX_DONE = 0x2,
+        PREAMBLE_DETECTED = 0x4,
+        SYNCWORD_VALID = 0x8,
+        HEADER_VALID = 0x10,
+        HEADER_ERR = 0x20,
+        CRC_ERR = 0x40,
+        CAD_DONE = 0x80,
+        CAD_DETECTED = 0x100,
+        TIMEOUT = 0x200,
+        LRFGSS_HOP = 0x4000
+    };
+
+    typedef struct
+    {
+        bool txDone;            // TX_DONE = 0x1,
+        bool rxDone;            // RX_DONE = 0x2,
+        bool preambleDetected;  // PREAMBLE_DETECTED = 0x4,
+        bool syncWordValid;     // SYNCWORD_VALID = 0x8,
+        bool headerValid;       // HEADER_VALID = 0x10,
+        bool headerErr;         // HEADER_ERR = 0x20,
+        bool crcErr;            // CRC_ERR = 0x40,
+        bool cadDone;           // CAD_DONE = 0x80,
+        bool cadDetected;       // CAD_DETECTED = 0x100,
+        bool timeout;           // TIMEOUT = 0x200,
+        bool lrFhssHop;         // LRFGSS_HOP = 0x4000
+    } IRQReg_t;
+
     typedef struct
     {
         E22Cmd_t commandCode;
@@ -134,8 +299,8 @@ public:
 
     bool setPacketType(PacketType_t packetType);
     bool getPacketType(PacketType_t *packetType);
-    bool writeRegister(uint16_t addr, uint8_t dataIn);
-    bool readRegister(uint16_t addr, uint8_t *dataOut);
+    bool writeRegister(E22_Reg_Addr addr, uint8_t dataIn);
+    bool readRegister(E22_Reg_Addr addr, uint8_t *dataOut);
     bool writeBuffer(uint8_t offset, uint8_t dataIn);
     bool readBuffer(uint8_t offset, uint8_t *dataOut);
     bool getStatus(void);
@@ -144,17 +309,36 @@ public:
     bool setRx(uint32_t Timeout);
     bool setStandBy(StdByMode_t mode);
     bool setDIO3asTCXOCtrl(tcxoVoltage_t voltage, uint32_t delay);
+    bool setXtalCap(uint8_t XTA, uint8_t XTB);
+    bool calibrate(RC64kCalibration_t RC64kCalib, RC13MCalibration_t RC13MCalib, PLLCalibration_t PLLCalib, ADCPulseCalibration_t ADCPulseCalib, ADCBulkNCalibration_t ADCBulkNCalib, ADCBulkPCalibration_t ADCBulkPCalib, ImageCalibration_t ImageCalib);
+    bool calibrateImage(ImageCalibrationFreq_t frequency);
+    bool setFrequency(uint32_t frequency);
+    bool setFrequencyAndCalibrate(uint32_t frequency);
+    bool setRxGain(RxGain_t gain);
+    bool setModulationParams(ModulationParameters_t modulation);
+    bool setPacketParams(LoraPacketParams_t packetParams);
+    bool setSyncWord(SyncWordType_t syncWord);
+    bool getIrqStatus(void);
+    bool clearIrqStatus(uint16_t IRQRegClear);
+    bool setDioIrqParams(IRQReg_t IRQMask, IRQReg_t DIO1Mask, IRQReg_t DIO2Mask, IRQReg_t DIO3Mask);
 
 private:
     // Constructor privado
     E22() {}
 
     static void E22Task(void *pvParameters);
+    static void IRAM_ATTR E22ISRHandler(void);
 
     bool processCmd(void);
+    bool processInterrupt(void);
     bool processResponse(void);
 
+    bool IOInit(void);
+    bool InterruptInit(void);
+
     bool processStatus(uint8_t msg);
+    void processIRQ(uint16_t IRQRegValue);
+    uint16_t processIRQMask(IRQReg_t IRQMask);
 
     bool isBusy(void);
     bool resetOn(void);
@@ -163,9 +347,12 @@ private:
     spi_device_handle_t SPIHandle;
 
     static TaskHandle_t E22TaskHandle;
+    static SemaphoreHandle_t xE22InterruptSempahore;
     QueueHandle_t xE22CmdQueue;
 
     uint8_t rssiInst;
+
+    IRQReg_t IRQReg;
 };
 
 #endif // E22DRIVER_H

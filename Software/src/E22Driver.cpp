@@ -1,6 +1,13 @@
 #include "E22Driver.h"
 
 TaskHandle_t E22::E22TaskHandle = NULL;
+SemaphoreHandle_t E22::xE22InterruptSempahore = NULL;
+
+void IRAM_ATTR E22::E22ISRHandler(void)
+{
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    xSemaphoreGiveFromISR(xE22InterruptSempahore, &xHigherPriorityTaskWoken);
+}
 
 void E22::E22Task(void *pvParameters)
 {
@@ -18,6 +25,11 @@ void E22::E22Task(void *pvParameters)
     {
         if (!e22->isBusy())
         {
+            while (e22->processInterrupt())
+            {
+                /* code */
+            }
+
             e22->processCmd();
         }
 
@@ -29,12 +41,22 @@ bool E22::Begin(void)
 {
     SPI &spi = SPI::getInstance();
 
+    // Configuro el IO necesario para el control del E22
+    IOInit();
+
+    InterruptInit();
+
     // Seteo todos los valores de las variables a 0
     rssiInst = 0;
+    memset(&IRQReg, 0, sizeof(IRQReg_t));
 
-    // Creo la queue de mensajes
-
+    // Creo la queue de mensajes al E22
     xE22CmdQueue = xQueueCreate(MAX_E22_CMD_QUEUE, sizeof(E22Command_t));
+
+    // Creo el semaphore de interrupcciones
+    xE22InterruptSempahore = xSemaphoreCreateMutex();
+    xSemaphoreGive(xE22InterruptSempahore);
+    xSemaphoreTake(xE22InterruptSempahore, 0);
 
     if (xE22CmdQueue == NULL)
     {
@@ -90,6 +112,82 @@ bool E22::Begin(void)
         1,                  // Priority of the task
         &E22TaskHandle,     // Task handle to keep track of created task
         0);                 // Pin task to core 0
+
+    return true;
+}
+
+bool E22::processInterrupt(void)
+{
+    if (xSemaphoreTake(xE22InterruptSempahore, 0))
+    {
+        /* code */
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool E22::IOInit(void)
+{
+    IO &io = IO::getInstance();
+    // Configuracion inicial y estado inicial del pin RXEN del E22
+    if (!io.SetConfig(RX_EN_E22_PIN, GPIO_MODE_OUTPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_ENABLE, GPIO_INTR_DISABLE))
+    {
+        return false;
+    };
+    if (io.SetLevel((gpio_num_t)RX_EN_E22_PIN, IO_LOW))
+    {
+        return false;
+    }
+
+    // Configuracion inicial y estado inicial del pin TXEN del E22
+    if (!io.SetConfig(TX_EN_E22_PIN, GPIO_MODE_OUTPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_ENABLE, GPIO_INTR_DISABLE))
+    {
+        return false;
+    };
+    if (io.SetLevel((gpio_num_t)TX_EN_E22_PIN, IO_LOW))
+    {
+        return false;
+    }
+
+    // Configuracion inicial y estado inicial del pin NRST del E22
+    if (!io.SetConfig(NRST_E22_PIN, GPIO_MODE_OUTPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_DISABLE, GPIO_INTR_DISABLE))
+    {
+        return false;
+    };
+    if (io.SetLevel((gpio_num_t)NRST_E22_PIN, IO_LOW))
+    {
+        return false;
+    }
+
+    // Configuracion inicial del pin BUSY del E22
+    if (!io.SetConfig(BUSY_E22_PIN, GPIO_MODE_INPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_DISABLE, GPIO_INTR_DISABLE))
+    {
+        return false;
+    };
+
+    // Configuracion inicial del pin DIO1 del E22
+    if (!io.SetConfig(DIO1_E22_PIN, GPIO_MODE_INPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_DISABLE, GPIO_INTR_POSEDGE))
+    {
+        return false;
+    };
+
+    return true;
+}
+
+bool E22::InterruptInit(void)
+{
+    // Install gpio isr service on the lowest priority
+    if (gpio_install_isr_service(ESP_INTR_FLAG_LEVEL1) != ESP_OK)
+    {
+        return false;
+    }
+    // Hook isr handler for the DIO1 pin of the E22
+    if (gpio_isr_handler_add((gpio_num_t)DIO1_E22_PIN, (gpio_isr_t)E22ISRHandler, nullptr) != ESP_OK)
+    {
+        return false;
+    }
 
     return true;
 }
@@ -370,9 +468,30 @@ bool E22::processCmd(void)
             break;
 
         case E22_CMD_Calibrate:
+            TxBuffer[0] = E22_OpCode_Calibrate;
+            TxBuffer[1] = cmdToProcess.params.paramsArray[0];
+
+            if (!spi.SendMessage(TxBuffer, cmdToProcess.paramCount + 1))
+            {
+                ESP_LOGE(E22TAG, "Error al enviar el comando Calibrate al spi.");
+                return false;
+            }
+
+            return true;
             break;
 
         case E22_CMD_CalibrateImage:
+            TxBuffer[0] = E22_OpCode_CalibrateImage;
+            TxBuffer[1] = cmdToProcess.params.paramsArray[0];
+            TxBuffer[2] = cmdToProcess.params.paramsArray[1];
+
+            if (!spi.SendMessage(TxBuffer, cmdToProcess.paramCount + 1))
+            {
+                ESP_LOGE(E22TAG, "Error al enviar el comando CalibrateImage al spi.");
+                return false;
+            }
+
+            return true;
             break;
 
         case E22_CMD_SetPaConfig:
@@ -445,12 +564,49 @@ bool E22::processCmd(void)
             break;
 
         case E22_CMD_SetDioIrqParams:
+            TxBuffer[0] = E22_OpCode_SetDioIrqParams;
+            TxBuffer[1] = cmdToProcess.params.paramsArray[0];
+            TxBuffer[2] = cmdToProcess.params.paramsArray[1];
+            TxBuffer[3] = cmdToProcess.params.paramsArray[2];
+            TxBuffer[4] = cmdToProcess.params.paramsArray[3];
+            TxBuffer[5] = cmdToProcess.params.paramsArray[4];
+            TxBuffer[6] = cmdToProcess.params.paramsArray[5];
+            TxBuffer[7] = cmdToProcess.params.paramsArray[6];
+            TxBuffer[8] = cmdToProcess.params.paramsArray[7];
+
+            if (!spi.SendMessage(TxBuffer, cmdToProcess.paramCount + 1))
+            {
+                ESP_LOGE(E22TAG, "Error al enviar el comando SetDioIrqParams al spi.");
+                return false;
+            }
             break;
 
         case E22_CMD_GetIrqStatus:
+            TxBuffer[0] = E22_OpCode_GetIrqStatus;
+
+            if (!spi.SendMessage(TxBuffer, cmdToProcess.paramCount + 4, RxBuffer, cmdToProcess.paramCount + 2))
+            {
+                ESP_LOGE(E22TAG, "Error al enviar el comando GetIrqStatus al spi.");
+                return false;
+            }
+            processStatus(RxBuffer[1]);
+            uint16_t irqStatus = (RxBuffer[2] << 8) | RxBuffer[3];
+            processIRQ(irqStatus);
+
             break;
 
         case E22_CMD_ClearIrqStatus:
+            TxBuffer[0] = E22_OpCode_ClearIrqStatus;
+            TxBuffer[1] = cmdToProcess.params.paramsArray[0];
+            TxBuffer[2] = cmdToProcess.params.paramsArray[1];
+
+            if (!spi.SendMessage(TxBuffer, cmdToProcess.paramCount + 1))
+            {
+                ESP_LOGE(E22TAG, "Error al enviar el comando ClearIrqStatus al spi.");
+                return false;
+            }
+
+            return true;
             break;
 
         case E22_CMD_SetDIO2AsRfSwitchCtrl:
@@ -473,6 +629,19 @@ bool E22::processCmd(void)
             break;
 
         case E22_CMD_SetRfFrequency:
+            TxBuffer[0] = E22_OpCode_SetRfFrequency;
+            TxBuffer[1] = cmdToProcess.params.paramsArray[0];
+            TxBuffer[2] = cmdToProcess.params.paramsArray[1];
+            TxBuffer[3] = cmdToProcess.params.paramsArray[2];
+            TxBuffer[4] = cmdToProcess.params.paramsArray[3];
+
+            if (!spi.SendMessage(TxBuffer, cmdToProcess.paramCount + 1))
+            {
+                ESP_LOGE(E22TAG, "Error al enviar el comando SetRfFrequency al spi.");
+                return false;
+            }
+
+            return true;
             break;
 
         case E22_CMD_SetPacketType:
@@ -507,9 +676,36 @@ bool E22::processCmd(void)
             break;
 
         case E22_CMD_SetModulationParams:
+            TxBuffer[0] = E22_OpCode_SetModulationParams;
+            TxBuffer[1] = cmdToProcess.params.paramsArray[0];
+            TxBuffer[2] = cmdToProcess.params.paramsArray[1];
+            TxBuffer[3] = cmdToProcess.params.paramsArray[2];
+
+            if (!spi.SendMessage(TxBuffer, cmdToProcess.paramCount + 1))
+            {
+                ESP_LOGE(E22TAG, "Error al enviar el comando SetModulationParams al spi.");
+                return false;
+            }
+
+            return true;
             break;
 
         case E22_CMD_SetPacketParams:
+            TxBuffer[0] = E22_OpCode_SetPacketParams;
+            TxBuffer[1] = cmdToProcess.params.paramsArray[0];
+            TxBuffer[2] = cmdToProcess.params.paramsArray[1];
+            TxBuffer[3] = cmdToProcess.params.paramsArray[2];
+            TxBuffer[4] = cmdToProcess.params.paramsArray[3];
+            TxBuffer[5] = cmdToProcess.params.paramsArray[4];
+            TxBuffer[6] = cmdToProcess.params.paramsArray[5];
+
+            if (!spi.SendMessage(TxBuffer, cmdToProcess.paramCount + 1))
+            {
+                ESP_LOGE(E22TAG, "Error al enviar el comando SetPacketParams al spi.");
+                return false;
+            }
+
+            return true;
             break;
 
         case E22_CMD_SetCadParams:
@@ -541,8 +737,8 @@ bool E22::processCmd(void)
                 ESP_LOGE(E22TAG, "Error al enviar el comando getStatus");
                 return false;
             }
-
             processStatus(RxBuffer[1]);
+
             return true;
             break;
 
@@ -590,7 +786,7 @@ bool E22::processResponse(void)
 {
 }
 
-bool E22::writeRegister(uint16_t addr, uint8_t dataIn)
+bool E22::writeRegister(E22_Reg_Addr addr, uint8_t dataIn)
 {
     E22Command_t command;
     memset(&command, 0, sizeof(E22Command_t));
@@ -609,7 +805,7 @@ bool E22::writeRegister(uint16_t addr, uint8_t dataIn)
     return false;
 }
 
-bool E22::readRegister(uint16_t addr, uint8_t *dataOut)
+bool E22::readRegister(E22_Reg_Addr addr, uint8_t *dataOut)
 {
     E22Command_t command;
     memset(&command, 0, sizeof(E22Command_t));
@@ -722,4 +918,427 @@ bool E22::setDIO3asTCXOCtrl(E22::tcxoVoltage_t voltage, uint32_t delay)
 
     ESP_LOGE(E22TAG, "Error al enviar el comando SetDIO3asTcxoCtrl a la queue.");
     return false;
+}
+
+bool E22::setXtalCap(uint8_t XTA, uint8_t XTB)
+{
+    if (!setStandBy(STDBY_XOSC))
+    {
+        return false;
+    }
+
+    if (!writeRegister(E22_Reg_XTATrim, XTA))
+    {
+        return false;
+    }
+
+    if (!writeRegister(E22_Reg_XTBTrim, XTB))
+    {
+        return false;
+    }
+
+    if (!setStandBy(STDBY_RC))
+    {
+        return false;
+    }
+
+    if (!calibrate(RC64K_CALIBRATION_ENABLE, RC13M_CALIBRATION_ENABLE, PLL_CALIBRATION_ENABLE, ADCPULSE_CALIBRATION_ENABLE, ADCBULKN_CALIBRATION_ENABLE, ADCBULKP_CALIBRATION_ENABLE, IMAGE_CALIBRATION_ENABLE))
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool E22::calibrate(RC64kCalibration_t RC64kCalib, RC13MCalibration_t RC13MCalib, PLLCalibration_t PLLCalib, ADCPulseCalibration_t ADCPulseCalib, ADCBulkNCalibration_t ADCBulkNCalib, ADCBulkPCalibration_t ADCBulkPCalib, ImageCalibration_t ImageCalib)
+{
+    E22Command_t command;
+    memset(&command, 0, sizeof(E22Command_t));
+    command.commandCode = E22_CMD_Calibrate;
+    command.paramCount = 1;
+    command.params.paramsArray[0] = (RC64kCalib << 0) | (RC13MCalib << 1) | (PLLCalib << 2) | (ADCPulseCalib << 3) | (ADCBulkNCalib << 4) | (ADCBulkPCalib << 5) | (ImageCalib << 6);
+
+    if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
+    {
+        return true;
+    }
+
+    ESP_LOGE(E22TAG, "Error al enviar el comando Calibrate a la queue.");
+    return false;
+}
+
+bool E22::calibrateImage(ImageCalibrationFreq_t frequency)
+{
+    E22Command_t command;
+    uint8_t freq1 = 0;
+    uint8_t freq2 = 0;
+    memset(&command, 0, sizeof(E22Command_t));
+    command.commandCode = E22_CMD_CalibrateImage;
+    command.paramCount = 2;
+
+    switch (frequency)
+    {
+    case FREQ_430_440:
+        freq1 = 0x6B;
+        freq2 = 0x6F;
+        break;
+
+    case FREQ_470_510:
+        freq1 = 0x75;
+        freq2 = 0x81;
+        break;
+
+    case FREQ_779_787:
+        freq1 = 0xC1;
+        freq2 = 0xC5;
+        break;
+
+    case FREQ_863_870:
+        freq1 = 0xD7;
+        freq2 = 0xD8;
+        break;
+
+    case FREQ_902_928:
+        freq1 = 0xE1;
+        freq2 = 0xE9;
+        break;
+
+    default:
+        ESP_LOGE(E22TAG, "Error al enviar el comando CalibrateImage a la queue.");
+        return false;
+        break;
+    }
+
+    command.params.paramsArray[0] = freq1;
+    command.params.paramsArray[1] = freq2;
+
+    if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
+    {
+        return true;
+    }
+
+    ESP_LOGE(E22TAG, "Error al enviar el comando CalibrateImage a la queue.");
+    return false;
+}
+
+bool E22::setFrequency(uint32_t frequency)
+{
+    E22Command_t command;
+    memset(&command, 0, sizeof(E22Command_t));
+    command.commandCode = E22_CMD_Calibrate;
+    command.paramCount = 4;
+
+    uint32_t RFfreq = ((uint64_t)frequency << SX126X_RF_FREQUENCY_SHIFT) / SX126X_RF_FREQUENCY_XTAL;
+    command.params.paramsArray[0] = (uint8_t)RFfreq >> 24;
+    command.params.paramsArray[1] = (uint8_t)RFfreq >> 16;
+    command.params.paramsArray[2] = (uint8_t)RFfreq >> 8;
+    command.params.paramsArray[3] = (uint8_t)RFfreq >> 0;
+
+    if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
+    {
+        return true;
+    }
+
+    ESP_LOGE(E22TAG, "Error al enviar el comando setFrequency a la queue.");
+    return false;
+}
+
+bool E22::setFrequencyAndCalibrate(uint32_t frequency)
+{
+    // Perform image calibration BEFORE set frequency
+    if (frequency < 446000000) // 430 - 440 Mhz
+    {
+        if (!calibrateImage(FREQ_430_440))
+        {
+            return false;
+        }
+    }
+    else if (frequency < 734000000) // 470 - 510 Mhz
+    {
+        if (!calibrateImage(FREQ_470_510))
+        {
+            return false;
+        }
+    }
+    else if (frequency < 828000000) // 779 - 787 Mhz
+    {
+        if (!calibrateImage(FREQ_779_787))
+        {
+            return false;
+        }
+    }
+    else if (frequency < 877000000) // 863 - 870 Mhz
+    {
+        if (!calibrateImage(FREQ_863_870))
+        {
+            return false;
+        }
+    }
+    else if (frequency < 1100000000) // 902 - 928 Mhz
+    {
+        if (!calibrateImage(FREQ_902_928))
+        {
+            return false;
+        }
+    }
+
+    if (!setFrequency(frequency))
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool E22::setRxGain(RxGain_t gain)
+{
+    if (!writeRegister(E22_Reg_RxGain, gain))
+    {
+        return false;
+    }
+    return true;
+}
+
+bool E22::setModulationParams(ModulationParameters_t modulation)
+{
+    E22Command_t command;
+    memset(&command, 0, sizeof(E22Command_t));
+    command.commandCode = E22_CMD_SetModulationParams;
+    command.paramCount = 3;
+
+    command.params.paramsArray[0] = (uint8_t)modulation.spredingFactor;
+    command.params.paramsArray[1] = (uint8_t)modulation.bandwidth;
+    command.params.paramsArray[2] = (uint8_t)modulation.codingRate;
+
+    if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
+    {
+        return true;
+    }
+
+    ESP_LOGE(E22TAG, "Error al enviar el comando SetModulationParams a la queue.");
+    return false;
+}
+
+bool E22::setPacketParams(LoraPacketParams_t packetParams)
+{
+    E22Command_t command;
+    memset(&command, 0, sizeof(E22Command_t));
+    command.commandCode = E22_CMD_SetPacketParams;
+    command.paramCount = 6;
+    command.params.paramsArray[0] = (uint8_t)packetParams.preambleLength >> 8;
+    command.params.paramsArray[1] = (uint8_t)packetParams.preambleLength >> 0;
+    command.params.paramsArray[2] = (uint8_t)packetParams.headerType;
+    command.params.paramsArray[3] = (uint8_t)packetParams.payloadLenght;
+    command.params.paramsArray[4] = (uint8_t)packetParams.crcType;
+    command.params.paramsArray[5] = (uint8_t)packetParams.iqType;
+
+    if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
+    {
+        return true;
+    }
+
+    ESP_LOGE(E22TAG, "Error al enviar el comando SetPacketParams a la queue.");
+    return false;
+}
+
+bool E22::setSyncWord(SyncWordType_t syncWord)
+{
+    switch (syncWord)
+    {
+    case PUBLIC_SYNCWORD:
+        if (!writeRegister(E22_Reg_LoRaSyncWordMSB, 0x34))
+        {
+            ESP_LOGE(E22TAG, "Error al enviar el comando SetSyncWord a la queue.");
+            return false;
+        }
+        if (!writeRegister(E22_Reg_LoRaSyncWordLSB, 0x44))
+        {
+            ESP_LOGE(E22TAG, "Error al enviar el comando SetSyncWord a la queue.");
+            return false;
+        }
+        break;
+
+    case PRIVATE_SYNCWORD:
+        if (!writeRegister(E22_Reg_LoRaSyncWordMSB, 0x14))
+        {
+            ESP_LOGE(E22TAG, "Error al enviar el comando SetSyncWord a la queue.");
+            return false;
+        }
+        if (!writeRegister(E22_Reg_LoRaSyncWordLSB, 0x24))
+        {
+            ESP_LOGE(E22TAG, "Error al enviar el comando SetSyncWord a la queue.");
+            return false;
+        }
+        break;
+
+    default:
+        ESP_LOGE(E22TAG, "Error al enviar el comando SetSyncWord a la queue.");
+        return false;
+        break;
+    }
+}
+
+bool E22::getIrqStatus(void)
+{
+    E22Command_t command;
+    memset(&command, 0, sizeof(E22Command_t));
+    command.commandCode = E22_CMD_GetIrqStatus;
+    command.paramCount = 0;
+    command.hasResponse = true;
+    command.responsesCount = 2;
+
+    if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
+    {
+        return true;
+    }
+
+    ESP_LOGE(E22TAG, "Error al enviar el comando GetIrqStatus a la queue.");
+    return false;
+}
+
+bool E22::clearIrqStatus(uint16_t IRQRegClear)
+{
+    E22Command_t command;
+    memset(&command, 0, sizeof(E22Command_t));
+    command.commandCode = E22_CMD_ClearIrqStatus;
+    command.paramCount = 2;
+    command.params.paramsArray[0] = (uint8_t)(IRQRegClear >> 8);
+    command.params.paramsArray[1] = (uint8_t)(IRQRegClear >> 0);
+
+    if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
+    {
+        return true;
+    }
+
+    ESP_LOGE(E22TAG, "Error al enviar el comando ClearIrqStatus a la queue.");
+    return false;
+}
+
+void E22::processIRQ(uint16_t IRQRegValue)
+{
+    memset(&IRQReg, 0, sizeof(IRQReg_t));
+    if (IRQRegValue & TX_DONE)
+    {
+        IRQReg.txDone = true;
+    }
+    if (IRQRegValue & RX_DONE)
+    {
+        IRQReg.rxDone = true;
+    }
+    if (IRQRegValue & PREAMBLE_DETECTED)
+    {
+        IRQReg.preambleDetected = true;
+    }
+    if (IRQRegValue & SYNCWORD_VALID)
+    {
+        IRQReg.syncWordValid = true;
+    }
+    if (IRQRegValue & HEADER_VALID)
+    {
+        IRQReg.headerValid = true;
+    }
+    if (IRQRegValue & HEADER_ERR)
+    {
+        IRQReg.headerErr = true;
+    }
+    if (IRQRegValue & CRC_ERR)
+    {
+        IRQReg.crcErr = true;
+    }
+    if (IRQRegValue & CAD_DONE)
+    {
+        IRQReg.cadDone = true;
+    }
+    if (IRQRegValue & CAD_DETECTED)
+    {
+        IRQReg.cadDetected = true;
+    }
+    if (IRQRegValue & TIMEOUT)
+    {
+        IRQReg.timeout = true;
+    }
+    if (IRQRegValue & LRFGSS_HOP)
+    {
+        IRQReg.lrFhssHop = true;
+    }
+}
+
+bool E22::setDioIrqParams(IRQReg_t IRQMask, IRQReg_t DIO1Mask, IRQReg_t DIO2Mask, IRQReg_t DIO3Mask)
+{
+    E22Command_t command;
+    uint16_t IRQAux = 0;
+    memset(&command, 0, sizeof(E22Command_t));
+    command.commandCode = E22_CMD_SetDioIrqParams;
+    command.paramCount = 8;
+    IRQAux = processIRQMask(IRQMask);
+    command.params.paramsArray[0] = (uint8_t)(IRQAux >> 8);
+    command.params.paramsArray[1] = (uint8_t)(IRQAux >> 0);
+    IRQAux = processIRQMask(DIO1Mask);
+    command.params.paramsArray[2] = (uint8_t)(IRQAux >> 8);
+    command.params.paramsArray[3] = (uint8_t)(IRQAux >> 0);
+    IRQAux = processIRQMask(DIO2Mask);
+    command.params.paramsArray[4] = (uint8_t)(IRQAux >> 8);
+    command.params.paramsArray[5] = (uint8_t)(IRQAux >> 0);
+    IRQAux = processIRQMask(DIO3Mask);
+    command.params.paramsArray[6] = (uint8_t)(IRQAux >> 8);
+    command.params.paramsArray[7] = (uint8_t)(IRQAux >> 0);
+
+    if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
+    {
+        return true;
+    }
+
+    ESP_LOGE(E22TAG, "Error al enviar el comando setDioIrqParams a la queue.");
+    return false;
+}
+
+uint16_t E22::processIRQMask(IRQReg_t IRQMask)
+{
+    uint16_t IRQAux = 0;
+    if (IRQMask.txDone)
+    {
+        IRQAux = IRQAux | TX_DONE;
+    }
+    if (IRQMask.rxDone)
+    {
+        IRQAux = IRQAux | RX_DONE;
+    }
+    if (IRQMask.preambleDetected)
+    {
+        IRQAux = IRQAux | PREAMBLE_DETECTED;
+    }
+    if (IRQMask.syncWordValid)
+    {
+        IRQAux = IRQAux | SYNCWORD_VALID;
+    }
+    if (IRQMask.headerValid)
+    {
+        IRQAux = IRQAux | HEADER_VALID;
+    }
+    if (IRQMask.headerErr)
+    {
+        IRQAux = IRQAux | HEADER_ERR;
+    }
+    if (IRQMask.crcErr)
+    {
+        IRQAux = IRQAux | CRC_ERR;
+    }
+    if (IRQMask.cadDone)
+    {
+        IRQAux = IRQAux | CAD_DONE;
+    }
+    if (IRQMask.cadDetected)
+    {
+        IRQAux = IRQAux | CAD_DETECTED;
+    }
+    if (IRQMask.timeout)
+    {
+        IRQAux = IRQAux | TIMEOUT;
+    }
+    if (IRQMask.lrFhssHop)
+    {
+        IRQAux = IRQAux | LRFGSS_HOP;
+    }
+
+    return IRQAux;
 }
