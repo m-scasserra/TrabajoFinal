@@ -2,6 +2,9 @@
 
 TaskHandle_t E22::E22TaskHandle = NULL;
 SemaphoreHandle_t E22::xE22InterruptSempahore = NULL;
+uint8_t E22::rssiInst = 0;
+uint8_t E22::PayloadLenghtRx = 0;
+uint8_t E22::RxStartBufferPointer = 0;
 
 void IRAM_ATTR E22::E22ISRHandler(void)
 {
@@ -25,10 +28,7 @@ void E22::E22Task(void *pvParameters)
     {
         if (!e22->isBusy())
         {
-            while (e22->processInterrupt())
-            {
-                /* code */
-            }
+            e22->processInterrupt();
 
             e22->processCmd();
         }
@@ -42,7 +42,7 @@ bool E22::Begin(void)
     SPI &spi = SPI::getInstance();
 
     // Configuro el IO necesario para el control del E22
-    IOInit();
+    E22IOInit();
 
     InterruptInit();
 
@@ -118,9 +118,59 @@ bool E22::Begin(void)
 
 bool E22::processInterrupt(void)
 {
+    IO &io = IO::getInstance();
+
     if (xSemaphoreTake(xE22InterruptSempahore, 0))
     {
-        /* code */
+        getIrqStatus(nullptr);
+
+        if (IRQReg.rxDone)
+        {
+            io.SetLevel((gpio_num_t)RX_EN_E22_PIN, IO_LOW);
+            getRxBufferStatus(&PayloadLenghtRx, &RxStartBufferPointer);
+            clearIrqStatus(RX_DONE);
+        }
+        if (IRQReg.txDone)
+        {
+            io.SetLevel((gpio_num_t)TX_EN_E22_PIN, IO_LOW);
+            clearIrqStatus(TX_DONE);
+        }
+        if (IRQReg.preambleDetected)
+        {
+            clearIrqStatus(PREAMBLE_DETECTED);
+        }
+        if (IRQReg.syncWordValid)
+        {
+            clearIrqStatus(SYNCWORD_VALID);
+        }
+        if (IRQReg.headerValid)
+        {
+            clearIrqStatus(HEADER_VALID);
+        }
+        if (IRQReg.headerErr)
+        {
+            clearIrqStatus(HEADER_ERR);
+        }
+        if (IRQReg.crcErr)
+        {
+            clearIrqStatus(CRC_ERR);
+        }
+        if (IRQReg.cadDone)
+        {
+            clearIrqStatus(CAD_DONE);
+        }
+        if (IRQReg.cadDetected)
+        {
+            clearIrqStatus(CAD_DETECTED);
+        }
+        if (IRQReg.timeout)
+        {
+            clearIrqStatus(TIMEOUT);
+        }
+        if (IRQReg.lrFhssHop)
+        {
+            clearIrqStatus(LRFGSS_HOP);
+        }
     }
     else
     {
@@ -128,7 +178,7 @@ bool E22::processInterrupt(void)
     }
 }
 
-bool E22::IOInit(void)
+bool E22::E22IOInit(void)
 {
     IO &io = IO::getInstance();
     // Configuracion inicial y estado inicial del pin RXEN del E22
@@ -528,7 +578,7 @@ bool E22::processCmd(void)
             processStatus(RxBuffer[1]);
             processStatus(RxBuffer[2]);
             processStatus(RxBuffer[3]);
-            cmdToProcess.responses.responsesPtr = (uint8_t *)RxBuffer[4];
+            cmdToProcess.responses.responsesPtr8[0] = (uint8_t *)RxBuffer[4];
 
             return true;
             break;
@@ -558,7 +608,7 @@ bool E22::processCmd(void)
             }
             processStatus(RxBuffer[1]);
             processStatus(RxBuffer[2]);
-            cmdToProcess.responses.responsesPtr = (uint8_t *)RxBuffer[3];
+            cmdToProcess.responses.responsesPtr8[0] = (uint8_t *)RxBuffer[3];
 
             return true;
             break;
@@ -591,7 +641,8 @@ bool E22::processCmd(void)
             }
             processStatus(RxBuffer[1]);
             uint16_t irqStatus = (RxBuffer[2] << 8) | RxBuffer[3];
-            processIRQ(irqStatus);
+            *cmdToProcess.responses.responsesPtr16[0] = irqStatus;
+            updateIRQStatus(irqStatus);
 
             break;
 
@@ -667,7 +718,7 @@ bool E22::processCmd(void)
                 return false;
             }
             processStatus(RxBuffer[1]);
-            cmdToProcess.responses.responsesPtr = (uint8_t *)RxBuffer[2];
+            cmdToProcess.responses.responsesPtr8[0] = (uint8_t *)RxBuffer[2];
 
             return true;
             break;
@@ -759,9 +810,41 @@ bool E22::processCmd(void)
             break;
 
         case E22_CMD_GetRxBufferStatus:
+            TxBuffer[0] = E22_OpCode_GetRxBufferStatus;
+            TxBuffer[1] = 0x00;
+            TxBuffer[2] = 0x00;
+            TxBuffer[3] = 0x00;
+
+            if (!spi.SendMessage(TxBuffer, cmdToProcess.paramCount + 4, RxBuffer, cmdToProcess.responsesCount + 2))
+            {
+                ESP_LOGE(E22TAG, "Error al enviar el comando GetRxBufferStatus");
+                return false;
+            }
+
+            processStatus(RxBuffer[1]);
+            cmdToProcess.responses.responsesPtr8[0] = (uint8_t *)RxBuffer[2];
+            cmdToProcess.responses.responsesPtr8[1] = (uint8_t *)RxBuffer[3];
+            return true;
             break;
 
         case E22_CMD_GetPacketStatus:
+            TxBuffer[0] = E22_OpCode_GetPacketStatus;
+            TxBuffer[1] = 0x00;
+            TxBuffer[2] = 0x00;
+            TxBuffer[3] = 0x00;
+            TxBuffer[4] = 0x00;
+
+            if (!spi.SendMessage(TxBuffer, cmdToProcess.paramCount + 5, RxBuffer, cmdToProcess.responsesCount + 2))
+            {
+                ESP_LOGE(E22TAG, "Error al enviar el comando GetPacketStatus");
+                return false;
+            }
+
+            processStatus(RxBuffer[1]);
+            cmdToProcess.responses.responsesPtr8[0] = (uint8_t *)RxBuffer[2];
+            cmdToProcess.responses.responsesPtr8[1] = (uint8_t *)RxBuffer[3];
+            cmdToProcess.responses.responsesPtr8[2] = (uint8_t *)RxBuffer[4];
+            return true;
             break;
 
         case E22_CMD_GetDeviceErrors:
@@ -815,7 +898,7 @@ bool E22::readRegister(E22_Reg_Addr addr, uint8_t *dataOut)
     command.params.paramsArray[1] = (uint8_t)addr & 0x00FF;
     command.hasResponse = true;
     command.responsesCount = 1;
-    command.responses.responsesPtr = dataOut;
+    command.responses.responsesPtr8[0] = dataOut;
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
@@ -853,7 +936,7 @@ bool E22::readBuffer(uint8_t offset, uint8_t *dataOut)
     command.params.paramsArray[0] = offset;
     command.hasResponse = true;
     command.responsesCount = 1;
-    command.responses.responsesPtr = dataOut;
+    command.responses.responsesPtr8[0] = dataOut;
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
@@ -889,7 +972,7 @@ bool E22::getPacketType(PacketType_t *packetType)
     command.paramCount = 0;
     command.hasResponse = true;
     command.responsesCount = 1;
-    command.responses.responsesPtr = (uint8_t *)packetType;
+    command.responses.responsesPtr8[0] = (uint8_t *)packetType;
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
@@ -1178,7 +1261,7 @@ bool E22::setSyncWord(SyncWordType_t syncWord)
     }
 }
 
-bool E22::getIrqStatus(void)
+bool E22::getIrqStatus(uint16_t *IrqStatusOut)
 {
     E22Command_t command;
     memset(&command, 0, sizeof(E22Command_t));
@@ -1186,6 +1269,7 @@ bool E22::getIrqStatus(void)
     command.paramCount = 0;
     command.hasResponse = true;
     command.responsesCount = 2;
+    command.responses.responsesPtr16[0] = IrqStatusOut;
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
@@ -1214,7 +1298,7 @@ bool E22::clearIrqStatus(uint16_t IRQRegClear)
     return false;
 }
 
-void E22::processIRQ(uint16_t IRQRegValue)
+void E22::updateIRQStatus(uint16_t IRQRegValue)
 {
     memset(&IRQReg, 0, sizeof(IRQReg_t));
     if (IRQRegValue & TX_DONE)
@@ -1341,4 +1425,45 @@ uint16_t E22::processIRQMask(IRQReg_t IRQMask)
     }
 
     return IRQAux;
+}
+
+bool E22::getRxBufferStatus(uint8_t *payLoadLenghtRx, uint8_t *RxStartBufferPointer)
+{
+    E22Command_t command;
+    memset(&command, 0, sizeof(E22Command_t));
+    command.commandCode = E22_CMD_GetRxBufferStatus;
+    command.paramCount = 0;
+    command.hasResponse = true;
+    command.responsesCount = 2;
+    command.responses.responsesPtr8[0] = payLoadLenghtRx;
+    command.responses.responsesPtr8[1] = RxStartBufferPointer;
+
+    if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
+    {
+        return true;
+    }
+
+    ESP_LOGE(E22TAG, "Error al enviar el comando GetRxBufferStatus a la queue.");
+    return false;
+}
+
+bool E22::getPacketStatus(uint8_t *RssiPkt, uint8_t *SnrPkt, uint8_t *SignalRssiPkt)
+{
+    E22Command_t command;
+    memset(&command, 0, sizeof(E22Command_t));
+    command.commandCode = E22_CMD_GetPacketStatus;
+    command.paramCount = 0;
+    command.hasResponse = true;
+    command.responsesCount = 3;
+    command.responses.responsesPtr8[0] = RssiPkt;
+    command.responses.responsesPtr8[1] = SnrPkt;
+    command.responses.responsesPtr8[2] = SignalRssiPkt;
+
+    if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
+    {
+        return true;
+    }
+
+    ESP_LOGE(E22TAG, "Error al enviar el comando GetPacketStatus a la queue.");
+    return false;
 }

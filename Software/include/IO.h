@@ -30,8 +30,6 @@ private:
     // Constructor privado
     IO() {}
 
-    bool Initial_configuration(void);
-
 };
 
 #endif // E22DRIVER_H

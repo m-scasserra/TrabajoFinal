@@ -12,7 +12,7 @@
 
 // Defines para la tarea de FRTOS del E22
 
-#define MAX_E22_CMD_QUEUE           10
+#define MAX_E22_CMD_QUEUE           30
 
 // Configuracion del SPI Device E22
 #define SPI_COMMAND_LEN             8
@@ -282,16 +282,17 @@ public:
         uint8_t paramCount; // Number of parameters present
         union params_t
         {
-            uint8_t paramsArray[MAX_CMD_PARAMS]; // Array to hold various parameter types
-            uint8_t *paramsPtr;                  // Pointer to hold various parameter types
+            uint8_t paramsArray[MAX_CMD_PARAMS]; // Array to hold various input parameter
+            uint8_t *paramsPtr[MAX_CMD_PARAMS];  // Pointer to hold various input parameter
         } params;
 
         bool hasResponse;
         uint8_t responsesCount; // Number of responses of the command
         union responses_t
         {
-            uint8_t responsesArray[MAX_RESPONSES]; // Array to hold various parameter types
-            uint8_t *responsesPtr;                 // Pointer to hold various parameter types
+            uint8_t responsesArray[MAX_RESPONSES]; // Array to hold various responses
+            uint8_t *responsesPtr8[MAX_RESPONSES];  // Pointer to hold various response of 8 bits
+            uint16_t *responsesPtr16[MAX_RESPONSES];  // Pointer to hold various response of 16 bits
         } responses;
     } E22Command_t;
 
@@ -318,9 +319,11 @@ public:
     bool setModulationParams(ModulationParameters_t modulation);
     bool setPacketParams(LoraPacketParams_t packetParams);
     bool setSyncWord(SyncWordType_t syncWord);
-    bool getIrqStatus(void);
+    bool getIrqStatus(uint16_t *IrqStatusOut);
     bool clearIrqStatus(uint16_t IRQRegClear);
     bool setDioIrqParams(IRQReg_t IRQMask, IRQReg_t DIO1Mask, IRQReg_t DIO2Mask, IRQReg_t DIO3Mask);
+    bool getRxBufferStatus(uint8_t *bufferLenght, uint8_t *bufferStart);\
+    bool getPacketStatus(uint8_t *RssiPkt, uint8_t *SnrPkt, uint8_t *SignalRssiPkt);
 
 private:
     // Constructor privado
@@ -333,11 +336,11 @@ private:
     bool processInterrupt(void);
     bool processResponse(void);
 
-    bool IOInit(void);
+    bool E22IOInit(void);
     bool InterruptInit(void);
 
     bool processStatus(uint8_t msg);
-    void processIRQ(uint16_t IRQRegValue);
+    void updateIRQStatus(uint16_t IRQRegValue);
     uint16_t processIRQMask(IRQReg_t IRQMask);
 
     bool isBusy(void);
@@ -350,7 +353,9 @@ private:
     static SemaphoreHandle_t xE22InterruptSempahore;
     QueueHandle_t xE22CmdQueue;
 
-    uint8_t rssiInst;
+    static uint8_t rssiInst;
+    static uint8_t PayloadLenghtRx;
+    static uint8_t RxStartBufferPointer;
 
     IRQReg_t IRQReg;
 };
