@@ -321,7 +321,11 @@ public:
     bool setSyncWord(SyncWordType_t syncWord);
     bool messageIsAvailable(void);
     uint8_t getMessageLenght(void);
-    
+    bool getMessageByte(uint8_t *dataOut);
+    bool getMessageLenght(uint8_t *dataOut);
+    bool beginTransmission(void);
+    bool writeByte(uint8_t data);
+    bool writeByteLength(uint8_t* data, uint8_t length);
     
     bool setDioIrqParams(IRQReg_t IRQMask, IRQReg_t DIO1Mask, IRQReg_t DIO2Mask, IRQReg_t DIO3Mask);
     bool getPacketStatus(uint8_t *RssiPkt, uint8_t *SnrPkt, uint8_t *SignalRssiPkt);
@@ -364,6 +368,7 @@ private:
     static uint8_t RxStartBufferPointer;
     static uint32_t msgTimeoutms;
     static bool PacketReceived;
+    static uint8_t PacketOffset;
 
     IRQReg_t IRQReg;
 };

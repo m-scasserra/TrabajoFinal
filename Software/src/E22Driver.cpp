@@ -8,6 +8,7 @@ uint8_t E22::PayloadLenghtRx = 0;
 uint8_t E22::RxStartBufferPointer = 0;
 uint32_t E22::msgTimeoutms = 0;
 bool E22::PacketReceived = false;
+uint8_t E22::PacketOffset = 0;
 
 void IRAM_ATTR E22::E22ISRHandler(void)
 {
@@ -136,6 +137,7 @@ bool E22::processInterrupt(void)
         {
             io.SetLevel((gpio_num_t)RX_EN_E22_PIN, IO_LOW);
             PacketReceived = true;
+            PacketOffset = 0;
             getRxBufferStatus(&PayloadLenghtRx, &RxStartBufferPointer);
             clearIrqStatus(RX_DONE);
         }
@@ -462,10 +464,11 @@ bool E22::processCmd(void)
 {
     SPI &spi = SPI::getInstance();
     E22Command_t cmdToProcess;
-    memset(&cmdToProcess, 0, sizeof(E22Command_t));
     uint8_t TxBuffer[MAX_CMD_PARAMS + 1];
-    memset(&TxBuffer, 0, sizeof(uint8_t) * (MAX_CMD_PARAMS + 1));
     uint8_t RxBuffer[MAX_CMD_PARAMS + 1];
+
+    memset(&cmdToProcess, 0, sizeof(E22Command_t));
+    memset(&TxBuffer, 0, sizeof(uint8_t) * (MAX_CMD_PARAMS + 1));
     memset(&RxBuffer, 0, sizeof(uint8_t) * (MAX_CMD_PARAMS + 1));
 
     if (xQueueReceive(xE22CmdQueue, &(cmdToProcess), 0) == pdPASS)
@@ -1498,9 +1501,66 @@ bool E22::getPacketStatus(uint8_t *RssiPkt, uint8_t *SnrPkt, uint8_t *SignalRssi
 
 bool E22::messageIsAvailable(void)
 {
-    return messageIsAvailable;
+    return PacketReceived;
 }
 
-uint8_t E22::getMessageLenght(void){
+uint8_t E22::getMessageLenght(void)
+{
     return PayloadLenghtRx;
+}
+
+bool E22::getMessageByte(uint8_t *dataOut)
+{
+    if (PacketOffset >= PayloadLenghtRx)
+    {
+        return false;
+    }
+    if(!readBuffer(RxStartBufferPointer + PacketOffset, dataOut))
+    {
+        return false;
+    }
+    PacketOffset++;
+    return true;
+}
+
+bool E22::getMessageLenght(uint8_t *dataOut)
+{
+    for (uint8_t i = 0; i < PayloadLenghtRx; i++)
+    {
+        if(!readBuffer(RxStartBufferPointer + PacketOffset, &dataOut[i]))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool E22::beginTransmission(void)
+{
+    // reset payload length and buffer index
+    _payloadTxRx = 0;
+    setBufferBaseAddress(_bufferIndex, _bufferIndex + 0xFF);
+
+    // set txen pin to low and rxen pin to high
+    
+        digitalWrite(_rxen, LOW);
+        digitalWrite(_txen, HIGH);
+        _pinToLow = _txen;
+    
+    
+    sx126x_fixLoRaBw500(_bw);
+}
+
+bool E22::writeByte(uint8_t data)
+{
+    writeBuffer(_bufferIndex, &data, 1);
+    _bufferIndex++;
+    _payloadTxRx++;
+    
+}
+bool E22::writeByteLength(uint8_t* data, uint8_t length)
+{
+    writeBuffer(_bufferIndex, data, length);
+    _bufferIndex += length;
+    _payloadTxRx += length;
 }
