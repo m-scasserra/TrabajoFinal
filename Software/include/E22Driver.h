@@ -12,7 +12,7 @@
 
 // Defines para la tarea de FRTOS del E22
 
-#define MAX_E22_CMD_QUEUE           30
+#define MAX_E22_CMD_QUEUE           200
 
 // Configuracion del SPI Device E22
 #define SPI_COMMAND_LEN             8
@@ -319,10 +319,11 @@ public:
     bool setModulationParams(ModulationParameters_t modulation);
     bool setPacketParams(LoraPacketParams_t packetParams);
     bool setSyncWord(SyncWordType_t syncWord);
-    bool getIrqStatus(uint16_t *IrqStatusOut);
-    bool clearIrqStatus(uint16_t IRQRegClear);
+    bool messageIsAvailable(void);
+    uint8_t getMessageLenght(void);
+    
+    
     bool setDioIrqParams(IRQReg_t IRQMask, IRQReg_t DIO1Mask, IRQReg_t DIO2Mask, IRQReg_t DIO3Mask);
-    bool getRxBufferStatus(uint8_t *bufferLenght, uint8_t *bufferStart);\
     bool getPacketStatus(uint8_t *RssiPkt, uint8_t *SnrPkt, uint8_t *SignalRssiPkt);
 
 private:
@@ -343,6 +344,10 @@ private:
     void updateIRQStatus(uint16_t IRQRegValue);
     uint16_t processIRQMask(IRQReg_t IRQMask);
 
+    bool getRxBufferStatus(uint8_t *bufferLenght, uint8_t *bufferStart);
+    bool getIrqStatus(uint16_t *IrqStatusOut);
+    bool clearIrqStatus(uint16_t IRQRegClear);
+
     bool isBusy(void);
     bool resetOn(void);
     bool resetOff(void);
@@ -351,11 +356,14 @@ private:
 
     static TaskHandle_t E22TaskHandle;
     static SemaphoreHandle_t xE22InterruptSempahore;
+    static SemaphoreHandle_t xE22ResponseWaitSempahore;
     QueueHandle_t xE22CmdQueue;
 
     static uint8_t rssiInst;
     static uint8_t PayloadLenghtRx;
     static uint8_t RxStartBufferPointer;
+    static uint32_t msgTimeoutms;
+    static bool PacketReceived;
 
     IRQReg_t IRQReg;
 };

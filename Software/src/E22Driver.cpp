@@ -2,9 +2,12 @@
 
 TaskHandle_t E22::E22TaskHandle = NULL;
 SemaphoreHandle_t E22::xE22InterruptSempahore = NULL;
+SemaphoreHandle_t E22::xE22ResponseWaitSempahore = NULL;
 uint8_t E22::rssiInst = 0;
 uint8_t E22::PayloadLenghtRx = 0;
 uint8_t E22::RxStartBufferPointer = 0;
+uint32_t E22::msgTimeoutms = 0;
+bool E22::PacketReceived = false;
 
 void IRAM_ATTR E22::E22ISRHandler(void)
 {
@@ -54,6 +57,11 @@ bool E22::Begin(void)
     xE22CmdQueue = xQueueCreate(MAX_E22_CMD_QUEUE, sizeof(E22Command_t));
 
     // Creo el semaphore de interrupcciones
+    xE22InterruptSempahore = xSemaphoreCreateMutex();
+    xSemaphoreGive(xE22InterruptSempahore);
+    xSemaphoreTake(xE22InterruptSempahore, 0);
+
+    // Creo el semaphore de respuestas de los mensajes
     xE22InterruptSempahore = xSemaphoreCreateMutex();
     xSemaphoreGive(xE22InterruptSempahore);
     xSemaphoreTake(xE22InterruptSempahore, 0);
@@ -127,6 +135,7 @@ bool E22::processInterrupt(void)
         if (IRQReg.rxDone)
         {
             io.SetLevel((gpio_num_t)RX_EN_E22_PIN, IO_LOW);
+            PacketReceived = true;
             getRxBufferStatus(&PayloadLenghtRx, &RxStartBufferPointer);
             clearIrqStatus(RX_DONE);
         }
@@ -252,6 +261,7 @@ bool E22::getStatus(void)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -270,6 +280,7 @@ bool E22::getRssiInst(void)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -288,6 +299,7 @@ bool E22::setBufferBaseAddress(uint8_t TxBaseAddr, uint8_t RxBaseAddr)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -312,6 +324,7 @@ bool E22::setRx(uint32_t Timeout)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -329,6 +342,7 @@ bool E22::setStandBy(StdByMode_t mode)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -881,6 +895,7 @@ bool E22::writeRegister(E22_Reg_Addr addr, uint8_t dataIn)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -902,6 +917,7 @@ bool E22::readRegister(E22_Reg_Addr addr, uint8_t *dataOut)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -920,6 +936,7 @@ bool E22::writeBuffer(uint8_t offset, uint8_t dataIn)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -940,6 +957,7 @@ bool E22::readBuffer(uint8_t offset, uint8_t *dataOut)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -957,6 +975,7 @@ bool E22::setPacketType(PacketType_t packetType)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -976,6 +995,7 @@ bool E22::getPacketType(PacketType_t *packetType)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -996,6 +1016,7 @@ bool E22::setDIO3asTCXOCtrl(E22::tcxoVoltage_t voltage, uint32_t delay)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -1043,6 +1064,7 @@ bool E22::calibrate(RC64kCalibration_t RC64kCalib, RC13MCalibration_t RC13MCalib
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -1097,6 +1119,7 @@ bool E22::calibrateImage(ImageCalibrationFreq_t frequency)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -1119,6 +1142,7 @@ bool E22::setFrequency(uint32_t frequency)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -1177,6 +1201,7 @@ bool E22::setRxGain(RxGain_t gain)
 {
     if (!writeRegister(E22_Reg_RxGain, gain))
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return false;
     }
     return true;
@@ -1195,6 +1220,7 @@ bool E22::setModulationParams(ModulationParameters_t modulation)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -1217,6 +1243,7 @@ bool E22::setPacketParams(LoraPacketParams_t packetParams)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -1369,6 +1396,7 @@ bool E22::setDioIrqParams(IRQReg_t IRQMask, IRQReg_t DIO1Mask, IRQReg_t DIO2Mask
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
+        xSemaphoreTake(xE22InterruptSempahore, pdMS_TO_TICKS(msgTimeoutms));
         return true;
     }
 
@@ -1466,4 +1494,13 @@ bool E22::getPacketStatus(uint8_t *RssiPkt, uint8_t *SnrPkt, uint8_t *SignalRssi
 
     ESP_LOGE(E22TAG, "Error al enviar el comando GetPacketStatus a la queue.");
     return false;
+}
+
+bool E22::messageIsAvailable(void)
+{
+    return messageIsAvailable;
+}
+
+uint8_t E22::getMessageLenght(void){
+    return PayloadLenghtRx;
 }
