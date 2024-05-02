@@ -46,6 +46,8 @@ private:
     static esp_err_t esp_console_register_FS_command(void);
     static int FSCmdFunc(int argc, char **argv);
     static int showStatusCMD(int argc, char **argv);
+    static int transmitCMD(int argc, char **argv);
+    static int recieveCMD(int argc, char **argv);
     static void PrintSeparator(void);
 
     // Argumentos para el comando timer

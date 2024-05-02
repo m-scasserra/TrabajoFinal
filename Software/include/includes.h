@@ -45,8 +45,8 @@
 #include "cmd_system.h"
 #include "Hardware.h"
 #include "SPI.h"
-#include "E22Driver.h"
 #include "E22Opcodes.h"
+#include "E22Driver.h"
 #include "IO.h"
 
 #endif //INCLUDES_H

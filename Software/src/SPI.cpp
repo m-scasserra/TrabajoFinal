@@ -36,11 +36,9 @@ bool SPI::SendMessage(uint8_t *tx_msg, uint8_t tx_len, uint8_t *rx_msg, uint8_t 
     spi_transaction_t message;
     memset(&message, 0, sizeof(spi_transaction_t));
 
-    //message.cmd = E22_CMD_GetStatus;
     message.length = 8 * tx_len;
     message.rxlength = 8 * rx_len;
     message.user = NULL;
-    message.tx_buffer = NULL;
     message.tx_buffer = tx_msg;
     message.rx_buffer = rx_msg;
 

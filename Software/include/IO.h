@@ -5,7 +5,7 @@
 
 #define IOTAG "IO"
 #define IO_LOW 0
-#define IO_HIGH 0
+#define IO_HIGH 1
 
 class IO
 {

@@ -25,7 +25,6 @@ static int tasks_infocmd()
     return 0;
 }
 
-
 esp_err_t CLI::esp_console_register_simple_command(const char *commandtext, const char *help, esp_console_cmd_func_t func)
 {
     esp_console_cmd_t command = {
@@ -37,10 +36,85 @@ esp_err_t CLI::esp_console_register_simple_command(const char *commandtext, cons
     return esp_console_cmd_register(&command);
 }
 
-
 int CLI::showStatusCMD(int argc, char **argv)
 {
-    //TODO: Llenar el show status
+    // TODO: Llenar el show status
+    return 0;
+}
+
+int CLI::recieveCMD(int argc, char **argv)
+{
+    E22 &e22 = E22::getInstance();
+    printf("Set RF module to use TCXO as clock reference\n\r");
+    e22.setStandBy(E22::STDBY_RC);
+
+    e22.setPacketType(E22::PACKET_TYPE_LORA);
+
+    e22.setBufferBaseAddress(SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
+    E22::tcxoVoltage_t dio3Voltage = E22::TCXOVOLTAGE_1_8;
+    e22.setDIO3asTCXOCtrl(dio3Voltage, 10);
+    e22.setStandBy(E22::STDBY_RC);
+    E22::Calibrate_t calibrationsToDo;
+    memset(&calibrationsToDo, 0, sizeof(E22::Calibrate_t));
+    calibrationsToDo.RC64kCalibration = true;
+    calibrationsToDo.RC13MCalibration = true;
+    calibrationsToDo.PLLCalibration = true;
+    calibrationsToDo.ADCPulseCalibration = true;
+    calibrationsToDo.ADCBulkNCalibration = true;
+    calibrationsToDo.ADCBulkPCalibration = true;
+    calibrationsToDo.ImageCalibration = true;
+    e22.calibrate(calibrationsToDo);
+
+    uint8_t xtalA = 0x12;
+    uint8_t xtalB = 0x12;
+    printf("Set RF module to use XTAL as clock reference\n\r");
+    e22.setXtalCap(xtalA, xtalB);
+
+    // Set frequency to 915 Mhz
+    printf("Set frequency to 915 Mhz\n\r");
+    e22.setFrequency(915000000);
+
+    // Set RX gain. RX gain option are power saving gain or boosted gain
+    printf("Set RX gain to power saving gain\n\r");
+    E22::RxGain_t gain;
+    gain = E22::RX_BOOST;
+    e22.setRxGain(gain); // Power saving gain
+
+    // Configure modulation parameter including spreading factor (SF), bandwidth (BW), and coding rate (CR)
+    // Transmitter must have same SF and BW setting so receiver can receive LoRa packet
+    printf("Set modulation parameters:\n\tSpreading factor = 7\n\tBandwidth = 125 kHz\n\tCoding rate = 4/5\r\n");
+    E22::ModulationParameters_t modulation;
+    modulation.spredingFactor = E22::SF_7;      // LoRa spreading factor: 7
+    modulation.bandwidth = E22::LORA_BW_125;    // LoRa bandwidth: 125 kHz
+    modulation.codingRate = E22::LORA_CR_4_5;   // Coding rate: 4/5
+    e22.setModulationParams(modulation);
+
+    // Configure packet parameter including header type, preamble length, payload length, and CRC type
+    // The explicit packet includes header contain CR, number of byte, and CRC type
+    // Packet with explicit header can't be received by receiver with implicit header mode
+    printf("Set packet parameters:\n\tExplicit header type\n\tPreamble length = 12\n\tPayload Length = 15\n\tCRC on\n\r");
+    E22::LoraPacketParams_t packetParams;
+    packetParams.headerType = E22::EXPLICIT_HEADER; // Explicit header mode
+    packetParams.preambleLength = 12;               // Set preamble length to 12
+    packetParams.payloadLength = 15;                // Initialize payloadLength to 15
+    packetParams.crcType = true;                    // Set CRC enable
+    packetParams.iqType = E22::STANDARD_IQ;
+    e22.setPacketParams(packetParams);
+
+    // Set syncronize word for public network (0x3444)
+    printf("Set syncronize word to 0x3444\n\r");
+    E22::SyncWordType_t syncWord = E22::PUBLIC_SYNCWORD;
+    e22.setSyncWord(syncWord);
+
+    printf("\n-- LORA RECEIVER --\n");
+
+    e22.receivePacket(10000);
+    return 0;
+}
+
+int CLI::transmitCMD(int argc, char **argv)
+{
+
     return 0;
 }
 
@@ -64,7 +138,7 @@ esp_err_t CLI::esp_console_register_config_command(void)
 
 int CLI::configCmdFunc(int argc, char **argv)
 {
-    //FS &fs = FS::getInstance();
+    // FS &fs = FS::getInstance();
     int nerrors = arg_parse(argc, argv, (void **)&config_args);
     if (nerrors != 0)
     {
@@ -217,11 +291,11 @@ int CLI::FSCmdFunc(int argc, char **argv)
         {
             fs.ls(STORAGE_PARTITION_NAME);
         }
-        else 
+        else
         {
             printf("Comando no valido\r\n");
         }
-        
+
     }
     else if (!strcmp(command, "cat"))
     {
@@ -234,16 +308,17 @@ int CLI::FSCmdFunc(int argc, char **argv)
     }
     */
     return 0;
-    
 }
 
 void CLI::esp_console_register_all_commands(void)
 {
     esp_console_register_help_command();
-    //esp_console_register_timer_command();
+    // esp_console_register_timer_command();
     esp_console_register_config_command();
     esp_console_register_FS_command();
     esp_console_register_simple_command("?", "Muestra el estado general del dispositivo", showStatusCMD);
+    esp_console_register_simple_command("tx", "Transmit", transmitCMD);
+    esp_console_register_simple_command("rx", "Recieve", recieveCMD);
     register_system();
 }
 
@@ -279,16 +354,15 @@ void CLI::Begin(void)
 void CLI::PrintLogo(void)
 {
 
-
-printf("\r\n");
-printf("   _____              _______   ______   _         ____     _____   _____    _____ \r\n");
-printf("  / ____|     /\\     |__   __| |  ____| | |       / __ \\   / ____| |_   _|  / ____|\r\n");
-printf(" | (___      /  \\       | |    | |__    | |      | |  | | | |  __    | |   | |     \r\n");
-printf("  \\___ \\    / /\\ \\      | |    |  __|   | |      | |  | | | | |_ |   | |   | |     \r\n");
-printf("  ____) |  / ____ \\     | |    | |____  | |____  | |__| | | |__| |  _| |_  | |____ \r\n");
-printf(" |_____/  /_/    \\_\\    |_|    |______| |______|  \\____/   \\_____| |_____|  \\_____|\r\n");
-printf("\r\n");
-fflush(stdout);
+    printf("\r\n");
+    printf("   _____              _______   ______   _         ____     _____   _____    _____ \r\n");
+    printf("  / ____|     /\\     |__   __| |  ____| | |       / __ \\   / ____| |_   _|  / ____|\r\n");
+    printf(" | (___      /  \\       | |    | |__    | |      | |  | | | |  __    | |   | |     \r\n");
+    printf("  \\___ \\    / /\\ \\      | |    |  __|   | |      | |  | | | | |_ |   | |   | |     \r\n");
+    printf("  ____) |  / ____ \\     | |    | |____  | |____  | |__| | | |__| |  _| |_  | |____ \r\n");
+    printf(" |_____/  /_/    \\_\\    |_|    |______| |______|  \\____/   \\_____| |_____|  \\_____|\r\n");
+    printf("\r\n");
+    fflush(stdout);
 
     return;
 }

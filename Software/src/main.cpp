@@ -11,7 +11,9 @@ extern "C" void app_main(void)
     led.Begin();
     cli.Begin();
     e22.Begin();
-    led.SetBrightness(50);
+    e22.setMsgTimeoutms(1000);
+    led.SetBrightness(10);
+    
 
     
     while (1)
