@@ -261,6 +261,26 @@ public:
         } responses;
     } E22Command_t;
 
+    enum PaConfig_t
+    {
+        PA_22_DBM,
+        PA_20_DBM,
+        PA_17_DBM,
+        PA_14_DBM
+    };
+
+    enum RampTime_t
+    {
+        SET_RAMP_10U    =  0x00, // 10 us
+        SET_RAMP_20U    =  0x01, // 20 us
+        SET_RAMP_40U    =  0x02, // 40 us
+        SET_RAMP_80U    =  0x03, // 80 us
+        SET_RAMP_200U   =  0x04, // 200 us
+        SET_RAMP_800U   =  0x05, // 800 us
+        SET_RAMP_1700U  =  0x06, // 1700 us
+        SET_RAMP_3400U  =  0x07, // 3400 us
+    };
+
     bool Begin(void);
 
     bool setPacketType(PacketType_t _packetType);
@@ -301,6 +321,10 @@ public:
     bool transmitPacket(uint32_t Timeout);
     bool receivePacket(uint32_t Timeout);
     void setMsgTimeoutms(uint32_t newMsgTimeoutms);
+    bool setPaConfig(PaConfig_t PaConfig);
+    bool setTxParams(RampTime_t RampTime);
+    bool fixInvertedIq(PacketIQType_t iqType);
+    bool fixModulationQuality(void);
 
     bool setDioIrqParams(IRQReg_t IRQMask, IRQReg_t DIO1Mask, IRQReg_t DIO2Mask, IRQReg_t DIO3Mask);
     bool getPacketStatus(uint8_t *RssiPkt, uint8_t *SnrPkt, uint8_t *SignalRssiPkt);
@@ -330,6 +354,9 @@ private:
     bool isBusy(void);
     bool resetOn(void);
     bool resetOff(void);
+
+    bool checkDeviceConnection(void);       //This function bypasses the FRTOS queue and directly executes the command
+    bool antennaMismatchCorrection(void);   //This function bypasses the FRTOS queue and directly executes the command
 
     spi_device_handle_t SPIHandle;
 

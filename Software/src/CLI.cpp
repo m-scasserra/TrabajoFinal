@@ -45,15 +45,23 @@ int CLI::showStatusCMD(int argc, char **argv)
 int CLI::recieveCMD(int argc, char **argv)
 {
     E22 &e22 = E22::getInstance();
-    printf("Set RF module to use TCXO as clock reference\n\r");
+    //printf("Set RF module to use TCXO as clock reference\n\r");
+    //e22.setStandBy(E22::STDBY_RC);
+//
+    //e22.setPacketType(E22::PACKET_TYPE_LORA);
+//
+    //// Set frequency to 915 Mhz
+    //printf("Set frequency to 915 Mhz\n\r");
+    //e22.setFrequency(915000000);
     e22.setStandBy(E22::STDBY_RC);
-
     e22.setPacketType(E22::PACKET_TYPE_LORA);
+//
+    //e22.setBufferBaseAddress(SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
+    //E22::tcxoVoltage_t dio3Voltage = E22::TCXOVOLTAGE_1_8;
+    e22.setDIO3asTCXOCtrl(E22::TCXOVOLTAGE_1_8, 10);
 
-    e22.setBufferBaseAddress(SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
-    E22::tcxoVoltage_t dio3Voltage = E22::TCXOVOLTAGE_1_8;
-    e22.setDIO3asTCXOCtrl(dio3Voltage, 10);
     e22.setStandBy(E22::STDBY_RC);
+
     E22::Calibrate_t calibrationsToDo;
     memset(&calibrationsToDo, 0, sizeof(E22::Calibrate_t));
     calibrationsToDo.RC64kCalibration = true;
@@ -65,28 +73,28 @@ int CLI::recieveCMD(int argc, char **argv)
     calibrationsToDo.ImageCalibration = true;
     e22.calibrate(calibrationsToDo);
 
-    uint8_t xtalA = 0x12;
-    uint8_t xtalB = 0x12;
-    printf("Set RF module to use XTAL as clock reference\n\r");
-    e22.setXtalCap(xtalA, xtalB);
+    //uint8_t xtalA = 0x12;
+    //uint8_t xtalB = 0x12;
+    //printf("Set RF module to use XTAL as clock reference\n\r");
+    //e22.setXtalCap(xtalA, xtalB);
 
     // Set frequency to 915 Mhz
     printf("Set frequency to 915 Mhz\n\r");
+    e22.calibrateImage(E22::FREQ_902_928);
     e22.setFrequency(915000000);
 
     // Set RX gain. RX gain option are power saving gain or boosted gain
     printf("Set RX gain to power saving gain\n\r");
-    E22::RxGain_t gain;
-    gain = E22::RX_BOOST;
-    e22.setRxGain(gain); // Power saving gain
+    //E22::RxGain_t gain = E22::RX_POWER_SAVE;
+    e22.setRxGain(E22::RX_BOOST); // Power saving gain
 
     // Configure modulation parameter including spreading factor (SF), bandwidth (BW), and coding rate (CR)
     // Transmitter must have same SF and BW setting so receiver can receive LoRa packet
     printf("Set modulation parameters:\n\tSpreading factor = 7\n\tBandwidth = 125 kHz\n\tCoding rate = 4/5\r\n");
     E22::ModulationParameters_t modulation;
-    modulation.spredingFactor = E22::SF_7;      // LoRa spreading factor: 7
-    modulation.bandwidth = E22::LORA_BW_125;    // LoRa bandwidth: 125 kHz
-    modulation.codingRate = E22::LORA_CR_4_5;   // Coding rate: 4/5
+    modulation.spredingFactor = E22::SF_7;    // LoRa spreading factor: 7
+    modulation.bandwidth = E22::LORA_BW_125;  // LoRa bandwidth: 125 kHz
+    modulation.codingRate = E22::LORA_CR_4_5; // Coding rate: 4/5
     e22.setModulationParams(modulation);
 
     // Configure packet parameter including header type, preamble length, payload length, and CRC type
@@ -103,17 +111,125 @@ int CLI::recieveCMD(int argc, char **argv)
 
     // Set syncronize word for public network (0x3444)
     printf("Set syncronize word to 0x3444\n\r");
-    E22::SyncWordType_t syncWord = E22::PUBLIC_SYNCWORD;
-    e22.setSyncWord(syncWord);
+    //E22::SyncWordType_t syncWord = E22::PUBLIC_SYNCWORD;
+    e22.setSyncWord(E22::PUBLIC_SYNCWORD);
 
     printf("\n-- LORA RECEIVER --\n");
 
-    e22.receivePacket(10000);
+    e22.receivePacket(100000);
+
+    while(e22.messageIsAvailable() == false){
+        printf("Waiting for packet...\n\r");
+        vTaskDelay(pdMS_TO_TICKS(1000));
+    }
+    printf("Received packet size %u\n\r", e22.getMessageLenght());
+    char messageOut[100];
+    memset(messageOut, 0, sizeof(messageOut));
+    e22.getMessageRxLenght((uint8_t *)messageOut, 15);
+    printf("Message: %s\n\r", messageOut);
+
     return 0;
 }
 
 int CLI::transmitCMD(int argc, char **argv)
 {
+    E22 &e22 = E22::getInstance();
+    //printf("Set RF module to use TCXO as clock reference\r\n");
+//
+    //e22.setStandBy(E22::STDBY_RC);
+    //e22.setPacketType(E22::PACKET_TYPE_LORA);
+    //e22.setBufferBaseAddress(SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
+    e22.setStandBy(E22::STDBY_RC);
+    e22.setPacketType(E22::PACKET_TYPE_LORA);
+
+    //E22::tcxoVoltage_t dio3Voltage = E22::TCXOVOLTAGE_1_8;
+    e22.setDIO3asTCXOCtrl(E22::TCXOVOLTAGE_1_8, 10);
+    e22.setStandBy(E22::STDBY_RC);
+    E22::Calibrate_t calibrationsToDo;
+    memset(&calibrationsToDo, 0, sizeof(E22::Calibrate_t));
+    calibrationsToDo.RC64kCalibration = true;
+    calibrationsToDo.RC13MCalibration = true;
+    calibrationsToDo.PLLCalibration = true;
+    calibrationsToDo.ADCPulseCalibration = true;
+    calibrationsToDo.ADCBulkNCalibration = true;
+    calibrationsToDo.ADCBulkPCalibration = true;
+    calibrationsToDo.ImageCalibration = true;
+    e22.calibrate(calibrationsToDo);
+
+    // uncomment code below to use XTAL
+    //int8_t xtalA = 0x12;
+    //int8_t xtalB = 0x12;
+    //rintf("Set RF module to use XTAL as clock reference\n\r");
+    //22.setXtalCap(xtalA, xtalB);
+
+    // Set frequency to 915 Mhz
+    printf("Set frequency to 915 Mhz\n\r");
+    e22.calibrateImage(E22::FREQ_902_928);
+    e22.setFrequency(915000000);
+
+    // Set TX power, default power for SX1262 and SX1268 are +22 dBm and for SX1261 is +14 dBm
+    // This function will set PA config with optimal setting for requested TX power
+    printf("Set TX power to +17 dBm\n\r");
+    //E22::PaConfig_t paConfig = E22::PA_17_DBM; // TX power +17 dBm for SX1262
+    e22.setPaConfig(E22::PA_17_DBM);
+    //E22::RampTime_t rampTime = ; // 800 microsecond Ramp Time
+    e22.setTxParams(E22::SET_RAMP_800U);
+
+    // Configure modulation parameter including spreading factor (SF), bandwidth (BW), and coding rate (CR)
+    // Transmitter must have same SF and BW setting so receiver can receive LoRa packet
+    printf("Set modulation parameters:\n\tSpreading factor = 7\n\tBandwidth = 125 kHz\n\tCoding rate = 4/5\r\n");
+    E22::ModulationParameters_t modulation;
+    modulation.spredingFactor = E22::SF_7;    // LoRa spreading factor: 7
+    modulation.bandwidth = E22::LORA_BW_125;  // LoRa bandwidth: 125 kHz
+    modulation.codingRate = E22::LORA_CR_4_5; // Coding rate: 4/5
+    e22.setModulationParams(modulation);
+
+    // Configure packet parameter including header type, preamble length, payload length, and CRC type
+    // The explicit packet includes header contain CR, number of byte, and CRC type
+    // Packet with explicit header can't be received by receiver with implicit header mode
+    printf("Set packet parameters:\n\tExplicit header type\n\tPreamble length = 12\n\tPayload Length = 15\n\tCRC on\n\r");
+    E22::LoraPacketParams_t packetParams;
+    packetParams.headerType = E22::EXPLICIT_HEADER; // Explicit header mode
+    packetParams.preambleLength = 12;               // Set preamble length to 12
+    packetParams.payloadLength = 15;                // Initialize payloadLength to 15
+    packetParams.crcType = true;                    // Set CRC enable
+    packetParams.iqType = E22::STANDARD_IQ;
+    e22.setPacketParams(packetParams);
+    e22.fixInvertedIq(packetParams.iqType);
+
+    // Set syncronize word for public network (0x3444)
+    printf("Set syncronize word to 0x3444\n\r");
+    //E22::SyncWordType_t syncWord = E22::PUBLIC_SYNCWORD;
+    e22.setSyncWord(E22::PUBLIC_SYNCWORD);
+
+    printf("\n-- LORA TRANSMITTER --\n\r");
+
+    //-----------------------------------------------------------------------------------------------------------------
+
+    // Transmit message and counter
+    // write() method must be placed between beginPacket() and endPacket()
+    static uint8_t counter = 0;
+    char message[] = "HeLoRa World!";
+    e22.beginTxPacket();
+    e22.writeMessageTxLength((uint8_t *)message, sizeof(message));
+    e22.writeMessageTxByte(counter);
+    e22.transmitPacket(30000);
+
+    // Print message and counter in serial
+    printf("%s %u", message, counter);
+    counter++;
+
+    // Wait until modulation process for transmitting packet finish
+    //LoRa.wait();
+
+    // Print transmit time
+    //Serial.print("Transmit time: ");
+    //Serial.print(LoRa.transmitTime());
+    //Serial.println(" ms");
+    //Serial.println();
+
+    // Don't load RF module with continous transmit
+    //delay(5000);
 
     return 0;
 }
