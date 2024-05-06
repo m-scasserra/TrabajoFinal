@@ -1,5 +1,0 @@
-Added Pin To Net: NetName=SCK Pin=IC2-20
-Added Pin To Net: NetName=5V Pin=IC3-6
-Added Pin To Net: NetName=5V Pin=R7-2
-Added Pin To Net: NetName=SCK Pin=SENSORADC-2
-Change Net Name : Old Net Name=SCK New Net Name=ADC
