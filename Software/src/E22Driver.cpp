@@ -380,7 +380,7 @@ bool E22::setRx(uint32_t Timeout)
     command.paramCount = 4;
     command.params.paramsArray[0] = (uint8_t)(TimeoutBits >> 16);
     command.params.paramsArray[1] = (uint8_t)(TimeoutBits >> 8);
-    command.params.paramsArray[2] = (uint8_t)(TimeoutBits & 0xFF);
+    command.params.paramsArray[2] = (uint8_t)(TimeoutBits >> 0);
     ESP_LOGE(E22TAG, "paramsArray[0]: %X paramsArray[1]: %X paramsArray[2]: %X", command.params.paramsArray[0], command.params.paramsArray[1], command.params.paramsArray[2]);
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
@@ -1080,8 +1080,8 @@ bool E22::writeRegister(E22_Reg_Addr addr, uint8_t dataIn)
     memset(&command, 0, sizeof(E22Command_t));
     command.commandCode = E22_CMD_WriteRegister;
     command.paramCount = 4;
-    command.params.paramsArray[0] = (uint8_t)addr >> 8;
-    command.params.paramsArray[1] = (uint8_t)addr >> 0;
+    command.params.paramsArray[0] = (uint8_t)(addr >> 8);
+    command.params.paramsArray[1] = (uint8_t)(addr >> 0);
     command.params.paramsArray[2] = (uint8_t)dataIn;
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
@@ -1099,8 +1099,8 @@ bool E22::readRegister(E22_Reg_Addr addr, uint8_t *dataOut)
     memset(&command, 0, sizeof(E22Command_t));
     command.commandCode = E22_CMD_ReadRegister;
     command.paramCount = 5;
-    command.params.paramsArray[0] = (uint8_t)addr >> 8;
-    command.params.paramsArray[1] = (uint8_t)addr >> 0;
+    command.params.paramsArray[0] = (uint8_t)(addr >> 8);
+    command.params.paramsArray[1] = (uint8_t)(addr >> 0);
     command.hasResponse = true;
     command.responsesCount = 5;
     command.responses.responsesPtr8[0] = dataOut;
@@ -1205,9 +1205,9 @@ bool E22::setDIO3asTCXOCtrl(E22::tcxoVoltage_t voltage, uint32_t delayms)
     command.commandCode = E22_CMD_SetDIO3asTcxoCtrl;
     command.paramCount = 5;
     command.params.paramsArray[0] = (uint8_t)voltage;
-    command.params.paramsArray[1] = (uint8_t)delayBits >> 16;
-    command.params.paramsArray[2] = (uint8_t)delayBits >> 8;
-    command.params.paramsArray[3] = (uint8_t)delayBits & 0x0000FF;
+    command.params.paramsArray[1] = (uint8_t)(delayBits >> 16);
+    command.params.paramsArray[2] = (uint8_t)(delayBits >> 8);
+    command.params.paramsArray[3] = (uint8_t)(delayBits >> 0);
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
@@ -1371,10 +1371,10 @@ bool E22::setFrequency(uint32_t frequency)
     command.paramCount = 5;
 
     uint32_t RFfreq = ((uint64_t)frequency << SX126X_RF_FREQUENCY_SHIFT) / SX126X_RF_FREQUENCY_XTAL;
-    command.params.paramsArray[0] = (uint8_t)RFfreq >> 24;
-    command.params.paramsArray[1] = (uint8_t)RFfreq >> 16;
-    command.params.paramsArray[2] = (uint8_t)RFfreq >> 8;
-    command.params.paramsArray[3] = (uint8_t)RFfreq >> 0;
+    command.params.paramsArray[0] = (uint8_t)(RFfreq >> 24);
+    command.params.paramsArray[1] = (uint8_t)(RFfreq >> 16);
+    command.params.paramsArray[2] = (uint8_t)(RFfreq >> 8);
+    command.params.paramsArray[3] = (uint8_t)(RFfreq >> 0);
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
@@ -1468,8 +1468,8 @@ bool E22::setPacketParams(LoraPacketParams_t packetParams)
     memset(&command, 0, sizeof(E22Command_t));
     command.commandCode = E22_CMD_SetPacketParams;
     command.paramCount = 10;
-    command.params.paramsArray[0] = (uint8_t)packetParams.preambleLength >> 8;
-    command.params.paramsArray[1] = (uint8_t)packetParams.preambleLength >> 0;
+    command.params.paramsArray[0] = (uint8_t)(packetParams.preambleLength >> 8);
+    command.params.paramsArray[1] = (uint8_t)(packetParams.preambleLength >> 0);
     command.params.paramsArray[2] = (uint8_t)packetParams.headerType;
     command.params.paramsArray[3] = (uint8_t)packetParams.payloadLength;
     command.params.paramsArray[4] = (uint8_t)packetParams.crcType;
@@ -1804,7 +1804,8 @@ bool E22::writeMessageTxLength(uint8_t *data, uint8_t length)
 {
     for (uint8_t i = 0; i < length; i++)
     {
-        if (!writeBuffer(TxBufferAddr + i, data[i]))
+        //if (!writeBuffer(TxBufferAddr + i, data[i]))
+        if (!writeBuffer(TxBufferAddr, data[i]))
         {
             return false;
         }
@@ -1847,10 +1848,10 @@ bool E22::transmitPacket(uint32_t Timeout)
     }
 
     // Send the PacketParams in case it was changed
-    if (!setPacketParams(packetParams))
-    {
-        return false;
-    }
+    //if (!setPacketParams(packetParams)) TODO: FIX
+    //{
+    //    return false;
+    //}
 
     // Set device to transmit mode with configured timeout
     if (!setTx(Timeout))
@@ -2108,8 +2109,8 @@ bool E22::antennaMismatchCorrection(void)
     memset(&RxBuffer, 0, sizeof(uint8_t) * (MAX_CMD_PARAMS + 1));
 
     TxBuffer[0] = E22_OpCode_ReadRegister;
-    TxBuffer[1] = (uint8_t)E22_Reg_TxClampConfig >> 8;
-    TxBuffer[2] = (uint8_t)E22_Reg_TxClampConfig >> 0;
+    TxBuffer[1] = (uint8_t)(E22_Reg_TxClampConfig >> 8);
+    TxBuffer[2] = (uint8_t)(E22_Reg_TxClampConfig >> 0);
 
     if (!spi.SendMessage(TxBuffer, 5, RxBuffer, 5))
     {
@@ -2121,8 +2122,8 @@ bool E22::antennaMismatchCorrection(void)
 
     memset(&TxBuffer, 0, sizeof(uint8_t) * (MAX_CMD_PARAMS + 1));
     TxBuffer[0] = E22_OpCode_WriteRegister;
-    TxBuffer[1] = (uint8_t)E22_Reg_TxClampConfig >> 8;
-    TxBuffer[2] = (uint8_t)E22_Reg_TxClampConfig >> 0;
+    TxBuffer[1] = (uint8_t)(E22_Reg_TxClampConfig >> 8);
+    TxBuffer[2] = (uint8_t)(E22_Reg_TxClampConfig >> 0);
     TxBuffer[3] = value;
 
     if (!spi.SendMessage(TxBuffer, 4))

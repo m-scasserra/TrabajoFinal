@@ -209,7 +209,8 @@ int CLI::transmitCMD(int argc, char **argv)
     // Transmit message and counter
     // write() method must be placed between beginPacket() and endPacket()
     static uint8_t counter = 0;
-    char message[] = "HeLoRa World!";
+    //char message[] = "HeLoRa World!";
+    char message[] = "Hola Cabrita!";
     e22.beginTxPacket();
     e22.writeMessageTxLength((uint8_t *)message, sizeof(message));
     e22.writeMessageTxByte(counter);

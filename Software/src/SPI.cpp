@@ -42,6 +42,21 @@ bool SPI::SendMessage(uint8_t *tx_msg, uint8_t tx_len, uint8_t *rx_msg, uint8_t 
     message.tx_buffer = tx_msg;
     message.rx_buffer = rx_msg;
 
+    // Print TX message content (assuming uint8_t is a single byte)
+    printf("TX message: ");
+    for (int i = 0; i < tx_len; i++)
+    {
+        printf("0x%X ", tx_msg[i]);
+    }
+    printf("\r\n");
+
+    // Print RX message content (assuming uint8_t is a single byte)
+    printf("RX message: ");
+    for (int i = 0; i < rx_len; i++)
+    {
+        printf("0x%X ", rx_msg[i]);
+    }
+    printf("\r\n");
     if (spi_device_polling_transmit(SPIHandle, &message) != ESP_OK)
     {
         ESP_LOGE("SPI", "Error en spi_device_polling_transmit()");
@@ -60,11 +75,18 @@ bool SPI::SendMessage(uint8_t *tx_msg, uint8_t tx_len)
     message.tx_buffer = tx_msg;
     message.rx_buffer = NULL;
 
+    // Print TX message content (assuming uint8_t is a single byte)
+    printf("TX message: ");
+    for (int i = 0; i < tx_len; i++)
+    {
+        printf("0x%X ", tx_msg[i]);
+    }
+    printf("\r\n");
+
     if (spi_device_polling_transmit(SPIHandle, &message) != ESP_OK)
     {
         ESP_LOGE("SPI", "Error en spi_device_polling_transmit()");
         return false;
     }
     return true;
-
 }
