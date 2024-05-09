@@ -114,6 +114,7 @@ int CLI::recieveCMD(int argc, char **argv)
     //E22::SyncWordType_t syncWord = E22::PUBLIC_SYNCWORD;
     e22.setSyncWord(E22::PUBLIC_SYNCWORD);
 
+    e22.setBufferBaseAddress(SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
     printf("\n-- LORA RECEIVER --\n");
 
     e22.receivePacket(100000);
@@ -122,6 +123,7 @@ int CLI::recieveCMD(int argc, char **argv)
         printf("Waiting for packet...\n\r");
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
+    vTaskDelay(pdMS_TO_TICKS(1000));
     printf("Received packet size %u\n\r", e22.getMessageLenght());
     char messageOut[100];
     memset(messageOut, 0, sizeof(messageOut));
@@ -208,11 +210,11 @@ int CLI::transmitCMD(int argc, char **argv)
 
     // Transmit message and counter
     // write() method must be placed between beginPacket() and endPacket()
-    static uint8_t counter = 0;
+    static uint8_t counter = 48;
     //char message[] = "HeLoRa World!";
     char message[] = "Hola Cabrita!";
     e22.beginTxPacket();
-    e22.writeMessageTxLength((uint8_t *)message, sizeof(message));
+    e22.writeMessageTxLength((uint8_t *)message, sizeof(message) - 1);
     e22.writeMessageTxByte(counter);
     e22.transmitPacket(30000);
 

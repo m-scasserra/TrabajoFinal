@@ -2,6 +2,7 @@
 
 extern "C" void app_main(void)
 {
+    esp_log_level_set("SPI", ESP_LOG_DEBUG);
     LED &led = LED::getInstance();
     
     CLI &cli = CLI::getInstance();

@@ -34,6 +34,9 @@ private:
     // Constructor privado
     SPI() {}
 
+    void debugTXmessage(uint8_t *tx_msg, uint8_t tx_len);
+    void debugRXmessage(uint8_t *rx_msg, uint8_t rx_len);
+
     static bool SPIInitiated;
 
     static spi_device_handle_t SPIHandle;

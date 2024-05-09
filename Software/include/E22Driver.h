@@ -10,6 +10,8 @@
 #define MAX_CMD_PARAMS 10
 #define MAX_RESPONSES 10
 
+#define DEFAULT_MSG_TIMEOUT_MS 1000
+
 // Defines para la tarea de FRTOS del E22
 
 #define MAX_E22_CMD_QUEUE 200
@@ -254,12 +256,18 @@ public:
 
         bool hasResponse;
         uint8_t responsesCount; // Number of responses of the command
+    } E22Command_t;
+
+    typedef struct
+    {
+        E22Cmd_t commandCode;
+        uint8_t responsesCount; // Number of responses of the command
         union responses_t
         {
             uint8_t responsesArray[MAX_RESPONSES]; // Array to hold various responses
             uint8_t *responsesPtr8[MAX_RESPONSES]; // Pointer to hold various response of 8 bits
         } responses;
-    } E22Command_t;
+    } E22Response_t;
 
     enum PaConfig_t
     {
@@ -329,6 +337,35 @@ public:
     bool setDioIrqParams(IRQReg_t IRQMask, IRQReg_t DIO1Mask, IRQReg_t DIO2Mask, IRQReg_t DIO3Mask);
     bool getPacketStatus(uint8_t *RssiPkt, uint8_t *SnrPkt, uint8_t *SignalRssiPkt);
 
+    const IRQReg_t IRQREGFULL = {
+        .txDone = true,
+        .rxDone = true,
+        .preambleDetected = true,
+        .syncWordValid = true,
+        .headerValid = true,
+        .headerErr = true,
+        .crcErr = true,
+        .cadDone = true,
+        .cadDetected = true,
+        .timeout = true,
+        .lrFhssHop = true
+    };
+
+    const IRQReg_t IRQREGEMPTY = {
+        .txDone = false,
+        .rxDone = false,
+        .preambleDetected = false,
+        .syncWordValid = false,
+        .headerValid = false,
+        .headerErr = false,
+        .crcErr = false,
+        .cadDone = false,
+        .cadDetected = false,
+        .timeout = false,
+        .lrFhssHop = false
+    };
+
+
 private:
     // Constructor privado
     E22() {}
@@ -343,7 +380,7 @@ private:
     bool E22IOInit(void);
     bool InterruptInit(void);
 
-    bool processStatus(uint8_t msg);
+    void processStatus(uint8_t msg);
     void updateIRQStatusFromMask(uint16_t IRQRegValue);
     uint16_t processIRQMask(IRQReg_t IRQMask);
 
@@ -355,8 +392,10 @@ private:
     bool resetOn(void);
     bool resetOff(void);
 
-    bool checkDeviceConnection(void);       //This function bypasses the FRTOS queue and directly executes the command
-    bool antennaMismatchCorrection(void);   //This function bypasses the FRTOS queue and directly executes the command
+    bool checkDeviceConnection(void);          //This function bypasses the FRTOS queue and directly executes the command
+    bool antennaMismatchCorrection(void);      //This function bypasses the FRTOS queue and directly executes the command
+    bool getIRQStatusForInterrupt(void);       //This function bypasses the FRTOS queue and directly executes the command
+    bool getRxBufferStatusForInterrupt(void);  //This function bypasses the FRTOS queue and directly executes the command
 
     spi_device_handle_t SPIHandle;
 
@@ -364,15 +403,20 @@ private:
     static SemaphoreHandle_t xE22InterruptSempahore;
     static SemaphoreHandle_t xE22ResponseWaitSempahore;
     QueueHandle_t xE22CmdQueue;
+    QueueHandle_t xE22ResponseQueue;
 
-    static uint8_t rssiInst;
-    static uint8_t PayloadLenghtRx;
-    static uint8_t RxBufferAddr;
-    static uint8_t TxBufferAddr;
-    static uint32_t msgTimeoutms;
-    static LoraPacketParams_t packetParams;
-    static ModulationParameters_t modulationParams;
-    static PacketType_t packetType;
+    static uint8_t s_rssiInst;
+    static uint32_t s_msgTimeoutms;
+    static LoraPacketParams_t s_packetParams;
+    static ModulationParameters_t s_modulationParams;
+    static PacketType_t s_packetType;
+
+    static uint8_t s_PayloadLenghtRx;
+    static uint8_t s_RxBufferAddr;
+    static uint8_t s_TxBufferAddr;
+    
+    
+    
     static bool PacketReceived;
 
     static IRQReg_t IRQReg;

@@ -42,26 +42,13 @@ bool SPI::SendMessage(uint8_t *tx_msg, uint8_t tx_len, uint8_t *rx_msg, uint8_t 
     message.tx_buffer = tx_msg;
     message.rx_buffer = rx_msg;
 
-    // Print TX message content (assuming uint8_t is a single byte)
-    printf("TX message: ");
-    for (int i = 0; i < tx_len; i++)
-    {
-        printf("0x%X ", tx_msg[i]);
-    }
-    printf("\r\n");
-
-    // Print RX message content (assuming uint8_t is a single byte)
-    printf("RX message: ");
-    for (int i = 0; i < rx_len; i++)
-    {
-        printf("0x%X ", rx_msg[i]);
-    }
-    printf("\r\n");
     if (spi_device_polling_transmit(SPIHandle, &message) != ESP_OK)
     {
         ESP_LOGE("SPI", "Error en spi_device_polling_transmit()");
         return false;
     }
+    debugTXmessage(tx_msg, tx_len);
+    debugRXmessage(rx_msg, rx_len);
     return true;
 }
 
@@ -75,18 +62,45 @@ bool SPI::SendMessage(uint8_t *tx_msg, uint8_t tx_len)
     message.tx_buffer = tx_msg;
     message.rx_buffer = NULL;
 
-    // Print TX message content (assuming uint8_t is a single byte)
-    printf("TX message: ");
-    for (int i = 0; i < tx_len; i++)
-    {
-        printf("0x%X ", tx_msg[i]);
-    }
-    printf("\r\n");
-
     if (spi_device_polling_transmit(SPIHandle, &message) != ESP_OK)
     {
         ESP_LOGE("SPI", "Error en spi_device_polling_transmit()");
         return false;
     }
+    debugTXmessage(tx_msg, tx_len);
     return true;
+}
+
+void SPI::debugTXmessage(uint8_t *tx_msg, uint8_t tx_len)
+{
+    // Create a buffer to store the formatted string
+    char formatted_string[tx_len * 5 + 1]; // Allocate enough space for hex, spaces and null terminator
+    memset(formatted_string, 0, sizeof(formatted_string));
+    int index = 0;
+    for (int i = 0; i < tx_len; i++)
+    {
+        // Format each byte as a two-digit hex string and store it in the buffer
+        sprintf(formatted_string + index, "0x%02X ", tx_msg[i]);
+        index += 5; // Increment index by 5 for the formatted byte + spaces
+    }
+
+    // Print the formatted string with a trailing newline
+    ESP_LOGD(SPITAG, "TX message: %s\n", formatted_string);
+}
+
+void SPI::debugRXmessage(uint8_t *rx_msg, uint8_t rx_len)
+{
+    // Create a buffer to store the formatted string
+    char formatted_string[rx_len * 5 + 1]; // Allocate enough space for hex, spaces and null terminator
+
+    int index = 0;
+    for (int i = 0; i < rx_len; i++)
+    {
+        // Format each byte as a two-digit hex string and store it in the buffer
+        sprintf(formatted_string + index, "0x%02X ", rx_msg[i]);
+        index += 5; // Increment index by 5 for the formatted byte + spaces
+    }
+
+    // Print the formatted string with a trailing newline
+    ESP_LOGD(SPITAG, "RX message: %s\n", formatted_string);
 }

@@ -3,17 +3,17 @@
 TaskHandle_t E22::E22TaskHandle = NULL;
 SemaphoreHandle_t E22::xE22InterruptSempahore = NULL;
 SemaphoreHandle_t E22::xE22ResponseWaitSempahore = NULL;
-uint8_t E22::rssiInst = 0;
-uint8_t E22::PayloadLenghtRx = 0;
-uint8_t E22::RxBufferAddr = 0;
-uint8_t E22::TxBufferAddr = 0;
-uint32_t E22::msgTimeoutms = 0;
-E22::LoraPacketParams_t E22::packetParams;
-E22::ModulationParameters_t E22::modulationParams;
+uint8_t E22::s_rssiInst = 0;
+uint32_t E22::s_msgTimeoutms = DEFAULT_MSG_TIMEOUT_MS;
+E22::LoraPacketParams_t E22::s_packetParams;
+E22::ModulationParameters_t E22::s_modulationParams;
+E22::PacketType_t E22::s_packetType;
+uint8_t E22::s_PayloadLenghtRx = 0;
+uint8_t E22::s_RxBufferAddr = 0;
+uint8_t E22::s_TxBufferAddr = 0;
 E22::IRQReg_t E22::IRQReg;
 bool E22::processIRQ = false;
 bool E22::PacketReceived = false;
-E22::PacketType_t E22::packetType;
 
 void IRAM_ATTR E22::E22ISRHandler(void)
 {
@@ -58,8 +58,7 @@ void E22::E22Task(void *pvParameters)
 
     while (1)
     {
-        bool busy = e22->isBusy();
-        if (!busy)
+        if (!e22->isBusy())
         {
             e22->processInterrupt();
 
@@ -81,11 +80,13 @@ bool E22::Begin(void)
 
     // Seteo todos los valores de las variables a 0
     memset(&IRQReg, 0, sizeof(IRQReg_t));
-    memset(&packetParams, 0, sizeof(LoraPacketParams_t));
-    memset(&modulationParams, 0, sizeof(ModulationParameters_t));
+    memset(&s_packetParams, 0, sizeof(LoraPacketParams_t));
+    memset(&s_modulationParams, 0, sizeof(ModulationParameters_t));
 
-    // Creo la queue de mensajes al E22
+    // Creo la queue de mensajes hacia el E22
     xE22CmdQueue = xQueueCreate(MAX_E22_CMD_QUEUE, sizeof(E22Command_t));
+    // Creo la queue de mensajes desde el E22
+    xE22ResponseQueue = xQueueCreate(MAX_E22_CMD_QUEUE, sizeof(E22Response_t));
 
     // Creo el semaphore de interrupcciones
     xE22InterruptSempahore = xSemaphoreCreateBinary();
@@ -158,17 +159,11 @@ bool E22::Begin(void)
 bool E22::processInterrupt(void)
 {
     IO &io = IO::getInstance();
-    IRQReg_t irqStatusToClear;
-    memset(&irqStatusToClear, 0, sizeof(IRQReg_t));
 
     if (xSemaphoreTake(xE22InterruptSempahore, 0))
     {
-        updateIrqStatus();
-        // ESP_LOGI(E22TAG, "IRQ received");
-        return true;
-    }
-    else if (processIRQ == true)
-    {
+        getIRQStatusForInterrupt();
+
         ESP_LOGI(E22TAG, "IRQReg.txDone: 0x%X", IRQReg.txDone);
         ESP_LOGI(E22TAG, "IRQReg.rxDone: 0x%X", IRQReg.rxDone);
         ESP_LOGI(E22TAG, "IRQReg.preambleDetected: 0x%X", IRQReg.preambleDetected);
@@ -184,13 +179,12 @@ bool E22::processInterrupt(void)
         if (IRQReg.rxDone)
         {
             io.SetLevel((gpio_num_t)RX_EN_E22_PIN, IO_LOW);
-            getRxBufferStatus(&PayloadLenghtRx, &RxBufferAddr);
+            getRxBufferStatusForInterrupt();
             PacketReceived = true;
         }
         if (IRQReg.txDone)
         {
             io.SetLevel((gpio_num_t)TX_EN_E22_PIN, IO_LOW);
-            ESP_LOGI(E22TAG, "TX Done");
         }
         if (IRQReg.preambleDetected)
         {
@@ -224,19 +218,8 @@ bool E22::processInterrupt(void)
         {
         }
 
-        irqStatusToClear.txDone = true;
-        irqStatusToClear.rxDone = true;
-        irqStatusToClear.preambleDetected = true;
-        irqStatusToClear.syncWordValid = true;
-        irqStatusToClear.headerValid = true;
-        irqStatusToClear.headerErr = true;
-        irqStatusToClear.crcErr = true;
-        irqStatusToClear.cadDone = true;
-        irqStatusToClear.cadDetected = true;
-        irqStatusToClear.timeout = true;
-        irqStatusToClear.lrFhssHop = true;
-        clearIrqStatus(irqStatusToClear);
-        processIRQ = false;
+        clearIrqStatus(IRQREGFULL);
+
         return true;
     }
     return false;
@@ -381,7 +364,6 @@ bool E22::setRx(uint32_t Timeout)
     command.params.paramsArray[0] = (uint8_t)(TimeoutBits >> 16);
     command.params.paramsArray[1] = (uint8_t)(TimeoutBits >> 8);
     command.params.paramsArray[2] = (uint8_t)(TimeoutBits >> 0);
-    ESP_LOGE(E22TAG, "paramsArray[0]: %X paramsArray[1]: %X paramsArray[2]: %X", command.params.paramsArray[0], command.params.paramsArray[1], command.params.paramsArray[2]);
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
@@ -409,79 +391,103 @@ bool E22::setStandBy(StdByMode_t mode)
     return false;
 }
 
-bool E22::processStatus(uint8_t msg)
+void E22::processStatus(uint8_t msg)
 {
-    bool rc = true;
-    printf("Chip Mode: ");
+    // Create a buffer to store the formatted string
+    char chipMode[10];       // Allocate enough space for hex, spaces and null terminator
+    char commandStatus[27];  // Allocate enough space for hex, spaces and null terminator
+    memset(chipMode, 0, sizeof(chipMode));
+
     switch (msg & 0x70)
     {
     case 0x00:
-        printf("Unused");
-        break;
-
-    case 0x20:
-        printf("STBY_RC");
-        break;
-
-    case 0x30:
-        printf("STBY_XOSC");
-        break;
-
-    case 0x40:
-        printf("FS");
-        break;
-
-    case 0x50:
-        printf("RX");
-        break;
-
-    case 0x60:
-        printf("TX");
-        break;
-
-    default:
-        printf("Undefined");
+    {
+        sprintf(chipMode, "Unused");
         break;
     }
 
-    printf("    Command Status: ");
+    case 0x20:
+    {
+        sprintf(chipMode, "STBY_RC");
+        break;
+    }
+
+    case 0x30:
+    {
+        sprintf(chipMode, "STBY_XOSC");
+        break;
+    }
+
+    case 0x40:
+    {
+        sprintf(chipMode, "FS");
+        break;
+    }
+
+    case 0x50:
+    {
+        sprintf(chipMode, "RX");
+        break;
+    }
+
+    case 0x60:
+    {
+        sprintf(chipMode, "TX");
+        break;
+    }
+
+    default:
+    {
+        sprintf(chipMode, "Undefined");
+        break;
+    }
+    }
+
     switch (msg & 0x0E)
     {
     case 0x00:
-        printf("Reserved");
-        break;
-
-    case 0x04:
-        printf("Data is available to host");
-        break;
-
-    case 0x06:
-        printf("Command timeout");
-        rc = false;
-        break;
-
-    case 0x08:
-        printf("Command processing error");
-        rc = false;
-        break;
-
-    case 0x0A:
-        printf("Failure to execute command");
-        rc = false;
-        break;
-
-    case 0x0C:
-        printf("Command TX done");
-        break;
-
-    default:
-        printf("Undefined");
+    {
+        sprintf(commandStatus, "Reserved");
         break;
     }
-    printf("\r\n");
-    printf("Valor de la respuesta status: 0x%X\r\n", msg & 0xff);
 
-    return rc;
+    case 0x04:
+    {
+        sprintf(commandStatus, "Data is available to host");
+        break;
+    }
+
+    case 0x06:
+    {
+        sprintf(commandStatus, "Command timeout");
+        break;
+    }
+
+    case 0x08:
+    {
+        sprintf(commandStatus, "Command processing error");
+        break;
+    }
+
+    case 0x0A:
+    {
+        sprintf(commandStatus, "Failure to execute command");
+        break;
+    }
+
+    case 0x0C:
+    {
+        sprintf(commandStatus, "Command TX done");
+        break;
+    }
+
+    default:
+    {
+        sprintf(commandStatus, "Undefined");
+        break;
+    }
+    }
+    ESP_LOGD(E22TAG, "Chip Mode: %s Command Status: %s Status Value: 0x%02X\r\n", chipMode, commandStatus, msg);
 }
 
 bool E22::isBusy(void)
@@ -521,10 +527,12 @@ bool E22::processCmd(void)
 {
     SPI &spi = SPI::getInstance();
     E22Command_t cmdToProcess;
+    E22Response_t response;
     uint8_t TxBuffer[MAX_CMD_PARAMS + 1];
     uint8_t RxBuffer[MAX_CMD_PARAMS + 1];
 
     memset(&cmdToProcess, 0, sizeof(E22Command_t));
+    memset(&response, 0, sizeof(E22Response_t));
     memset(&TxBuffer, 0, sizeof(uint8_t) * (MAX_CMD_PARAMS + 1));
     memset(&RxBuffer, 0, sizeof(uint8_t) * (MAX_CMD_PARAMS + 1));
 
@@ -583,7 +591,6 @@ bool E22::processCmd(void)
             TxBuffer[1] = cmdToProcess.params.paramsArray[0];
             TxBuffer[2] = cmdToProcess.params.paramsArray[1];
             TxBuffer[3] = cmdToProcess.params.paramsArray[2];
-            ESP_LOGE(E22TAG, "paramsArray[0]: %X paramsArray[1]: %X paramsArray[2]: %X", cmdToProcess.params.paramsArray[0], cmdToProcess.params.paramsArray[1], cmdToProcess.params.paramsArray[2]);
 
             if (!spi.SendMessage(TxBuffer, cmdToProcess.paramCount))
             {
@@ -710,11 +717,18 @@ bool E22::processCmd(void)
             processStatus(RxBuffer[1]);
             processStatus(RxBuffer[2]);
             processStatus(RxBuffer[3]);
-            ESP_LOGE(E22TAG, "ReadRegister: %X", RxBuffer[4]);
-            cmdToProcess.responses.responsesPtr8[0] = &RxBuffer[4];
-            xSemaphoreGive(xE22ResponseWaitSempahore);
+            response.commandCode = E22_CMD_ReadRegister;
+            response.responsesCount = 1;
+            response.responses.responsesArray[0] = RxBuffer[4];
 
-            return true;
+            if (xQueueSend(xE22ResponseQueue, (void *)&response, 0) == pdPASS)
+            {
+                return true;
+            }
+
+            ESP_LOGE(E22TAG, "Error al enviar el comando ReadRegister a la queue de respuestas.");
+
+            return false;
         }
         break;
 
@@ -746,10 +760,18 @@ bool E22::processCmd(void)
             }
             processStatus(RxBuffer[1]);
             processStatus(RxBuffer[2]);
-            cmdToProcess.responses.responsesPtr8[0] = &RxBuffer[3];
-            xSemaphoreGive(xE22ResponseWaitSempahore);
+            response.commandCode = E22_CMD_ReadBuffer;
+            response.responsesCount = 1;
+            response.responses.responsesArray[0] = RxBuffer[3];
 
-            return true;
+            if (xQueueSend(xE22ResponseQueue, (void *)&response, 0) == pdPASS)
+            {
+                return true;
+            }
+
+            ESP_LOGE(E22TAG, "Error al enviar el comando ReadBuffer a la queue de respuestas.");
+
+            return false;
         }
         break;
 
@@ -783,14 +805,19 @@ bool E22::processCmd(void)
                 return false;
             }
             processStatus(RxBuffer[1]);
-            uint16_t irqStatus = (RxBuffer[2] << 8) | RxBuffer[3];
-            ESP_LOGI(E22TAG, "RxBuffer[1]: %X, RxBuffer[2]: %X, RxBuffer[3]: %X", RxBuffer[1], RxBuffer[2], RxBuffer[3]);
-            updateIRQStatusFromMask(irqStatus);
-            ESP_LOGI(E22TAG, "IRQ Status: %X", irqStatus);
-            xSemaphoreGive(xE22ResponseWaitSempahore);
-            processIRQ = true;
+            response.commandCode = E22_CMD_GetIrqStatus;
+            response.responsesCount = 2;
+            response.responses.responsesArray[0] = RxBuffer[2];
+            response.responses.responsesArray[1] = RxBuffer[3];
 
-            return true;
+            if (xQueueSend(xE22ResponseQueue, (void *)&response, 0) == pdPASS)
+            {
+                return true;
+            }
+
+            ESP_LOGE(E22TAG, "Error al enviar el comando GetIrqStatus a la queue de respuestas.");
+
+            return false;
         }
         break;
 
@@ -877,9 +904,18 @@ bool E22::processCmd(void)
                 return false;
             }
             processStatus(RxBuffer[1]);
-            // packetType = (PacketType_t)RxBuffer[2]; //TODO
-            xSemaphoreGive(xE22ResponseWaitSempahore);
-            return true;
+            response.commandCode = E22_CMD_GetPacketType;
+            response.responsesCount = 1;
+            response.responses.responsesArray[0] = RxBuffer[2];
+
+            if (xQueueSend(xE22ResponseQueue, (void *)&response, 0) == pdPASS)
+            {
+                return true;
+            }
+
+            ESP_LOGE(E22TAG, "Error al enviar el comando getPacketType a la queue de respuestas.");
+
+            return false;
         }
         break;
 
@@ -932,6 +968,12 @@ bool E22::processCmd(void)
                 ESP_LOGE(E22TAG, "Error al enviar el comando SetPacketParams al spi.");
                 return false;
             }
+
+            s_packetParams.preambleLength = (uint16_t)((cmdToProcess.params.paramsArray[0] << 8) | cmdToProcess.params.paramsArray[1]);
+            s_packetParams.headerType = (E22::PacketHeaderType_t)cmdToProcess.params.paramsArray[2];
+            s_packetParams.payloadLength = cmdToProcess.params.paramsArray[3];
+            s_packetParams.crcType = cmdToProcess.params.paramsArray[4];
+            s_packetParams.iqType = (E22::PacketIQType_t)cmdToProcess.params.paramsArray[5];
 
             return true;
         }
@@ -992,7 +1034,7 @@ bool E22::processCmd(void)
             }
 
             processStatus(RxBuffer[1]);
-            rssiInst = RxBuffer[2] / 2;
+            s_rssiInst = RxBuffer[2] / 2;
             return true;
         }
         break;
@@ -1011,10 +1053,19 @@ bool E22::processCmd(void)
             }
 
             processStatus(RxBuffer[1]);
-            cmdToProcess.responses.responsesPtr8[0] = &RxBuffer[2];
-            cmdToProcess.responses.responsesPtr8[1] = &RxBuffer[3];
-            ESP_LOGI(E22TAG, "GetRxBufferStatus, Lenght: %d, Addr: 0x%X", PayloadLenghtRx, RxBufferAddr);
-            return true;
+            response.commandCode = E22_CMD_GetRxBufferStatus;
+            response.responsesCount = 2;
+            response.responses.responsesArray[0] = RxBuffer[2];
+            response.responses.responsesArray[1] = RxBuffer[3];
+
+            if (xQueueSend(xE22ResponseQueue, (void *)&response, 0) == pdPASS)
+            {
+                return true;
+            }
+
+            ESP_LOGE(E22TAG, "Error al enviar el comando GetRxBufferStatus a la queue de respuestas.");
+
+            return false;
         }
         break;
 
@@ -1033,10 +1084,20 @@ bool E22::processCmd(void)
             }
 
             processStatus(RxBuffer[1]);
-            cmdToProcess.responses.responsesPtr8[0] = &RxBuffer[2];
-            cmdToProcess.responses.responsesPtr8[1] = &RxBuffer[3];
-            cmdToProcess.responses.responsesPtr8[2] = &RxBuffer[4];
-            return true;
+            response.commandCode = E22_CMD_GetPacketStatus;
+            response.responsesCount = 3;
+            response.responses.responsesArray[0] = RxBuffer[2];
+            response.responses.responsesArray[1] = RxBuffer[3];
+            response.responses.responsesArray[2] = RxBuffer[4];
+
+            if (xQueueSend(xE22ResponseQueue, (void *)&response, 0) == pdPASS)
+            {
+                return true;
+            }
+
+            ESP_LOGE(E22TAG, "Error al enviar el comando GetPacketStatus a la queue de respuestas.");
+
+            return false;
         }
         break;
 
@@ -1096,19 +1157,25 @@ bool E22::writeRegister(E22_Reg_Addr addr, uint8_t dataIn)
 bool E22::readRegister(E22_Reg_Addr addr, uint8_t *dataOut)
 {
     E22Command_t command;
+    E22Response_t response;
     memset(&command, 0, sizeof(E22Command_t));
+    memset(&response, 0, sizeof(E22Response_t));
     command.commandCode = E22_CMD_ReadRegister;
     command.paramCount = 5;
     command.params.paramsArray[0] = (uint8_t)(addr >> 8);
     command.params.paramsArray[1] = (uint8_t)(addr >> 0);
     command.hasResponse = true;
     command.responsesCount = 5;
-    command.responses.responsesPtr8[0] = dataOut;
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
-        xSemaphoreTake(xE22ResponseWaitSempahore, pdMS_TO_TICKS(msgTimeoutms));
-        return true;
+        if (xQueueReceive(xE22ResponseQueue, &(response), pdMS_TO_TICKS(10000)) == pdPASS)
+        {
+            *dataOut = response.responses.responsesArray[0];
+            return true;
+        }
+        ESP_LOGE(E22TAG, "Error al leer el comando readRegister a la queue.");
+        return false;
     }
 
     ESP_LOGE(E22TAG, "Error al enviar el comando readRegister a la queue.");
@@ -1136,18 +1203,24 @@ bool E22::writeBuffer(uint8_t offset, uint8_t dataIn)
 bool E22::readBuffer(uint8_t offset, uint8_t *dataOut)
 {
     E22Command_t command;
+    E22Response_t response;
     memset(&command, 0, sizeof(E22Command_t));
+    memset(&response, 0, sizeof(E22Response_t));
     command.commandCode = E22_CMD_ReadBuffer;
     command.paramCount = 4;
     command.params.paramsArray[0] = offset;
     command.hasResponse = true;
     command.responsesCount = 4;
-    command.responses.responsesPtr8[0] = dataOut;
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
-        xSemaphoreTake(xE22ResponseWaitSempahore, pdMS_TO_TICKS(msgTimeoutms));
-        return true;
+        if (xQueueReceive(xE22ResponseQueue, &(response), pdMS_TO_TICKS(10000)) == pdPASS)
+        {
+            *dataOut = response.responses.responsesArray[0];
+            return true;
+        }
+        ESP_LOGE(E22TAG, "Error al leer el comando readBuffer a la queue.");
+        return false;
     }
 
     ESP_LOGE(E22TAG, "Error al enviar el comando readBuffer a la queue.");
@@ -1164,7 +1237,7 @@ bool E22::setPacketType(PacketType_t _packetType)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
-        packetType = _packetType;
+        s_packetType = _packetType;
         return true;
     }
 
@@ -1175,7 +1248,9 @@ bool E22::setPacketType(PacketType_t _packetType)
 bool E22::getPacketType(PacketType_t *_packetType)
 {
     E22Command_t command;
+    E22Response_t response;
     memset(&command, 0, sizeof(E22Command_t));
+    memset(&response, 0, sizeof(E22Response_t));
     command.commandCode = E22_CMD_GetPacketType;
     command.paramCount = 3;
     command.hasResponse = true;
@@ -1183,9 +1258,14 @@ bool E22::getPacketType(PacketType_t *_packetType)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
-        xSemaphoreTake(xE22ResponseWaitSempahore, pdMS_TO_TICKS(msgTimeoutms));
-        *_packetType = packetType;
-        return true;
+        if (xQueueReceive(xE22ResponseQueue, &(response), pdMS_TO_TICKS(10000)) == pdPASS)
+        {
+            *_packetType = (PacketType_t)response.responses.responsesArray[0];
+            s_packetType = (PacketType_t)response.responses.responsesArray[0];
+            return true;
+        }
+        ESP_LOGE(E22TAG, "Error al leer el comando readRegister a la queue.");
+        return false;
     }
 
     ESP_LOGE(E22TAG, "Error al enviar el comando getPacketType a la queue.");
@@ -1454,7 +1534,7 @@ bool E22::setModulationParams(ModulationParameters_t modulation)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
-        modulationParams = modulation;
+        s_modulationParams = modulation;
         return true;
     }
 
@@ -1526,7 +1606,9 @@ bool E22::setSyncWord(SyncWordType_t syncWord)
 bool E22::updateIrqStatus(void)
 {
     E22Command_t command;
+    E22Response_t response;
     memset(&command, 0, sizeof(E22Command_t));
+    memset(&response, 0, sizeof(E22Response_t));
     command.commandCode = E22_CMD_GetIrqStatus;
     command.paramCount = 4;
     command.hasResponse = true;
@@ -1534,8 +1616,14 @@ bool E22::updateIrqStatus(void)
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
-        xSemaphoreTake(xE22ResponseWaitSempahore, pdMS_TO_TICKS(msgTimeoutms));
-        return true;
+        if (xQueueReceive(xE22ResponseQueue, &(response), pdMS_TO_TICKS(10000)) == pdPASS)
+        {
+            uint16_t irqStatus = ((uint16_t)(response.responses.responsesArray[0] << 8)) | response.responses.responsesArray[1];
+            updateIRQStatusFromMask(irqStatus);
+            return true;
+        }
+        ESP_LOGE(E22TAG, "Error al leer el comando GetIrqStatus a la queue.");
+        return false;
     }
 
     ESP_LOGE(E22TAG, "Error al enviar el comando GetIrqStatus a la queue.");
@@ -1694,17 +1782,25 @@ uint16_t E22::processIRQMask(IRQReg_t IRQMask)
 bool E22::getRxBufferStatus(uint8_t *payLoadLenghtRx, uint8_t *RxBufferAddr)
 {
     E22Command_t command;
+    E22Response_t response;
     memset(&command, 0, sizeof(E22Command_t));
+    memset(&response, 0, sizeof(E22Response_t));
     command.commandCode = E22_CMD_GetRxBufferStatus;
     command.paramCount = 4;
     command.hasResponse = true;
     command.responsesCount = 4;
-    command.responses.responsesPtr8[0] = payLoadLenghtRx;
-    command.responses.responsesPtr8[1] = RxBufferAddr;
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
-        return true;
+        if (xQueueReceive(xE22ResponseQueue, &(response), pdMS_TO_TICKS(10000)) == pdPASS)
+        {
+            *payLoadLenghtRx = response.responses.responsesArray[0];
+            *RxBufferAddr = response.responses.responsesArray[1];
+            return true;
+        }
+
+        ESP_LOGE(E22TAG, "Error al leer el comando getRxBufferStatus de la queue.");
+        return false;
     }
 
     ESP_LOGE(E22TAG, "Error al enviar el comando GetRxBufferStatus a la queue.");
@@ -1714,18 +1810,26 @@ bool E22::getRxBufferStatus(uint8_t *payLoadLenghtRx, uint8_t *RxBufferAddr)
 bool E22::getPacketStatus(uint8_t *RssiPkt, uint8_t *SnrPkt, uint8_t *SignalRssiPkt)
 {
     E22Command_t command;
+    E22Response_t response;
     memset(&command, 0, sizeof(E22Command_t));
+    memset(&response, 0, sizeof(E22Response_t));
     command.commandCode = E22_CMD_GetPacketStatus;
     command.paramCount = 5;
     command.hasResponse = true;
     command.responsesCount = 5;
-    command.responses.responsesPtr8[0] = RssiPkt;
-    command.responses.responsesPtr8[1] = SnrPkt;
-    command.responses.responsesPtr8[2] = SignalRssiPkt;
 
     if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
     {
-        return true;
+        if (xQueueReceive(xE22ResponseQueue, &(response), pdMS_TO_TICKS(10000)) == pdPASS)
+        {
+            *RssiPkt = response.responses.responsesArray[0];
+            *SnrPkt = response.responses.responsesArray[1];
+            *SignalRssiPkt = response.responses.responsesArray[2];
+            return true;
+        }
+
+        ESP_LOGE(E22TAG, "Error al leer el comando GetPacketStatus a la queue.");
+        return false;
     }
 
     ESP_LOGE(E22TAG, "Error al enviar el comando GetPacketStatus a la queue.");
@@ -1739,36 +1843,36 @@ bool E22::messageIsAvailable(void)
 
 uint8_t E22::getMessageLenght(void)
 {
-    return PayloadLenghtRx;
+    return s_PayloadLenghtRx;
 }
 
 bool E22::getMessageRxByte(uint8_t *dataOut)
 {
-    if (SX126X_RX_BASE_BUFFER_ADDR + RxBufferAddr > PayloadLenghtRx)
+    if (SX126X_RX_BASE_BUFFER_ADDR + s_RxBufferAddr > s_PayloadLenghtRx) //TODO
     {
         return false;
     }
-    if (!readBuffer(RxBufferAddr, dataOut))
+    if (!readBuffer(s_RxBufferAddr, dataOut))
     {
         return false;
     }
-    RxBufferAddr++;
+    s_RxBufferAddr++;
     return true;
 }
 
 bool E22::getMessageRxLenght(uint8_t *dataOut, uint8_t length)
 {
-    for (uint8_t i = 0; i < PayloadLenghtRx; i++)
+    for (uint8_t i = 0; i < s_PayloadLenghtRx; i++)
     {
-        if (SX126X_RX_BASE_BUFFER_ADDR + RxBufferAddr > PayloadLenghtRx)
+        if (SX126X_RX_BASE_BUFFER_ADDR + s_RxBufferAddr > s_PayloadLenghtRx) //TODO
         {
             return false;
         }
-        if (!readBuffer(RxBufferAddr + i, &dataOut[i]))
+        if (!readBuffer(s_RxBufferAddr, &dataOut[i]))
         {
             return false;
         }
-        RxBufferAddr++;
+        s_RxBufferAddr++;
     }
     return true;
 }
@@ -1779,8 +1883,8 @@ bool E22::beginTxPacket(void)
 
     // Set buffer addresses to SX126X_TX_BASE_BUFFER_ADDR and SX126X_RX_BASE_BUFFER_ADDR
     setBufferBaseAddress(SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
-    TxBufferAddr = SX126X_TX_BASE_BUFFER_ADDR;
-    RxBufferAddr = SX126X_RX_BASE_BUFFER_ADDR;
+    s_TxBufferAddr = SX126X_TX_BASE_BUFFER_ADDR;
+    s_RxBufferAddr = SX126X_RX_BASE_BUFFER_ADDR;
 
     // Set RxEn and TxEn to the corresponding values
     io.SetLevel((gpio_num_t)RX_EN_E22_PIN, IO_LOW);
@@ -1793,23 +1897,22 @@ bool E22::beginTxPacket(void)
 
 bool E22::writeMessageTxByte(uint8_t data)
 {
-    if (!writeBuffer(TxBufferAddr, data))
+    if (!writeBuffer(s_TxBufferAddr, data))
     {
         return false;
     }
-    TxBufferAddr++;
+    s_TxBufferAddr++;
     return true;
 }
 bool E22::writeMessageTxLength(uint8_t *data, uint8_t length)
 {
     for (uint8_t i = 0; i < length; i++)
     {
-        //if (!writeBuffer(TxBufferAddr + i, data[i]))
-        if (!writeBuffer(TxBufferAddr, data[i]))
+        if (!writeBuffer(s_TxBufferAddr, data[i]))
         {
             return false;
         }
-        TxBufferAddr++;
+        s_TxBufferAddr++;
     }
     return true;
 }
@@ -1817,41 +1920,27 @@ bool E22::writeMessageTxLength(uint8_t *data, uint8_t length)
 bool E22::transmitPacket(uint32_t Timeout)
 {
     IRQReg_t irqStatus;
-    IRQReg_t irqStatusEmpty;
     memset(&irqStatus, 0, sizeof(IRQReg_t));
-    memset(&irqStatusEmpty, 0, sizeof(IRQReg_t));
 
     // Clear all previous interrupts
-    irqStatus.txDone = true;
-    irqStatus.rxDone = true;
-    irqStatus.preambleDetected = true;
-    irqStatus.syncWordValid = true;
-    irqStatus.headerValid = true;
-    irqStatus.headerErr = true;
-    irqStatus.crcErr = true;
-    irqStatus.cadDone = true;
-    irqStatus.cadDetected = true;
-    irqStatus.timeout = true;
-    irqStatus.lrFhssHop = true;
-    if (!clearIrqStatus(irqStatus))
+    if (!clearIrqStatus(IRQREGFULL))
     {
         return false;
     }
 
     // Set DIO1 IRQ params for TX done and timeout
-    memset(&irqStatus, 0, sizeof(IRQReg_t));
     irqStatus.txDone = true;
     irqStatus.timeout = true;
-    if (!setDioIrqParams(irqStatus, irqStatus, irqStatusEmpty, irqStatusEmpty))
+    if (!setDioIrqParams(irqStatus, irqStatus, IRQREGEMPTY, IRQREGEMPTY))
     {
         return false;
     }
 
     // Send the PacketParams in case it was changed
-    //if (!setPacketParams(packetParams)) TODO: FIX
-    //{
-    //    return false;
-    //}
+    if (!setPacketParams(s_packetParams))
+    {
+        return false;
+    }
 
     // Set device to transmit mode with configured timeout
     if (!setTx(Timeout))
@@ -1870,28 +1959,28 @@ bool E22::transmitPacket(uint32_t Timeout)
 
 bool E22::changePacketPreambleLenght(uint16_t preambleLenght)
 {
-    packetParams.preambleLength = preambleLenght;
-    return setPacketParams(packetParams);
+    s_packetParams.preambleLength = preambleLenght;
+    return setPacketParams(s_packetParams);
 }
 bool E22::changePacketHeaderType(PacketHeaderType_t headerType)
 {
-    packetParams.headerType = headerType;
-    return setPacketParams(packetParams);
+    s_packetParams.headerType = headerType;
+    return setPacketParams(s_packetParams);
 }
 bool E22::changePacketPayloadLength(uint8_t payloadLength)
 {
-    packetParams.payloadLength = payloadLength;
-    return setPacketParams(packetParams);
+    s_packetParams.payloadLength = payloadLength;
+    return setPacketParams(s_packetParams);
 }
 bool E22::changePacketCrcType(bool crcType)
 {
-    packetParams.crcType = crcType;
-    return setPacketParams(packetParams);
+    s_packetParams.crcType = crcType;
+    return setPacketParams(s_packetParams);
 }
 bool E22::changePacketIQType(PacketIQType_t iqType)
 {
-    packetParams.iqType = iqType;
-    return setPacketParams(packetParams);
+    s_packetParams.iqType = iqType;
+    return setPacketParams(s_packetParams);
 }
 
 bool E22::setTx(uint32_t Timeout)
@@ -1922,35 +2011,24 @@ bool E22::setTx(uint32_t Timeout)
 bool E22::receivePacket(uint32_t Timeout)
 {
     IO &io = IO::getInstance();
+    s_PayloadLenghtRx = 0;
+    s_RxBufferAddr = 0;
+    PacketReceived = false;
     IRQReg_t irqStatus;
-    IRQReg_t irqStatusEmpty;
     memset(&irqStatus, 0, sizeof(IRQReg_t));
-    memset(&irqStatusEmpty, 0, sizeof(IRQReg_t));
 
     // Clear all previous interrupts
-    irqStatus.txDone = true;
-    irqStatus.rxDone = true;
-    irqStatus.preambleDetected = true;
-    irqStatus.syncWordValid = true;
-    irqStatus.headerValid = true;
-    irqStatus.headerErr = true;
-    irqStatus.crcErr = true;
-    irqStatus.cadDone = true;
-    irqStatus.cadDetected = true;
-    irqStatus.timeout = true;
-    irqStatus.lrFhssHop = true;
-    if (!clearIrqStatus(irqStatus))
+    if (!clearIrqStatus(IRQREGFULL))
     {
         return false;
     }
 
     // Set DIO1 IRQ params for RX done, timeout, header error, and CRC error
-    memset(&irqStatus, 0, sizeof(IRQReg_t));
     irqStatus.rxDone = true;
     irqStatus.timeout = true;
     irqStatus.headerErr = true;
     irqStatus.crcErr = true;
-    if (!setDioIrqParams(irqStatus, irqStatus, irqStatusEmpty, irqStatusEmpty))
+    if (!setDioIrqParams(irqStatus, irqStatus, IRQREGEMPTY, IRQREGEMPTY))
     {
         return false;
     }
@@ -1976,7 +2054,7 @@ bool E22::receivePacket(uint32_t Timeout)
 
 void E22::setMsgTimeoutms(uint32_t newMsgTimeoutms)
 {
-    msgTimeoutms = newMsgTimeoutms;
+    s_msgTimeoutms = newMsgTimeoutms;
 }
 
 bool E22::setPaConfig(PaConfig_t PaConfig)
@@ -2135,6 +2213,53 @@ bool E22::antennaMismatchCorrection(void)
     return true;
 }
 
+bool E22::getIRQStatusForInterrupt(void)
+{
+    SPI &spi = SPI::getInstance();
+
+    uint8_t TxBuffer[MAX_CMD_PARAMS + 1];
+    uint8_t RxBuffer[MAX_CMD_PARAMS + 1];
+
+    memset(&TxBuffer, 0, sizeof(uint8_t) * (MAX_CMD_PARAMS + 1));
+    memset(&RxBuffer, 0, sizeof(uint8_t) * (MAX_CMD_PARAMS + 1));
+    TxBuffer[0] = E22_OpCode_GetIrqStatus;
+
+    if (!spi.SendMessage(TxBuffer, 4, RxBuffer, 4))
+    {
+        ESP_LOGE(E22TAG, "Error al enviar el comando GetIrqStatus al spi.");
+        return false;
+    }
+    uint16_t irqStatus = (RxBuffer[2] << 8) | RxBuffer[3];
+    updateIRQStatusFromMask(irqStatus);
+
+    return true;
+}
+
+bool E22::getRxBufferStatusForInterrupt(void)
+{
+    SPI &spi = SPI::getInstance();
+
+    uint8_t TxBuffer[MAX_CMD_PARAMS + 1];
+    uint8_t RxBuffer[MAX_CMD_PARAMS + 1];
+
+    memset(&TxBuffer, 0, sizeof(uint8_t) * (MAX_CMD_PARAMS + 1));
+    memset(&RxBuffer, 0, sizeof(uint8_t) * (MAX_CMD_PARAMS + 1));
+    TxBuffer[0] = E22_OpCode_GetRxBufferStatus;
+    TxBuffer[1] = 0x00;
+    TxBuffer[2] = 0x00;
+    TxBuffer[3] = 0x00;
+
+    if (!spi.SendMessage(TxBuffer, 4, RxBuffer, 4))
+    {
+        ESP_LOGE(E22TAG, "Error al enviar el comando GetRxBufferStatus al spi.");
+        return false;
+    }
+    s_PayloadLenghtRx = RxBuffer[2];
+    s_RxBufferAddr = RxBuffer[3];
+
+    return true;
+}
+
 bool E22::fixInvertedIq(PacketIQType_t iqType)
 {
     uint8_t fixInvertedIqValue;
@@ -2170,10 +2295,11 @@ bool E22::fixModulationQuality(void)
         return false;
     }
 
-    if (modulationParams.bandwidth == LORA_BW_500)
+    if (s_modulationParams.bandwidth == LORA_BW_500)
     {
         fixModulationQuality &= ~(1 << 2);
-    }else
+    }
+    else
     {
         fixModulationQuality |= (1 << 2);
     }
