@@ -2,7 +2,7 @@
  * @file LED.cpp
  * @brief Implementation of the LED class for controlling RGB LED strips using RMT.
  */
-#include "includes.h"
+#include "Includes.h"
 
 // Initialize static members
 rmt_channel_handle_t LED::led_chan = NULL;      ///< RMT channel handle for LED

@@ -3,7 +3,7 @@
 
 #include "driver/rmt_encoder.h"
 #include "driver/rmt_tx.h"
-#include "includes.h"
+#include "Includes.h"
 
 // Define LED strip configuration constants
 #define RMT_LED_STRIP_RESOLUTION_HZ 10000000 // 10MHz resolution, 1 tick = 0.1us (led strip needs a high resolution)

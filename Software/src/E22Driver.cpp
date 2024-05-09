@@ -105,20 +105,20 @@ bool E22::Begin(void)
 
     // Configuracion del bus SPI
     spi_bus_config_t SPIBusCfg;
-    memset(&SPIBusCfg, 0, sizeof(spi_bus_config_t)); // Seteo el SPIBus en 0 para asegurarme que ningun parametro esta pre iniciado
-    SPIBusCfg.mosi_io_num = SPI_MOSI_PIN;            // Pin del MOSI
-    SPIBusCfg.miso_io_num = SPI_MISO_PIN;            // Pin del MiSO
-    SPIBusCfg.sclk_io_num = SPI_SCK_PIN;             // Pin del SCK
-    SPIBusCfg.quadhd_io_num = -1;                    // No se usa el Write Protect
-    SPIBusCfg.quadwp_io_num = -1;                    // No se usa el Hold
-    SPIBusCfg.data4_io_num = -1;                     // No se usa el spi Data 4 signal porque no estamos en OSPI
-    SPIBusCfg.data5_io_num = -1;                     // No se usa el spi Data 5 signal porque no estamos en OSPI
-    SPIBusCfg.data6_io_num = -1;                     // No se usa el spi Data 6 signal porque no estamos en OSPI
-    SPIBusCfg.data7_io_num = -1;                     // No se usa el spi Data 7 signal porque no estamos en OSPI
-    SPIBusCfg.max_transfer_sz = SPI_MAX_TRANSFER;    // Maximo tamaño de transferencia
-    SPIBusCfg.flags = SPICOMMON_BUSFLAG_MASTER;      // Flag para indicar que el µC es el master en SPI
-    SPIBusCfg.isr_cpu_id = INTR_CPU_ID_AUTO;         // CPU que se encarga de las interrupciones, en el ESP32-C3 hay un solo CPU
-    SPIBusCfg.intr_flags = SPI_INTR_BUS_FLAGS;       // Flags de configuracion para el bus SPI
+    memset(&SPIBusCfg, 0, sizeof(spi_bus_config_t));   // Seteo el SPIBus en 0 para asegurarme que ningun parametro esta pre iniciado
+    SPIBusCfg.mosi_io_num = SPI_MOSI_PIN;              // Pin del MOSI
+    SPIBusCfg.miso_io_num = SPI_MISO_PIN;              // Pin del MiSO
+    SPIBusCfg.sclk_io_num = SPI_SCK_PIN;               // Pin del SCK
+    SPIBusCfg.quadhd_io_num = -1;                      // No se usa el Write Protect
+    SPIBusCfg.quadwp_io_num = -1;                      // No se usa el Hold
+    SPIBusCfg.data4_io_num = -1;                       // No se usa el spi Data 4 signal porque no estamos en OSPI
+    SPIBusCfg.data5_io_num = -1;                       // No se usa el spi Data 5 signal porque no estamos en OSPI
+    SPIBusCfg.data6_io_num = -1;                       // No se usa el spi Data 6 signal porque no estamos en OSPI
+    SPIBusCfg.data7_io_num = -1;                       // No se usa el spi Data 7 signal porque no estamos en OSPI
+    SPIBusCfg.max_transfer_sz = SPI_MAX_TRANSFER;      // Maximo tamaño de transferencia
+    SPIBusCfg.flags = SPICOMMON_BUSFLAG_MASTER;        // Flag para indicar que el µC es el master en SPI
+    SPIBusCfg.isr_cpu_id = ESP_INTR_CPU_AFFINITY_AUTO; // CPU que se encarga de las interrupciones, en el ESP32-C3 hay un solo CPU
+    SPIBusCfg.intr_flags = SPI_INTR_BUS_FLAGS;         // Flags de configuracion para el bus SPI
 
     // Configuracion SPI del E22
     spi_device_interface_config_t SPISlaveCfg;
