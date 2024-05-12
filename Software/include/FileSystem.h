@@ -2,11 +2,22 @@
 #define FS_H
 
 #include "Includes.h"
+#include "dev/minIni.h"
+#include "esp_littlefs.h"
 
 #define FSTAG "FS"
 #define STORAGE_PARTITION_NAME "storage"
-#define INI_FILENAME "/config.ini"
+#define AUTOMATIC_JOBS_PATH "/storage/AutomaticJobs"
+#define PACKETS_RECEIVED_PATH "/storage/PacketsReceived"
+#define MEASUREMENTS_PATH "/storage/Measurements"
+#define CONFIG_PATH "/storage/Config"
+
 #define INI_MAX_LEN 100
+#define PATH_MAX_LEN 100
+#define SECTION_MAX_LEN 100
+#define KEY_MAX_LEN 100
+#define VALUE_MAX_LEN 100
+
 #define MAX_PATH_LEN 100
 
 class FS{
@@ -23,26 +34,36 @@ public:
     }
     
     void Begin(void);
-    // Solo hago un check por el html, el css, el js y el logopng
-    bool checkPortalFiles(void);
+
     int getFileSize(const char *path, long *fileSize);
     int getFileBuffer(const char *path, void *buffer, size_t sizeBuffer, size_t sizeFile);
-    bool checkIniFile(void);
+    bool CreateFile(const char *filePath);
+    bool WriteFile(const void *content , size_t contentSize, size_t contentNumber, const char *filePath, const char *operationType);
+    bool seekAndReadFile(const char *filePath, void *outputBuffer, long int size, long int offset, int origin);
+    bool seekAndWriteFile(const char *filePath, void *outputBuffer, long int size, long int offset, int origin);
+    bool CheckFileExists(const char *filePath);
+    bool CheckDirExists(const char *dirPath);
+    bool CreateDir(const char *dirPath);
+
     esp_err_t formatPartition(const char *PartitionName);
-    bool Ini_gets(const char *Section, const char *Key, char *Result);
-    bool Ini_puts(const char *Section, const char *Key, const char *Value);
+    
+    bool Ini_gets(const char *Section, const char *Key, char *Result, const char *FilePath);
+    bool Ini_getl(const char *Section, const char *Key, long *Result, const char *FilePath);
+    bool Ini_puts(const char *Section, const char *Key, const char *Value, const char *FilePath);
+    bool Ini_putl(const char *Section, const char *Key, long Value, const char *FilePath);
+    bool Ini_hassection(const char *Section, const char *FilePath);
+    bool Ini_haskey(const char *Section, const char *Key, const char *FilePath);
+
     bool ls(const char *PartitionName);
     bool cat(const char *filePath);
-    
 
 private:
     // Constructor privado
     FS() {}
-
-    bool createIni(void);
-    bool populateIni();
+    
     esp_err_t mountPartition(const char *PartitionName);
-    static char IniPath[MAX_PATH_LEN];
+    
+    static SemaphoreHandle_t xFSSemaphore;
 
 };
 

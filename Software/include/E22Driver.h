@@ -397,8 +397,6 @@ private:
     bool getIRQStatusForInterrupt(void);       //This function bypasses the FRTOS queue and directly executes the command
     bool getRxBufferStatusForInterrupt(void);  //This function bypasses the FRTOS queue and directly executes the command
 
-    spi_device_handle_t SPIHandle;
-
     static TaskHandle_t E22TaskHandle;
     static SemaphoreHandle_t xE22InterruptSempahore;
     static SemaphoreHandle_t xE22ResponseWaitSempahore;

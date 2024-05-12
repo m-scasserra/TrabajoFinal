@@ -2,18 +2,25 @@
 
 extern "C" void app_main(void)
 {
-    esp_log_level_set("SPI", ESP_LOG_DEBUG);
     LED &led = LED::getInstance();
     
     CLI &cli = CLI::getInstance();
     E22 &e22 = E22::getInstance();
     IO &io = IO::getInstance();
+    FS &fs = FS::getInstance();
+    NETWORK &net = NETWORK::getInstance();
+    DEVICETIME &time = DEVICETIME::getInstance();
+
+    fs.Begin();
+    time.Begin();
+
     io.Begin();
     led.Begin();
-    cli.Begin();
     e22.Begin();
     e22.setMsgTimeoutms(1000);
     led.SetBrightness(10);
+    net.Begin();
+    cli.Begin();
     
 
     
