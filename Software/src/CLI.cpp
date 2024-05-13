@@ -141,7 +141,7 @@ int CLI::transmitCMD(int argc, char **argv)
     calibrationsToDo.ImageCalibration = true;
     e22.calibrate(calibrationsToDo);
 
-    // uncomment code below to use XTAL
+    // Use XTAL
     int8_t xtalA = 0x12;
     int8_t xtalB = 0x12;
     printf("Set RF module to use XTAL as clock reference\n\r");
@@ -155,10 +155,8 @@ int CLI::transmitCMD(int argc, char **argv)
     // Set TX power, default power for SX1262 and SX1268 are +22 dBm and for SX1261 is +14 dBm
     // This function will set PA config with optimal setting for requested TX power
     printf("Set TX power to +17 dBm\n\r");
-    // E22::PaConfig_t paConfig = E22::PA_17_DBM; // TX power +17 dBm for SX1262
-    e22.setPaConfig(E22::PA_17_DBM);
-    // E22::RampTime_t rampTime = ; // 800 microsecond Ramp Time
-    e22.setTxParams(E22::SET_RAMP_800U);
+    e22.setPaConfig(E22::PA_17_DBM);     // TX power +17 dBm for SX1262
+    e22.setTxParams(E22::SET_RAMP_800U); // 800 microsecond Ramp Time
 
     // Configure modulation parameter including spreading factor (SF), bandwidth (BW), and coding rate (CR)
     // Transmitter must have same SF and BW setting so receiver can receive LoRa packet
@@ -264,15 +262,14 @@ int CLI::configCmdFunc(int argc, char **argv)
         const char *key = config_args.key->sval[0];
         char value[INI_MAX_LEN];
         memset(value, 0, sizeof(value));
-        /*if (fs.Ini_gets(section, key, value))
+        if (fs.Ini_gets(section, key, value, DEVICE_CONFIG_FILE_PATH))
         {
             ESP_LOGI(CLITAG, "CONFIG [%s] %s=%s\r\n", section, key, value);
         }
         else
         {
             ESP_LOGE(CLITAG, "Error al escribir/leer el config.");
-        }*/
-        // TODO
+        }
 
         return 0;
     }
@@ -296,15 +293,14 @@ int CLI::configCmdFunc(int argc, char **argv)
         const char *section = config_args.section->sval[0];
         const char *key = config_args.key->sval[0];
         const char *value = config_args.value->sval[0];
-        /*if (fs.Ini_puts(section, key, value))
+        if (fs.Ini_puts(section, key, value, DEVICE_CONFIG_FILE_PATH))
         {
             ESP_LOGI(CLITAG, "CONFIG SET [%s] %s=%s\r\n", section, key, value);
         }
         else
         {
             ESP_LOGE(CLITAG, "Error al escribir/leer el config.");
-        }*/
-        // TODO
+        }
         return 0;
     }
     else if (!strcmp(command, "delete"))
@@ -321,15 +317,26 @@ int CLI::configCmdFunc(int argc, char **argv)
         }
         const char *section = config_args.section->sval[0];
         const char *key = config_args.key->sval[0];
-        /*if (fs.Ini_puts(section, key, NULL))
+        if (fs.Ini_puts(section, key, NULL, DEVICE_CONFIG_FILE_PATH))
         {
             ESP_LOGI(CLITAG, "CONFIG DELETE [%s] %s\r\n", section, key);
         }
         else
         {
             ESP_LOGE(CLITAG, "Error al escribir/leer el config.");
-        }*/
-        // TODO
+        }
+        return 0;
+    }
+    else if (!strcmp(command, "reset"))
+    {
+        ESP_LOGI(CLITAG, "CONFIG RESET\r\n");
+        if (!fs.populateDeviceConfigIni())
+        {
+            ESP_LOGE(CLITAG, "Error al escribir/leer el config.");
+            return 0;
+        }
+        ESP_LOGI(CLITAG, "CONFIG RESET OK\r\n");
+        
         return 0;
     }
     else
@@ -395,6 +402,10 @@ int CLI::FSCmdFunc(int argc, char **argv)
     else if (!strcmp(command, "cat"))
     {
         fs.cat(FS_args.path->sval[0]);
+    }
+    else if (!strcmp(command, "catb"))
+    {
+        fs.catb(FS_args.path->sval[0]);
     }
     else
     {
@@ -553,13 +564,13 @@ esp_err_t CLI::esp_console_register_AutoJob_command(void)
 {
     memset(&AJ_args, 0, sizeof(AJcmd_args_t));
 
-    AJ_args.command = arg_str1(NULL, NULL, "<funcion>", "Funcion del comando AJ.");
+    AJ_args.command = arg_str1(NULL, NULL, "<funcion>", "Funcion del comando aj.");
     AJ_args.job = arg_str0(NULL, NULL, "[jobname]", "Nombre del job");
     AJ_args.end = arg_end(1);
 
     const esp_console_cmd_t cmd = {
-        .command = "AJ",
-        .help = "Comandos de control del comando AJ o AutomaticJob",
+        .command = "aj",
+        .help = "Comandos de control del comando aj (AutomaticJob)",
         .hint = "<show|update|save|load> [ntpserver]",
         .func = &AutoJobCmdFunc,
         .argtable = &AJ_args};
@@ -576,14 +587,14 @@ int CLI::AutoJobCmdFunc(int argc, char **argv)
         return 1;
     }
     const char *command = AJ_args.command->sval[0];
-    if (!strcmp(command, "a"))
+    if (!strcmp(command, "start"))
     {
-        AJ.saveJobsToFs();
+        AJ.startJobs();
         return 0;
     }
-    else if (!strcmp(command, "b"))
+    else if (!strcmp(command, "stop"))
     {
-        AJ.loadJobsFromFs();
+        AJ.stopJobs();
         return 0;
     }
     else if (!strcmp(command, "save"))

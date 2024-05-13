@@ -192,7 +192,6 @@ public:
         IMPLICIT_HEADER = 0x1
     };
 
-
     enum PacketIQType_t
     {
         STANDARD_IQ = 0x0,
@@ -244,6 +243,52 @@ public:
         bool lrFhssHop;        // LRFGSS_HOP = 0x4000
     } IRQReg_t;
 
+    const IRQReg_t IRQREGFULL = {
+        .txDone = true,
+        .rxDone = true,
+        .preambleDetected = true,
+        .syncWordValid = true,
+        .headerValid = true,
+        .headerErr = true,
+        .crcErr = true,
+        .cadDone = true,
+        .cadDetected = true,
+        .timeout = true,
+        .lrFhssHop = true};
+
+    const IRQReg_t IRQREGEMPTY = {
+        .txDone = false,
+        .rxDone = false,
+        .preambleDetected = false,
+        .syncWordValid = false,
+        .headerValid = false,
+        .headerErr = false,
+        .crcErr = false,
+        .cadDone = false,
+        .cadDetected = false,
+        .timeout = false,
+        .lrFhssHop = false};
+
+    enum PaConfig_t
+    {
+        PA_22_DBM,
+        PA_20_DBM,
+        PA_17_DBM,
+        PA_14_DBM
+    };
+
+    enum RampTime_t
+    {
+        SET_RAMP_10U = 0x00,   // 10 us
+        SET_RAMP_20U = 0x01,   // 20 us
+        SET_RAMP_40U = 0x02,   // 40 us
+        SET_RAMP_80U = 0x03,   // 80 us
+        SET_RAMP_200U = 0x04,  // 200 us
+        SET_RAMP_800U = 0x05,  // 800 us
+        SET_RAMP_1700U = 0x06, // 1700 us
+        SET_RAMP_3400U = 0x07, // 3400 us
+    };
+
     typedef struct
     {
         E22Cmd_t commandCode;
@@ -269,26 +314,6 @@ public:
         } responses;
     } E22Response_t;
 
-    enum PaConfig_t
-    {
-        PA_22_DBM,
-        PA_20_DBM,
-        PA_17_DBM,
-        PA_14_DBM
-    };
-
-    enum RampTime_t
-    {
-        SET_RAMP_10U    =  0x00, // 10 us
-        SET_RAMP_20U    =  0x01, // 20 us
-        SET_RAMP_40U    =  0x02, // 40 us
-        SET_RAMP_80U    =  0x03, // 80 us
-        SET_RAMP_200U   =  0x04, // 200 us
-        SET_RAMP_800U   =  0x05, // 800 us
-        SET_RAMP_1700U  =  0x06, // 1700 us
-        SET_RAMP_3400U  =  0x07, // 3400 us
-    };
-
     bool Begin(void);
 
     bool setPacketType(PacketType_t _packetType);
@@ -306,6 +331,7 @@ public:
     bool setXtalCap(uint8_t XTA, uint8_t XTB);
     bool calibrate(Calibrate_t calibrationsToDo);
     uint8_t calibrationsToMask(Calibrate_t calibrations);
+    static Calibrate_t calibrationsFromMask(uint8_t calibrationsMask);
     bool calibrateImage(ImageCalibrationFreq_t frequency);
     bool setFrequency(uint32_t frequency);
     bool setFrequencyAndCalibrate(uint32_t frequency);
@@ -337,35 +363,6 @@ public:
     bool setDioIrqParams(IRQReg_t IRQMask, IRQReg_t DIO1Mask, IRQReg_t DIO2Mask, IRQReg_t DIO3Mask);
     bool getPacketStatus(uint8_t *RssiPkt, uint8_t *SnrPkt, uint8_t *SignalRssiPkt);
 
-    const IRQReg_t IRQREGFULL = {
-        .txDone = true,
-        .rxDone = true,
-        .preambleDetected = true,
-        .syncWordValid = true,
-        .headerValid = true,
-        .headerErr = true,
-        .crcErr = true,
-        .cadDone = true,
-        .cadDetected = true,
-        .timeout = true,
-        .lrFhssHop = true
-    };
-
-    const IRQReg_t IRQREGEMPTY = {
-        .txDone = false,
-        .rxDone = false,
-        .preambleDetected = false,
-        .syncWordValid = false,
-        .headerValid = false,
-        .headerErr = false,
-        .crcErr = false,
-        .cadDone = false,
-        .cadDetected = false,
-        .timeout = false,
-        .lrFhssHop = false
-    };
-
-
 private:
     // Constructor privado
     E22() {}
@@ -392,10 +389,10 @@ private:
     bool resetOn(void);
     bool resetOff(void);
 
-    bool checkDeviceConnection(void);          //This function bypasses the FRTOS queue and directly executes the command
-    bool antennaMismatchCorrection(void);      //This function bypasses the FRTOS queue and directly executes the command
-    bool getIRQStatusForInterrupt(void);       //This function bypasses the FRTOS queue and directly executes the command
-    bool getRxBufferStatusForInterrupt(void);  //This function bypasses the FRTOS queue and directly executes the command
+    bool checkDeviceConnection(void);         // This function bypasses the FRTOS queue and directly executes the command
+    bool antennaMismatchCorrection(void);     // This function bypasses the FRTOS queue and directly executes the command
+    bool getIRQStatusForInterrupt(void);      // This function bypasses the FRTOS queue and directly executes the command
+    bool getRxBufferStatusForInterrupt(void); // This function bypasses the FRTOS queue and directly executes the command
 
     static TaskHandle_t E22TaskHandle;
     static SemaphoreHandle_t xE22InterruptSempahore;
@@ -412,9 +409,7 @@ private:
     static uint8_t s_PayloadLenghtRx;
     static uint8_t s_RxBufferAddr;
     static uint8_t s_TxBufferAddr;
-    
-    
-    
+
     static bool PacketReceived;
 
     static IRQReg_t IRQReg;

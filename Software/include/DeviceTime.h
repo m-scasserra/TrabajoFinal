@@ -7,7 +7,6 @@
 #define DEFAULT_TIMEZONE "GMT+3"
 #define DEFAULT_NTP_SERVER "ar.pool.ntp.org"
 #define WAIT_TIME_FOR_NTP_MS 10000
-#define TIME_BIN_PATH "/storage/AutomaticJobs/time.bin"
 
 class DEVICETIME
 {
@@ -36,4 +35,4 @@ private:
 
 };
 
-#endif // DEVICE_H
+#endif // DEVICETIME_H

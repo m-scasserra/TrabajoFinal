@@ -6,22 +6,27 @@ AUTOJOB::callbackNode_t *callbackListHead = NULL;
 
 void test_cron_job_sample_callback(cron_job *job)
 {
-    printf("Cron job sample callback\n\n");
+    printf("Cron job sample callback\r\n");
     if ((int)(job->data) == 5)
     {
-        printf("Cron job sample callback 5\n\n");
+        printf("Cron job sample callback 5\r\n");
     }
     if ((int)(job->data) == 10)
     {
-        printf("Cron job sample callback 10\n\n");
+        printf("Cron job sample callback 10\r\n");
     }
 
     return;
 }
 
+bool AUTOJOB::Begin(void)
+{
+    addCallback(&callbackListHead, "test", (callback_t)test_cron_job_sample_callback);
+    return true;
+}
+
 bool AUTOJOB::startJobs(void)
 {
-
     if (started == true)
     {
         ESP_LOGE(AJTAG, "Jobs already started");
@@ -30,24 +35,60 @@ bool AUTOJOB::startJobs(void)
 
     ESP_LOGI(AJTAG, "Starting automatic jobs");
 
+    ESP_LOGI(AJTAG, "Clearing all jobs");
+    cron_job_clear_all();
+    ESP_LOGI(AJTAG, "All jobs cleared");
 
+    ESP_LOGI(AJTAG, "Loading jobs from filesystem");
+    if (loadJobsFromFs() == false)
+    {
+        ESP_LOGI(AJTAG, "Failed to load jobs from filesystem");
+        return false;
+    }
+    ESP_LOGI(AJTAG, "Jobs loaded from filesystem");
 
-    //addCallback(&callbackListHead, "test", (callback_t)test_cron_job_sample_callback);
+    ESP_LOGI(AJTAG, "Starting cron");
+    if (cron_start() != 0)
+    {
+        ESP_LOGI(AJTAG, "Failed to start cron");
+        return false;
+    }
+    ESP_LOGI(AJTAG, "Cron started");
 
-    // Get callback functions by name
-    //callback_t callback_func = getCallback(callbackListHead, "test");
+    started = true;
 
-    //cron_job_create("*/5 * * * * *", (cron_job_callback)callback_func, (void *)((int)5));
-    //cron_job_create("*/30 * * * * *", test_cron_job_sample_callback, (void *)((int)10));
-    cron_start();
-    // cron_stop();
-    // cron_job_clear_all();
+    return true;
+}
+
+bool AUTOJOB::stopJobs(void)
+{
+    if (started == false)
+    {
+        ESP_LOGI(AJTAG, "Jobs already stopped");
+        return false;
+    }
+
+    ESP_LOGI(AJTAG, "Stopping automatic jobs");
+
+    ESP_LOGI(AJTAG, "Clearing all jobs");
+    cron_job_clear_all();
+    ESP_LOGI(AJTAG, "All jobs cleared");
+
+    ESP_LOGI(AJTAG, "Stopping cron");
+    if (cron_stop() != 0)
+    {
+        ESP_LOGI(AJTAG, "Failed to stop cron");
+        return false;
+    }
+    ESP_LOGI(AJTAG, "Cron stopped");
+
+    started = false;
+
     return true;
 }
 
 bool AUTOJOB::loadJobsFromFs(void)
 {
-    addCallback(&callbackListHead, "test", (callback_t)test_cron_job_sample_callback);
     FS &fs = FS::getInstance();
     char line[MAX_LINE_LENGTH];
     memset(line, 0, sizeof(line));
@@ -71,7 +112,6 @@ bool AUTOJOB::loadJobsFromFs(void)
         while (line != NULL)
         {
             // Process each line (in this example, just print it)
-            ESP_LOGD(AJTAG, "LINEA: %s\n", line);
             char *end_token;
             // Tokenize line based on comma
             // Parseo los dos valores separados por una coma
@@ -93,7 +133,6 @@ bool AUTOJOB::loadJobsFromFs(void)
     ESP_LOGE(AJTAG, "Error al leer el archivo %s", AUTOMATICJOBS_BIN_PATH);
     return false;
 }
-
 
 bool AUTOJOB::saveJobsToFs(void)
 {

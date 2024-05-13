@@ -1389,6 +1389,18 @@ uint8_t E22::calibrationsToMask(Calibrate_t calibrations)
     return aux;
 }
 
+E22::Calibrate_t E22::calibrationsFromMask(uint8_t calibrationsMask){
+    E22::Calibrate_t calibrations;
+    (calibrationsMask & 0x01) ? calibrations.RC64kCalibration = true : calibrations.RC64kCalibration = false;
+    (calibrationsMask & 0x02) ? calibrations.RC13MCalibration = true : calibrations.RC13MCalibration = false;
+    (calibrationsMask & 0x04) ? calibrations.PLLCalibration = true : calibrations.PLLCalibration = false;
+    (calibrationsMask & 0x08) ? calibrations.ADCPulseCalibration = true : calibrations.ADCPulseCalibration = false;
+    (calibrationsMask & 0x10) ? calibrations.ADCBulkNCalibration = true : calibrations.ADCBulkNCalibration = false;
+    (calibrationsMask & 0x20) ? calibrations.ADCBulkPCalibration = true : calibrations.ADCBulkPCalibration = false;
+    (calibrationsMask & 0x40) ? calibrations.ImageCalibration = true : calibrations.ImageCalibration = false;
+    return calibrations;
+}
+
 bool E22::calibrateImage(ImageCalibrationFreq_t frequency)
 {
     E22Command_t command;

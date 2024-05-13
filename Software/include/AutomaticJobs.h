@@ -42,6 +42,7 @@ public:
     static bool loadJobsFromFs(void);
     static bool saveJobsToFs(void);
     static bool startJobs(void);
+    static bool stopJobs(void);
     static bool Begin(void);
 
 private:

@@ -15,48 +15,94 @@ void FS::Begin(void)
     if (mountPartition(STORAGE_PARTITION_NAME) == ESP_OK)
     {
         ESP_LOGI(FSTAG, "Particion montada");
-        if (CheckDirExists(AUTOMATIC_JOBS_PATH) == false)
+        ESP_LOGI(FSTAG, "Verificando existencia de directorios");
+        if (!checkAndCreateDirs())
         {
-            ESP_LOGI(FSTAG, "Carpeta AutomaticJobs no encontrada. Creando carpeta");
-            CreateDir(AUTOMATIC_JOBS_PATH);
-        }
-        else
-        {
-            ESP_LOGI(FSTAG, "Carpeta AutomaticJobs encontrada");
+            ESP_LOGE(FSTAG, "Error al crear directorios");
+            return;
         }
 
-        if (CheckDirExists(PACKETS_RECEIVED_PATH) == false)
+        if (!CheckFileExists(DEVICE_CONFIG_FILE_PATH))
         {
-            ESP_LOGI(FSTAG, "Carpeta PacketsReceived no encontrada. Creando carpeta");
-            CreateDir(PACKETS_RECEIVED_PATH);
-        }
-        else
-        {
-            ESP_LOGI(FSTAG, "Carpeta PacketsReceived encontrada");
-        }
-
-        if (CheckDirExists(MEASUREMENTS_PATH) == false)
-        {
-            ESP_LOGI(FSTAG, "Carpeta Measurements no encontrada. Creando carpeta");
-            CreateDir(MEASUREMENTS_PATH);
-        }
-        else
-        {
-            ESP_LOGI(FSTAG, "Carpeta Measurements encontrada");
-        }
-
-        if (CheckDirExists(CONFIG_PATH) == false)
-        {
-            ESP_LOGI(FSTAG, "Carpeta Config no encontrada. Creando carpeta");
-            CreateDir(CONFIG_PATH);
-        }
-        else
-        {
-            ESP_LOGI(FSTAG, "Carpeta Config encontrada");
+            ESP_LOGI(FSTAG, "%s no encontrado. Creando ...", DEVICE_CONFIG_FILE_PATH);
+            if (!CreateFile(DEVICE_CONFIG_FILE_PATH))
+            {
+                ESP_LOGE(FSTAG, "Error al crear el archivo %s", DEVICE_CONFIG_FILE_PATH);
+                return;
+            }
+            ESP_LOGI(FSTAG, "Se ha creado el archivo %s", DEVICE_CONFIG_FILE_PATH);
+            
+            ESP_LOGI(FSTAG, "Populando archivo %s", DEVICE_CONFIG_FILE_PATH);
+            if (!populateDeviceConfigIni())
+            {
+                ESP_LOGE(FSTAG, "Error al crear el archivo %s", DEVICE_CONFIG_FILE_PATH);
+                return;
+            }
+            ESP_LOGI(FSTAG, "Populado archivo %s", DEVICE_CONFIG_FILE_PATH);
         }
     }
 
     // esp_log_level_set(FSTAG, ESP_LOG_ERROR);
+}
+
+bool FS::checkAndCreateDirs(void)
+{
+    if (CheckDirExists(AUTOMATIC_JOBS_FOLDER_PATH) == false)
+    {
+        ESP_LOGI(FSTAG, "Carpeta AutomaticJobs no encontrada. Creando carpeta");
+        if (!CreateDir(AUTOMATIC_JOBS_FOLDER_PATH))
+        {
+            ESP_LOGE(FSTAG, "Error creando carpeta %s", AUTOMATIC_JOBS_FOLDER_PATH);
+            return false;
+        }
+    }
+    else
+    {
+        ESP_LOGI(FSTAG, "Carpeta AutomaticJobs encontrada");
+    }
+
+    if (CheckDirExists(PACKETS_RECEIVED_FOLDER_PATH) == false)
+    {
+        ESP_LOGI(FSTAG, "Carpeta PacketsReceived no encontrada. Creando carpeta");
+        if (!CreateDir(PACKETS_RECEIVED_FOLDER_PATH))
+        {
+            ESP_LOGE(FSTAG, "Error creando carpeta %s", PACKETS_RECEIVED_FOLDER_PATH);
+            return false;
+        }
+    }
+    else
+    {
+        ESP_LOGI(FSTAG, "Carpeta PacketsReceived encontrada");
+    }
+
+    if (CheckDirExists(MEASUREMENTS_FOLDER_PATH) == false)
+    {
+        ESP_LOGI(FSTAG, "Carpeta Measurements no encontrada. Creando carpeta");
+        if (!CreateDir(MEASUREMENTS_FOLDER_PATH))
+        {
+            ESP_LOGE(FSTAG, "Error creando carpeta %s", MEASUREMENTS_FOLDER_PATH);
+            return false;
+        }
+    }
+    else
+    {
+        ESP_LOGI(FSTAG, "Carpeta Measurements encontrada");
+    }
+
+    if (CheckDirExists(CONFIG_FOLDER_PATH) == false)
+    {
+        ESP_LOGI(FSTAG, "Carpeta Config no encontrada. Creando carpeta");
+        if (!CreateDir(CONFIG_FOLDER_PATH))
+        {
+            ESP_LOGE(FSTAG, "Error creando carpeta %s", CONFIG_FOLDER_PATH);
+            return false;
+        }
+    }
+    else
+    {
+        ESP_LOGI(FSTAG, "Carpeta Config encontrada");
+    }
+    return true;
 }
 
 bool FS::CheckFileExists(const char *filePath)
@@ -493,6 +539,48 @@ bool FS::cat(const char *filePath)
     return rc; // Exit successfully
 }
 
+bool FS::catb(const char *filePath)
+{
+    FILE *filePointer;
+    bool rc = true;
+    uint8_t byte;
+
+    if (xSemaphoreTake(xFSSemaphore, portMAX_DELAY) == pdTRUE)
+    {
+
+        // Open the file in read mode
+        filePointer = fopen(filePath, "r");
+
+        // Check if the file opened successfully
+        if (filePointer == NULL)
+        {
+            printf("Unable to open the file %s\r\n", filePath);
+            fclose(filePointer);
+            xSemaphoreGive(xFSSemaphore);
+            return false; // Exit with an error code
+        }
+        printf("Contents of %s\r\n", filePath);
+        // Read and print each character until the end of the file
+        while (fread(&byte, sizeof(uint8_t), 1, filePointer) == 1)
+        {
+            printf("0x%02X ", byte);
+            fflush(stdout); // Flush stdout to ensure immediate printing
+        }
+        printf("\r\n");
+
+        // Close the file
+        fclose(filePointer);
+        xSemaphoreGive(xFSSemaphore);
+    }
+    else
+    {
+        ESP_LOGE(FSTAG, "File System Busy");
+        rc = false;
+    }
+
+    return rc; // Exit successfully
+}
+
 bool FS::CreateFile(const char *filePath)
 {
     ESP_LOGI(FSTAG, "Creating %s", filePath);
@@ -621,5 +709,95 @@ bool FS::seekAndWriteFile(const char *filePath, void *inputBuffer, long int size
         ESP_LOGE(FSTAG, "File System Busy");
         return false;
     }
+    return true;
+}
+
+bool FS::populateDeviceConfigIni(void)
+{
+    // Populo el config.ini de los valores predeterminados
+    /*
+    [DEVICE]
+        AUTOMATIC=OFF
+    [PACKETTYPE]
+        TYPE=LORA
+    [TCXO]
+        DIO3VOLTAGE=1.8
+        DIO3DELAY=10
+    [CALIBRATIONS]
+        DO=0x7F
+    [XTAL]
+        USE=Y
+        A=0x12
+        B=0x12
+    [FREQUENCY]
+        FREQUENCY=915000000
+    [PACONFIG]
+        DBM=17
+    [TXPARAMS]
+        RAMPTIME=800
+    [MODULATION]
+        SF=7
+        BW=12
+        CR=4/5
+    [PACKETPARAMS]
+        HEADER=EXPLICIT
+        PREAMBLELENGTH=12
+        PAYLOADLENGTH=15
+        CRC=ON
+        IQTYPE=STANDARD
+    [SYNCWORD]
+        SYNCWORD=0x3444
+    [RXGAIN]
+        RXGAIN=BOOST
+    [TIMEOUT]
+        TRANSMIT=30000
+        RECIEVE=30000
+    */
+    if (!Ini_puts("DEVICE", "AUTOMATIC", "OFF", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("PACKETTYPE", "TYPE", "LORA", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("TCXO", "DIO3VOLTAGE", "1_8", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("TCXO", "DIO3DELAY", "10", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("CALIBRATIONS", "DO", "0x7F", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("XTAL", "USE", "Y", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("XTAL", "A", "0x12", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("XTAL", "B", "0x12", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("FREQUENCY", "FREQUENCY", "915000000", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("PACONFIG", "DBM", "17", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("TXPARAMS", "RAMPTIME", "800", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("MODULATION", "SF", "7", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("MODULATION", "BW", "125", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("MODULATION", "CR", "4/5", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("PACKETPARAMS", "HEADER", "EXPLICIT", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("PACKETPARAMS", "PREAMBLELENGTH", "12", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("PACKETPARAMS", "PAYLOADLENGTH", "15", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("PACKETPARAMS", "CRC", "ON", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("PACKETPARAMS", "IQTYPE", "STANDARD", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("SYNCWORD", "SYNCWORD", "0x3444", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("RXGAIN", "RXGAIN", "BOOST", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("TIMEOUT", "TRANSMIT", "30000", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("TIMEOUT", "RECIEVE", "30000", DEVICE_CONFIG_FILE_PATH))
+        return false;
     return true;
 }

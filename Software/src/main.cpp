@@ -10,9 +10,11 @@ extern "C" void app_main(void)
     FS &fs = FS::getInstance();
     NETWORK &net = NETWORK::getInstance();
     DEVICETIME &time = DEVICETIME::getInstance();
+    AUTOJOB &autojob = AUTOJOB::getInstance();
 
     fs.Begin();
     time.Begin();
+    
 
     io.Begin();
     led.Begin();
@@ -21,7 +23,7 @@ extern "C" void app_main(void)
     led.SetBrightness(10);
     net.Begin();
     cli.Begin();
-    
+    autojob.Begin();
 
     
     while (1)

@@ -7,10 +7,13 @@
 
 #define FSTAG "FS"
 #define STORAGE_PARTITION_NAME "storage"
-#define AUTOMATIC_JOBS_PATH "/storage/AutomaticJobs"
-#define PACKETS_RECEIVED_PATH "/storage/PacketsReceived"
-#define MEASUREMENTS_PATH "/storage/Measurements"
-#define CONFIG_PATH "/storage/Config"
+#define AUTOMATIC_JOBS_FOLDER_PATH "/storage/AutomaticJobs"
+#define PACKETS_RECEIVED_FOLDER_PATH "/storage/PacketsReceived"
+#define MEASUREMENTS_FOLDER_PATH "/storage/Measurements"
+#define CONFIG_FOLDER_PATH "/storage/Config"
+
+#define DEVICE_CONFIG_FILE_PATH "/storage/Config/deviceConfig.ini"
+#define TIME_BIN_PATH "/storage/AutomaticJobs/time.bin"
 
 #define INI_MAX_LEN 100
 #define PATH_MAX_LEN 100
@@ -46,6 +49,9 @@ public:
     bool CreateDir(const char *dirPath);
 
     esp_err_t formatPartition(const char *PartitionName);
+
+    bool populateDeviceConfigIni(void);
+    bool checkAndCreateDirs(void);
     
     bool Ini_gets(const char *Section, const char *Key, char *Result, const char *FilePath);
     bool Ini_getl(const char *Section, const char *Key, long *Result, const char *FilePath);
@@ -56,6 +62,7 @@ public:
 
     bool ls(const char *PartitionName);
     bool cat(const char *filePath);
+    bool catb(const char *filePath);
 
 private:
     // Constructor privado
