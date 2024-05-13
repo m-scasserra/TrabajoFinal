@@ -181,7 +181,7 @@ public:
 
     typedef struct
     {
-        SpredingFactor_t spredingFactor;
+        SpredingFactor_t spreadingFactor;
         BandWidth_t bandwidth;
         CodingRate_t codingRate;
     } ModulationParameters_t;
@@ -242,32 +242,6 @@ public:
         bool timeout;          // TIMEOUT = 0x200,
         bool lrFhssHop;        // LRFGSS_HOP = 0x4000
     } IRQReg_t;
-
-    const IRQReg_t IRQREGFULL = {
-        .txDone = true,
-        .rxDone = true,
-        .preambleDetected = true,
-        .syncWordValid = true,
-        .headerValid = true,
-        .headerErr = true,
-        .crcErr = true,
-        .cadDone = true,
-        .cadDetected = true,
-        .timeout = true,
-        .lrFhssHop = true};
-
-    const IRQReg_t IRQREGEMPTY = {
-        .txDone = false,
-        .rxDone = false,
-        .preambleDetected = false,
-        .syncWordValid = false,
-        .headerValid = false,
-        .headerErr = false,
-        .crcErr = false,
-        .cadDone = false,
-        .cadDetected = false,
-        .timeout = false,
-        .lrFhssHop = false};
 
     enum PaConfig_t
     {
@@ -362,6 +336,35 @@ public:
 
     bool setDioIrqParams(IRQReg_t IRQMask, IRQReg_t DIO1Mask, IRQReg_t DIO2Mask, IRQReg_t DIO3Mask);
     bool getPacketStatus(uint8_t *RssiPkt, uint8_t *SnrPkt, uint8_t *SignalRssiPkt);
+
+    static bool setUpForRx(void);
+    static bool setUpForTx(void);
+
+    const IRQReg_t IRQREGFULL = {
+        .txDone = true,
+        .rxDone = true,
+        .preambleDetected = true,
+        .syncWordValid = true,
+        .headerValid = true,
+        .headerErr = true,
+        .crcErr = true,
+        .cadDone = true,
+        .cadDetected = true,
+        .timeout = true,
+        .lrFhssHop = true};
+
+    const IRQReg_t IRQREGEMPTY = {
+        .txDone = false,
+        .rxDone = false,
+        .preambleDetected = false,
+        .syncWordValid = false,
+        .headerValid = false,
+        .headerErr = false,
+        .crcErr = false,
+        .cadDone = false,
+        .cadDetected = false,
+        .timeout = false,
+        .lrFhssHop = false};
 
 private:
     // Constructor privado

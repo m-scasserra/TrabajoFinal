@@ -1,6 +1,7 @@
 #include "argtable3/argtable3.h"
 #include "includes.h"
 #include "sys/queue.h"
+#include "DeviceStatus.h"
 
 CLI::timercmd_args_t CLI::timer_args;
 CLI::configcmd_args_t CLI::config_args;
@@ -22,82 +23,16 @@ esp_err_t CLI::esp_console_register_simple_command(const char *commandtext, cons
 
 int CLI::showStatusCMD(int argc, char **argv)
 {
-    // TODO: Llenar el show status
+    DEVICESTATUS &ds = DEVICESTATUS::getInstance();
+    ds.printStatus();
     return 0;
 }
 
 int CLI::recieveCMD(int argc, char **argv)
 {
     E22 &e22 = E22::getInstance();
-    // printf("Set RF module to use TCXO as clock reference\n\r");
-    // e22.setStandBy(E22::STDBY_RC);
-    //
-    // e22.setPacketType(E22::PACKET_TYPE_LORA);
-    //
-    //// Set frequency to 915 Mhz
-    // printf("Set frequency to 915 Mhz\n\r");
-    // e22.setFrequency(915000000);
-    e22.setStandBy(E22::STDBY_RC);
-    e22.setPacketType(E22::PACKET_TYPE_LORA);
-    //
-    // e22.setBufferBaseAddress(SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
-    // E22::tcxoVoltage_t dio3Voltage = E22::TCXOVOLTAGE_1_8;
-    e22.setDIO3asTCXOCtrl(E22::TCXOVOLTAGE_1_8, 10);
 
-    e22.setStandBy(E22::STDBY_RC);
-
-    E22::Calibrate_t calibrationsToDo;
-    memset(&calibrationsToDo, 0, sizeof(E22::Calibrate_t));
-    calibrationsToDo.RC64kCalibration = true;
-    calibrationsToDo.RC13MCalibration = true;
-    calibrationsToDo.PLLCalibration = true;
-    calibrationsToDo.ADCPulseCalibration = true;
-    calibrationsToDo.ADCBulkNCalibration = true;
-    calibrationsToDo.ADCBulkPCalibration = true;
-    calibrationsToDo.ImageCalibration = true;
-    e22.calibrate(calibrationsToDo);
-
-    uint8_t xtalA = 0x12;
-    uint8_t xtalB = 0x12;
-    printf("Set RF module to use XTAL as clock reference\n\r");
-    e22.setXtalCap(xtalA, xtalB);
-
-    // Set frequency to 915 Mhz
-    printf("Set frequency to 915 Mhz\n\r");
-    e22.calibrateImage(E22::FREQ_902_928);
-    e22.setFrequency(915000000);
-
-    // Set RX gain. RX gain option are power saving gain or boosted gain
-    printf("Set RX gain to power saving gain\n\r");
-    // E22::RxGain_t gain = E22::RX_POWER_SAVE;
-    e22.setRxGain(E22::RX_BOOST); // Power saving gain
-
-    // Configure modulation parameter including spreading factor (SF), bandwidth (BW), and coding rate (CR)
-    // Transmitter must have same SF and BW setting so receiver can receive LoRa packet
-    printf("Set modulation parameters:\n\tSpreading factor = 7\n\tBandwidth = 125 kHz\n\tCoding rate = 4/5\r\n");
-    E22::ModulationParameters_t modulation;
-    modulation.spredingFactor = E22::SF_7;    // LoRa spreading factor: 7
-    modulation.bandwidth = E22::LORA_BW_125;  // LoRa bandwidth: 125 kHz
-    modulation.codingRate = E22::LORA_CR_4_5; // Coding rate: 4/5
-    e22.setModulationParams(modulation);
-
-    // Configure packet parameter including header type, preamble length, payload length, and CRC type
-    // The explicit packet includes header contain CR, number of byte, and CRC type
-    // Packet with explicit header can't be received by receiver with implicit header mode
-    printf("Set packet parameters:\n\tExplicit header type\n\tPreamble length = 12\n\tPayload Length = 15\n\tCRC on\n\r");
-    E22::LoraPacketParams_t packetParams;
-    packetParams.headerType = E22::EXPLICIT_HEADER; // Explicit header mode
-    packetParams.preambleLength = 12;               // Set preamble length to 12
-    packetParams.payloadLength = 15;                // Initialize payloadLength to 15
-    packetParams.crcType = true;                    // Set CRC enable
-    packetParams.iqType = E22::STANDARD_IQ;
-    e22.setPacketParams(packetParams);
-
-    // Set syncronize word for public network (0x3444)
-    printf("Set syncronize word to 0x3444\n\r");
-    e22.setSyncWord(E22::PUBLIC_SYNCWORD);
-
-    e22.setBufferBaseAddress(SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
+    e22.setUpForRx();
     printf("\n-- LORA RECEIVER --\n");
 
     e22.receivePacket(100000);
@@ -120,80 +55,17 @@ int CLI::recieveCMD(int argc, char **argv)
 int CLI::transmitCMD(int argc, char **argv)
 {
     E22 &e22 = E22::getInstance();
-    // printf("Set RF module to use TCXO as clock reference\r\n");
-    // e22.setStandBy(E22::STDBY_RC);
-    // e22.setPacketType(E22::PACKET_TYPE_LORA);
-    // e22.setBufferBaseAddress(SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
-    e22.setStandBy(E22::STDBY_RC);
-    e22.setPacketType(E22::PACKET_TYPE_LORA);
 
-    // E22::tcxoVoltage_t dio3Voltage = E22::TCXOVOLTAGE_1_8;
-    e22.setDIO3asTCXOCtrl(E22::TCXOVOLTAGE_1_8, 10);
-    e22.setStandBy(E22::STDBY_RC);
-    E22::Calibrate_t calibrationsToDo;
-    memset(&calibrationsToDo, 0, sizeof(E22::Calibrate_t));
-    calibrationsToDo.RC64kCalibration = true;
-    calibrationsToDo.RC13MCalibration = true;
-    calibrationsToDo.PLLCalibration = true;
-    calibrationsToDo.ADCPulseCalibration = true;
-    calibrationsToDo.ADCBulkNCalibration = true;
-    calibrationsToDo.ADCBulkPCalibration = true;
-    calibrationsToDo.ImageCalibration = true;
-    e22.calibrate(calibrationsToDo);
-
-    // Use XTAL
-    int8_t xtalA = 0x12;
-    int8_t xtalB = 0x12;
-    printf("Set RF module to use XTAL as clock reference\n\r");
-    e22.setXtalCap(xtalA, xtalB);
-
-    // Set frequency to 915 Mhz
-    printf("Set frequency to 915 Mhz\n\r");
-    e22.calibrateImage(E22::FREQ_902_928);
-    e22.setFrequency(915000000);
-
-    // Set TX power, default power for SX1262 and SX1268 are +22 dBm and for SX1261 is +14 dBm
-    // This function will set PA config with optimal setting for requested TX power
-    printf("Set TX power to +17 dBm\n\r");
-    e22.setPaConfig(E22::PA_17_DBM);     // TX power +17 dBm for SX1262
-    e22.setTxParams(E22::SET_RAMP_800U); // 800 microsecond Ramp Time
-
-    // Configure modulation parameter including spreading factor (SF), bandwidth (BW), and coding rate (CR)
-    // Transmitter must have same SF and BW setting so receiver can receive LoRa packet
-    printf("Set modulation parameters:\n\tSpreading factor = 7\n\tBandwidth = 125 kHz\n\tCoding rate = 4/5\r\n");
-    E22::ModulationParameters_t modulation;
-    modulation.spredingFactor = E22::SF_7;    // LoRa spreading factor: 7
-    modulation.bandwidth = E22::LORA_BW_125;  // LoRa bandwidth: 125 kHz
-    modulation.codingRate = E22::LORA_CR_4_5; // Coding rate: 4/5
-    e22.setModulationParams(modulation);
-
-    // Configure packet parameter including header type, preamble length, payload length, and CRC type
-    // The explicit packet includes header contain CR, number of byte, and CRC type
-    // Packet with explicit header can't be received by receiver with implicit header mode
-    printf("Set packet parameters:\n\tExplicit header type\n\tPreamble length = 12\n\tPayload Length = 15\n\tCRC on\n\r");
-    E22::LoraPacketParams_t packetParams;
-    packetParams.headerType = E22::EXPLICIT_HEADER; // Explicit header mode
-    packetParams.preambleLength = 12;               // Set preamble length to 12
-    packetParams.payloadLength = 15;                // Initialize payloadLength to 15
-    packetParams.crcType = true;                    // Set CRC enable
-    packetParams.iqType = E22::STANDARD_IQ;
-    e22.setPacketParams(packetParams);
-    e22.fixInvertedIq(packetParams.iqType);
-
-    // Set syncronize word for public network (0x3444)
-    printf("Set syncronize word to 0x3444\n\r");
-    // E22::SyncWordType_t syncWord = E22::PUBLIC_SYNCWORD;
-    e22.setSyncWord(E22::PUBLIC_SYNCWORD);
-
+    e22.setUpForTx();
     printf("\n-- LORA TRANSMITTER --\n\r");
 
     //-----------------------------------------------------------------------------------------------------------------
 
     // Transmit message and counter
     // write() method must be placed between beginPacket() and endPacket()
-    static uint8_t counter = 48;
+    static uint8_t counter = 0;
     // char message[] = "HeLoRa World!";
-    char message[] = "Hola Cabrita!";
+    char message[] = "Hola Cabrita! ";
     e22.beginTxPacket();
     e22.writeMessageTxLength((uint8_t *)message, sizeof(message) - 1);
     e22.writeMessageTxByte(counter);
@@ -239,6 +111,7 @@ esp_err_t CLI::esp_console_register_config_command(void)
 int CLI::configCmdFunc(int argc, char **argv)
 {
     FS &fs = FS::getInstance();
+    DEVICESTATUS &deviceStatus = DEVICESTATUS::getInstance();
     int nerrors = arg_parse(argc, argv, (void **)&config_args);
     if (nerrors != 0)
     {
@@ -264,7 +137,7 @@ int CLI::configCmdFunc(int argc, char **argv)
         memset(value, 0, sizeof(value));
         if (fs.Ini_gets(section, key, value, DEVICE_CONFIG_FILE_PATH))
         {
-            ESP_LOGI(CLITAG, "CONFIG [%s] %s=%s\r\n", section, key, value);
+            ESP_LOGI(CLITAG, "CONFIG [%s] %s=%s", section, key, value);
         }
         else
         {
@@ -295,7 +168,7 @@ int CLI::configCmdFunc(int argc, char **argv)
         const char *value = config_args.value->sval[0];
         if (fs.Ini_puts(section, key, value, DEVICE_CONFIG_FILE_PATH))
         {
-            ESP_LOGI(CLITAG, "CONFIG SET [%s] %s=%s\r\n", section, key, value);
+            ESP_LOGI(CLITAG, "CONFIG SET [%s] %s=%s", section, key, value);
         }
         else
         {
@@ -319,7 +192,7 @@ int CLI::configCmdFunc(int argc, char **argv)
         const char *key = config_args.key->sval[0];
         if (fs.Ini_puts(section, key, NULL, DEVICE_CONFIG_FILE_PATH))
         {
-            ESP_LOGI(CLITAG, "CONFIG DELETE [%s] %s\r\n", section, key);
+            ESP_LOGI(CLITAG, "CONFIG DELETE [%s] %s", section, key);
         }
         else
         {
@@ -329,19 +202,31 @@ int CLI::configCmdFunc(int argc, char **argv)
     }
     else if (!strcmp(command, "reset"))
     {
-        ESP_LOGI(CLITAG, "CONFIG RESET\r\n");
+        ESP_LOGI(CLITAG, "CONFIG RESET");
         if (!fs.populateDeviceConfigIni())
         {
             ESP_LOGE(CLITAG, "Error al escribir/leer el config.");
             return 0;
         }
-        ESP_LOGI(CLITAG, "CONFIG RESET OK\r\n");
+        ESP_LOGI(CLITAG, "CONFIG RESET OK");
+        
+        return 0;
+    }
+    else if (!strcmp(command, "load"))
+    {
+        ESP_LOGI(CLITAG, "Config load");
+        if (!deviceStatus.loadStatusFromFs())
+        {
+            ESP_LOGE(CLITAG, "Error al escribir/leer el config.");
+            return 0;
+        }
+        ESP_LOGI(CLITAG, "CONFIG LOAD OK");
         
         return 0;
     }
     else
     {
-        ESP_LOGI(CLITAG, "Comando no valido\r\n");
+        ESP_LOGI(CLITAG, "Comando no valido");
         return 0;
     }
 
@@ -409,7 +294,7 @@ int CLI::FSCmdFunc(int argc, char **argv)
     }
     else
     {
-        ESP_LOGI(CLITAG, "Comando no valido\r\n");
+        ESP_LOGI(CLITAG, "Comando no valido");
     }
 
     return 0;
@@ -496,7 +381,7 @@ int CLI::netCmdFunc(int argc, char **argv)
     }
     else
     {
-        ESP_LOGI(CLITAG, "Comando no valido\r\n");
+        ESP_LOGI(CLITAG, "Comando no valido");
     }
 
     return 0;
@@ -554,7 +439,7 @@ int CLI::timeCmdFunc(int argc, char **argv)
     }
     else
     {
-        ESP_LOGI(CLITAG, "Comando no valido\r\n");
+        ESP_LOGI(CLITAG, "Comando no valido");
     }
 
     return 0;
@@ -609,7 +494,7 @@ int CLI::AutoJobCmdFunc(int argc, char **argv)
     }
     else
     {
-        ESP_LOGI(CLITAG, "Comando no valido\r\n");
+        ESP_LOGI(CLITAG, "Comando no valido");
     }
 
     return 0;

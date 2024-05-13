@@ -1,4 +1,5 @@
 #include "E22Driver.h"
+#include "DeviceStatus.h"
 
 TaskHandle_t E22::E22TaskHandle = NULL;
 SemaphoreHandle_t E22::xE22InterruptSempahore = NULL;
@@ -394,8 +395,8 @@ bool E22::setStandBy(StdByMode_t mode)
 void E22::processStatus(uint8_t msg)
 {
     // Create a buffer to store the formatted string
-    char chipMode[10];       // Allocate enough space for hex, spaces and null terminator
-    char commandStatus[27];  // Allocate enough space for hex, spaces and null terminator
+    char chipMode[10];      // Allocate enough space for hex, spaces and null terminator
+    char commandStatus[27]; // Allocate enough space for hex, spaces and null terminator
     memset(chipMode, 0, sizeof(chipMode));
 
     switch (msg & 0x70)
@@ -1389,7 +1390,8 @@ uint8_t E22::calibrationsToMask(Calibrate_t calibrations)
     return aux;
 }
 
-E22::Calibrate_t E22::calibrationsFromMask(uint8_t calibrationsMask){
+E22::Calibrate_t E22::calibrationsFromMask(uint8_t calibrationsMask)
+{
     E22::Calibrate_t calibrations;
     (calibrationsMask & 0x01) ? calibrations.RC64kCalibration = true : calibrations.RC64kCalibration = false;
     (calibrationsMask & 0x02) ? calibrations.RC13MCalibration = true : calibrations.RC13MCalibration = false;
@@ -1540,7 +1542,7 @@ bool E22::setModulationParams(ModulationParameters_t modulation)
     command.commandCode = E22_CMD_SetModulationParams;
     command.paramCount = 9;
 
-    command.params.paramsArray[0] = (uint8_t)modulation.spredingFactor;
+    command.params.paramsArray[0] = (uint8_t)modulation.spreadingFactor;
     command.params.paramsArray[1] = (uint8_t)modulation.bandwidth;
     command.params.paramsArray[2] = (uint8_t)modulation.codingRate;
 
@@ -1860,7 +1862,7 @@ uint8_t E22::getMessageLenght(void)
 
 bool E22::getMessageRxByte(uint8_t *dataOut)
 {
-    if (SX126X_RX_BASE_BUFFER_ADDR + s_RxBufferAddr > s_PayloadLenghtRx) //TODO
+    if (SX126X_RX_BASE_BUFFER_ADDR + s_RxBufferAddr > s_PayloadLenghtRx) // TODO
     {
         return false;
     }
@@ -1876,7 +1878,7 @@ bool E22::getMessageRxLenght(uint8_t *dataOut, uint8_t length)
 {
     for (uint8_t i = 0; i < s_PayloadLenghtRx; i++)
     {
-        if (SX126X_RX_BASE_BUFFER_ADDR + s_RxBufferAddr > s_PayloadLenghtRx) //TODO
+        if (SX126X_RX_BASE_BUFFER_ADDR + s_RxBufferAddr > s_PayloadLenghtRx) // TODO
         {
             return false;
         }
@@ -2321,5 +2323,111 @@ bool E22::fixModulationQuality(void)
         ESP_LOGE(E22TAG, "Error al escribir el registro TxModulation");
         return false;
     }
+    return true;
+}
+
+bool E22::setUpForRx(void)
+{
+    E22 &e22 = E22::getInstance();
+    DEVICESTATUS &ds = DEVICESTATUS::getInstance();
+
+    ESP_LOGI(E22TAG, "Setting up for TX");
+    ESP_LOGI(E22TAG, "Going to standby RC");
+    e22.setStandBy(E22::STDBY_RC);
+
+    ESP_LOGI(E22TAG, "Setting up packet type: %d", ds.deviceStatus.E22Status.packetType);
+    e22.setPacketType(ds.deviceStatus.E22Status.packetType);
+
+    ESP_LOGI(E22TAG, "Setting up TCXO voltage: %d, TCXO delay: %lu", ds.deviceStatus.E22Status.tcxoVoltage, ds.deviceStatus.E22Status.TXCOdio3Delay);
+    e22.setDIO3asTCXOCtrl(ds.deviceStatus.E22Status.tcxoVoltage, ds.deviceStatus.E22Status.TXCOdio3Delay);
+
+    ESP_LOGI(E22TAG, "Going to standby RC");
+    e22.setStandBy(E22::STDBY_RC);
+
+    ESP_LOGI(E22TAG, "Calibrating");
+    e22.calibrate(ds.deviceStatus.E22Status.calibrations);
+
+    if (ds.deviceStatus.E22Status.xtalConfig.use)
+    {
+        ESP_LOGI(E22TAG, "Using XTAL: A=%d, B=%d", ds.deviceStatus.E22Status.xtalConfig.XTALA, ds.deviceStatus.E22Status.xtalConfig.XTALB);
+        e22.setXtalCap(ds.deviceStatus.E22Status.xtalConfig.XTALA, ds.deviceStatus.E22Status.xtalConfig.XTALB);
+    }
+
+    ESP_LOGI(E22TAG, "Calibrating image frequency: %d", ds.deviceStatus.E22Status.imageCalibrationFreq);
+    e22.calibrateImage(ds.deviceStatus.E22Status.imageCalibrationFreq);
+    ESP_LOGI(E22TAG, "Setting up frequency: %lu", ds.deviceStatus.E22Status.frequency);
+    e22.setFrequency(ds.deviceStatus.E22Status.frequency);
+
+    
+    ESP_LOGI(E22TAG, "Setting up Rx gain: %d", ds.deviceStatus.E22Status.rxGain);
+    e22.setRxGain(ds.deviceStatus.E22Status.rxGain);
+
+    ESP_LOGI(E22TAG, "Setting up modulation parameters");
+    e22.setModulationParams(ds.deviceStatus.E22Status.modulationParams);
+
+    ESP_LOGI(E22TAG, "Setting up packet parameters");
+    e22.setPacketParams(ds.deviceStatus.E22Status.packetParams);
+    e22.fixInvertedIq(ds.deviceStatus.E22Status.packetParams.iqType);
+
+    ESP_LOGI(E22TAG, "Setting up sync word: %d", ds.deviceStatus.E22Status.syncWord);
+    e22.setSyncWord(ds.deviceStatus.E22Status.syncWord);
+
+    ESP_LOGI(E22TAG, "Setting up buffer base address: %d, %d", SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
+    e22.setBufferBaseAddress(SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
+
+    return true;
+}
+
+bool E22::setUpForTx(void)
+{
+    E22 &e22 = E22::getInstance();
+    DEVICESTATUS &ds = DEVICESTATUS::getInstance();
+
+    ESP_LOGI(E22TAG, "Setting up for TX");
+    ESP_LOGI(E22TAG, "Going to standby RC");
+    e22.setStandBy(E22::STDBY_RC);
+
+    ESP_LOGI(E22TAG, "Setting up packet type: %d", ds.deviceStatus.E22Status.packetType);
+    e22.setPacketType(ds.deviceStatus.E22Status.packetType);
+
+    ESP_LOGI(E22TAG, "Setting up TCXO voltage: %d, TCXO delay: %lu", ds.deviceStatus.E22Status.tcxoVoltage, ds.deviceStatus.E22Status.TXCOdio3Delay);
+    e22.setDIO3asTCXOCtrl(ds.deviceStatus.E22Status.tcxoVoltage, ds.deviceStatus.E22Status.TXCOdio3Delay);
+
+    ESP_LOGI(E22TAG, "Going to standby RC");
+    e22.setStandBy(E22::STDBY_RC);
+
+    ESP_LOGI(E22TAG, "Calibrating");
+    e22.calibrate(ds.deviceStatus.E22Status.calibrations);
+
+    if (ds.deviceStatus.E22Status.xtalConfig.use)
+    {
+        ESP_LOGI(E22TAG, "Using XTAL: A=%d, B=%d", ds.deviceStatus.E22Status.xtalConfig.XTALA, ds.deviceStatus.E22Status.xtalConfig.XTALB);
+        e22.setXtalCap(ds.deviceStatus.E22Status.xtalConfig.XTALA, ds.deviceStatus.E22Status.xtalConfig.XTALB);
+    }
+
+    ESP_LOGI(E22TAG, "Calibrating image frequency: %d", ds.deviceStatus.E22Status.imageCalibrationFreq);
+    e22.calibrateImage(ds.deviceStatus.E22Status.imageCalibrationFreq);
+    ESP_LOGI(E22TAG, "Setting up frequency: %lu", ds.deviceStatus.E22Status.frequency);
+    e22.setFrequency(ds.deviceStatus.E22Status.frequency);
+
+    ESP_LOGI(E22TAG, "Setting up TX power: %d", ds.deviceStatus.E22Status.paConfig);
+    e22.setPaConfig(ds.deviceStatus.E22Status.paConfig);
+
+    ESP_LOGI(E22TAG, "Setting up ramp time: %d", ds.deviceStatus.E22Status.rampTime);
+    e22.setTxParams(ds.deviceStatus.E22Status.rampTime);
+
+    ESP_LOGI(E22TAG, "Setting up modulation parameters");
+    e22.setModulationParams(ds.deviceStatus.E22Status.modulationParams);
+
+    ESP_LOGI(E22TAG, "Setting up packet parameters");
+    e22.setPacketParams(ds.deviceStatus.E22Status.packetParams);
+    e22.fixInvertedIq(ds.deviceStatus.E22Status.packetParams.iqType);
+
+    ESP_LOGI(E22TAG, "Setting up sync word: %d", ds.deviceStatus.E22Status.syncWord);
+    e22.setSyncWord(ds.deviceStatus.E22Status.syncWord);
+
+    ESP_LOGI(E22TAG, "Setting up buffer base address: %d, %d", SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
+    e22.setBufferBaseAddress(SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
+
     return true;
 }

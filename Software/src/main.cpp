@@ -1,4 +1,5 @@
 #include "Includes.h"
+#include "DeviceStatus.h"
 
 extern "C" void app_main(void)
 {
@@ -11,10 +12,12 @@ extern "C" void app_main(void)
     NETWORK &net = NETWORK::getInstance();
     DEVICETIME &time = DEVICETIME::getInstance();
     AUTOJOB &autojob = AUTOJOB::getInstance();
+    DEVICESTATUS &ds = DEVICESTATUS::getInstance();
 
     fs.Begin();
     time.Begin();
-    
+    ds.Begin();
+    ds.loadStatusFromFs();
 
     io.Begin();
     led.Begin();

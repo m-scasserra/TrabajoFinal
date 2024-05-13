@@ -52,7 +52,7 @@
 #include "IO.h"
 #include "Network.h"
 #include "DeviceTime.h"
-#include "DeviceStatus.h"
+
 
 
 #endif //INCLUDES_H

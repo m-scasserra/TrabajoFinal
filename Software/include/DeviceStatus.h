@@ -3,6 +3,8 @@
 
 #include "Includes.h"
 
+#define STATUSTAG "STATUS"
+
 class DEVICESTATUS
 {
 
