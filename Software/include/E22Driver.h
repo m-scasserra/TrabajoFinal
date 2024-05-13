@@ -2,6 +2,7 @@
 #define E22DRIVER_H
 
 #include "Includes.h"
+#include "SPI.h"
 
 #define E22TAG "E22"
 
@@ -425,6 +426,7 @@ private:
 
     static IRQReg_t IRQReg;
     static bool processIRQ;
+    static SPI *spi;
 };
 
 #endif // E22DRIVER_H

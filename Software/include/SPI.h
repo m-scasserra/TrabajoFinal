@@ -1,7 +1,16 @@
 #ifndef SPI_H
 #define SPI_H
 
-#include "Includes.h"
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <sys/time.h>
+#include <sys/param.h>
+#include <sys/unistd.h>
+#include <sys/stat.h>
+#include <string.h>
+#include "esp_log.h"
 #include "driver/spi_master.h"
 #include "esp_intr_alloc.h"
 
@@ -14,32 +23,19 @@
 class SPI
 {
 public:
-    // Eliminar las funciones de copia y asignación
-    SPI(const SPI &) = delete;
-    SPI &operator=(const SPI &) = delete;
-
-    // Función para acceder a la instancia única del SPI
-    static SPI &getInstance()
-    {
-        static SPI instance; // Única instancia
-        return instance;
-    }
-
+    SPI() { SPIInitiated = false; };
     bool Begin(spi_bus_config_t *SPIBusCfg);
     bool AddDevice(spi_device_interface_config_t *SPISlaveCfg);
     bool SendMessage(uint8_t *tx_msg, uint8_t tx_len, uint8_t *rx_msg, uint8_t rx_len);
     bool SendMessage(uint8_t *tx_msg, uint8_t tx_len);
 
 private:
-    // Constructor privado
-    SPI() {}
-
     void debugTXmessage(uint8_t *tx_msg, uint8_t tx_len);
     void debugRXmessage(uint8_t *rx_msg, uint8_t rx_len);
 
-    static bool SPIInitiated;
+    bool SPIInitiated;
 
-    static spi_device_handle_t SPIHandle;
+    spi_device_handle_t SPIHandle;
 };
 
 #endif // SPI_H

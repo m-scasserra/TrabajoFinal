@@ -45,7 +45,6 @@
 #include "CLI.h"
 #include "cmd_system.h"
 #include "Hardware.h"
-#include "SPI.h"
 #include "FileSystem.h"
 #include "E22Opcodes.h"
 #include "E22Driver.h"

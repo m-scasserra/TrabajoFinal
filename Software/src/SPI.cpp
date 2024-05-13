@@ -1,9 +1,13 @@
 #include "SPI.h"
 
-spi_device_handle_t SPI::SPIHandle = NULL;
-
 bool SPI::Begin(spi_bus_config_t *SPIBusCfg)
 {
+    if (SPIInitiated)
+    {
+        ESP_LOGI(SPITAG, "El SPI ya fue inicializado.");
+        return true;
+    }
+
     // Initialize the SPI bus
     ESP_LOGI(SPITAG, "Inicio el bus SPI.");
     if (spi_bus_initialize(SPI2_HOST, SPIBusCfg, SPI_DMA_DISABLED) != ESP_OK)
@@ -12,7 +16,7 @@ bool SPI::Begin(spi_bus_config_t *SPIBusCfg)
         return false;
     }
     ESP_LOGI(SPITAG, "SPI Bus inicializado correctamente.");
-
+    SPIInitiated = true;
     return true;
 }
 
