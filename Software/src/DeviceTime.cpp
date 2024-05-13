@@ -2,9 +2,27 @@
 
 bool DEVICETIME::Begin(void)
 {
+    FS &fs = FS::getInstance();
+    
     // Set timezone
     setenv("TZ", (const char *)DEFAULT_TIMEZONE, 1);
     tzset();
+
+    if (!fs.CheckFileExists(TIME_BIN_PATH))
+    {
+        ESP_LOGE(TIMETAG, "No se ha encontrado el archivo %s.", TIME_BIN_PATH);
+        if (!saveTimeToFs())
+        {
+            ESP_LOGE(TIMETAG, "Error al guardar el tiempo");
+        }
+    }
+    else
+    {
+        if (!loadTimeFromFs())
+        {
+            ESP_LOGE(TIMETAG, "Error al cargar el tiempo");
+        }
+    }
     return true;
 }
 

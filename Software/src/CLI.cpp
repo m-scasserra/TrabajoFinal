@@ -209,7 +209,7 @@ int CLI::configCmdFunc(int argc, char **argv)
             return 0;
         }
         ESP_LOGI(CLITAG, "CONFIG RESET OK");
-        
+
         return 0;
     }
     else if (!strcmp(command, "load"))
@@ -221,7 +221,7 @@ int CLI::configCmdFunc(int argc, char **argv)
             return 0;
         }
         ESP_LOGI(CLITAG, "CONFIG LOAD OK");
-        
+
         return 0;
     }
     else
@@ -421,7 +421,7 @@ int CLI::timeCmdFunc(int argc, char **argv)
     }
     else if (!strcmp(command, "update"))
     {
-        time.updateTimeFromNet(time_args.ntpserver->sval[0], time_args.ntpserver->count);
+        time.updateTimeFromNet(time_args.ntpserver->sval[0], sizeof(time_args.ntpserver->sval[0]));
         time.printTime();
         return 0;
     }
@@ -465,6 +465,8 @@ esp_err_t CLI::esp_console_register_AutoJob_command(void)
 int CLI::AutoJobCmdFunc(int argc, char **argv)
 {
     AUTOJOB &AJ = AUTOJOB::getInstance();
+    FS &fs = FS::getInstance();
+
     int nerrors = arg_parse(argc, argv, (void **)&AJ_args);
     if (nerrors != 0)
     {
@@ -484,12 +486,60 @@ int CLI::AutoJobCmdFunc(int argc, char **argv)
     }
     else if (!strcmp(command, "save"))
     {
-        AJ.startJobs();
+        AJ.saveJobsToFs();
         return 0;
     }
     else if (!strcmp(command, "load"))
     {
+        AJ.loadJobsFromFs();
+        return 0;
+    }
+    else if (!strcmp(command, "lscallbacks"))
+    {
+        AJ.printAllCallbacksNames();
+        return 0;
+    }
+    else if (!strcmp(command, "write"))
+    {
+        size_t len = strlen(AJ_args.job->sval[0]);
+        char lineToAppend[len + 1];
+        strcpy(lineToAppend, AJ_args.job->sval[0]);
+        lineToAppend[len] = '\n';
 
+        if (!fs.WriteFile(lineToAppend, len + 1, 1, AUTOMATICJOBS_BIN_PATH, "a"))
+        {
+            ESP_LOGI(CLITAG, "Error al escribir en el archivo");
+            return 0;
+        }
+        return 0;
+    }
+    else if (!strcmp(command, "del"))
+    {
+        if (!AJ.deleteJobsFromFs(AJ_args.job->sval[0]))
+        {
+            ESP_LOGE(CLITAG, "Error al borrar el job");
+            return 0;
+        }
+        ESP_LOGI(CLITAG, "Job %s borrado", AJ_args.job->sval[0]);
+        return 0;
+    }
+    else if (!strcmp(command, "show"))
+    {
+        long fileSize = 0;
+        fs.getFileSize(AUTOMATICJOBS_BIN_PATH, &fileSize);
+        char *buffer = (char *)malloc(fileSize);
+        size_t bytesRead = fs.getFileBuffer(AUTOMATICJOBS_BIN_PATH, buffer, sizeof(*buffer), fileSize);
+        buffer[bytesRead] = '\0';
+        if (bytesRead)
+        {
+            printf("%s", buffer);
+            free(buffer);
+        }
+        else
+        {
+            ESP_LOGI(CLITAG, "Error al leer el archivo");
+            free(buffer);
+        }
         return 0;
     }
     else
@@ -503,7 +553,6 @@ int CLI::AutoJobCmdFunc(int argc, char **argv)
 void CLI::esp_console_register_all_commands(void)
 {
     esp_console_register_help_command();
-    // esp_console_register_timer_command();
     esp_console_register_config_command();
     esp_console_register_FS_command();
     esp_console_register_simple_command("?", "Muestra el estado general del dispositivo", showStatusCMD);
@@ -521,6 +570,7 @@ void CLI::Begin(void)
     memset(&timer_args, 0, sizeof(timer_args));
     esp_console_repl_t *repl = NULL;
     esp_console_repl_config_t repl_config = ESP_CONSOLE_REPL_CONFIG_DEFAULT();
+    repl_config.task_stack_size = 5120;
     /* Prompt to be printed before each line.
      * This can be customized, made dynamic, etc.
      */

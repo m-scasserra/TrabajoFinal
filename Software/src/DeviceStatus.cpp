@@ -102,6 +102,33 @@ bool DEVICESTATUS::loadDeviceFromFs(void)
         ESP_LOGE(STATUSTAG, "Error al escribir/leer el config.");
         return false;
     }
+
+    memset(value, 0, sizeof(value));
+    if (fs.Ini_gets("DEVICE", "FUNCTION", value, DEVICE_CONFIG_FILE_PATH))
+    {
+        if (!strcmp(value, "NONE"))
+        {
+            deviceStatus.mode = NONE;
+        }
+        else if (!strcmp(value, "TX"))
+        {
+            deviceStatus.mode = TX;
+        }
+        else if (!strcmp(value, "RX"))
+        {
+            deviceStatus.mode = RX;
+        }
+        else
+        {
+            ESP_LOGE(STATUSTAG, "Valor de DEVICE FUNCTION no reconocido.");
+            return false;
+        }
+    }
+    else
+    {
+        ESP_LOGE(STATUSTAG, "Error al escribir/leer el config.");
+        return false;
+    }
     return true;
 }
 

@@ -35,10 +35,28 @@ void FS::Begin(void)
             ESP_LOGI(FSTAG, "Populando archivo %s", DEVICE_CONFIG_FILE_PATH);
             if (!populateDeviceConfigIni())
             {
-                ESP_LOGE(FSTAG, "Error al crear el archivo %s", DEVICE_CONFIG_FILE_PATH);
+                ESP_LOGE(FSTAG, "Error al popular el archivo %s", DEVICE_CONFIG_FILE_PATH);
                 return;
             }
             ESP_LOGI(FSTAG, "Populado archivo %s", DEVICE_CONFIG_FILE_PATH);
+        }
+        if (!CheckFileExists(AUTOMATICJOBS_BIN_PATH))
+        {
+            ESP_LOGE(FSTAG, "%s no encontrado. Creando ...", AUTOMATICJOBS_BIN_PATH);
+            if (!CreateFile(AUTOMATICJOBS_BIN_PATH))
+            {
+                ESP_LOGE(FSTAG, "Error al crear el archivo %s", AUTOMATICJOBS_BIN_PATH);
+                return;
+            }
+            ESP_LOGI(FSTAG, "Se ha creado el archivo %s", AUTOMATICJOBS_BIN_PATH);
+
+            ESP_LOGI(FSTAG, "Populando archivo %s", AUTOMATICJOBS_BIN_PATH);
+            if (!WriteFile("0 0 * * * *,saveTime\n", sizeof("0 0 * * * *,saveTime\n") - 1, 1, AUTOMATICJOBS_BIN_PATH, "w") == false)
+            {
+                ESP_LOGE(FSTAG, "Error al escribir el archivo %s", AUTOMATICJOBS_BIN_PATH);
+                return;
+            }
+            ESP_LOGI(FSTAG, "Escrito archivo %s", AUTOMATICJOBS_BIN_PATH);
         }
     }
 
@@ -717,43 +735,46 @@ bool FS::populateDeviceConfigIni(void)
     // Populo el config.ini de los valores predeterminados
     /*
     [DEVICE]
-        AUTOMATIC=OFF
+        AUTOMATIC=[OFF]/ON
+        FUNCTION=[NONE]/TX/RX
     [PACKETTYPE]
-        TYPE=LORA
+        TYPE=[LORA]/GFSK/LRFHSS
     [TCXO]
-        DIO3VOLTAGE=1.8
-        DIO3DELAY=10
+        DIO3VOLTAGE=[1_8]/1_6/1_7/1_8/2_2/2_4/2_7/3_0/3_3
+        DIO3DELAY=[10]/0-262143
     [CALIBRATIONS]
-        DO=0x7F
+        DO=[0x7F]/0x00-0x7F
     [XTAL]
-        USE=Y
-        A=0x12
-        B=0x12
+        USE=[Y]/N
+        A=[0x12]/0x00-0x2F
+        B=[0x12]/0x00-0x2F
     [FREQUENCY]
-        FREQUENCY=915000000
+        FREQUENCY=[915000000]
     [PACONFIG]
-        DBM=17
+        DBM=[17]/14/20/22
     [TXPARAMS]
-        RAMPTIME=800
+        RAMPTIME=[800]/10/20/40/80/200/800/1700/3400
     [MODULATION]
-        SF=7
-        BW=12
-        CR=4/5
+        SF=[7]/5/6/7/8/9/10/11/12
+        BW=[125]/7/10/15/20/31/41/62/125/250/500
+        CR=[4/5]/"4/6"/"4/7"/"4/8"
     [PACKETPARAMS]
-        HEADER=EXPLICIT
-        PREAMBLELENGTH=12
-        PAYLOADLENGTH=15
-        CRC=ON
-        IQTYPE=STANDARD
+        HEADER=[EXPLICIT]/IMPLICIT
+        PREAMBLELENGTH=[12]
+        PAYLOADLENGTH=[15]
+        CRC=[ON]/OFF
+        IQTYPE=[STANDARD]/INVERTED
     [SYNCWORD]
-        SYNCWORD=0x3444
+        SYNCWORD=[0x3444]/0x1424
     [RXGAIN]
-        RXGAIN=BOOST
+        RXGAIN=[BOOST]/POWERSAVE
     [TIMEOUT]
-        TRANSMIT=30000
-        RECIEVE=30000
+        TRANSMIT=[30000]
+        RECIEVE=[30000]
     */
     if (!Ini_puts("DEVICE", "AUTOMATIC", "OFF", DEVICE_CONFIG_FILE_PATH))
+        return false;
+    if (!Ini_puts("DEVICE", "FUNCTION", "NONE", DEVICE_CONFIG_FILE_PATH))
         return false;
     if (!Ini_puts("PACKETTYPE", "TYPE", "LORA", DEVICE_CONFIG_FILE_PATH))
         return false;

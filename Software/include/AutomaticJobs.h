@@ -6,6 +6,8 @@
 #define AJTAG "AUTOJOB"
 #define AUTOMATICJOBS_BIN_PATH "/storage/AutomaticJobs/jobs.bin"
 #define MAX_LINE_LENGTH 200
+#define MAX_SCHEDULE_LENGTH 50
+#define MAX_FUNCTION_NAME_LENGTH 50
 
 class AUTOJOB
 {
@@ -41,9 +43,12 @@ public:
 
     static bool loadJobsFromFs(void);
     static bool saveJobsToFs(void);
+    static bool deleteJobsFromFs(const char *functionToDelete);
     static bool startJobs(void);
     static bool stopJobs(void);
     static bool Begin(void);
+    static bool addAllCallbacks(void);
+    static bool printAllCallbacksNames(void);
 
 private:
     // Constructor privado

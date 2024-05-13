@@ -263,6 +263,12 @@ public:
         SET_RAMP_3400U = 0x07, // 3400 us
     };
 
+    typedef enum{
+        NONE = 0,
+        TX = 1,
+        RX = 2
+    } E22SetUpState_t;
+
     typedef struct
     {
         E22Cmd_t commandCode;
@@ -414,6 +420,8 @@ private:
     static uint8_t s_TxBufferAddr;
 
     static bool PacketReceived;
+
+    static E22SetUpState_t E22SetUpState;
 
     static IRQReg_t IRQReg;
     static bool processIRQ;

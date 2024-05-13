@@ -12,6 +12,7 @@ E22::PacketType_t E22::s_packetType;
 uint8_t E22::s_PayloadLenghtRx = 0;
 uint8_t E22::s_RxBufferAddr = 0;
 uint8_t E22::s_TxBufferAddr = 0;
+E22::E22SetUpState_t E22::E22SetUpState = NONE;
 E22::IRQReg_t E22::IRQReg;
 bool E22::processIRQ = false;
 bool E22::PacketReceived = false;
@@ -2358,7 +2359,6 @@ bool E22::setUpForRx(void)
     ESP_LOGI(E22TAG, "Setting up frequency: %lu", ds.deviceStatus.E22Status.frequency);
     e22.setFrequency(ds.deviceStatus.E22Status.frequency);
 
-    
     ESP_LOGI(E22TAG, "Setting up Rx gain: %d", ds.deviceStatus.E22Status.rxGain);
     e22.setRxGain(ds.deviceStatus.E22Status.rxGain);
 
@@ -2375,6 +2375,7 @@ bool E22::setUpForRx(void)
     ESP_LOGI(E22TAG, "Setting up buffer base address: %d, %d", SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
     e22.setBufferBaseAddress(SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
 
+    E22SetUpState = RX;
     return true;
 }
 
@@ -2429,5 +2430,6 @@ bool E22::setUpForTx(void)
     ESP_LOGI(E22TAG, "Setting up buffer base address: %d, %d", SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
     e22.setBufferBaseAddress(SX126X_TX_BASE_BUFFER_ADDR, SX126X_RX_BASE_BUFFER_ADDR);
 
+    E22SetUpState = TX;
     return true;
 }

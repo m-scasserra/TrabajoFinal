@@ -1,5 +1,6 @@
 #include "AutomaticJobs.h"
 #include "include/cron.h"
+#include "DeviceStatus.h"
 
 bool AUTOJOB::started = false;
 AUTOJOB::callbackNode_t *callbackListHead = NULL;
@@ -19,9 +20,74 @@ void test_cron_job_sample_callback(cron_job *job)
     return;
 }
 
+void transmitCronJobCallback(cron_job *job)
+{
+    printf("Transmit Cron job sample callback\r\n");
+
+    return;
+}
+
+void recieveCronJobCallback(cron_job *job)
+{
+    printf("Recieve Cron job sample callback\r\n");
+
+    return;
+}
+
+void saveTimeCronJobCallback(cron_job *job)
+{
+    DEVICETIME &time = DEVICETIME::getInstance();
+    if (!time.saveTimeToFs())
+    {
+        ESP_LOGE("CRON", "Failed to save time");
+    }
+
+    return;
+}
+
 bool AUTOJOB::Begin(void)
 {
-    addCallback(&callbackListHead, "test", (callback_t)test_cron_job_sample_callback);
+    DEVICESTATUS &ds = DEVICESTATUS::getInstance();
+    if (!addAllCallbacks())
+    {
+        ESP_LOGE(AJTAG, "Failed to add all callbacks");
+        return false;
+    }
+
+    if (ds.deviceStatus.automatic == true)
+    {
+        ESP_LOGI(AJTAG, "Automatic jobs enabled");
+        if (startJobs() == false)
+        {
+            ESP_LOGE(AJTAG, "Failed to start automatic jobs");
+            return false;
+        }
+        else
+        {
+            ESP_LOGI(AJTAG, "Automatic jobs started");
+        }
+    }
+
+    return true;
+}
+
+bool AUTOJOB::addAllCallbacks(void)
+{
+    addCallback(&callbackListHead, "Transmit", (callback_t)transmitCronJobCallback);
+    addCallback(&callbackListHead, "Recieve", (callback_t)recieveCronJobCallback);
+    addCallback(&callbackListHead, "saveTime", (callback_t)saveTimeCronJobCallback);
+    return true;
+}
+
+bool AUTOJOB::printAllCallbacksNames(void)
+{
+    callbackNode_t *current = callbackListHead;
+    printf("Callback list:\r\n");
+    while (current != NULL)
+    {
+        printf("\t%s\r\n", current->name);
+        current = current->next;
+    }
     return true;
 }
 
@@ -101,28 +167,37 @@ bool AUTOJOB::loadJobsFromFs(void)
     }
 
     fs.getFileSize(AUTOMATICJOBS_BIN_PATH, &fileSize);
-    char *buffer = (char *)malloc(fileSize);
+    char *buffer = (char *)malloc(fileSize + 1);
+    memset(buffer, 0, fileSize);
     size_t bytesRead = fs.getFileBuffer(AUTOMATICJOBS_BIN_PATH, buffer, sizeof(*buffer), fileSize);
     buffer[bytesRead] = '\0';
     if (bytesRead)
     {
         // Tokenize buffer based on newline
-        char *end_str;
+        char *end_token = NULL;
+        char *end_str = NULL;
+
         char *line = strtok_r(buffer, "\n", &end_str);
         while (line != NULL)
         {
-            // Process each line (in this example, just print it)
-            char *end_token;
             // Tokenize line based on comma
             // Parseo los dos valores separados por una coma
+            // Copy extracted values (assuming allocated memory)
             char *scheduleValue = strtok_r(line, ",", &end_token);
             char *functionValue = strtok_r(NULL, ",", &end_token);
-            ESP_LOGD(AJTAG, "SCHEDULE: %s FUNCTION: %s\n", scheduleValue, functionValue);
+
+            ESP_LOGI(AJTAG, "SCHEDULE: %s FUNCTION: %s\n", scheduleValue, functionValue);
             // Busco la funcion con su nombre
             callback_t callback_func = getCallback(callbackListHead, functionValue);
-            // Creo el cronjob
-            cron_job_create(scheduleValue, (cron_job_callback)callback_func, NULL);
-
+            if (callback_func == NULL)
+            {
+                ESP_LOGE(AJTAG, "Callback not found: %s", functionValue);
+            }
+            else
+            {
+                // Creo el cronjob
+                cron_job_create(scheduleValue, (cron_job_callback)callback_func, NULL);
+            }
             // Move to the next line
             line = strtok_r(NULL, "\n", &end_str);
         }
@@ -130,6 +205,69 @@ bool AUTOJOB::loadJobsFromFs(void)
         return true;
     }
     free(buffer);
+    ESP_LOGE(AJTAG, "Error al leer el archivo %s", AUTOMATICJOBS_BIN_PATH);
+    return false;
+}
+
+bool AUTOJOB::deleteJobsFromFs(const char *functionToDelete)
+{
+    FS &fs = FS::getInstance();
+    char line[MAX_LINE_LENGTH];
+    memset(line, 0, sizeof(line));
+    long fileSize = 0;
+
+    if (!fs.CheckFileExists(AUTOMATICJOBS_BIN_PATH))
+    {
+        ESP_LOGE(AJTAG, "No se ha encontrado el archivo %s", AUTOMATICJOBS_BIN_PATH);
+        return false;
+    }
+
+    fs.getFileSize(AUTOMATICJOBS_BIN_PATH, &fileSize);
+    char *buffer = (char *)malloc(fileSize + 1);
+    char *bufferToWrite = (char *)malloc(fileSize + 1);
+    memset(buffer, 0, fileSize + 1);
+    memset(bufferToWrite, 0, fileSize + 1);
+    size_t bytesRead = fs.getFileBuffer(AUTOMATICJOBS_BIN_PATH, buffer, sizeof(*buffer), fileSize);
+    buffer[bytesRead] = '\0';
+    if (bytesRead)
+    {
+        // Tokenize buffer based on newline
+        char *end_token = NULL;
+        char *end_str = NULL;
+        char *line = strtok_r(buffer, "\n", &end_str);
+        while (line != NULL)
+        {
+            // Tokenize line based on comma
+            // Parseo los dos valores separados por una coma
+            char *scheduleValue = strtok_r(line, ",", &end_token);
+            char *functionValue = strtok_r(NULL, ",", &end_token);
+
+            ESP_LOGD(AJTAG, "SCHEDULE: %s FUNCTION: %s\n", scheduleValue, functionValue);
+            if (strcmp(functionValue, functionToDelete) != 0)
+            {
+                // Add to bufferToWrite
+                strcat(bufferToWrite, scheduleValue);
+                strcat(bufferToWrite, ",");
+                strcat(bufferToWrite, functionValue);
+                strcat(bufferToWrite, "\n");
+            }
+
+            // Move to the next line
+            line = strtok_r(NULL, "\n", &end_str);
+        }
+        free(buffer);
+        strcat(bufferToWrite, "\0");
+        if (!fs.WriteFile(bufferToWrite, strlen(bufferToWrite), 1, AUTOMATICJOBS_BIN_PATH, "w"))
+        {
+            ESP_LOGE(AJTAG, "Error al escribir en el archivo");
+            free(bufferToWrite);
+            return false;
+        }
+        free(bufferToWrite);
+        return true;
+    }
+    free(buffer);
+    free(bufferToWrite);
     ESP_LOGE(AJTAG, "Error al leer el archivo %s", AUTOMATICJOBS_BIN_PATH);
     return false;
 }

@@ -5,6 +5,20 @@
 
 #define STATUSTAG "STATUS"
 
+typedef struct
+{
+    bool use;
+    uint8_t XTALA;
+    uint8_t XTALB;
+} XTalConfig_t;
+
+typedef enum
+{
+    NONE = 0,
+    TX = 1,
+    RX = 2
+} DeviceMode_t;
+
 class DEVICESTATUS
 {
 
@@ -13,20 +27,11 @@ public:
     DEVICESTATUS(const DEVICESTATUS &) = delete;
     DEVICESTATUS &operator=(const DEVICESTATUS &) = delete;
 
-
     static DEVICESTATUS &getInstance()
     {
         static DEVICESTATUS instance; // Única instancia
         return instance;
     }
-
-    typedef struct
-    {
-        bool use;
-        uint8_t XTALA;
-        uint8_t XTALB;
-    } XTalConfig_t;
-
 
     typedef struct
     {
@@ -51,8 +56,8 @@ public:
     {
         E22Status_t E22Status;
         bool automatic;
+        DeviceMode_t mode;
     } DeviceStatus_t;
-    
 
     bool Begin(void);
     bool printStatus(void);
@@ -78,7 +83,6 @@ private:
     static bool loadSyncWordFromFs(void);
     static bool loadRxGainFromFs(void);
     static bool loadTimeoutFromFs(void);
-
 };
 
 #endif // DEVICESTATUS_H

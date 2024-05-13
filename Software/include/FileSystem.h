@@ -15,6 +15,7 @@
 #define DEVICE_CONFIG_FILE_PATH "/storage/Config/deviceConfig.ini"
 #define TIME_BIN_PATH "/storage/AutomaticJobs/time.bin"
 
+
 #define INI_MAX_LEN 100
 #define PATH_MAX_LEN 100
 #define SECTION_MAX_LEN 100
