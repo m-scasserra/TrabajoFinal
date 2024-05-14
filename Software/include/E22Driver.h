@@ -244,6 +244,32 @@ public:
         bool lrFhssHop;        // LRFGSS_HOP = 0x4000
     } IRQReg_t;
 
+    const IRQReg_t IRQREGFULL = {
+        .txDone = true,
+        .rxDone = true,
+        .preambleDetected = true,
+        .syncWordValid = true,
+        .headerValid = true,
+        .headerErr = true,
+        .crcErr = true,
+        .cadDone = true,
+        .cadDetected = true,
+        .timeout = true,
+        .lrFhssHop = true};
+
+    const IRQReg_t IRQREGEMPTY = {
+        .txDone = false,
+        .rxDone = false,
+        .preambleDetected = false,
+        .syncWordValid = false,
+        .headerValid = false,
+        .headerErr = false,
+        .crcErr = false,
+        .cadDone = false,
+        .cadDetected = false,
+        .timeout = false,
+        .lrFhssHop = false};
+
     enum PaConfig_t
     {
         PA_22_DBM,
@@ -264,7 +290,8 @@ public:
         SET_RAMP_3400U = 0x07, // 3400 us
     };
 
-    typedef enum{
+    typedef enum
+    {
         NONE = 0,
         TX = 1,
         RX = 2
@@ -320,10 +347,11 @@ public:
     bool setModulationParams(ModulationParameters_t modulation);
     bool setPacketParams(LoraPacketParams_t packetParams);
     bool setSyncWord(SyncWordType_t syncWord);
-    bool messageIsAvailable(void);
-    uint8_t getMessageLenght(void);
+    bool messageRecieved(void);
+    bool messageSent(void);
+    uint8_t getMessageLength(void);
     bool getMessageRxByte(uint8_t *dataOut);
-    bool getMessageRxLenght(uint8_t *dataOut, uint8_t length);
+    bool getMessageRxLength(uint8_t *dataOut, uint8_t length);
     bool beginTxPacket(void);
     bool writeMessageTxByte(uint8_t data);
     bool writeMessageTxLength(uint8_t *data, uint8_t length);
@@ -346,32 +374,7 @@ public:
 
     static bool setUpForRx(void);
     static bool setUpForTx(void);
-
-    const IRQReg_t IRQREGFULL = {
-        .txDone = true,
-        .rxDone = true,
-        .preambleDetected = true,
-        .syncWordValid = true,
-        .headerValid = true,
-        .headerErr = true,
-        .crcErr = true,
-        .cadDone = true,
-        .cadDetected = true,
-        .timeout = true,
-        .lrFhssHop = true};
-
-    const IRQReg_t IRQREGEMPTY = {
-        .txDone = false,
-        .rxDone = false,
-        .preambleDetected = false,
-        .syncWordValid = false,
-        .headerValid = false,
-        .headerErr = false,
-        .crcErr = false,
-        .cadDone = false,
-        .cadDetected = false,
-        .timeout = false,
-        .lrFhssHop = false};
+    bool IsInTransaction(void);
 
 private:
     // Constructor privado
@@ -421,12 +424,15 @@ private:
     static uint8_t s_TxBufferAddr;
 
     static bool PacketReceived;
+    static bool PacketSent;
 
     static E22SetUpState_t E22SetUpState;
 
     static IRQReg_t IRQReg;
     static bool processIRQ;
     static SPI *spi;
+
+    static bool InTransaction;
 };
 
 #endif // E22DRIVER_H

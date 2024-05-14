@@ -42,6 +42,7 @@ bool DEVICESTATUS::printStatus(void)
     printf("\trecieveTimeout: %lu\r\n", deviceStatus.E22Status.recieveTimeout);
 
     printf("DEVICE: AUTOMATIC: %s\r\n", deviceStatus.automatic ? "ON" : "OFF");
+    printf("DEVICE: FUNCTION: %02X\r\n", deviceStatus.mode);
     return true;
 }
 

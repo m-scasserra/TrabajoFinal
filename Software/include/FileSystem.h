@@ -8,12 +8,14 @@
 #define FSTAG "FS"
 #define STORAGE_PARTITION_NAME "storage"
 #define AUTOMATIC_JOBS_FOLDER_PATH "/storage/AutomaticJobs"
-#define PACKETS_RECEIVED_FOLDER_PATH "/storage/PacketsReceived"
+#define PACKETS_RECEIVED_FOLDER_PATH "/storage/Packets"
 #define MEASUREMENTS_FOLDER_PATH "/storage/Measurements"
 #define CONFIG_FOLDER_PATH "/storage/Config"
 
 #define DEVICE_CONFIG_FILE_PATH "/storage/Config/deviceConfig.ini"
 #define TIME_BIN_PATH "/storage/AutomaticJobs/time.bin"
+#define ADC_BIN_PATH "/storage/Measurements/adc.bin"
+#define PACKETS_BIN_PATH "/storage/Packets/packets.bin"
 
 
 #define INI_MAX_LEN 100

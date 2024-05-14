@@ -2,6 +2,7 @@
 #include "includes.h"
 #include "sys/queue.h"
 #include "DeviceStatus.h"
+#include "Message.h"
 
 CLI::timercmd_args_t CLI::timer_args;
 CLI::configcmd_args_t CLI::config_args;
@@ -31,23 +32,35 @@ int CLI::showStatusCMD(int argc, char **argv)
 int CLI::recieveCMD(int argc, char **argv)
 {
     E22 &e22 = E22::getInstance();
-
     e22.setUpForRx();
     printf("\n-- LORA RECEIVER --\n");
 
-    e22.receivePacket(100000);
-
-    while (e22.messageIsAvailable() == false)
+    DEVICESTATUS &ds = DEVICESTATUS::getInstance();
+    //E22 &e22 = E22::getInstance();
+    MESSAGE &msg = MESSAGE::getInstance();
+    e22.receivePacket(ds.deviceStatus.E22Status.recieveTimeout);
+    while (e22.IsInTransaction())
     {
-        printf("Waiting for packet...\n\r");
+        ESP_LOGI("Cron", "Receiving...");
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
-    vTaskDelay(pdMS_TO_TICKS(1000));
-    printf("Received packet size %u\n\r", e22.getMessageLenght());
-    char messageOut[100];
-    memset(messageOut, 0, sizeof(messageOut));
-    e22.getMessageRxLenght((uint8_t *)messageOut, 15);
-    printf("Message: %s\n\r", messageOut);
+    ESP_LOGI("Cron", "Out Of transaction");
+    
+    if (e22.messageRecieved())
+    {
+        printf("Received packet size %u\n\r", e22.getMessageLength());
+        uint8_t msgLen = e22.getMessageLength();
+        uint8_t messageOut[100];
+        memset(messageOut, 0, sizeof(messageOut));
+        e22.getMessageRxLength(messageOut, msgLen);
+        for (size_t i = 0; i < 15; i++)
+        {
+            printf("%c", messageOut[i]);
+        }
+        
+        //Message_t msgAux = msg.processMessageRecieved(messageOut);
+        //msg.saveMessage(msgAux);
+    }
 
     return 0;
 }
@@ -61,31 +74,68 @@ int CLI::transmitCMD(int argc, char **argv)
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    // Transmit message and counter
-    // write() method must be placed between beginPacket() and endPacket()
     static uint8_t counter = 0;
-    // char message[] = "HeLoRa World!";
-    char message[] = "Hola Cabrita! ";
+    char message[] = "HeLoRa World!";
+    //char message[] = "Hola Cabrita! ";
     e22.beginTxPacket();
-    e22.writeMessageTxLength((uint8_t *)message, sizeof(message) - 1);
-    e22.writeMessageTxByte(counter);
+    e22.writeMessageTxLength((uint8_t *)message, 13);
+    e22.writeMessageTxByte(counter + 48);
+    e22.writeMessageTxByte(counter + 48);
     e22.transmitPacket(30000);
+
+    while (e22.IsInTransaction())
+    {
+        ESP_LOGI("Cron", "Transmiting...");
+        vTaskDelay(pdMS_TO_TICKS(100));
+    }
 
     // Print message and counter in serial
     printf("%s %u", message, counter);
     counter++;
 
-    // Wait until modulation process for transmitting packet finish
-    // LoRa.wait();
+    /*IO &io = IO::getInstance();
+    MESSAGE &msg = MESSAGE::getInstance();
+    DEVICESTATUS &ds = DEVICESTATUS::getInstance();
 
-    // Print transmit time
-    // Serial.print("Transmit time: ");
-    // Serial.print(LoRa.transmitTime());
-    // Serial.println(" ms");
-    // Serial.println();
+    static uint32_t msgID = 0;
 
-    // Don't load RF module with continous transmit
-    // delay(5000);
+    uint8_t arr [100];
+    memset(arr, 0, sizeof(arr));
+
+
+    int32_t ADCValue;
+    io.getADCOneShotRaw(&ADCValue);
+    e22.beginTxPacket();
+    e22.writeMessageTxLength((uint8_t *)ADCValue, sizeof(int32_t));
+    uint8_t flags = 0xAA;
+    e22.writeMessageTxLength(&flags, 1);
+    e22.writeMessageTxLength((uint8_t *)msgID, sizeof(int32_t));
+    msgID++;
+
+    e22.transmitPacket(ds.deviceStatus.E22Status.transmitTimeout);
+    fflush(stdout);
+    arr[0] = (uint8_t)ADCValue >> 24;
+    arr[1] = (uint8_t)ADCValue >> 16;
+    arr[2] = (uint8_t)ADCValue >> 8;
+    arr[3] = (uint8_t)ADCValue >> 0;
+    arr[4] = flags;
+    arr[5] = (uint8_t)msgID >> 24;
+    arr[6] = (uint8_t)msgID >> 16;
+    arr[7] = (uint8_t)msgID >> 8;
+    arr[8] = (uint8_t)msgID >> 0;
+    //memcpy(arr, &ADCValue, sizeof(int32_t));
+    //memcpy(arr + 4, &flags, sizeof(uint8_t));
+    //memcpy(arr + 5, &msgID, sizeof(int32_t));
+    if (e22.IsInTransaction())
+    {
+        ESP_LOGI("Cron", "Transmitting...");
+        vTaskDelay(pdMS_TO_TICKS(1000));
+    }
+    if (e22.messageSent())
+    {
+        Message_t msgAux = msg.processMessageSent(arr);
+        msg.saveMessage(msgAux);
+    }*/
 
     return 0;
 }

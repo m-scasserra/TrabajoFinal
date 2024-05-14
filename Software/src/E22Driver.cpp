@@ -17,6 +17,8 @@ E22::E22SetUpState_t E22::E22SetUpState = NONE;
 E22::IRQReg_t E22::IRQReg;
 bool E22::processIRQ = false;
 bool E22::PacketReceived = false;
+bool E22::PacketSent = false;
+bool E22::InTransaction = false;
 
 void IRAM_ATTR E22::E22ISRHandler(void)
 {
@@ -163,6 +165,7 @@ bool E22::processInterrupt(void)
 
     if (xSemaphoreTake(xE22InterruptSempahore, 0))
     {
+        InTransaction = false;
         getIRQStatusForInterrupt();
 
         ESP_LOGI(E22TAG, "IRQReg.txDone: 0x%X", IRQReg.txDone);
@@ -185,7 +188,8 @@ bool E22::processInterrupt(void)
         }
         if (IRQReg.txDone)
         {
-            io.SetLevel((gpio_num_t)TX_EN_E22_PIN, IO_LOW);
+            io.SetLevel((gpio_num_t)TX_EN_E22_PIN, IO_LOW);\
+            PacketSent = true;
         }
         if (IRQReg.preambleDetected)
         {
@@ -581,7 +585,6 @@ bool E22::processCmd(void)
                 ESP_LOGE(E22TAG, "Error al enviar el comando SetTx");
                 return false;
             }
-
             return true;
         }
         break;
@@ -598,7 +601,6 @@ bool E22::processCmd(void)
                 ESP_LOGE(E22TAG, "Error al enviar el comando SetRx");
                 return false;
             }
-
             return true;
         }
         break;
@@ -1850,12 +1852,17 @@ bool E22::getPacketStatus(uint8_t *RssiPkt, uint8_t *SnrPkt, uint8_t *SignalRssi
     return false;
 }
 
-bool E22::messageIsAvailable(void)
+bool E22::messageRecieved(void)
 {
     return PacketReceived;
 }
 
-uint8_t E22::getMessageLenght(void)
+bool E22::messageSent(void)
+{
+    return PacketSent;
+}
+
+uint8_t E22::getMessageLength(void)
 {
     return s_PayloadLenghtRx;
 }
@@ -1874,7 +1881,7 @@ bool E22::getMessageRxByte(uint8_t *dataOut)
     return true;
 }
 
-bool E22::getMessageRxLenght(uint8_t *dataOut, uint8_t length)
+bool E22::getMessageRxLength(uint8_t *dataOut, uint8_t length)
 {
     for (uint8_t i = 0; i < s_PayloadLenghtRx; i++)
     {
@@ -1935,7 +1942,7 @@ bool E22::transmitPacket(uint32_t Timeout)
 {
     IRQReg_t irqStatus;
     memset(&irqStatus, 0, sizeof(IRQReg_t));
-
+    PacketSent = false;
     // Clear all previous interrupts
     if (!clearIrqStatus(IRQREGFULL))
     {
@@ -1967,7 +1974,8 @@ bool E22::transmitPacket(uint32_t Timeout)
     {
         return false;
     }
-
+    
+    InTransaction = true;
     return true;
 }
 
@@ -2063,6 +2071,7 @@ bool E22::receivePacket(uint32_t Timeout)
         return false;
     }
 
+    InTransaction = true;
     return true;
 }
 
@@ -2424,3 +2433,9 @@ bool E22::setUpForTx(void)
     E22SetUpState = TX;
     return true;
 }
+
+bool E22::IsInTransaction(void)
+{
+    return InTransaction;
+}
+
