@@ -1974,7 +1974,7 @@ bool E22::transmitPacket(uint32_t Timeout)
     {
         return false;
     }
-    
+
     InTransaction = true;
     return true;
 }
@@ -2332,7 +2332,7 @@ bool E22::setUpForRx(void)
     E22 &e22 = E22::getInstance();
     DEVICESTATUS &ds = DEVICESTATUS::getInstance();
 
-    ESP_LOGI(E22TAG, "Setting up for TX");
+    ESP_LOGI(E22TAG, "Setting up for RX");
     ESP_LOGI(E22TAG, "Going to standby RC");
     e22.setStandBy(E22::STDBY_RC);
 

@@ -55,9 +55,6 @@ extern "C" void app_main(void)
 
     while (1)
     {
-        led.SetLedColor(LED::blue);
-        vTaskDelay(pdMS_TO_TICKS(1000));
-        led.SetLedColor(LED::red);
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }

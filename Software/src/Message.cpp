@@ -10,7 +10,6 @@ Message_t MESSAGE::processMessageSent(uint8_t arr[])
     time_t timeAction = 0;
     time(&timeAction);
     aux.timeAction = timeAction;
-    aux.direction = 0;
 
     aux.ADCValue = (int32_t)arr[0] << 24 | (uint32_t)arr[1] << 16 | (uint32_t)arr[2] << 8 | (uint32_t)arr[3];
 
@@ -31,7 +30,6 @@ Message_t MESSAGE::processMessageRecieved(uint8_t arr[])
     time_t timeAction = 0;
     time(&timeAction);
     aux.timeAction = timeAction;
-    aux.direction = 1;
 
     memcpy(&aux.ADCValue, arr, sizeof(int32_t));
     memcpy(&aux.flags, arr + 4, sizeof(uint8_t));
@@ -46,6 +44,9 @@ Message_t MESSAGE::processMessageRecieved(uint8_t arr[])
 bool MESSAGE::saveMessage(Message_t message)
 {
     FS &fs = FS::getInstance();
+    time_t auxTime = 0;
+    time(&auxTime);
+    message.timeAction = auxTime;
 
     if (!fs.WriteFile(&message, sizeof(Message_t), 1, PACKETS_BIN_PATH, "a+"))
     {
@@ -62,11 +63,7 @@ bool MESSAGE::readAllPackets(void)
     FS &fs = FS::getInstance();
     Message_t aux;
     long sizeFile;
-    if (!fs.getFileSize(PACKETS_BIN_PATH, &sizeFile))
-    {
-        ESP_LOGE(IOTAG, "Error al leer el tamaño del archivo %s", PACKETS_BIN_PATH);
-        return false;
-    }
+    fs.getFileSize(PACKETS_BIN_PATH, &sizeFile);
 
     if (sizeFile > 0)
     {
@@ -83,7 +80,6 @@ bool MESSAGE::readAllPackets(void)
 
             printf("Paquete guardado %lu: \r\n", i);
             printf("Tiempo: %llu\r\n", aux.timeAction);
-            printf("Direction: %X\r\n", aux.direction);
             printf("ADC: %ld\r\n", aux.ADCValue);
             printf("Flags: %X\r\n", aux.flags);
             printf("ID: %lu\r\n", aux.messageId);

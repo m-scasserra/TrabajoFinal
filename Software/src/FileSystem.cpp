@@ -761,7 +761,7 @@ bool FS::populateDeviceConfigIni(void)
     [PACKETPARAMS]
         HEADER=[EXPLICIT]/IMPLICIT
         PREAMBLELENGTH=[12]
-        PAYLOADLENGTH=[15]
+        PAYLOADLENGTH=[9]
         CRC=[ON]/OFF
         IQTYPE=[STANDARD]/INVERTED
     [SYNCWORD]
@@ -806,7 +806,7 @@ bool FS::populateDeviceConfigIni(void)
         return false;
     if (!Ini_puts("PACKETPARAMS", "PREAMBLELENGTH", "12", DEVICE_CONFIG_FILE_PATH))
         return false;
-    if (!Ini_puts("PACKETPARAMS", "PAYLOADLENGTH", "15", DEVICE_CONFIG_FILE_PATH))
+    if (!Ini_puts("PACKETPARAMS", "PAYLOADLENGTH", "9", DEVICE_CONFIG_FILE_PATH))
         return false;
     if (!Ini_puts("PACKETPARAMS", "CRC", "ON", DEVICE_CONFIG_FILE_PATH))
         return false;

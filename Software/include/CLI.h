@@ -59,6 +59,7 @@ private:
     static int showStatusCMD(int argc, char **argv);
     static int transmitCMD(int argc, char **argv);
     static int recieveCMD(int argc, char **argv);
+    static int msgCMD(int argc, char **argv);
     static void PrintSeparator(void);
 
     // Argumentos para el comando timer

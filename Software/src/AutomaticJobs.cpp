@@ -23,65 +23,77 @@ void test_cron_job_sample_callback(cron_job *job)
 
 void transmitCronJobCallback(cron_job *job)
 {
+    LED &led = LED::getInstance();
     E22 &e22 = E22::getInstance();
     IO &io = IO::getInstance();
-    MESSAGE &msg = MESSAGE::getInstance();
     DEVICESTATUS &ds = DEVICESTATUS::getInstance();
 
     static uint32_t msgID = 0;
 
-    uint8_t arr [100];
-    memset(arr, 0, sizeof(arr));
-
-
+    e22.beginTxPacket();
+    uint8_t Flags = 0xAA;
     int32_t ADCValue;
     io.getADCOneShotRaw(&ADCValue);
-    memcpy(arr, &ADCValue, sizeof(int32_t));
-    e22.beginTxPacket();
-    e22.writeMessageTxLength((uint8_t *)ADCValue, sizeof(int32_t));
-    uint8_t flags = 0xAA;
-    memcpy(arr + 4, &flags, sizeof(uint8_t));
-    e22.writeMessageTxByte(flags);
-    e22.writeMessageTxLength((uint8_t *)msgID, sizeof(int32_t));
-    msgID++;
-    memcpy(arr + 5, &msgID, sizeof(int32_t));
+
+    e22.writeMessageTxByte((uint8_t)(msgID >> 24));
+    e22.writeMessageTxByte((uint8_t)(msgID >> 16));
+    e22.writeMessageTxByte((uint8_t)(msgID >> 8));
+    e22.writeMessageTxByte((uint8_t)msgID);
+    e22.writeMessageTxByte((uint8_t)(ADCValue >> 24));
+    e22.writeMessageTxByte((uint8_t)(ADCValue >> 16));
+    e22.writeMessageTxByte((uint8_t)(ADCValue >> 8));
+    e22.writeMessageTxByte((uint8_t)ADCValue);
+    e22.writeMessageTxByte((uint8_t)Flags);
 
     e22.transmitPacket(ds.deviceStatus.E22Status.transmitTimeout);
-    if (e22.IsInTransaction())
+
+    while (e22.IsInTransaction())
     {
-        ESP_LOGI("Cron", "Transmitting...");
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        led.SetLedColor(LED::red);
+        ESP_LOGI("Cron", "Transmiting...");
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
-    if (e22.messageSent())
-    {
-        Message_t msgAux = msg.processMessageSent(arr);
-        msg.saveMessage(msgAux);
-    }
+    led.SetLedColor(LED::black);
+    msgID++;
 
     return;
 }
 
 void recieveCronJobCallback(cron_job *job)
 {
+    LED &led = LED::getInstance();
     DEVICESTATUS &ds = DEVICESTATUS::getInstance();
     E22 &e22 = E22::getInstance();
     MESSAGE &msg = MESSAGE::getInstance();
+
     e22.receivePacket(ds.deviceStatus.E22Status.recieveTimeout);
-    if (e22.IsInTransaction())
+    while (e22.IsInTransaction())
     {
+        led.SetLedColor(LED::blue);
         ESP_LOGI("Cron", "Receiving...");
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 
+    led.SetLedColor(LED::black);
+
     if (e22.messageRecieved())
     {
         uint8_t msgLen = e22.getMessageLength();
+        printf("Received packet size %u\n\r", msgLen);
+
         uint8_t messageOut[100];
         memset(messageOut, 0, sizeof(messageOut));
+
         e22.getMessageRxLength(messageOut, msgLen);
 
-        Message_t msgAux = msg.processMessageRecieved(messageOut);
-        msg.saveMessage(msgAux);
+        Message_t msgToProcess;
+        memset(&msgToProcess, 0, sizeof(Message_t));
+
+        msgToProcess.messageId = (uint32_t)((messageOut[0] << 24) | (messageOut[1] << 16) | (messageOut[2] << 8) | messageOut[3]);
+        msgToProcess.ADCValue = (int32_t)((messageOut[4] << 24) | (messageOut[5] << 16) | (messageOut[6] << 8) | messageOut[7]);
+        msgToProcess.flags = messageOut[8];
+
+        msg.saveMessage(msgToProcess);
     }
 
     return;
@@ -95,22 +107,6 @@ void saveTimeCronJobCallback(cron_job *job)
         ESP_LOGE("CRON", "Failed to save time");
     }
 
-    return;
-}
-
-void TareaACronJobCallback(cron_job *job)
-{
-    DEVICETIME &time = DEVICETIME::getInstance();
-    printf("Estoy en la tarea A que se corre cada 10 segundos desde el minuto.\r\n");
-    time.printTime();
-    return;
-}
-
-void TareaBCronJobCallback(cron_job *job)
-{
-    DEVICETIME &time = DEVICETIME::getInstance();
-    printf("Estoy en la tarea B que se corre cada minuto.\r\n");
-    time.printTime();
     return;
 }
 
@@ -145,8 +141,6 @@ bool AUTOJOB::addAllCallbacks(void)
     addCallback(&callbackListHead, "Transmit", (callback_t)transmitCronJobCallback);
     addCallback(&callbackListHead, "Recieve", (callback_t)recieveCronJobCallback);
     addCallback(&callbackListHead, "saveTime", (callback_t)saveTimeCronJobCallback);
-    addCallback(&callbackListHead, "TareaA", (callback_t)TareaACronJobCallback);
-    addCallback(&callbackListHead, "TareaB", (callback_t)TareaBCronJobCallback);
     return true;
 }
 

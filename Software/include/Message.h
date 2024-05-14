@@ -13,15 +13,13 @@
 typedef struct
 {
     time_t timeAction;
-    bool direction; // 0 is sent, 1 is recieved
     uint8_t RssiPkt;
     uint8_t SnrPkt;
     uint8_t SignalRssiPkt;
-    // This is the message paylod
+    // This is the message payload
+    uint32_t messageId;
     int32_t ADCValue;
     uint8_t flags;
-    uint32_t messageId;
-
 } Message_t;
 
 #pragma pack(pop)

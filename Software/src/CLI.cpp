@@ -29,37 +29,55 @@ int CLI::showStatusCMD(int argc, char **argv)
     return 0;
 }
 
+int CLI::msgCMD(int argc, char **argv)
+{
+    MESSAGE &msg = MESSAGE::getInstance();
+    msg.readAllPackets();
+    return 0;
+}
+
 int CLI::recieveCMD(int argc, char **argv)
 {
+    LED &led = LED::getInstance();
     E22 &e22 = E22::getInstance();
     e22.setUpForRx();
     printf("\n-- LORA RECEIVER --\n");
 
+    //LED &led = LED::getInstance();
     DEVICESTATUS &ds = DEVICESTATUS::getInstance();
     //E22 &e22 = E22::getInstance();
     MESSAGE &msg = MESSAGE::getInstance();
+
     e22.receivePacket(ds.deviceStatus.E22Status.recieveTimeout);
     while (e22.IsInTransaction())
     {
+        led.SetLedColor(LED::blue);
         ESP_LOGI("Cron", "Receiving...");
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
-    ESP_LOGI("Cron", "Out Of transaction");
-    
+
+    led.SetLedColor(LED::black);
+
     if (e22.messageRecieved())
     {
-        printf("Received packet size %u\n\r", e22.getMessageLength());
         uint8_t msgLen = e22.getMessageLength();
+        printf("Received packet size %u\n\r", msgLen);
+
         uint8_t messageOut[100];
         memset(messageOut, 0, sizeof(messageOut));
+
         e22.getMessageRxLength(messageOut, msgLen);
-        for (size_t i = 0; i < 15; i++)
-        {
-            printf("%c", messageOut[i]);
-        }
-        
-        //Message_t msgAux = msg.processMessageRecieved(messageOut);
-        //msg.saveMessage(msgAux);
+
+        Message_t msgToProcess;
+        memset(&msgToProcess, 0, sizeof(Message_t));
+
+        msgToProcess.messageId = (uint32_t)((messageOut[0] << 24) | (messageOut[1] << 16) | (messageOut[2] << 8) | messageOut[3]);
+        msgToProcess.ADCValue = (int32_t)((messageOut[4] << 24) | (messageOut[5] << 16) | (messageOut[6] << 8) | messageOut[7]);
+        msgToProcess.flags = messageOut[8];
+        printf("ID: %lu\r\n", msgToProcess.messageId);
+        printf("ADC: %ld\r\n", msgToProcess.ADCValue);
+        printf("Flags: %X\r\n", msgToProcess.flags);
+        msg.saveMessage(msgToProcess);
     }
 
     return 0;
@@ -68,74 +86,44 @@ int CLI::recieveCMD(int argc, char **argv)
 int CLI::transmitCMD(int argc, char **argv)
 {
     E22 &e22 = E22::getInstance();
-
+    LED &led = LED::getInstance();
     e22.setUpForTx();
     printf("\n-- LORA TRANSMITTER --\n\r");
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    static uint8_t counter = 0;
-    char message[] = "HeLoRa World!";
-    //char message[] = "Hola Cabrita! ";
-    e22.beginTxPacket();
-    e22.writeMessageTxLength((uint8_t *)message, 13);
-    e22.writeMessageTxByte(counter + 48);
-    e22.writeMessageTxByte(counter + 48);
-    e22.transmitPacket(30000);
-
-    while (e22.IsInTransaction())
-    {
-        ESP_LOGI("Cron", "Transmiting...");
-        vTaskDelay(pdMS_TO_TICKS(100));
-    }
-
-    // Print message and counter in serial
-    printf("%s %u", message, counter);
-    counter++;
-
-    /*IO &io = IO::getInstance();
-    MESSAGE &msg = MESSAGE::getInstance();
+    //LED &led = LED::getInstance();
+    //E22 &e22 = E22::getInstance();
+    IO &io = IO::getInstance();
     DEVICESTATUS &ds = DEVICESTATUS::getInstance();
 
     static uint32_t msgID = 0;
 
-    uint8_t arr [100];
-    memset(arr, 0, sizeof(arr));
-
-
+    e22.beginTxPacket();
+    uint8_t Flags = 0xAA;
     int32_t ADCValue;
     io.getADCOneShotRaw(&ADCValue);
-    e22.beginTxPacket();
-    e22.writeMessageTxLength((uint8_t *)ADCValue, sizeof(int32_t));
-    uint8_t flags = 0xAA;
-    e22.writeMessageTxLength(&flags, 1);
-    e22.writeMessageTxLength((uint8_t *)msgID, sizeof(int32_t));
-    msgID++;
+
+    e22.writeMessageTxByte((uint8_t)(msgID >> 24));
+    e22.writeMessageTxByte((uint8_t)(msgID >> 16));
+    e22.writeMessageTxByte((uint8_t)(msgID >> 8));
+    e22.writeMessageTxByte((uint8_t)msgID);
+    e22.writeMessageTxByte((uint8_t)(ADCValue >> 24));
+    e22.writeMessageTxByte((uint8_t)(ADCValue >> 16));
+    e22.writeMessageTxByte((uint8_t)(ADCValue >> 8));
+    e22.writeMessageTxByte((uint8_t)ADCValue);
+    e22.writeMessageTxByte((uint8_t)Flags);
 
     e22.transmitPacket(ds.deviceStatus.E22Status.transmitTimeout);
-    fflush(stdout);
-    arr[0] = (uint8_t)ADCValue >> 24;
-    arr[1] = (uint8_t)ADCValue >> 16;
-    arr[2] = (uint8_t)ADCValue >> 8;
-    arr[3] = (uint8_t)ADCValue >> 0;
-    arr[4] = flags;
-    arr[5] = (uint8_t)msgID >> 24;
-    arr[6] = (uint8_t)msgID >> 16;
-    arr[7] = (uint8_t)msgID >> 8;
-    arr[8] = (uint8_t)msgID >> 0;
-    //memcpy(arr, &ADCValue, sizeof(int32_t));
-    //memcpy(arr + 4, &flags, sizeof(uint8_t));
-    //memcpy(arr + 5, &msgID, sizeof(int32_t));
-    if (e22.IsInTransaction())
+
+    while (e22.IsInTransaction())
     {
-        ESP_LOGI("Cron", "Transmitting...");
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        led.SetLedColor(LED::red);
+        ESP_LOGI("Cron", "Transmiting...");
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
-    if (e22.messageSent())
-    {
-        Message_t msgAux = msg.processMessageSent(arr);
-        msg.saveMessage(msgAux);
-    }*/
+    led.SetLedColor(LED::black);
+    msgID++;
 
     return 0;
 }
@@ -608,6 +596,7 @@ void CLI::esp_console_register_all_commands(void)
     esp_console_register_simple_command("?", "Muestra el estado general del dispositivo", showStatusCMD);
     esp_console_register_simple_command("tx", "Transmit", transmitCMD);
     esp_console_register_simple_command("rx", "Recieve", recieveCMD);
+    esp_console_register_simple_command("msg", "Show messages saved", msgCMD);
     esp_console_register_net_command();
     esp_console_register_time_command();
     esp_console_register_AutoJob_command();
