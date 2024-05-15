@@ -101,51 +101,6 @@ public:
         RX_BOOST = 0x96
     };
 
-    enum E22Cmd_t
-    {
-        E22_CMD_SetSleep,
-        E22_CMD_SetStandBy,
-        E22_CMD_SetFs,
-        E22_CMD_SetTx,
-        E22_CMD_SetRx,
-        E22_CMD_StopTimerOnPreamble,
-        E22_CMD_SetRxDutyCycle,
-        E22_CMD_SetCad,
-        E22_CMD_SetTxContinousWave,
-        E22_CMD_SetTxInfinitePreamble,
-        E22_CMD_SetRegulatorMode,
-        E22_CMD_Calibrate,
-        E22_CMD_CalibrateImage,
-        E22_CMD_SetPaConfig,
-        E22_CMD_SetRxTxFallbackMode,
-        E22_CMD_WriteRegister,
-        E22_CMD_ReadRegister,
-        E22_CMD_WriteBuffer,
-        E22_CMD_ReadBuffer,
-        E22_CMD_SetDioIrqParams,
-        E22_CMD_GetIrqStatus,
-        E22_CMD_ClearIrqStatus,
-        E22_CMD_SetDIO2AsRfSwitchCtrl,
-        E22_CMD_SetDIO3asTcxoCtrl,
-        E22_CMD_SetRfFrequency,
-        E22_CMD_SetPacketType,
-        E22_CMD_GetPacketType,
-        E22_CMD_SetTxParams,
-        E22_CMD_SetModulationParams,
-        E22_CMD_SetPacketParams,
-        E22_CMD_SetCadParams,
-        E22_CMD_SetBufferBaseAddress,
-        E22_CMD_SetLoRaSymbNumTimeout,
-        E22_CMD_GetStatus,
-        E22_CMD_GetRssiInst,
-        E22_CMD_GetRxBufferStatus,
-        E22_CMD_GetPacketStatus,
-        E22_CMD_GetDeviceErrors,
-        E22_CMD_ClearDeviceErrors,
-        E22_CMD_GetStats,
-        E22_CMD_ResetStats,
-    };
-
     enum SpredingFactor_t
     {
         SF_5 = 0x5,
@@ -299,7 +254,7 @@ public:
 
     typedef struct
     {
-        E22Cmd_t commandCode;
+        E22_OpCode_Cmd_t commandCode;
         uint8_t paramCount; // Number of parameters present
         union params_t
         {
@@ -313,7 +268,7 @@ public:
 
     typedef struct
     {
-        E22Cmd_t commandCode;
+        E22_OpCode_Cmd_t commandCode;
         uint8_t responsesCount; // Number of responses of the command
         union responses_t
         {
