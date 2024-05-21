@@ -1,4 +1,9 @@
+#include <string.h>
+
 #include "IO.h"
+#include "FileSystem.h"
+
+#include "esp_log.h"
 #include "adc_cali_interface.h"
 #include "adc_cali_schemes.h"
 #include "esp_adc/adc_cali_scheme.h"

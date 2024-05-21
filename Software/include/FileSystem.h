@@ -1,9 +1,10 @@
 #ifndef FS_H
 #define FS_H
 
-#include "Includes.h"
+
 #include "dev/minIni.h"
 #include "esp_littlefs.h"
+#include "freertos/FreeRTOS.h"
 
 #define FSTAG "FS"
 #define STORAGE_PARTITION_NAME "storage"
@@ -16,6 +17,7 @@
 #define TIME_BIN_PATH "/storage/AutomaticJobs/time.bin"
 #define ADC_BIN_PATH "/storage/Measurements/adc.bin"
 #define PACKETS_BIN_PATH "/storage/Packets/packets.bin"
+#define AUTOMATICJOBS_BIN_PATH "/storage/AutomaticJobs/jobs.bin"
 
 
 #define INI_MAX_LEN 100

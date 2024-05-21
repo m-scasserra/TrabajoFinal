@@ -1,4 +1,7 @@
+#include <string.h>
 #include "SPI.h"
+#include "esp_log.h"
+
 
 bool SPI::Begin(spi_bus_config_t *SPIBusCfg)
 {

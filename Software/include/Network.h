@@ -1,7 +1,9 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
-#include "Includes.h"
+#include <stdint.h>
+
+#include "esp_event.h"
 
 #define NETWORKTAG "NET"
 #define MAX_NUMBER_NETOWRK_SCAN 10

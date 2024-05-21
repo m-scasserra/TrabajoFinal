@@ -1,10 +1,9 @@
 #ifndef AUTOMATICJOBS_H
 #define AUTOMATICJOBS_H
 
-#include "Includes.h"
+#include <stdint.h>
 
 #define AJTAG "AUTOJOB"
-#define AUTOMATICJOBS_BIN_PATH "/storage/AutomaticJobs/jobs.bin"
 #define MAX_LINE_LENGTH 200
 #define MAX_SCHEDULE_LENGTH 50
 #define MAX_FUNCTION_NAME_LENGTH 50
@@ -69,4 +68,4 @@ private:
     static bool started;
 };
 
-#endif // DEVICE_H
+#endif // AUTOMATICJOBS_H

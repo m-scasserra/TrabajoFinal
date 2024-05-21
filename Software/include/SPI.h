@@ -1,18 +1,9 @@
 #ifndef SPI_H
 #define SPI_H
 
-#include <stdio.h>
-#include <stdbool.h>
 #include <stdint.h>
-#include <stdlib.h>
-#include <sys/time.h>
-#include <sys/param.h>
-#include <sys/unistd.h>
-#include <sys/stat.h>
-#include <string.h>
-#include "esp_log.h"
+
 #include "driver/spi_master.h"
-#include "esp_intr_alloc.h"
 
 #define SPITAG "SPI"
 

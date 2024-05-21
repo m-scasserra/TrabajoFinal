@@ -1,7 +1,9 @@
 #ifndef DEVICESTATUS_H
 #define DEVICESTATUS_H
 
-#include "Includes.h"
+#include <stdint.h>
+
+#include "E22Driver.h"
 
 #define STATUSTAG "STATUS"
 

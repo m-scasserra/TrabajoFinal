@@ -1,8 +1,8 @@
 #ifndef E22DRIVER_H
 #define E22DRIVER_H
 
-#include "Includes.h"
 #include "SPI.h"
+#include "E22Opcodes.h"
 
 #define E22TAG "E22"
 

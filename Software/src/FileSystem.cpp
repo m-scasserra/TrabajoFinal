@@ -1,4 +1,9 @@
+#include <string.h>
+#include <sys/stat.h>
+#include <dirent.h>
+
 #include "FileSystem.h"
+#include "esp_log.h"
 
 SemaphoreHandle_t FS::xFSSemaphore;
 
