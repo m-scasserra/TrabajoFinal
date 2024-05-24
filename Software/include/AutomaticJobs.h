@@ -1,7 +1,7 @@
 #ifndef AUTOMATICJOBS_H
 #define AUTOMATICJOBS_H
 
-#include <stdint.h>
+#include "CommonIncludes.h"
 
 #define AJTAG "AUTOJOB"
 #define MAX_LINE_LENGTH 200

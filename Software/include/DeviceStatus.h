@@ -1,7 +1,7 @@
 #ifndef DEVICESTATUS_H
 #define DEVICESTATUS_H
 
-#include <stdint.h>
+#include "CommonIncludes.h"
 
 #include "E22Driver.h"
 

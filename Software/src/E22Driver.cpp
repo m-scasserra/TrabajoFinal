@@ -1,12 +1,10 @@
-#include <string.h>
-
 #include "E22Driver.h"
 #include "DeviceStatus.h"
-
-#include "esp_log.h"
-#include "driver/gpio.h"
 #include "Hardware.h"
 #include "IO.h"
+
+#include "driver/gpio.h"
+
 
 SPI* E22::spi = new SPI();
 TaskHandle_t E22::E22TaskHandle = NULL;

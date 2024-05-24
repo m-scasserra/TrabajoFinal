@@ -11,11 +11,6 @@
 #include "DeviceTime.h"
 #include "IO.h"
 
-#include "esp_log.h"
-
-
-
-
 
 bool AUTOJOB::started = false;
 AUTOJOB::callbackNode_t *callbackListHead = NULL;

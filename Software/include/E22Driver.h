@@ -1,6 +1,7 @@
 #ifndef E22DRIVER_H
 #define E22DRIVER_H
 
+#include "CommonIncludes.h"
 #include "SPI.h"
 #include "E22Opcodes.h"
 

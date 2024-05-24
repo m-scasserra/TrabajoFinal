@@ -1,6 +1,7 @@
 #ifndef CLI_H
 #define CLI_H
 
+#include "CommonIncludes.h"
 #include "esp_clk_tree.h"
 #include "esp_console.h"
 

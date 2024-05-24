@@ -1,8 +1,6 @@
-#include <string.h>
-
+#include "CLI.h"
 #include "DeviceStatus.h"
 #include "Message.h"
-#include "Cli.h"
 #include "Led.h"
 #include "FileSystem.h"
 #include "IO.h"
@@ -13,7 +11,6 @@
 #include "cmd_system.h"
 #include "argtable3/argtable3.h"
 #include "sys/queue.h"
-#include "esp_log.h"
 
 
 CLI::timercmd_args_t CLI::timer_args;

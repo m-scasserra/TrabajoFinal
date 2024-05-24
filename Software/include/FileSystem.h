@@ -1,10 +1,9 @@
 #ifndef FS_H
 #define FS_H
 
-
+#include "CommonIncludes.h"
 #include "dev/minIni.h"
 #include "esp_littlefs.h"
-#include "freertos/FreeRTOS.h"
 
 #define FSTAG "FS"
 #define STORAGE_PARTITION_NAME "storage"

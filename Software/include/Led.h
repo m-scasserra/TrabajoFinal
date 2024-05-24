@@ -1,6 +1,7 @@
 #ifndef LED_H
 #define LED_H
 
+#include "CommonIncludes.h"
 #include "driver/rmt_encoder.h"
 #include "driver/rmt_tx.h"
 

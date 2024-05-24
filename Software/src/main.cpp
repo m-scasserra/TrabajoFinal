@@ -1,3 +1,4 @@
+#include "CommonIncludes.h"
 #include "DeviceStatus.h"
 #include "Led.h"
 #include "CLI.h"
@@ -11,7 +12,6 @@
 #include "DeviceTime.h"
 #include "AutomaticJobs.h"
 
-#include "esp_log.h"
 
 extern "C" void app_main(void)
 {

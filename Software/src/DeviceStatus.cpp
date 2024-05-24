@@ -3,8 +3,6 @@
 #include "DeviceStatus.h"
 #include "FileSystem.h"
 
-#include "esp_log.h"
-
 
 DEVICESTATUS::DeviceStatus_t DEVICESTATUS::deviceStatus;
 

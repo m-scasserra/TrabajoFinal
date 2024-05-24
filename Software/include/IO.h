@@ -1,6 +1,7 @@
 #ifndef IO_H
 #define IO_H
 
+#include "CommonIncludes.h"
 #include "driver/gpio.h"
 #include "esp_adc/adc_oneshot.h"
 #include "esp_adc/adc_cali.h"

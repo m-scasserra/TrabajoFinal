@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - home/marco/Documents/Dev/TrabajoFinal/Software/test/test_native/src/test_spi.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../../../../../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory /home/marco/Documents/Dev/TrabajoFinal/Software/test/test_native/src">/home/marco/Documents/Dev/TrabajoFinal/Software/test/test_native/src</a> - test_spi.cpp<span style="font-size: 80%;"> (source / <a href="test_spi.cpp.func-c.html" title="Click to go to function table">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">95.8&nbsp;%</td>
+            <td class="headerCovTableEntry">24</td>
+            <td class="headerCovTableEntry">23</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2024-05-23 23:05:34</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
+          </tr>
+                  <tr><td><img src="../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #include &lt;gtest/gtest.h&gt;</span>
+<span id="L2"><span class="lineNum">       2</span>              : #include &lt;gmock/gmock.h&gt;</span>
+<span id="L3"><span class="lineNum">       3</span>              : #include &quot;../include/spi_mock.hpp&quot;</span>
+<span id="L4"><span class="lineNum">       4</span>              : </span>
+<span id="L5"><span class="lineNum">       5</span>              : #include &lt;iostream&gt;</span>
+<span id="L6"><span class="lineNum">       6</span>              : </span>
+<span id="L7"><span class="lineNum">       7</span>              : using ::testing::_;</span>
+<span id="L8"><span class="lineNum">       8</span>              : using ::testing::Return;</span>
+<span id="L9"><span class="lineNum">       9</span>              : using namespace std;</span>
+<span id="L10"><span class="lineNum">      10</span>              : </span>
+<span id="L11"><span class="lineNum">      11</span>              : #include &quot;../../../src/SPI.cpp&quot;</span>
+<span id="L12"><span class="lineNum">      12</span>              : SPI *SPIObj;</span>
+<span id="L13"><span class="lineNum">      13</span>              : </span>
+<span id="L14"><span class="lineNum">      14</span>              : namespace SPITests</span>
+<span id="L15"><span class="lineNum">      15</span>              : {</span>
+<span id="L16"><span class="lineNum">      16</span>              : // System under test</span>
+<span id="L17"><span class="lineNum">      17</span>              : </span>
+<span id="L18"><span class="lineNum">      18</span>              : </span>
+<span id="L19"><span class="lineNum">      19</span>              :     class SPIAPIsTest : public ::testing::Test</span>
+<span id="L20"><span class="lineNum">      20</span>              :     {</span>
+<span id="L21"><span class="lineNum">      21</span>              :     protected:</span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC tlaBgGNC">           1 :         void SetUp() override</span></span>
+<span id="L23"><span class="lineNum">      23</span>              :         {</span>
+<span id="L24"><span class="lineNum">      24</span>              :             // Set up mock object</span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">           1 :             SPIMockObj = new SPIMock;</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">           1 :             SPIObj = new SPI;</span></span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L28"><span class="lineNum">      28</span>              : </span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           1 :         void TearDown() override</span></span>
+<span id="L30"><span class="lineNum">      30</span>              :         {</span>
+<span id="L31"><span class="lineNum">      31</span>              :             // Clean up the mock object used</span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           1 :             delete SPIMockObj;</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L34"><span class="lineNum">      34</span>              :     };</span>
+<span id="L35"><span class="lineNum">      35</span>              : </span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           4 :     TEST_F(SPIAPIsTest, TestConfigureSPI)</span></span>
+<span id="L37"><span class="lineNum">      37</span>              :     {</span>
+<span id="L38"><span class="lineNum">      38</span>              :         // List of tests to be done for function TestConfigureGPIO</span>
+<span id="L39"><span class="lineNum">      39</span>              :         // 1 - Test returning success from gpio_config and gpio_set_level</span>
+<span id="L40"><span class="lineNum">      40</span>              :         // 2 - Test returning error from gpio_config</span>
+<span id="L41"><span class="lineNum">      41</span>              :         // 3 - Test returning error from gpio_set_level</span>
+<span id="L42"><span class="lineNum">      42</span>              : </span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           1 :         bool TestHasError = 0;</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">           1 :         bool test_return = false;</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           1 :         spi_host_device_t mock_host_id = 0;</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">           1 :         spi_bus_config_t *mock_bus_config = NULL; </span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">           1 :         spi_dma_chan_t mock_dma_chan = 0;</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">           1 :         spi_device_interface_config_t *mock_dev_config = NULL;</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">           1 :         spi_device_handle_t *mock_handle = NULL;</span></span>
+<span id="L50"><span class="lineNum">      50</span>              : </span>
+<span id="L51"><span class="lineNum">      51</span>              :         //////////////////////////////////////////////// Test 1 /////////////////////////////////////////////////////////////////////////////////////</span>
+<span id="L52"><span class="lineNum">      52</span>              :         //cout &lt;&lt; endl</span>
+<span id="L53"><span class="lineNum">      53</span>              :         //     &lt;&lt; &quot;[   INFO   ] Test 1 - Test returning success from gpio_config and gpio_set_level&quot; &lt;&lt; endl;</span>
+<span id="L54"><span class="lineNum">      54</span>              :         //printf(&quot;\n[   INFO   ] Test 1 - Test returning success from gpio_config and gpio_set_level\n&quot;);</span>
+<span id="L55"><span class="lineNum">      55</span>              : </span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">           2 :         EXPECT_CALL(*SPIMockObj, spi_bus_initialize(mock_host_id, testing::_, mock_dma_chan)) // The called argument is a pointer, so we will test call expectation with the any argument pararameter</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">           1 :             .Times(1)</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">           1 :             .WillOnce(Return(ESP_OK));</span></span>
+<span id="L59"><span class="lineNum">      59</span>              : </span>
+<span id="L60"><span class="lineNum">      60</span>              :         //EXPECT_CALL(*SPIMockObj, spi_bus_add_device(testing::_, testing::_, testing::_))</span>
+<span id="L61"><span class="lineNum">      61</span>              :         //    .Times(1)</span>
+<span id="L62"><span class="lineNum">      62</span>              :         //    .WillOnce(Return(ESP_OK));</span>
+<span id="L63"><span class="lineNum">      63</span>              : </span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">           1 :         test_return = SPIObj-&gt;Begin(mock_bus_config);</span></span>
+<span id="L65"><span class="lineNum">      65</span>              :         //EXPECT_EQ(true, test_return);</span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">           1 :         EXPECT_EQ(true, test_return) &lt;&lt; (TestHasError = true); // If expectation fails, set TestHasError to true;</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">           1 :         if (TestHasError)</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaUNC tlaBgUNC">           0 :             std::cout &lt;&lt; &quot;[   FAIL   ] &quot; &lt;&lt; &quot;Test 1 fail&quot; &lt;&lt; endl;</span></span>
+<span id="L69"><span class="lineNum">      69</span>              :         else</span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC tlaBgGNC">           1 :             std::cout &lt;&lt; &quot;[    OK    ] &quot; &lt;&lt; &quot;Test 1 pass&quot; &lt;&lt; endl;</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">           1 :     }</span></span>
+<span id="L72"><span class="lineNum">      72</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.1-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

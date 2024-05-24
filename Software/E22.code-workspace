@@ -14,7 +14,8 @@
 			"string_view": "cpp",
 			"initializer_list": "cpp",
 			"cron.h": "c",
-			"jobs.h": "c"
+			"jobs.h": "c",
+			"format": "cpp"
 		}
 	}
 }

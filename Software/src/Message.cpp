@@ -1,9 +1,4 @@
-#include <string.h>
-#include <sys/time.h>
-#include <stdio.h>
-
 #include "Message.h"
-#include "esp_log.h"
 #include "FileSystem.h"
 
 Message_t MESSAGE::processMessageSent(uint8_t arr[])

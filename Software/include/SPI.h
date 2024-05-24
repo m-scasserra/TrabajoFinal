@@ -1,7 +1,7 @@
 #ifndef SPI_H
 #define SPI_H
 
-#include <stdint.h>
+#include "CommonIncludes.h"
 
 #include "driver/spi_master.h"
 

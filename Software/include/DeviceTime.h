@@ -1,7 +1,7 @@
 #ifndef DEVICETIME_H
 #define DEVICETIME_H
 
-#include <stdint.h>
+#include "CommonIncludes.h"
 
 #define TIMETAG "TIME"
 #define DEFAULT_TIMEZONE "GMT+3"
