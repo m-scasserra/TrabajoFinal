@@ -1,7 +1,6 @@
 #include "IO.h"
 #include "FileSystem.h"
 
-
 #include "adc_cali_interface.h"
 #include "adc_cali_schemes.h"
 #include "esp_adc/adc_cali_scheme.h"
@@ -13,7 +12,6 @@ bool IO::calibratedADC1_chan3 = false;
 
 bool IO::Begin(void)
 {
-
     if (ConfigADC())
     {
         ESP_LOGI(IOTAG, "IO inicializado correctamente.");
@@ -108,6 +106,7 @@ bool IO::ConfigADC(void)
     adc_oneshot_chan_cfg_t configADC = {
         .atten = ADC_ATTEN_DB_12,
         .bitwidth = ADC_BITWIDTH_12};
+
     // Configuro el ADC 1 CHAN 3 ADC Channel 0 corresponde al IO 3
     if (adc_oneshot_config_channel(adc1_handle, ADC_CHANNEL_3, &configADC) != ESP_OK)
     {

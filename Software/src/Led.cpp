@@ -1,9 +1,5 @@
-/**
- * @file LED.cpp
- * @brief Implementation of the LED class for controlling RGB LED strips using RMT.
- */
 #include "Led.h"
-
+#include "Hardware.h"
 
 // Initialize static members
 rmt_channel_handle_t LED::led_chan = NULL;      ///< RMT channel handle for LED
@@ -13,25 +9,20 @@ uint8_t LED::brillo = 100;                      ///< Brightness level for LED
 uint8_t LED::ledColor[3] = {0, 0, 0};           ///< RGB values for LED color
 LED::colors LED::CurrColor = undefined;         ///< Current LED color
 
-/**
- * @brief Initializes the LED object by setting up the RMT communication channel and encoder.
- * @details This function configures the RMT channel and encoder for controlling the LED strip.
- */
 void LED::Begin(void)
 {
-    // Inicializo todas las configuraciones a 0
     rmt_tx_channel_config_t RMTtx_chan_config;
     led_strip_encoder_config_t RMTencoder_config;
     memset(&RMTtx_chan_config, 0, sizeof(RMTtx_chan_config));
     memset(&tx_config, 0, sizeof(tx_config));
     memset(&RMTencoder_config, 0, sizeof(RMTencoder_config));
 
-    // Configuracion del canal de transmision de RMT
-    RMTtx_chan_config.gpio_num = (gpio_num_t) 8;             // LED PIN
-    RMTtx_chan_config.clk_src = RMT_CLK_SRC_DEFAULT;               // select source clock
-    RMTtx_chan_config.resolution_hz = RMT_LED_STRIP_RESOLUTION_HZ; //
-    RMTtx_chan_config.mem_block_symbols = 64;                      // increase the block size can make the LED less flickering
-    RMTtx_chan_config.trans_queue_depth = 4;                       // set the number of transactions that can be pending in the background
+    // RMT channel configuration
+    RMTtx_chan_config.gpio_num = (gpio_num_t) RGB_LED_PIN;          // LED PIN
+    RMTtx_chan_config.clk_src = RMT_CLK_SRC_DEFAULT;                // Set the clock source for the channel
+    RMTtx_chan_config.resolution_hz = RMT_LED_STRIP_RESOLUTION_HZ;  // Set the resolution of the channel
+    RMTtx_chan_config.mem_block_symbols = 64;                       // Increase the block size can make the LED less flickering
+    RMTtx_chan_config.trans_queue_depth = 4;                        // Set the number of transactions that can be pending in the background
     // Creo el canal de RMT con la configuracion del LED y el handle del canal para el LED
     rmt_new_tx_channel(&RMTtx_chan_config, &led_chan);
     // Configuro la resolucion del encoder del LED
@@ -43,21 +34,11 @@ void LED::Begin(void)
     SetLedColor(black);
 }
 
-/**
- * @brief Gets the current LED color.
- * @return Current LED color.
- */
 LED::colors LED::GetLedColor(void)
 {
     return CurrColor;
 }
 
-/**
- * @brief Sets the LED color using RGB values.
- * @param[in] R Red component (0-255).
- * @param[in] G Green component (0-255).
- * @param[in] B Blue component (0-255).
- */
 void LED::SetLedColor(uint8_t R, uint8_t G, uint8_t B)
 {
     ledColor[0] = G;
@@ -66,10 +47,6 @@ void LED::SetLedColor(uint8_t R, uint8_t G, uint8_t B)
     CurrColor = undefined;
 }
 
-/**
- * @brief Sets the LED color using predefined colors.
- * @param[in] color Predefined color (black, red, blue, green, white).
- */
 void LED::SetLedColor(colors color)
 {
     switch (color)
@@ -105,9 +82,6 @@ void LED::SetLedColor(colors color)
     Show();
 }
 
-/**
- * @brief Displays the current LED color using RMT.
- */
 void LED::Show(void)
 {
     esp_err_t err;
@@ -127,10 +101,6 @@ void LED::Show(void)
     }
 }
 
-/**
- * @brief Sets the LED brightness level.
- * @param[in] brillo_ Brightness level (0-100).
- */
 void LED::SetBrightness(uint8_t brillo_)
 {
     if ((brillo_ > 0) && (brillo_ <= 100))
@@ -143,16 +113,6 @@ void LED::SetBrightness(uint8_t brillo_)
     }
 }
 
-/**
- * @brief RMT encoder callback when encoding LED strip pixels into RMT symbols.
- * @details This callback handles the encoding of RGB data and reset code for LED strips.
- * @param[in] encoder Encoder that called the callback.
- * @param[in] channel RMT channel handle.
- * @param[in] primary_data Pointer to the RGB data.
- * @param[in] data_size Size of the RGB data.
- * @param[out] ret_state Returned encoding state.
- * @return Number of encoded symbols.
- */
 size_t LED::rmt_encode_led_strip(rmt_encoder_t *encoder, rmt_channel_handle_t channel, const void *primary_data, size_t data_size, rmt_encode_state_t *ret_state)
 {
     rmt_led_strip_encoder_t *led_encoder = __containerof(encoder, rmt_led_strip_encoder_t, base);
@@ -161,6 +121,7 @@ size_t LED::rmt_encode_led_strip(rmt_encoder_t *encoder, rmt_channel_handle_t ch
     rmt_encode_state_t session_state = RMT_ENCODING_RESET;
     rmt_encode_state_t state = RMT_ENCODING_RESET;
     size_t encoded_symbols = 0;
+
     switch (led_encoder->state)
     {
     case 0: // send RGB data
@@ -194,12 +155,6 @@ out:
     return encoded_symbols;
 }
 
-/**
- * @brief RMT encoder callback when deleting the LED strip encoder.
- * @details This callback handles the deletion of the LED strip encoder.
- * @param[in] encoder Encoder that called the callback.
- * @return ESP_OK if deletion is successful.
- */
 esp_err_t LED::rmt_del_led_strip_encoder(rmt_encoder_t *encoder)
 {
     rmt_led_strip_encoder_t *led_encoder = __containerof(encoder, rmt_led_strip_encoder_t, base);
@@ -209,12 +164,6 @@ esp_err_t LED::rmt_del_led_strip_encoder(rmt_encoder_t *encoder)
     return ESP_OK;
 }
 
-/**
- * @brief RMT encoder callback when resetting the LED strip encoder.
- * @details This callback handles the reset of the LED strip encoder.
- * @param[in] encoder Encoder that called the callback.
- * @return ESP_OK if reset is successful.
- */
 esp_err_t LED::rmt_led_strip_encoder_reset(rmt_encoder_t *encoder)
 {
     rmt_led_strip_encoder_t *led_encoder = __containerof(encoder, rmt_led_strip_encoder_t, base);
@@ -224,12 +173,6 @@ esp_err_t LED::rmt_led_strip_encoder_reset(rmt_encoder_t *encoder)
     return ESP_OK;
 }
 
-/**
- * @brief Creates an RMT encoder for encoding LED strip pixels into RMT symbols.
- * @param[in] config Encoder configuration.
- * @param[out] ret_encoder Returned encoder handle.
- * @return ESP_OK if creating the encoder is successful.
- */
 esp_err_t LED::rmt_new_led_strip_encoder(const led_strip_encoder_config_t *config, rmt_encoder_handle_t *ret_encoder)
 {
     rmt_led_strip_encoder_t *led_encoder = NULL;

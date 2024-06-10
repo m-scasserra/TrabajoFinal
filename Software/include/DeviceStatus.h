@@ -61,8 +61,28 @@ public:
         DeviceMode_t mode;
     } DeviceStatus_t;
 
+    /**
+     * @brief Initializes the device status
+     *
+     * @return true If the device status was initialized correctly
+     * @return false If there was an error initializing the device status
+     */
     bool Begin(void);
+
+    /**
+     * @brief Prints the device status
+     *
+     * @return true If the device status was printed correctly
+     * @return false If there was an error printing the device status
+     */
     bool printStatus(void);
+
+    /**
+     * @brief Load the status of the device from the file system
+     *
+     * @return true If the status was loaded correctly
+     * @return false If there was an error loading the status
+     */
     bool loadStatusFromFs(void);
 
     static DeviceStatus_t deviceStatus;
@@ -71,7 +91,16 @@ private:
     // Constructor privado
     DEVICESTATUS() {}
 
+    /**
+     * @brief Load the device status from the file system
+     *
+     * @return true If the device status was loaded correctly
+     * @return false If there was an error loading the device status
+     */
     static bool loadDeviceFromFs(void);
+
+    // Doxygen comments
+
     static bool loadPacketTypeFromFs(void);
     static bool loadTCXOFromFs(void);
     static bool loadCalibrationsFromFs(void);

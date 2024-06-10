@@ -49,8 +49,7 @@ namespace SPITests
         spi_device_handle_t *mock_handle = NULL;
 
         //////////////////////////////////////////////// Test 1 /////////////////////////////////////////////////////////////////////////////////////
-        //cout << endl
-        //     << "[   INFO   ] Test 1 - Test returning success from gpio_config and gpio_set_level" << endl;
+
         //GTEST_LOG_(INFO) << "Test 1 - Test returning success from gpio_config and gpio_set_level";
         printf("[   INFO   ] Test 1 - Test returning success from gpio_config and gpio_set_level\n");
 
