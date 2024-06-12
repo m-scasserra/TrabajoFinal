@@ -1,0 +1,44 @@
+\doxysection{SPI.\+h}
+\hypertarget{SPI_8h_source}{}\label{SPI_8h_source}\index{include/SPI.h@{include/SPI.h}}
+\mbox{\hyperlink{SPI_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SPI\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SPI\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CommonIncludes_8h}{CommonIncludes.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}driver/spi\_master.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ SPITAG\ "{}SPI"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ SPI2\_HOST}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ SPI\_MAX\_TRANSFER\ 1024}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ SPI\_INTR\_BUS\_FLAGS\ 0}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classSPI}{SPI}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classSPI_a2ba081c29fbdecc704c6bf00b24d5205}{SPI}}()\ \{\ \mbox{\hyperlink{classSPI_a462315b7142c6d643c1466582e771841}{SPIInitialized}}\ =\ \textcolor{keyword}{false};\ \};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSPI_a346740d6b1a56968b34eff772e115987}{Begin}}(spi\_bus\_config\_t\ *SPIBusCfg,\ spi\_host\_device\_t\ host\_id\ =\ SPI2\_HOST,\ spi\_dma\_chan\_t\ dma\_chan\ =\ SPI\_DMA\_DISABLED);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSPI_ad269245233960467777c40dd65e9f09d}{AddDevice}}(spi\_device\_interface\_config\_t\ *SPISlaveCfg);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSPI_ae13afa285e0c21c541221d92ecb0872f}{SendMessage}}(uint8\_t\ *tx\_msg,\ uint8\_t\ tx\_len,\ uint8\_t\ *rx\_msg,\ uint8\_t\ rx\_len);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSPI_ae13afa285e0c21c541221d92ecb0872f}{SendMessage}}(uint8\_t\ *tx\_msg,\ uint8\_t\ tx\_len);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSPI_a5899c86a5a89c06c6d649087194cabb3}{debugTXmessage}}(uint8\_t\ *tx\_msg,\ uint8\_t\ tx\_len);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSPI_adbda98ea06cacebfc6041304514a426e}{debugRXmessage}}(uint8\_t\ *rx\_msg,\ uint8\_t\ rx\_len);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSPI_a462315b7142c6d643c1466582e771841}{SPIInitialized}};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00087\ \ \ \ \ spi\_device\_handle\_t\ \mbox{\hyperlink{classSPI_a853a765aa04121875c5b9f5c6b934367}{SPIHandle}};}
+\DoxyCodeLine{00088\ \};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SPI\_H}}
+
+\end{DoxyCode}

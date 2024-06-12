@@ -1,0 +1,428 @@
+0m
+[0;32mI (296) cpu_start: Unicore app[0m
+[0;32mI (305) cpu_start: Pro cpu start user code[0m
+[0;32mI (305) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (306) cpu_start: Application information:[0m
+[0;32mI (308) cpu_start: Project name:     Projecto_Final[0m
+[0;32mI (314) cpu_start: App version:      b295427-dirty[0m
+[0;32mI (319) cpu_start: Compile time:     Jun 11 2024 22:02:35[0m
+[0;32mI (326) cpu_start: ELF file SHA256:  309f3819e278682c...[0m
+[0;32mI (332) cpu_start: ESP-IDF:          5.2.1[0m
+[0;32mI (336) cpu_start: Min chip rev:     v0.3[0m
+[0;32mI (341) cpu_start: Max chip rev:     v1.99 [0m
+[0;32mI (346) cpu_start: Chip rev:         v0.3[0m
+[0;32mI (351) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (358) heap_init: At 3FC9F010 len 00020FF0 (131 KiB): RAM[0m
+[0;32mI (364) heap_init: At 3FCC0000 len 0001C710 (113 KiB): Retention RAM[0m
+[0;32mI (371) heap_init: At 3FCDC710 len 00002950 (10 KiB): Retention RAM[0m
+[0;32mI (378) heap_init: At 50000020 len 00001FC8 (7 KiB): RTCRAM[0m
+[0;32mI (385) spi_flash: detected chip: generic[0m
+[0;32mI (389) spi_flash: flash io: dio[0m
+[0;32mI (394) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (400) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (407) main_task: Started on CPU0[0m
+[0;32mI (411) main_task: Calling app_main()[0m
+[0;32mI (420) FS: Mounted /storage[0m
+[0;32mI (427) FS: Partition size: totalBytes: 2097152, usedBytes: 40960[0m
+[0;32mI (428) FS: Particion montada[0m
+[0;32mI (429) FS: Verificando existencia de directorios[0m
+[0;32mI (435) FS: /storage/AutomaticJobs found in the filesystem.[0m
+[0;32mI (440) FS: Carpeta AutomaticJobs encontrada[0m
+[0;32mI (446) FS: /storage/Packets found in the filesystem.[0m
+[0;32mI (451) FS: Carpeta PacketsReceived encontrada[0m
+[0;32mI (457) FS: /storage/Measurements found in the filesystem.[0m
+[0;32mI (462) FS: Carpeta Measurements encontrada[0m
+[0;32mI (469) FS: /storage/Config found in the filesystem.[0m
+[0;32mI (473) FS: Carpeta Config encontrada[0m
+[0;32mI (481) FS: /storage/Config/deviceConfig.ini   Size: 467[0m
+[0;32mI (486) FS: /storage/AutomaticJobs/jobs.bin   Size: 21[0m
+[0;32mI (492) FS: /storage/AutomaticJobs/time.bin   Size: 8[0m
+[0;32mI (499) TIME: Tiempo cargado[0m
+[0;32mI (654) NET: Initializing NVS[0m
+[0;32mI (661) NET: Starting event loop...[0m
+[0;32mI (662) pp: pp rom version: 9387209[0m
+[0;32mI (662) net80211: net80211 rom version: 9387209[0m
+[0;32mI (672) NET: Setting Wi-Fi mode to station...[0m
+[0;32mI (673) IO: calibration scheme version is Curve Fitting[0m
+[0;32mI (674) IO: Calibration Success[0m
+[0;32mI (678) gpio: GPIO[3]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (687) IO: IO inicializado correctamente.[0m
+[0;32mI (692) gpio: GPIO[8]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (702) gpio: GPIO[0]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 1| Intr:0 [0m
+[0;32mI (711) gpio: GPIO[1]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 1| Intr:0 [0m
+[0;32mI (720) gpio: GPIO[2]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (779) gpio: GPIO[19]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (779) gpio: GPIO[18]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 0| Pulldown: 1| Intr:0 [0m
+[0;32mI (787) SPI: Starting the SPI bus.[0m
+[0;32mI (791) SPI: SPI Bus initialized correctly.[0m
+[0;32mI (795) SPI: Adding the SPI device[0m
+[0;32mI (800) SPI: The slave device was added correctly.[0m
+[0;32mI (805) E22: SPI Configured correctly, initiating E22 task.[0m
+[0;32mI (811) E22: Shutting down the E22.[0m
+[5n
+   _____              _______   ______   _         ____     _____   _____    _____ 
+  / ____|     /\     |__   __| |  ____| | |       / __ \   / ____| |_   _|  / ____|
+ | (___      /  \       | |    | |__    | |      | |  | | | |  __    | |   | |     
+  \___ \    / /\ \      | |    |  __|   | |      | |  | | | | |_ |   | |   | |     
+  ____) |  / ____ \     | |    | |____  | |____  | |__| | | |__| |  _| |_  | |____ 
+ |_____/  /_/    \_\    |_|    |______| |______|  \____/   \_____| |_____|  \_____|
+
+
+Type 'help' to get the list of commands.
+Use UP/DOWN arrows to navigate through command history.
+Press TAB when typing command name to auto-complete.
+
+Your terminal applic[0n[0;32mI (1815) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1825) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1835) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1845) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1855) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1865) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1875) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1885) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1895) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1905) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1915) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1925) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1935) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1945) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1955) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1965) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1975) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1985) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (1995) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2005) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2015) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2025) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2035) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2045) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2055) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2065) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2075) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2085) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2095) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2105) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2115) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2125) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2135) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2145) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2155) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2165) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2175) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2185) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2195) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2205) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2215) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2225) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2235) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2245) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2255) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2265) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2275) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2285) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2295) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2305) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2315) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2325) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2335) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2345) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2355) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2363) Main: Modo NONE[0m
+[0;32mI (2365) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2375) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2385) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2395) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2405) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2415) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2425) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2435) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2445) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2455) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2465) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2475) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2485) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2495) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2505) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2515) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2525) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2535) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2545) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2555) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2565) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2575) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2585) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2595) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2605) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2615) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2625) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2635) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2645) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2655) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2665) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2675) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2685) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2695) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2705) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2715) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2725) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2735) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2745) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2755) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2765) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2775) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2785) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2795) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2805) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2815) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2825) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2835) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2845) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2855) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2865) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2875) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2885) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2895) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2905) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2915) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2925) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2935) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2945) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2955) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2965) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2975) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2985) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (2995) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3005) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3015) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3025) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3035) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3045) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3055) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3065) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3075) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3085) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3095) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3105) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3115) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3125) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3135) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3145) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3155) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3165) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3175) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3185) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3195) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3205) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3215) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3225) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3235) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3245) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3255) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3265) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3275) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3285) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3295) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3305) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3315) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3325) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3335) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3345) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3355) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3365) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3375) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3385) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3395) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3405) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3415) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3425) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3435) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3445) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3455) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3465) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3475) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3485) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3495) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3505) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3515) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3525) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3535) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3545) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3555) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3565) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3575) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3585) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3595) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3605) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3615) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3625) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3635) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3645) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3655) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3665) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3675) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3685) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3695) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3705) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3715) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3725) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3735) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3745) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3755) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3765) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3775) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3785) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3795) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3805) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3815) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3825) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3835) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3845) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3855) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3865) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3875) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3885) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3895) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3905) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3915) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3925) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3935) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3945) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3955) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3965) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3975) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3985) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (3995) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4005) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4015) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4025) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4035) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4045) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4055) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4065) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4075) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4085) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4095) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4105) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4115) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4125) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4135) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4145) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4155) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4165) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4175) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4185) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4195) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4205) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4215) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4225) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4235) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4245) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4255) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4265) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4275) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4285) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4295) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4305) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4315) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4325) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4335) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4345) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4355) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4365) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4375) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4385) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4395) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4405) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4415) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4425) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4435) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4445) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4455) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4465) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4475) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4485) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4495) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4505) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4515) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4525) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4535) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4545) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4555) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4565) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4575) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4585) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4595) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4605) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4615) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4625) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4635) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4645) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4655) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4665) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4675) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4685) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4695) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4705) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4715) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4725) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4735) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4745) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4755) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4765) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4775) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4785) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4795) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4805) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4815) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4825) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4835) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4845) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4855) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4865) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4875) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4885) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4895) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4905) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4915) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4925) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4935) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4945) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4955) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4965) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4975) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4985) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (4995) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5005) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5015) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5025) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5035) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5045) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5055) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5065) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5075) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5085) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5095) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5105) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5115) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5125) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5135) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5145) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5155) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5165) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5175) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5185) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5195) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5205) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5215) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5225) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5235) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5245) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5255) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5265) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5275) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5285) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI (5295) E22: E22 is busy, waiting for it to be ready.[0m
+[0;32mI�ESP-ROM:esp32c3-api1-20210207
+Build:Feb  7 2021
+rst:0x1 (POWERON),boot:0x5 (DOWNLOAD(USB/UART0/1))
+waiting for download

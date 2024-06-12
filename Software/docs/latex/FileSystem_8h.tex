@@ -1,0 +1,152 @@
+\doxysection{include/\+File\+System.h File Reference}
+\hypertarget{FileSystem_8h}{}\label{FileSystem_8h}\index{include/FileSystem.h@{include/FileSystem.h}}
+{\ttfamily \#include "{}Common\+Includes.\+h"{}}\newline
+{\ttfamily \#include "{}dev/min\+Ini.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+littlefs.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classFS}{FS}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_aaa0b344eecabc00990e0b6f04306f049}{FSTAG}}~"{}FS"{}
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_ac7266fac29d0aad0e1ddd098d0823fcb}{STORAGE\+\_\+\+PARTITION\+\_\+\+NAME}}~"{}storage"{}
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_a24f0f5a01d23982dff2ab670343aac49}{AUTOMATIC\+\_\+\+JOBS\+\_\+\+FOLDER\+\_\+\+PATH}}~"{}/storage/Automatic\+Jobs"{}
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_a636361c9ceed0765c72a8d632d076bda}{PACKETS\+\_\+\+RECEIVED\+\_\+\+FOLDER\+\_\+\+PATH}}~"{}/storage/Packets"{}
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_ac6355d5a610c430477293b22ba39aa9c}{MEASUREMENTS\+\_\+\+FOLDER\+\_\+\+PATH}}~"{}/storage/Measurements"{}
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_ab9c2b51840a80933b0deb311fbd950ba}{CONFIG\+\_\+\+FOLDER\+\_\+\+PATH}}~"{}/storage/Config"{}
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_a888de0ce8ff408446aba9b557d7a40dd}{DEVICE\+\_\+\+CONFIG\+\_\+\+FILE\+\_\+\+PATH}}~"{}/storage/Config/device\+Config.\+ini"{}
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_a109fc01297ca4ae917c9c3b6a4bfc496}{TIME\+\_\+\+BIN\+\_\+\+PATH}}~"{}/storage/Automatic\+Jobs/time.\+bin"{}
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_a414ca1cc8845047836225c9b30b45ae8}{ADC\+\_\+\+BIN\+\_\+\+PATH}}~"{}/storage/Measurements/adc.\+bin"{}
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_a61c379b4247ab70ab6d4fffcc4f8b26c}{PACKETS\+\_\+\+BIN\+\_\+\+PATH}}~"{}/storage/Packets/packets.\+bin"{}
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_a372792711318773463be6d83a6045b8c}{AUTOMATICJOBS\+\_\+\+BIN\+\_\+\+PATH}}~"{}/storage/Automatic\+Jobs/jobs.\+bin"{}
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_abf1eb195468bbf2ea4f194da8e70ad74}{INI\+\_\+\+MAX\+\_\+\+LEN}}~100
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_aa19daec6a07e6d507e6ca9eadb395a45}{PATH\+\_\+\+MAX\+\_\+\+LEN}}~100
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_a585ebfc8dc79b56210d70e43d57e6643}{SECTION\+\_\+\+MAX\+\_\+\+LEN}}~100
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_a11358e4d9ccb28b8541f6356cead2479}{KEY\+\_\+\+MAX\+\_\+\+LEN}}~100
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_a627c5366b8f52ae4f0dd4b7491bc84f2}{VALUE\+\_\+\+MAX\+\_\+\+LEN}}~100
+\item 
+\#define \mbox{\hyperlink{FileSystem_8h_abdd33f362ae3bbdacb5de76473aa8a2f}{MAX\+\_\+\+PATH\+\_\+\+LEN}}~100
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{FileSystem_8h_a414ca1cc8845047836225c9b30b45ae8}\index{FileSystem.h@{FileSystem.h}!ADC\_BIN\_PATH@{ADC\_BIN\_PATH}}
+\index{ADC\_BIN\_PATH@{ADC\_BIN\_PATH}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{ADC\_BIN\_PATH}{ADC\_BIN\_PATH}}
+{\footnotesize\ttfamily \label{FileSystem_8h_a414ca1cc8845047836225c9b30b45ae8} 
+\#define ADC\+\_\+\+BIN\+\_\+\+PATH~"{}/storage/Measurements/adc.\+bin"{}}
+
+\Hypertarget{FileSystem_8h_a24f0f5a01d23982dff2ab670343aac49}\index{FileSystem.h@{FileSystem.h}!AUTOMATIC\_JOBS\_FOLDER\_PATH@{AUTOMATIC\_JOBS\_FOLDER\_PATH}}
+\index{AUTOMATIC\_JOBS\_FOLDER\_PATH@{AUTOMATIC\_JOBS\_FOLDER\_PATH}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{AUTOMATIC\_JOBS\_FOLDER\_PATH}{AUTOMATIC\_JOBS\_FOLDER\_PATH}}
+{\footnotesize\ttfamily \label{FileSystem_8h_a24f0f5a01d23982dff2ab670343aac49} 
+\#define AUTOMATIC\+\_\+\+JOBS\+\_\+\+FOLDER\+\_\+\+PATH~"{}/storage/Automatic\+Jobs"{}}
+
+\Hypertarget{FileSystem_8h_a372792711318773463be6d83a6045b8c}\index{FileSystem.h@{FileSystem.h}!AUTOMATICJOBS\_BIN\_PATH@{AUTOMATICJOBS\_BIN\_PATH}}
+\index{AUTOMATICJOBS\_BIN\_PATH@{AUTOMATICJOBS\_BIN\_PATH}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{AUTOMATICJOBS\_BIN\_PATH}{AUTOMATICJOBS\_BIN\_PATH}}
+{\footnotesize\ttfamily \label{FileSystem_8h_a372792711318773463be6d83a6045b8c} 
+\#define AUTOMATICJOBS\+\_\+\+BIN\+\_\+\+PATH~"{}/storage/Automatic\+Jobs/jobs.\+bin"{}}
+
+\Hypertarget{FileSystem_8h_ab9c2b51840a80933b0deb311fbd950ba}\index{FileSystem.h@{FileSystem.h}!CONFIG\_FOLDER\_PATH@{CONFIG\_FOLDER\_PATH}}
+\index{CONFIG\_FOLDER\_PATH@{CONFIG\_FOLDER\_PATH}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{CONFIG\_FOLDER\_PATH}{CONFIG\_FOLDER\_PATH}}
+{\footnotesize\ttfamily \label{FileSystem_8h_ab9c2b51840a80933b0deb311fbd950ba} 
+\#define CONFIG\+\_\+\+FOLDER\+\_\+\+PATH~"{}/storage/Config"{}}
+
+\Hypertarget{FileSystem_8h_a888de0ce8ff408446aba9b557d7a40dd}\index{FileSystem.h@{FileSystem.h}!DEVICE\_CONFIG\_FILE\_PATH@{DEVICE\_CONFIG\_FILE\_PATH}}
+\index{DEVICE\_CONFIG\_FILE\_PATH@{DEVICE\_CONFIG\_FILE\_PATH}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{DEVICE\_CONFIG\_FILE\_PATH}{DEVICE\_CONFIG\_FILE\_PATH}}
+{\footnotesize\ttfamily \label{FileSystem_8h_a888de0ce8ff408446aba9b557d7a40dd} 
+\#define DEVICE\+\_\+\+CONFIG\+\_\+\+FILE\+\_\+\+PATH~"{}/storage/Config/device\+Config.\+ini"{}}
+
+\Hypertarget{FileSystem_8h_aaa0b344eecabc00990e0b6f04306f049}\index{FileSystem.h@{FileSystem.h}!FSTAG@{FSTAG}}
+\index{FSTAG@{FSTAG}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{FSTAG}{FSTAG}}
+{\footnotesize\ttfamily \label{FileSystem_8h_aaa0b344eecabc00990e0b6f04306f049} 
+\#define FSTAG~"{}FS"{}}
+
+\Hypertarget{FileSystem_8h_abf1eb195468bbf2ea4f194da8e70ad74}\index{FileSystem.h@{FileSystem.h}!INI\_MAX\_LEN@{INI\_MAX\_LEN}}
+\index{INI\_MAX\_LEN@{INI\_MAX\_LEN}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{INI\_MAX\_LEN}{INI\_MAX\_LEN}}
+{\footnotesize\ttfamily \label{FileSystem_8h_abf1eb195468bbf2ea4f194da8e70ad74} 
+\#define INI\+\_\+\+MAX\+\_\+\+LEN~100}
+
+\Hypertarget{FileSystem_8h_a11358e4d9ccb28b8541f6356cead2479}\index{FileSystem.h@{FileSystem.h}!KEY\_MAX\_LEN@{KEY\_MAX\_LEN}}
+\index{KEY\_MAX\_LEN@{KEY\_MAX\_LEN}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{KEY\_MAX\_LEN}{KEY\_MAX\_LEN}}
+{\footnotesize\ttfamily \label{FileSystem_8h_a11358e4d9ccb28b8541f6356cead2479} 
+\#define KEY\+\_\+\+MAX\+\_\+\+LEN~100}
+
+\Hypertarget{FileSystem_8h_abdd33f362ae3bbdacb5de76473aa8a2f}\index{FileSystem.h@{FileSystem.h}!MAX\_PATH\_LEN@{MAX\_PATH\_LEN}}
+\index{MAX\_PATH\_LEN@{MAX\_PATH\_LEN}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_PATH\_LEN}{MAX\_PATH\_LEN}}
+{\footnotesize\ttfamily \label{FileSystem_8h_abdd33f362ae3bbdacb5de76473aa8a2f} 
+\#define MAX\+\_\+\+PATH\+\_\+\+LEN~100}
+
+\Hypertarget{FileSystem_8h_ac6355d5a610c430477293b22ba39aa9c}\index{FileSystem.h@{FileSystem.h}!MEASUREMENTS\_FOLDER\_PATH@{MEASUREMENTS\_FOLDER\_PATH}}
+\index{MEASUREMENTS\_FOLDER\_PATH@{MEASUREMENTS\_FOLDER\_PATH}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{MEASUREMENTS\_FOLDER\_PATH}{MEASUREMENTS\_FOLDER\_PATH}}
+{\footnotesize\ttfamily \label{FileSystem_8h_ac6355d5a610c430477293b22ba39aa9c} 
+\#define MEASUREMENTS\+\_\+\+FOLDER\+\_\+\+PATH~"{}/storage/Measurements"{}}
+
+\Hypertarget{FileSystem_8h_a61c379b4247ab70ab6d4fffcc4f8b26c}\index{FileSystem.h@{FileSystem.h}!PACKETS\_BIN\_PATH@{PACKETS\_BIN\_PATH}}
+\index{PACKETS\_BIN\_PATH@{PACKETS\_BIN\_PATH}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{PACKETS\_BIN\_PATH}{PACKETS\_BIN\_PATH}}
+{\footnotesize\ttfamily \label{FileSystem_8h_a61c379b4247ab70ab6d4fffcc4f8b26c} 
+\#define PACKETS\+\_\+\+BIN\+\_\+\+PATH~"{}/storage/Packets/packets.\+bin"{}}
+
+\Hypertarget{FileSystem_8h_a636361c9ceed0765c72a8d632d076bda}\index{FileSystem.h@{FileSystem.h}!PACKETS\_RECEIVED\_FOLDER\_PATH@{PACKETS\_RECEIVED\_FOLDER\_PATH}}
+\index{PACKETS\_RECEIVED\_FOLDER\_PATH@{PACKETS\_RECEIVED\_FOLDER\_PATH}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{PACKETS\_RECEIVED\_FOLDER\_PATH}{PACKETS\_RECEIVED\_FOLDER\_PATH}}
+{\footnotesize\ttfamily \label{FileSystem_8h_a636361c9ceed0765c72a8d632d076bda} 
+\#define PACKETS\+\_\+\+RECEIVED\+\_\+\+FOLDER\+\_\+\+PATH~"{}/storage/Packets"{}}
+
+\Hypertarget{FileSystem_8h_aa19daec6a07e6d507e6ca9eadb395a45}\index{FileSystem.h@{FileSystem.h}!PATH\_MAX\_LEN@{PATH\_MAX\_LEN}}
+\index{PATH\_MAX\_LEN@{PATH\_MAX\_LEN}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{PATH\_MAX\_LEN}{PATH\_MAX\_LEN}}
+{\footnotesize\ttfamily \label{FileSystem_8h_aa19daec6a07e6d507e6ca9eadb395a45} 
+\#define PATH\+\_\+\+MAX\+\_\+\+LEN~100}
+
+\Hypertarget{FileSystem_8h_a585ebfc8dc79b56210d70e43d57e6643}\index{FileSystem.h@{FileSystem.h}!SECTION\_MAX\_LEN@{SECTION\_MAX\_LEN}}
+\index{SECTION\_MAX\_LEN@{SECTION\_MAX\_LEN}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{SECTION\_MAX\_LEN}{SECTION\_MAX\_LEN}}
+{\footnotesize\ttfamily \label{FileSystem_8h_a585ebfc8dc79b56210d70e43d57e6643} 
+\#define SECTION\+\_\+\+MAX\+\_\+\+LEN~100}
+
+\Hypertarget{FileSystem_8h_ac7266fac29d0aad0e1ddd098d0823fcb}\index{FileSystem.h@{FileSystem.h}!STORAGE\_PARTITION\_NAME@{STORAGE\_PARTITION\_NAME}}
+\index{STORAGE\_PARTITION\_NAME@{STORAGE\_PARTITION\_NAME}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{STORAGE\_PARTITION\_NAME}{STORAGE\_PARTITION\_NAME}}
+{\footnotesize\ttfamily \label{FileSystem_8h_ac7266fac29d0aad0e1ddd098d0823fcb} 
+\#define STORAGE\+\_\+\+PARTITION\+\_\+\+NAME~"{}storage"{}}
+
+\Hypertarget{FileSystem_8h_a109fc01297ca4ae917c9c3b6a4bfc496}\index{FileSystem.h@{FileSystem.h}!TIME\_BIN\_PATH@{TIME\_BIN\_PATH}}
+\index{TIME\_BIN\_PATH@{TIME\_BIN\_PATH}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{TIME\_BIN\_PATH}{TIME\_BIN\_PATH}}
+{\footnotesize\ttfamily \label{FileSystem_8h_a109fc01297ca4ae917c9c3b6a4bfc496} 
+\#define TIME\+\_\+\+BIN\+\_\+\+PATH~"{}/storage/Automatic\+Jobs/time.\+bin"{}}
+
+\Hypertarget{FileSystem_8h_a627c5366b8f52ae4f0dd4b7491bc84f2}\index{FileSystem.h@{FileSystem.h}!VALUE\_MAX\_LEN@{VALUE\_MAX\_LEN}}
+\index{VALUE\_MAX\_LEN@{VALUE\_MAX\_LEN}!FileSystem.h@{FileSystem.h}}
+\doxysubsubsection{\texorpdfstring{VALUE\_MAX\_LEN}{VALUE\_MAX\_LEN}}
+{\footnotesize\ttfamily \label{FileSystem_8h_a627c5366b8f52ae4f0dd4b7491bc84f2} 
+\#define VALUE\+\_\+\+MAX\+\_\+\+LEN~100}
+

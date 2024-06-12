@@ -277,6 +277,8 @@ public:
 
     bool Begin(void);
 
+    bool readRegisterManual(uint16_t addr, uint8_t *dataOut); // TODO: Delete
+
     bool setPacketType(PacketType_t _packetType);
     bool getPacketType(PacketType_t *packetType);
     bool writeRegister(E22_Reg_Addr addr, uint8_t dataIn);

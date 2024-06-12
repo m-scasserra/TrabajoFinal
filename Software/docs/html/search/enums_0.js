@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['colors_0',['colors',['../class_l_e_d.html#aa47b3dfee0275a3586654a7598a5bbc5',1,'LED']]]
+  ['bandwidth_5ft_0',['BandWidth_t',['../classE22.html#a325a465e38ede2c8b493488bae34a712',1,'E22']]]
 ];

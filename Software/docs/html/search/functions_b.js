@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['updatetimefromnet_0',['updateTimeFromNet',['../class_d_e_v_i_c_e_t_i_m_e.html#a1ecc36d88dfe321938da64653540ec09',1,'DEVICETIME']]]
+  ['netcmdfunc_0',['netCmdFunc',['../classCLI.html#a3671452c6580d899420441bb5f6a98bc',1,'CLI']]],
+  ['network_1',['NETWORK',['../classNETWORK.html#ade385715273ceb55a719de6fdbf598a1',1,'NETWORK::NETWORK(const NETWORK &amp;)=delete'],['../classNETWORK.html#a681aa1ba644d6ecafdf60e238906aab3',1,'NETWORK::NETWORK()']]]
 ];

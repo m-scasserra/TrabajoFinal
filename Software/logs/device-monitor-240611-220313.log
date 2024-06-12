@@ -1,0 +1,336 @@
+[0;32mI (662) NET: Starting event loop...[0m
+[0;32mI (663) pp: pp rom version: 9387209[0m
+[0;32mI (663) net80211: net80211 rom version: 9387209[0m
+[0;32mI (672) NET: Setting Wi-Fi mode to station...[0m
+[0;32mI (673) IO: calibration scheme version is Curve Fitting[0m
+[0;32mI (676) IO: Calibration Success[0m
+[0;32mI (679) gpio: GPIO[3]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (688) IO: IO inicializado correctamente.[0m
+[0;32mI (694) gpio: GPIO[8]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (703) gpio: GPIO[0]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 1| Intr:0 [0m
+[0;31mE (712) E22: Error initializing the IO pins for the E22.[0m
+[5n
+   _____              _______   ______   _         ____     _____   _____    _____ 
+  / ____|     /\     |__   __| |  ____| | |       / __ \   / ____| |_   _|  / ____|
+ | (___      /  \       | |    | |__    | |      | |  | | | |  __    | |   | |     
+  \___ \    / /\ \      | |    |  __|   | |      | |  | | | | |_ |   | |   | |     
+  ____) |  / ____ \     | |    | |____  | |____  | |__| | | |__| |  _| |_  | |____ 
+ |_____/  /_/    \_\    |_|    |______| |______|  \____/   \_____| |_____|  \_____|
+
+
+Type 'help' to get the list of commands.
+Use UP/DOWN arrows to navigate through command history.
+Press TAB when typing command name to auto-complete.
+
+Your terminal application does not support escape sequences.
+
+Line editing and history features are disabled.
+
+On Windows, try using Putty instead.
+SATE> [0n[0;32mI (2265) Main: Modo NONE[0m
+aj register
+Unrecognized command
+SATE> ah j show
+0 0 * * * *,saveTime
+SATE> aj register
+
+assert failed: xQueueGenericSend queue.c:936 (pxQueue)
+Core  0 register dump:
+MEPC    : 0x403833f0  RA      : 0x40389d26  SP      : 0x3fcb2310  GP      : 0x3fc97e00  
+TP      : 0x3fc80c28  T0      : 0x37363534  T1      : 0x7271706f  T2      : 0x33323130  
+S0/FP   : 0x00000091  S1      : 0x00000001  A0      : 0x3fcb234c  A1      : 0x3fc99b0d  
+A2      : 0x00000001  A3      : 0x00000029  A4      : 0x00000001  A5      : 0x3fc9f000  
+A6      : 0x7a797877  A7      : 0x76757473  S2      : 0x00000009  S3      : 0x3fcb2456  
+S4      : 0x3fc99b0c  S5      : 0x00000000  S6      : 0x00000000  S7      : 0x00000000  
+S8      : 0x00000000  S9      : 0x00000000  S10     : 0x00000000  S11     : 0x00000000  
+T3      : 0x6e6d6c6b  T4      : 0x6a696867  T5      : 0x66656463  T6      : 0x62613938  
+MSTATUS : 0x00001881  MTVEC   : 0x40380001  MCAUSE  : 0x00000007  MTVAL   : 0x00000000  
+MHARTID : 0x00000000  
+
+Stack memory:
+3fcb2310: 0x00000000 0x00000000 0x3c0de4f8 0x40393550 0x3fc99524 0x3c0de4f8 0x3fc999bc 0x3c0d1092
+3fcb2330: 0x3fc99534 0x3fcb2344 0x3fc99538 0x3c0d1108 0x3fc99b0c 0x00363339 0x3fc9bf70 0x65737361
+3fcb2350: 0x66207472 0x656c6961 0x78203a64 0x75657551 0x6e654765 0x63697265 0x646e6553 0x65757120
+3fcb2370: 0x632e6575 0x3633393a 0x78702820 0x75657551 0x3f002965 0x3fcb382c 0x3fca3b2c 0x40384314
+3fcb2390: 0xffffffff 0x00000000 0x3fca3830 0x40384464 0x00000000 0x00000000 0x3fca3830 0x3fc9bf70
+3fcb23b0: 0x00000000 0x00000000 0x3fcb2484 0x420a5b30 0x00000000 0x00000001 0x00000000 0x3fcb3848
+3fcb23d0: 0x00000002 0x00000000 0x3fcb3860 0x3c0d8000 0x3fcb383c 0x3fcb382c 0x3fcb2484 0x420a5afc
+3fcb23f0: 0x0000000a 0x00000004 0x3fc97c28 0x3c0db25c 0x00000000 0x00000000 0x00000003 0x4039087c
+3fcb2410: 0x00000000 0x00000000 0x00000000 0x42000000 0x00000000 0x00000002 0x00000000 0x3fcb24bc
+3fcb2430: 0x00000001 0x00000000 0x00000000 0x4038a58a 0x3fc80c28 0xff7fffff 0x403843b8 0x00000000
+3fcb2450: 0xffffffff 0x00000002 0x3fcb3860 0x4039087c 0x3fcb383c 0x3fcb383c 0x3fc9f010 0x3fc9a510
+3fcb2470: 0x00000001 0x3fcb250c 0x3fc9a510 0x42004b46 0x3fcb3860 0x00000000 0x3fca38c8 0x00000000
+3fcb2490: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb24b0: 0x00000000 0x00000000 0x00000000 0x0000001d 0x00000005 0x00000000 0x00000000 0x00000000
+3fcb24d0: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000501
+3fcb24f0: 0x00000000 0x00000000 0x3fcb2530 0x42001e66 0x00001000 0x00000004 0x00000080 0x40383c00
+3fcb2510: 0x00000000 0x00000000 0x3fc9f000 0x3fc97748 0x3fcb2550 0x00000002 0x3fcb37a8 0x42015cc4
+3fcb2530: 0x00001000 0x3fcb096c 0x00000000 0x00000000 0x00000000 0x3fcb0968 0x3fcb2710 0x42015ea2
+3fcb2550: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x4038d438
+3fcb2570: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb2590: 0x00000000 0xa5a5a5a5 0xa5a5a5a5 0xa5a5a5a5 0xa5a5a5a5 0xa5a5a5a5 0xa5a5a5a5 0x0000015c
+3fcb25b0: 0x3fcb2430 0x00000000 0x3fc9a780 0x3fc9a780 0x3fcb25b0 0x3fc9a778 0x00000017 0x3fcb0cd8
+3fcb25d0: 0x3fcb0cd8 0x3fcb25b0 0x00000000 0x00000002 0x3fcb11ac 0x736e6f63 0x5f656c6f 0x6c706572
+3fcb25f0: 0x00000000 0x3fcb25a0 0x00000008 0x00000000 0x00000002 0x00000000 0x00000000 0x00000000
+3fcb2610: 0x000066dc 0x00000000 0x3fc9f814 0x3fc9f87c 0x3fc9f8e4 0x00000000 0x00000000 0x00000001
+3fcb2630: 0x00000000 0x00000000 0x00000000 0x42047954 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb2650: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb2670: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb2690: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb26b0: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb26d0: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb26f0: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00001000
+
+
+
+ELF file SHA256: 251f568115a07212
+
+Rebooting...
+ESP-ROM:esp32c3-api1-20210207
+Build:Feb  7 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0xd (SPI_FAST_FLASH_BOOT)
+Saved PC:0x403833dc
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fcd5820,len:0x1738
+load:0x403cc710,len:0xb98
+load:0x403ce710,len:0x2e40
+entry 0x403cc710
+[0;32mI (24) boot: ESP-IDF 5.2.1 2nd stage bootloader[0m
+[0;32mI (24) boot: compile time Jun 11 2024 22:02:46[0m
+[0;32mI (24) boot: chip revision: v0.3[0m
+[0;32mI (27) boot.esp32c3: SPI Speed      : 80MHz[0m
+[0;32mI (32) boot.esp32c3: SPI Mode       : DIO[0m
+[0;32mI (36) boot.esp32c3: SPI Flash Size : 4MB[0m
+[0;32mI (41) boot: Enabling RNG early entropy source...[0m
+[0;32mI (46) boot: Partition Table:[0m
+[0;32mI (50) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (57) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (72) boot:  2 factory          factory app      00 00 00010000 00150000[0m
+[0;32mI (80) boot:  3 storage          Unknown data     01 82 00160000 00200000[0m
+[0;32mI (87) boot: End of partition table[0m
+[0;32mI (91) esp_image: segment 0: paddr=00010020 vaddr=3c0c0020 size=32578h (206200) map[0m
+[0;32mI (132) esp_image: segment 1: paddr=000425a0 vaddr=3fc97600 size=02f08h ( 12040) load[0m
+[0;32mI (134) esp_image: segment 2: paddr=000454b0 vaddr=40380000 size=0ab68h ( 43880) load[0m
+[0;32mI (146) esp_image: segment 3: paddr=00050020 vaddr=42000020 size=bf81ch (784412) map[0m
+[0;32mI (269) esp_image: segment 4: paddr=0010f844 vaddr=4038ab68 size=0c8a4h ( 51364) load[0m
+[0;32mI (279) esp_image: segment 5: paddr=0011c0f0 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (286) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (286) boot: Disabling RNG early entropy source...[0m
+[0;32mI (299) cpu_start: Unicore app[0m
+[0;32mI (308) cpu_start: Pro cpu start user code[0m
+[0;32mI (308) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (308) cpu_start: Application information:[0m
+[0;32mI (311) cpu_start: Project name:     Projecto_Final[0m
+[0;32mI (316) cpu_start: App version:      b295427-dirty[0m
+[0;32mI (322) cpu_start: Compile time:     Jun 11 2024 22:02:35[0m
+[0;32mI (328) cpu_start: ELF file SHA256:  251f568115a07212...[0m
+[0;32mI (334) cpu_start: ESP-IDF:          5.2.1[0m
+[0;32mI (339) cpu_start: Min chip rev:     v0.3[0m
+[0;32mI (343) cpu_start: Max chip rev:     v1.99 [0m
+[0;32mI (348) cpu_start: Chip rev:         v0.3[0m
+[0;32mI (353) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (360) heap_init: At 3FC9F010 len 00020FF0 (131 KiB): RAM[0m
+[0;32mI (366) heap_init: At 3FCC0000 len 0001C710 (113 KiB): Retention RAM[0m
+[0;32mI (373) heap_init: At 3FCDC710 len 00002950 (10 KiB): Retention RAM[0m
+[0;32mI (380) heap_init: At 50000020 len 00001FC8 (7 KiB): RTCRAM[0m
+[0;32mI (387) spi_flash: detected chip: generic[0m
+[0;32mI (391) spi_flash: flash io: dio[0m
+[0;32mI (396) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (402) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (409) main_task: Started on CPU0[0m
+[0;32mI (413) main_task: Calling app_main()[0m
+[0;32mI (422) FS: Mounted /storage[0m
+[0;32mI (429) FS: Partition size: totalBytes: 2097152, usedBytes: 40960[0m
+[0;32mI (430) FS: Particion montada[0m
+[0;32mI (431) FS: Verificando existencia de directorios[0m
+[0;32mI (437) FS: /storage/AutomaticJobs found in the filesystem.[0m
+[0;32mI (442) FS: Carpeta AutomaticJobs encontrada[0m
+[0;32mI (448) FS: /storage/Packets found in the filesystem.[0m
+[0;32mI (453) FS: Carpeta PacketsReceived encontrada[0m
+[0;32mI (459) FS: /storage/Measurements found in the filesystem.[0m
+[0;32mI (464) FS: Carpeta Measurements encontrada[0m
+[0;32mI (471) FS: /storage/Config found in the filesystem.[0m
+[0;32mI (475) FS: Carpeta Config encontrada[0m
+[0;32mI (483) FS: /storage/Config/deviceConfig.ini   Size: 467[0m
+[0;32mI (488) FS: /storage/AutomaticJobs/jobs.bin   Size: 21[0m
+[0;32mI (494) FS: /storage/AutomaticJobs/time.bin   Size: 8[0m
+[0;32mI (501) TIME: Tiempo cargado[0m
+[0;32mI (656) NET: Initializing NVS[0m
+[0;32mI (664) NET: Starting event loop...[0m
+[0;32mI (665) pp: pp rom version: 9387209[0m
+[0;32mI (665) net80211: net80211 rom version: 9387209[0m
+[0;32mI (674) NET: Setting Wi-Fi mode to station...[0m
+[0;32mI (675) IO: calibration scheme version is Curve Fitting[0m
+[0;32mI (678) IO: Calibration Success[0m
+[0;32mI (681) gpio: GPIO[3]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (690) IO: IO inicializado correctamente.[0m
+[0;32mI (696) gpio: GPIO[8]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (705) gpio: GPIO[0]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 1| Intr:0 [0m
+[0;31mE (714) E22: Error initializing the IO pins for the E22.[0m
+[5n
+   _____              _______   ______   _         ____     _____   _____    _____ 
+  / ____|     /\     |__   __| |  ____| | |       / __ \   / ____| |_   _|  / ____|
+ | (___      /  \       | |    | |__    | |      | |  | | | |  __    | |   | |     
+  \___ \    / /\ \      | |    |  __|   | |      | |  | | | | |_ |   | |   | |     
+  ____) |  / ____ \     | |    | |____  | |____  | |__| | | |__| |  _| |_  | |____ 
+ |_____/  /_/    \_\    |_|    |______| |______|  \____/   \_____| |_____|  \_____|
+
+
+Type 'help' to get the list of commands.
+Use UP/DOWN arrows to navigate through command history.
+Press TAB when typing command name to auto-complete.
+[6n [999C [6n [151D[0;32mSATE> [0m[0;32mI (1807) Main: Modo NONE[0m
+[0K[0;32mSATE> [0mt[7C[0K[0;32mSATE> [0mtx[8C[0K[0;32mSATE> [0mtx[8C
+[0;32mI (17213) E22: Setting up for TX[0m
+[0;32mI (17214) E22: Going to standby RC[0m
+
+assert failed: xQueueGenericSend queue.c:936 (pxQueue)
+Core  0 register dump:
+MEPC    : 0x403833f0  RA      : 0x40389d26  SP      : 0x3fcb2320  GP      : 0x3fc97e00  
+TP      : 0x3fc80c28  T0      : 0x37363534  T1      : 0x7271706f  T2      : 0x33323130  
+S0/FP   : 0x00000091  S1      : 0x00000001  A0      : 0x3fcb235c  A1      : 0x3fc99b0d  
+A2      : 0x00000001  A3      : 0x00000029  A4      : 0x00000001  A5      : 0x3fc9f000  
+A6      : 0x7a797877  A7      : 0x76757473  S2      : 0x00000009  S3      : 0x3fcb2466  
+S4      : 0x3fc99b0c  S5      : 0x00000000  S6      : 0x00000000  S7      : 0x00000000  
+S8      : 0x00000000  S9      : 0x00000000  S10     : 0x00000000  S11     : 0x00000000  
+T3      : 0x6e6d6c6b  T4      : 0x6a696867  T5      : 0x66656463  T6      : 0x62613938  
+MSTATUS : 0x00001881  MTVEC   : 0x40380001  MCAUSE  : 0x00000007  MTVAL   : 0x00000000  
+MHARTID : 0x00000000  
+
+Stack memory:
+3fcb2320: 0x0ccccccc 0x00000019 0x3c0de4f8 0x40393550 0x3fc99524 0x3c0de4f8 0x3fc999bc 0x3c0d1092
+3fcb2340: 0x3fc99534 0x3fcb2354 0x3fc99538 0x3c0d1108 0x3fc99b0c 0x00363339 0x3fcb0df8 0x65737361
+3fcb2360: 0x66207472 0x656c6961 0x78203a64 0x75657551 0x6e654765 0x63697265 0x646e6553 0x65757120
+3fcb2380: 0x632e6575 0x3633393a 0x78702820 0x75657551 0x00002965 0x00000000 0x3fcb0df8 0x4038a620
+3fcb23a0: 0x3fc80c28 0x00000000 0x3fca3830 0x40389fe6 0x00000000 0x00000000 0x3fca3830 0x4038a620
+3fcb23c0: 0x00000004 0x03ff0000 0xe0038000 0x00000000 0x00000000 0x00000001 0x00000000 0x4201fe9e
+3fcb23e0: 0x00000000 0xffffffff 0x3fca3830 0x00000000 0x00000001 0x00000000 0x3fc9fc50 0x40389fe6
+3fcb2400: 0x00000000 0x00000000 0x3fc9fc50 0x4038a620 0x00000001 0x3fcb3798 0x00000000 0x00000000
+3fcb2420: 0x00000001 0x00000000 0x00000000 0x40000000 0x0000001d 0x3fcb3798 0x3fc9f000 0x3fcb249c
+3fcb2440: 0x3fcb2550 0x00000000 0x00000000 0x4038a58a 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb2460: 0x00000000 0x00000000 0x3fc9f000 0x3fcb24cc 0x3c0c3220 0x3c0c206c 0x00000003 0x3c0c3000
+3fcb2480: 0x3fcb2550 0x3fc9a510 0x3c0c2000 0x420044cc 0x3fcb2550 0x3fc9a510 0x3c0c2000 0x00000080
+3fcb24a0: 0x00000002 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb24c0: 0x00000000 0x00000000 0x00000000 0x00000000 0x3c0c206c 0x00000199 0x60023000 0x42006ba8
+3fcb24e0: 0x3fcb2550 0x00000002 0x00000000 0x420194cc 0x00001000 0x00000001 0x3fc9a510 0x3fc97748
+3fcb2500: 0x3fcb2550 0x00000001 0x3fc9a510 0x42001644 0x00000000 0x00000004 0x3fcb2710 0x3fc97748
+3fcb2520: 0x3fcb2550 0x00000001 0x3fcb3798 0x42015cc4 0x3c0c78cc 0x3fcb096c 0x00000000 0x00000000
+3fcb2540: 0x00000000 0x3fcb0968 0x3fcb2710 0x42015ea2 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb2560: 0x00000000 0x00000000 0x00000000 0x4038d438 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb2580: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0xa5a5a5a5 0xa5a5a5a5 0xa5a5a5a5
+3fcb25a0: 0xa5a5a5a5 0xa5a5a5a5 0xa5a5a5a5 0x0000015c 0x3fcb1e50 0x00000000 0x3fc9a780 0x3fc9a780
+3fcb25c0: 0x3fcb25b0 0x3fc9a778 0x00000017 0x3fcb0cd8 0x3fcb0cd8 0x3fcb25b0 0x00000000 0x00000002
+3fcb25e0: 0x3fcb11ac 0x736e6f63 0x5f656c6f 0x6c706572 0x00000000 0x3fcb25a0 0x00000008 0x00000000
+3fcb2600: 0x00000002 0x00000000 0x00000000 0x00000000 0x00003488 0x00000000 0x3fc9f814 0x3fc9f87c
+3fcb2620: 0x3fc9f8e4 0x00000000 0x00000000 0x00000001 0x00000000 0x00000000 0x00000000 0x42047954
+3fcb2640: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb2660: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb2680: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb26a0: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb26c0: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb26e0: 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+3fcb2700: 0x00000000 0x00000000 0x00000000 0x00001000 0x00007874 0x00000000 0x00000000 0x00000000
+
+
+
+ELF file SHA256: 251f568115a07212
+
+Rebooting...
+ESP-ROM:esp32c3-api1-20210207
+Build:Feb  7 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0xd (SPI_FAST_FLASH_BOOT)
+Saved PC:0x403833dc
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fcd5820,len:0x1738
+load:0x403cc710,len:0xb98
+load:0x403ce710,len:0x2e40
+entry 0x403cc710
+[0;32mI (24) boot: ESP-IDF 5.2.1 2nd stage bootloader[0m
+[0;32mI (24) boot: compile time Jun 11 2024 22:02:46[0m
+[0;32mI (24) boot: chip revision: v0.3[0m
+[0;32mI (27) boot.esp32c3: SPI Speed      : 80MHz[0m
+[0;32mI (32) boot.esp32c3: SPI Mode       : DIO[0m
+[0;32mI (36) boot.esp32c3: SPI Flash Size : 4MB[0m
+[0;32mI (41) boot: Enabling RNG early entropy source...[0m
+[0;32mI (46) boot: Partition Table:[0m
+[0;32mI (50) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (57) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (72) boot:  2 factory          factory app      00 00 00010000 00150000[0m
+[0;32mI (80) boot:  3 storage          Unknown data     01 82 00160000 00200000[0m
+[0;32mI (87) boot: End of partition table[0m
+[0;32mI (91) esp_image: segment 0: paddr=00010020 vaddr=3c0c0020 size=32578h (206200) map[0m
+[0;32mI (132) esp_image: segment 1: paddr=000425a0 vaddr=3fc97600 size=02f08h ( 12040) load[0m
+[0;32mI (134) esp_image: segment 2: paddr=000454b0 vaddr=40380000 size=0ab68h ( 43880) load[0m
+[0;32mI (146) esp_image: segment 3: paddr=00050020 vaddr=42000020 size=bf81ch (784412) map[0m
+[0;32mI (269) esp_image: segment 4: paddr=0010f844 vaddr=4038ab68 size=0c8a4h ( 51364) load[0m
+[0;32mI (279) esp_image: segment 5: paddr=0011c0f0 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (286) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (286) boot: Disabling RNG early entropy source...[0m
+[0;32mI (299) cpu_start: Unicore app[0m
+[0;32mI (308) cpu_start: Pro cpu start user code[0m
+[0;32mI (308) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (308) cpu_start: Application information:[0m
+[0;32mI (311) cpu_start: Project name:     Projecto_Final[0m
+[0;32mI (316) cpu_start: App version:      b295427-dirty[0m
+[0;32mI (322) cpu_start: Compile time:     Jun 11 2024 22:02:35[0m
+[0;32mI (328) cpu_start: ELF file SHA256:  251f568115a07212...[0m
+[0;32mI (334) cpu_start: ESP-IDF:          5.2.1[0m
+[0;32mI (339) cpu_start: Min chip rev:     v0.3[0m
+[0;32mI (343) cpu_start: Max chip rev:     v1.99 [0m
+[0;32mI (348) cpu_start: Chip rev:         v0.3[0m
+[0;32mI (353) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (360) heap_init: At 3FC9F010 len 00020FF0 (131 KiB): RAM[0m
+[0;32mI (366) heap_init: At 3FCC0000 len 0001C710 (113 KiB): Retention RAM[0m
+[0;32mI (373) heap_init: At 3FCDC710 len 00002950 (10 KiB): Retention RAM[0m
+[0;32mI (380) heap_init: At 50000020 len 00001FC8 (7 KiB): RTCRAM[0m
+[0;32mI (387) spi_flash: detected chip: generic[0m
+[0;32mI (391) spi_flash: flash io: dio[0m
+[0;32mI (396) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (402) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (409) main_task: Started on CPU0[0m
+[0;32mI (413) main_task: Calling app_main()[0m
+[0;32mI (422) FS: Mounted /storage[0m
+[0;32mI (429) FS: Partition size: totalBytes: 2097152, usedBytes: 40960[0m
+[0;32mI (430) FS: Particion montada[0m
+[0;32mI (431) FS: Verificando existencia de directorios[0m
+[0;32mI (437) FS: /storage/AutomaticJobs found in the filesystem.[0m
+[0;32mI (442) FS: Carpeta AutomaticJobs encontrada[0m
+[0;32mI (448) FS: /storage/Packets found in the filesystem.[0m
+[0;32mI (453) FS: Carpeta PacketsReceived encontrada[0m
+[0;32mI (459) FS: /storage/Measurements found in the filesystem.[0m
+[0;32mI (464) FS: Carpeta Measurements encontrada[0m
+[0;32mI (471) FS: /storage/Config found in the filesystem.[0m
+[0;32mI (475) FS: Carpeta Config encontrada[0m
+[0;32mI (483) FS: /storage/Config/deviceConfig.ini   Size: 467[0m
+[0;32mI (488) FS: /storage/AutomaticJobs/jobs.bin   Size: 21[0m
+[0;32mI (494) FS: /storage/AutomaticJobs/time.bin   Size: 8[0m
+[0;32mI (501) TIME: Tiempo cargado[0m
+[0;32mI (656) NET: Initializing NVS[0m
+[0;32mI (664) NET: Starting event loop...[0m
+[0;32mI (665) pp: pp rom version: 9387209[0m
+[0;32mI (665) net80211: net80211 rom version: 9387209[0m
+[0;32mI (674) NET: Setting Wi-Fi mode to station...[0m
+[0;32mI (675) IO: calibration scheme version is Curve Fitting[0m
+[0;32mI (678) IO: Calibration Success[0m
+[0;32mI (681) gpio: GPIO[3]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (690) IO: IO inicializado correctamente.[0m
+[0;32mI (696) gpio: GPIO[8]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (705) gpio: GPIO[0]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 1| Intr:0 [0m
+[0;31mE (714) E22: Error initializing the IO pins for the E22.[0m
+[5n
+   _____              _______   ______   _         ____     _____   _____    _____ 
+  / ____|     /\     |__   __| |  ____| | |       / __ \   / ____| |_   _|  / ____|
+ | (___      /  \       | |    | |__    | |      | |  | | | |  __    | |   | |     
+  \___ \    / /\ \      | |    |  __|   | |      | |  | | | | |_ |   | |   | |     
+  ____) |  / ____ \     | |    | |____  | |____  | |__| | | |__| |  _| |_  | |____ 
+ |_____/  /_/    \_\    |_|    |______| |______|  \____/   \_____| |_____|  \_____|
+
+
+Type 'help' to get the list of commands.
+Use UP/DOWN arrows to navigate through command history.
+Press TAB when typing command name to auto-complete.
+[6n [999C [6n [151D[0;32mSATE> [0m[0;32mI (1807) Main: Modo NONE[0m

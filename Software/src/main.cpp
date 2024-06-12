@@ -41,18 +41,18 @@ extern "C" void app_main(void)
 
     switch (ds.deviceStatus.mode)
     {
-    case NONE:
+    case DEVICESTATUS::NONE:
     {
         ESP_LOGI("Main", "Modo NONE");
     }
     break;
-    case TX:
+    case DEVICESTATUS::TX:
     {
         ESP_LOGI("Main", "Modo TX");
         e22.setUpForTx();
     }
     break;
-    case RX:
+    case DEVICESTATUS::RX:
     {
         ESP_LOGI("Main", "Modo RX");
         e22.setUpForRx();

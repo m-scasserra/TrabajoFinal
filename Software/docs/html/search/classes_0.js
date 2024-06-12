@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['autojob_0',['AUTOJOB',['../class_a_u_t_o_j_o_b.html',1,'']]]
+  ['ajcmd_5fargs_5ft_0',['AJcmd_args_t',['../structCLI_1_1AJcmd__args__t.html',1,'CLI']]],
+  ['autojob_1',['AUTOJOB',['../classAUTOJOB.html',1,'']]]
 ];

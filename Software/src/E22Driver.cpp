@@ -38,7 +38,7 @@ void E22::E22Task(void *pvParameters)
 
     ESP_LOGI(E22TAG, "Shutting down the E22.");
     e22->resetOn();
-//    vTaskDelay(pdMS_TO_TICKS(1000));
+    vTaskDelay(pdMS_TO_TICKS(1000));
 
     while (e22->isBusy())
     {
@@ -281,7 +281,7 @@ bool E22::E22IOInit(void)
     {
         return false;
     }
-    if (io.SetLevel((gpio_num_t)RX_EN_E22_PIN, IO_LOW))
+    if (!io.SetLevel((gpio_num_t)RX_EN_E22_PIN, IO_LOW))
     {
         return false;
     }
@@ -291,7 +291,7 @@ bool E22::E22IOInit(void)
     {
         return false;
     }
-    if (io.SetLevel((gpio_num_t)TX_EN_E22_PIN, IO_LOW))
+    if (!io.SetLevel((gpio_num_t)TX_EN_E22_PIN, IO_LOW))
     {
         return false;
     }
@@ -301,7 +301,7 @@ bool E22::E22IOInit(void)
     {
         return false;
     }
-    if (io.SetLevel((gpio_num_t)NRST_E22_PIN, IO_LOW))
+    if (!io.SetLevel((gpio_num_t)NRST_E22_PIN, IO_LOW))
     {
         return false;
     }
@@ -655,6 +655,37 @@ bool E22::writeRegister(E22_Reg_Addr addr, uint8_t dataIn)
 }
 
 bool E22::readRegister(E22_Reg_Addr addr, uint8_t *dataOut)
+{
+    E22Command_t command;
+    E22Response_t response;
+    memset(&command, 0, sizeof(E22Command_t));
+    memset(&response, 0, sizeof(E22Response_t));
+    command.commandCode = E22_OpCode_ReadRegister;
+    command.paramCount = 5;
+    command.params.paramsArray[0] = (uint8_t)(addr >> 8);
+    command.params.paramsArray[1] = (uint8_t)(addr >> 0);
+    command.hasResponse = true;
+    command.responsesCount = 5;
+
+    if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
+    {
+        if (xQueueReceive(xE22ResponseQueue, &(response), pdMS_TO_TICKS(10000)) == pdPASS)
+        {
+            processStatus(response.responses.responsesArray[1]);
+            processStatus(response.responses.responsesArray[2]);
+            processStatus(response.responses.responsesArray[3]);
+            *dataOut = response.responses.responsesArray[4];
+            return true;
+        }
+        ESP_LOGE(E22TAG, "Error al leer el comando readRegister a la queue.");
+        return false;
+    }
+
+    ESP_LOGE(E22TAG, "Error al enviar el comando readRegister a la queue.");
+    return false;
+}
+
+bool E22::readRegisterManual(uint16_t addr, uint8_t *dataOut) // TODO: Delete
 {
     E22Command_t command;
     E22Response_t response;

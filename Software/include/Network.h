@@ -28,7 +28,11 @@ public:
      * 
      * @return NETWORK& The instance of the NETWORK class.
      */
-    static NETWORK &getInstance();
+    static NETWORK &getInstance()
+    {
+        static NETWORK instance; // Única instancia
+        return instance;
+    }
 
     /**
      * @brief Initialize the network module.

@@ -1,0 +1,277 @@
+\doxysection{NETWORK Class Reference}
+\hypertarget{classNETWORK}{}\label{classNETWORK}\index{NETWORK@{NETWORK}}
+
+
+The \doxylink{classNETWORK}{NETWORK} class provides functions to initialize, start, stop, scan, connect, disconnect, and check the connection status of a network.  
+
+
+
+
+{\ttfamily \#include $<$Network.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classNETWORK_ade385715273ceb55a719de6fdbf598a1}{NETWORK}} (const \mbox{\hyperlink{classNETWORK}{NETWORK}} \&)=delete
+\item 
+\mbox{\hyperlink{classNETWORK}{NETWORK}} \& \mbox{\hyperlink{classNETWORK_a300fa58297c9952107b33db9f070bfff}{operator=}} (const \mbox{\hyperlink{classNETWORK}{NETWORK}} \&)=delete
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classNETWORK}{NETWORK}} \& \mbox{\hyperlink{classNETWORK_a0e572f25107c60192c799890ce2e5d13}{get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Get the instance of the \doxylink{classNETWORK}{NETWORK} class. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classNETWORK_a6606413ef832b507068b30cf4fbeb4b3}{Begin}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the network module. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classNETWORK_abde265762255c75a5ed75a11ebaf7b03}{start\+Wifi\+Station}} (void)
+\begin{DoxyCompactList}\small\item\em Start the Wi\+Fi station. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classNETWORK_acdbcb20063adf01fd97d49df482c54df}{stop\+Wifi\+Station}} (void)
+\begin{DoxyCompactList}\small\item\em Stop the Wi\+Fi station. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classNETWORK_a8eb73b3d38ed885021967e8d4a318b3e}{wifi\+Scan}} (void)
+\begin{DoxyCompactList}\small\item\em Scan for available networks. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classNETWORK_a76ad43eec6275c6a00419243f0a0405f}{connect\+To\+Network}} (const char \texorpdfstring{$\ast$}{*}ssid, uint32\+\_\+t ssid\+Len, const char \texorpdfstring{$\ast$}{*}password, uint32\+\_\+t password\+Len)
+\begin{DoxyCompactList}\small\item\em Connect to a network. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classNETWORK_a3120bb381a3291ff5bc0ee8a008f098e}{disconnect\+From\+Network}} (void)
+\begin{DoxyCompactList}\small\item\em Disconnect from the network. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classNETWORK_a6088e6226304f320d257c1af2fe42f1d}{is\+Connected\+To\+Network}} (void)
+\begin{DoxyCompactList}\small\item\em Check if the device is connected to a network. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classNETWORK_a681aa1ba644d6ecafdf60e238906aab3}{NETWORK}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classNETWORK_a984f2b93e4be186bf615efad7289d701}{print\+Auth\+Mode}} (int authmode)
+\begin{DoxyCompactList}\small\item\em Print the authentication mode of the networks found. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classNETWORK_aba43d93792b82fe6e0b169731c15d8d5}{wifi\+\_\+event\+\_\+handler}} (void \texorpdfstring{$\ast$}{*}arg, esp\+\_\+event\+\_\+base\+\_\+t event\+\_\+base, int32\+\_\+t event\+\_\+id, void \texorpdfstring{$\ast$}{*}event\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Event handler for Wi\+Fi events. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classNETWORK_a02829a705f7b3c99a2c6f2cd3a2682cf}{connected\+To\+Network}} = false
+\begin{DoxyCompactList}\small\item\em Variable to check if the device is connected to a network. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classNETWORK_ace9003fbb7913d18b260fc2bd5a84bae}{wifi\+Started}} = false
+\begin{DoxyCompactList}\small\item\em Variable to check if the Wi\+Fi has been started. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{classNETWORK}{NETWORK} class provides functions to initialize, start, stop, scan, connect, disconnect, and check the connection status of a network. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classNETWORK_ade385715273ceb55a719de6fdbf598a1}\index{NETWORK@{NETWORK}!NETWORK@{NETWORK}}
+\index{NETWORK@{NETWORK}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{NETWORK()}{NETWORK()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classNETWORK_ade385715273ceb55a719de6fdbf598a1} 
+NETWORK\+::\+NETWORK (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classNETWORK}{NETWORK}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classNETWORK_a681aa1ba644d6ecafdf60e238906aab3}\index{NETWORK@{NETWORK}!NETWORK@{NETWORK}}
+\index{NETWORK@{NETWORK}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{NETWORK()}{NETWORK()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classNETWORK_a681aa1ba644d6ecafdf60e238906aab3} 
+NETWORK\+::\+NETWORK (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classNETWORK_a6606413ef832b507068b30cf4fbeb4b3}\index{NETWORK@{NETWORK}!Begin@{Begin}}
+\index{Begin@{Begin}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{Begin()}{Begin()}}
+{\footnotesize\ttfamily \label{classNETWORK_a6606413ef832b507068b30cf4fbeb4b3} 
+bool NETWORK\+::\+Begin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Initialize the network module. 
+
+\begin{DoxyReturn}{Returns}
+true If the network module was initialized correctly. 
+
+false If there was an error initializing the network module. 
+\end{DoxyReturn}
+\Hypertarget{classNETWORK_a76ad43eec6275c6a00419243f0a0405f}\index{NETWORK@{NETWORK}!connectToNetwork@{connectToNetwork}}
+\index{connectToNetwork@{connectToNetwork}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{connectToNetwork()}{connectToNetwork()}}
+{\footnotesize\ttfamily \label{classNETWORK_a76ad43eec6275c6a00419243f0a0405f} 
+bool NETWORK\+::connect\+To\+Network (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{ssid}{, }\item[{uint32\+\_\+t}]{ssid\+Len}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{password}{, }\item[{uint32\+\_\+t}]{password\+Len}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Connect to a network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ssid} & SSID of the network. \\
+\hline
+{\em ssid\+Len} & Length of the SSID. \\
+\hline
+{\em password} & Password of the network. \\
+\hline
+{\em password\+Len} & Length of the password. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the connection was successful. 
+
+false If there was an error connecting to the network. 
+\end{DoxyReturn}
+\Hypertarget{classNETWORK_a3120bb381a3291ff5bc0ee8a008f098e}\index{NETWORK@{NETWORK}!disconnectFromNetwork@{disconnectFromNetwork}}
+\index{disconnectFromNetwork@{disconnectFromNetwork}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{disconnectFromNetwork()}{disconnectFromNetwork()}}
+{\footnotesize\ttfamily \label{classNETWORK_a3120bb381a3291ff5bc0ee8a008f098e} 
+bool NETWORK\+::disconnect\+From\+Network (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Disconnect from the network. 
+
+\begin{DoxyReturn}{Returns}
+true If the disconnection was successful. 
+
+false If there was an error disconnecting from the network. 
+\end{DoxyReturn}
+\Hypertarget{classNETWORK_a0e572f25107c60192c799890ce2e5d13}\index{NETWORK@{NETWORK}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \label{classNETWORK_a0e572f25107c60192c799890ce2e5d13} 
+static \mbox{\hyperlink{classNETWORK}{NETWORK}} \& NETWORK\+::get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the instance of the \doxylink{classNETWORK}{NETWORK} class. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{classNETWORK}{NETWORK}\& The instance of the \doxylink{classNETWORK}{NETWORK} class. 
+\end{DoxyReturn}
+\Hypertarget{classNETWORK_a6088e6226304f320d257c1af2fe42f1d}\index{NETWORK@{NETWORK}!isConnectedToNetwork@{isConnectedToNetwork}}
+\index{isConnectedToNetwork@{isConnectedToNetwork}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{isConnectedToNetwork()}{isConnectedToNetwork()}}
+{\footnotesize\ttfamily \label{classNETWORK_a6088e6226304f320d257c1af2fe42f1d} 
+bool NETWORK\+::is\+Connected\+To\+Network (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if the device is connected to a network. 
+
+\begin{DoxyReturn}{Returns}
+true If the device is connected to a network. 
+
+false If the device is not connected to a network. 
+\end{DoxyReturn}
+\Hypertarget{classNETWORK_a300fa58297c9952107b33db9f070bfff}\index{NETWORK@{NETWORK}!operator=@{operator=}}
+\index{operator=@{operator=}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classNETWORK_a300fa58297c9952107b33db9f070bfff} 
+\mbox{\hyperlink{classNETWORK}{NETWORK}} \& NETWORK\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classNETWORK}{NETWORK}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classNETWORK_a984f2b93e4be186bf615efad7289d701}\index{NETWORK@{NETWORK}!printAuthMode@{printAuthMode}}
+\index{printAuthMode@{printAuthMode}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{printAuthMode()}{printAuthMode()}}
+{\footnotesize\ttfamily \label{classNETWORK_a984f2b93e4be186bf615efad7289d701} 
+void NETWORK\+::print\+Auth\+Mode (\begin{DoxyParamCaption}\item[{int}]{authmode}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Print the authentication mode of the networks found. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em authmode} & Authentication mode of the network. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classNETWORK_abde265762255c75a5ed75a11ebaf7b03}\index{NETWORK@{NETWORK}!startWifiStation@{startWifiStation}}
+\index{startWifiStation@{startWifiStation}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{startWifiStation()}{startWifiStation()}}
+{\footnotesize\ttfamily \label{classNETWORK_abde265762255c75a5ed75a11ebaf7b03} 
+bool NETWORK\+::start\+Wifi\+Station (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Start the Wi\+Fi station. 
+
+\begin{DoxyReturn}{Returns}
+true If the Wi\+Fi station was started correctly. 
+
+false If there was an error starting the Wi\+Fi station. 
+\end{DoxyReturn}
+\Hypertarget{classNETWORK_acdbcb20063adf01fd97d49df482c54df}\index{NETWORK@{NETWORK}!stopWifiStation@{stopWifiStation}}
+\index{stopWifiStation@{stopWifiStation}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{stopWifiStation()}{stopWifiStation()}}
+{\footnotesize\ttfamily \label{classNETWORK_acdbcb20063adf01fd97d49df482c54df} 
+bool NETWORK\+::stop\+Wifi\+Station (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Stop the Wi\+Fi station. 
+
+\begin{DoxyReturn}{Returns}
+true If the Wi\+Fi station was stopped correctly. 
+
+false If there was an error stopping the Wi\+Fi station. 
+\end{DoxyReturn}
+\Hypertarget{classNETWORK_aba43d93792b82fe6e0b169731c15d8d5}\index{NETWORK@{NETWORK}!wifi\_event\_handler@{wifi\_event\_handler}}
+\index{wifi\_event\_handler@{wifi\_event\_handler}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{wifi\_event\_handler()}{wifi\_event\_handler()}}
+{\footnotesize\ttfamily \label{classNETWORK_aba43d93792b82fe6e0b169731c15d8d5} 
+void NETWORK\+::wifi\+\_\+event\+\_\+handler (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg}{, }\item[{esp\+\_\+event\+\_\+base\+\_\+t}]{event\+\_\+base}{, }\item[{int32\+\_\+t}]{event\+\_\+id}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{event\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Event handler for Wi\+Fi events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em arg} & Pointer to the event handler argument. \\
+\hline
+{\em event\+\_\+base} & Event base. \\
+\hline
+{\em event\+\_\+id} & Event ID. \\
+\hline
+{\em event\+\_\+data} & Pointer to the event data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classNETWORK_a8eb73b3d38ed885021967e8d4a318b3e}\index{NETWORK@{NETWORK}!wifiScan@{wifiScan}}
+\index{wifiScan@{wifiScan}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{wifiScan()}{wifiScan()}}
+{\footnotesize\ttfamily \label{classNETWORK_a8eb73b3d38ed885021967e8d4a318b3e} 
+bool NETWORK\+::wifi\+Scan (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Scan for available networks. 
+
+\begin{DoxyReturn}{Returns}
+true If the scan was successful. 
+
+false If there was an error scanning for networks. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classNETWORK_a02829a705f7b3c99a2c6f2cd3a2682cf}\index{NETWORK@{NETWORK}!connectedToNetwork@{connectedToNetwork}}
+\index{connectedToNetwork@{connectedToNetwork}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{connectedToNetwork}{connectedToNetwork}}
+{\footnotesize\ttfamily \label{classNETWORK_a02829a705f7b3c99a2c6f2cd3a2682cf} 
+bool NETWORK\+::connected\+To\+Network = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Variable to check if the device is connected to a network. 
+
+\Hypertarget{classNETWORK_ace9003fbb7913d18b260fc2bd5a84bae}\index{NETWORK@{NETWORK}!wifiStarted@{wifiStarted}}
+\index{wifiStarted@{wifiStarted}!NETWORK@{NETWORK}}
+\doxysubsubsection{\texorpdfstring{wifiStarted}{wifiStarted}}
+{\footnotesize\ttfamily \label{classNETWORK_ace9003fbb7913d18b260fc2bd5a84bae} 
+bool NETWORK\+::wifi\+Started = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Variable to check if the Wi\+Fi has been started. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{Network_8h}{Network.\+h}}\item 
+src/\mbox{\hyperlink{Network_8cpp}{Network.\+cpp}}\end{DoxyCompactItemize}

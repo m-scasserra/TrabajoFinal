@@ -1,0 +1,41 @@
+\doxysection{Device\+Time.\+h}
+\hypertarget{DeviceTime_8h_source}{}\label{DeviceTime_8h_source}\index{include/DeviceTime.h@{include/DeviceTime.h}}
+\mbox{\hyperlink{DeviceTime_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ DEVICETIME\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ DEVICETIME\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CommonIncludes_8h}{CommonIncludes.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ TIMETAG\ "{}TIME"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ DEFAULT\_TIMEZONE\ "{}GMT+3"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ DEFAULT\_NTP\_SERVER\ "{}ar.pool.ntp.org"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ WAIT\_TIME\_FOR\_NTP\_MS\ 10000}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classDEVICETIME}{DEVICETIME}}}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{classDEVICETIME_a0102c706c732bf73b9ddda6126740891}{DEVICETIME}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classDEVICETIME}{DEVICETIME}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classDEVICETIME}{DEVICETIME}}\ \&\mbox{\hyperlink{classDEVICETIME_a542a6bc09a729fda88cb8b0bdb055bb6}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classDEVICETIME}{DEVICETIME}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classDEVICETIME}{DEVICETIME}}\ \&\mbox{\hyperlink{classDEVICETIME_a9bef32b44fcf43b9d7e16c63c66b62e1}{getInstance}}();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICETIME_a881c01143a84127355a23a8772c16eb9}{Begin}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICETIME_a1ecc36d88dfe321938da64653540ec09}{updateTimeFromNet}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *server,\ uint8\_t\ serverLen);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICETIME_abfe65a8ae6c6d6dfb8b85522162e9681}{printTime}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICETIME_a76b802b345fad934271f65b5ccbf1c7a}{saveTimeToFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICETIME_a8ae96730975e273b749c8ff74cae2d52}{loadTimeFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{classDEVICETIME_a223aae0b4aaf1586ae1f170d389f80ee}{DEVICETIME}}()\ \{\}}
+\DoxyCodeLine{00090\ \};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DEVICETIME\_H}}
+
+\end{DoxyCode}

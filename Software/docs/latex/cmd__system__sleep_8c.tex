@@ -1,0 +1,130 @@
+\doxysection{src/cmd\+\_\+system\+\_\+sleep.c File Reference}
+\hypertarget{cmd__system__sleep_8c}{}\label{cmd__system__sleep_8c}\index{src/cmd\_system\_sleep.c@{src/cmd\_system\_sleep.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$inttypes.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include "{}esp\+\_\+log.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+console.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+chip\+\_\+info.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+sleep.\+h"{}}\newline
+{\ttfamily \#include "{}driver/rtc\+\_\+io.\+h"{}}\newline
+{\ttfamily \#include "{}driver/uart.\+h"{}}\newline
+{\ttfamily \#include "{}argtable3/argtable3.\+h"{}}\newline
+{\ttfamily \#include "{}cmd\+\_\+system.\+h"{}}\newline
+{\ttfamily \#include "{}sdkconfig.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{cmd__system__sleep_8c_a55a448d28410b092baac9241bff97893}{register\+\_\+deep\+\_\+sleep}} (void)
+\item 
+static void \mbox{\hyperlink{cmd__system__sleep_8c_a393b46f840ce1bcb5ee637bab9425963}{register\+\_\+light\+\_\+sleep}} (void)
+\item 
+void \mbox{\hyperlink{cmd__system__sleep_8c_a96a91dd7f941390f45d124bb3684488b}{register\+\_\+system\+\_\+sleep}} (void)
+\item 
+static int \mbox{\hyperlink{cmd__system__sleep_8c_a79d847cfa6b0b77aea0d3c59c73c92ba}{deep\+\_\+sleep}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static int \mbox{\hyperlink{cmd__system__sleep_8c_af946dac1754f014e197ac65464974e28}{light\+\_\+sleep}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{cmd__system__sleep_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}} = "{}cmd\+\_\+system\+\_\+sleep"{}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>struct arg\_int \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{cmd__system__sleep_8c_ab3b20bebbe413d3f7aeaad510b06b504}{wakeup\_time}}\\
+\>struct arg\_end \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{cmd__system__sleep_8c_a088ac7ffa534015d5b07ddcc7aef9fd4}{end}}\\
+\} \mbox{\hyperlink{cmd__system__sleep_8c_aa802eb7cc4d67c93bb4262b73a722cae}{deep\_sleep\_args}}\\
+
+\end{tabbing}\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>struct arg\_int \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{cmd__system__sleep_8c_ab3b20bebbe413d3f7aeaad510b06b504}{wakeup\_time}}\\
+\>struct arg\_int \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{cmd__system__sleep_8c_aa31253a3a15c37d1bf9d6c5d7224f125}{wakeup\_gpio\_num}}\\
+\>struct arg\_int \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{cmd__system__sleep_8c_a4a20eba214d492252e0275fadff9e489}{wakeup\_gpio\_level}}\\
+\>struct arg\_end \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{cmd__system__sleep_8c_a088ac7ffa534015d5b07ddcc7aef9fd4}{end}}\\
+\} \mbox{\hyperlink{cmd__system__sleep_8c_a95da36010bd5ad2cf1477c74d6e50447}{light\_sleep\_args}}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{cmd__system__sleep_8c_a79d847cfa6b0b77aea0d3c59c73c92ba}\index{cmd\_system\_sleep.c@{cmd\_system\_sleep.c}!deep\_sleep@{deep\_sleep}}
+\index{deep\_sleep@{deep\_sleep}!cmd\_system\_sleep.c@{cmd\_system\_sleep.c}}
+\doxysubsubsection{\texorpdfstring{deep\_sleep()}{deep\_sleep()}}
+{\footnotesize\ttfamily \label{cmd__system__sleep_8c_a79d847cfa6b0b77aea0d3c59c73c92ba} 
+static int deep\+\_\+sleep (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{cmd__system__sleep_8c_af946dac1754f014e197ac65464974e28}\index{cmd\_system\_sleep.c@{cmd\_system\_sleep.c}!light\_sleep@{light\_sleep}}
+\index{light\_sleep@{light\_sleep}!cmd\_system\_sleep.c@{cmd\_system\_sleep.c}}
+\doxysubsubsection{\texorpdfstring{light\_sleep()}{light\_sleep()}}
+{\footnotesize\ttfamily \label{cmd__system__sleep_8c_af946dac1754f014e197ac65464974e28} 
+static int light\+\_\+sleep (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{cmd__system__sleep_8c_a55a448d28410b092baac9241bff97893}\index{cmd\_system\_sleep.c@{cmd\_system\_sleep.c}!register\_deep\_sleep@{register\_deep\_sleep}}
+\index{register\_deep\_sleep@{register\_deep\_sleep}!cmd\_system\_sleep.c@{cmd\_system\_sleep.c}}
+\doxysubsubsection{\texorpdfstring{register\_deep\_sleep()}{register\_deep\_sleep()}}
+{\footnotesize\ttfamily \label{cmd__system__sleep_8c_a55a448d28410b092baac9241bff97893} 
+static void register\+\_\+deep\+\_\+sleep (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{cmd__system__sleep_8c_a393b46f840ce1bcb5ee637bab9425963}\index{cmd\_system\_sleep.c@{cmd\_system\_sleep.c}!register\_light\_sleep@{register\_light\_sleep}}
+\index{register\_light\_sleep@{register\_light\_sleep}!cmd\_system\_sleep.c@{cmd\_system\_sleep.c}}
+\doxysubsubsection{\texorpdfstring{register\_light\_sleep()}{register\_light\_sleep()}}
+{\footnotesize\ttfamily \label{cmd__system__sleep_8c_a393b46f840ce1bcb5ee637bab9425963} 
+static void register\+\_\+light\+\_\+sleep (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{cmd__system__sleep_8c_a96a91dd7f941390f45d124bb3684488b}\index{cmd\_system\_sleep.c@{cmd\_system\_sleep.c}!register\_system\_sleep@{register\_system\_sleep}}
+\index{register\_system\_sleep@{register\_system\_sleep}!cmd\_system\_sleep.c@{cmd\_system\_sleep.c}}
+\doxysubsubsection{\texorpdfstring{register\_system\_sleep()}{register\_system\_sleep()}}
+{\footnotesize\ttfamily \label{cmd__system__sleep_8c_a96a91dd7f941390f45d124bb3684488b} 
+void register\+\_\+system\+\_\+sleep (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{cmd__system__sleep_8c_aa802eb7cc4d67c93bb4262b73a722cae}\index{cmd\_system\_sleep.c@{cmd\_system\_sleep.c}!deep\_sleep\_args@{deep\_sleep\_args}}
+\index{deep\_sleep\_args@{deep\_sleep\_args}!cmd\_system\_sleep.c@{cmd\_system\_sleep.c}}
+\doxysubsubsection{\texorpdfstring{[struct]}{[struct]}}
+{\footnotesize\ttfamily \label{cmd__system__sleep_8c_aa802eb7cc4d67c93bb4262b73a722cae} 
+struct  \{ ... \}  deep\+\_\+sleep\+\_\+args\hspace{0.3cm}{\ttfamily [static]}}
+
+\textquotesingle{}deep\+\_\+sleep\textquotesingle{} command puts the chip into deep sleep mode \Hypertarget{cmd__system__sleep_8c_a088ac7ffa534015d5b07ddcc7aef9fd4}\index{cmd\_system\_sleep.c@{cmd\_system\_sleep.c}!end@{end}}
+\index{end@{end}!cmd\_system\_sleep.c@{cmd\_system\_sleep.c}}
+\doxysubsubsection{\texorpdfstring{end}{end}}
+{\footnotesize\ttfamily \label{cmd__system__sleep_8c_a088ac7ffa534015d5b07ddcc7aef9fd4} 
+struct arg\+\_\+end\texorpdfstring{$\ast$}{*} end}
+
+\Hypertarget{cmd__system__sleep_8c_a95da36010bd5ad2cf1477c74d6e50447}\index{cmd\_system\_sleep.c@{cmd\_system\_sleep.c}!light\_sleep\_args@{light\_sleep\_args}}
+\index{light\_sleep\_args@{light\_sleep\_args}!cmd\_system\_sleep.c@{cmd\_system\_sleep.c}}
+\doxysubsubsection{\texorpdfstring{[struct]}{[struct]}}
+{\footnotesize\ttfamily \label{cmd__system__sleep_8c_a95da36010bd5ad2cf1477c74d6e50447} 
+struct  \{ ... \}  light\+\_\+sleep\+\_\+args\hspace{0.3cm}{\ttfamily [static]}}
+
+\textquotesingle{}light\+\_\+sleep\textquotesingle{} command puts the chip into light sleep mode \Hypertarget{cmd__system__sleep_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}\index{cmd\_system\_sleep.c@{cmd\_system\_sleep.c}!TAG@{TAG}}
+\index{TAG@{TAG}!cmd\_system\_sleep.c@{cmd\_system\_sleep.c}}
+\doxysubsubsection{\texorpdfstring{TAG}{TAG}}
+{\footnotesize\ttfamily \label{cmd__system__sleep_8c_a5a85b9c772bbeb480b209a3e6ea92b4c} 
+const char\texorpdfstring{$\ast$}{*} TAG = "{}cmd\+\_\+system\+\_\+sleep"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{cmd__system__sleep_8c_a4a20eba214d492252e0275fadff9e489}\index{cmd\_system\_sleep.c@{cmd\_system\_sleep.c}!wakeup\_gpio\_level@{wakeup\_gpio\_level}}
+\index{wakeup\_gpio\_level@{wakeup\_gpio\_level}!cmd\_system\_sleep.c@{cmd\_system\_sleep.c}}
+\doxysubsubsection{\texorpdfstring{wakeup\_gpio\_level}{wakeup\_gpio\_level}}
+{\footnotesize\ttfamily \label{cmd__system__sleep_8c_a4a20eba214d492252e0275fadff9e489} 
+struct arg\+\_\+int\texorpdfstring{$\ast$}{*} wakeup\+\_\+gpio\+\_\+level}
+
+\Hypertarget{cmd__system__sleep_8c_aa31253a3a15c37d1bf9d6c5d7224f125}\index{cmd\_system\_sleep.c@{cmd\_system\_sleep.c}!wakeup\_gpio\_num@{wakeup\_gpio\_num}}
+\index{wakeup\_gpio\_num@{wakeup\_gpio\_num}!cmd\_system\_sleep.c@{cmd\_system\_sleep.c}}
+\doxysubsubsection{\texorpdfstring{wakeup\_gpio\_num}{wakeup\_gpio\_num}}
+{\footnotesize\ttfamily \label{cmd__system__sleep_8c_aa31253a3a15c37d1bf9d6c5d7224f125} 
+struct arg\+\_\+int\texorpdfstring{$\ast$}{*} wakeup\+\_\+gpio\+\_\+num}
+
+\Hypertarget{cmd__system__sleep_8c_ab3b20bebbe413d3f7aeaad510b06b504}\index{cmd\_system\_sleep.c@{cmd\_system\_sleep.c}!wakeup\_time@{wakeup\_time}}
+\index{wakeup\_time@{wakeup\_time}!cmd\_system\_sleep.c@{cmd\_system\_sleep.c}}
+\doxysubsubsection{\texorpdfstring{wakeup\_time}{wakeup\_time}}
+{\footnotesize\ttfamily \label{cmd__system__sleep_8c_ab3b20bebbe413d3f7aeaad510b06b504} 
+struct arg\+\_\+int\texorpdfstring{$\ast$}{*} wakeup\+\_\+time}
+

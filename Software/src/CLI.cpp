@@ -533,7 +533,7 @@ int CLI::AutoJobCmdFunc(int argc, char **argv)
     }
     else if (!strcmp(command, "save"))
     {
-        AJ.saveJobsToFs();
+        //AJ.saveJobsToFs();
         return 0;
     }
     else if (!strcmp(command, "load"))
@@ -588,6 +588,18 @@ int CLI::AutoJobCmdFunc(int argc, char **argv)
             free(buffer);
         }
         return 0;
+    }
+    else if (!strcmp(command, "register")) //TODO: Delete
+    {
+        
+        E22 &e22 = E22::getInstance();
+        uint8_t aux = 0;
+        for (uint16_t i = 0; i < 0xFFFF; i++)
+        {
+            aux = 0;
+            e22.readRegisterManual(i, &aux);
+            printf("Reg: %X - %X\n", i, aux);
+        }
     }
     else
     {

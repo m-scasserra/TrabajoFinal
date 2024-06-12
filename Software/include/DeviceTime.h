@@ -48,7 +48,11 @@ public:
      * @brief Get the instance of DEVICETIME.
      * @return The instance of DEVICETIME.
      */
-    static DEVICETIME &getInstance();
+    static DEVICETIME &getInstance()
+    {
+        static DEVICETIME instance; // Única instancia
+        return instance;
+    }
 
     /**
      * @brief Initialize the device time.
