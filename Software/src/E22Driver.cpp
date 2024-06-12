@@ -297,7 +297,7 @@ bool E22::E22IOInit(void)
     }
 
     // Initial configuration and initial state of the NRST pin of the E22
-    if (!io.SetConfig(NRST_E22_PIN, GPIO_MODE_OUTPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_DISABLE, GPIO_INTR_DISABLE))
+    if (!io.SetConfig(NRST_E22_PIN, GPIO_MODE_OUTPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_ENABLE, GPIO_INTR_DISABLE))
     {
         return false;
     }
@@ -307,7 +307,7 @@ bool E22::E22IOInit(void)
     }
 
     // Initial configuration of the BUSY pin of the E22
-    if (!io.SetConfig(BUSY_E22_PIN, GPIO_MODE_INPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_DISABLE, GPIO_INTR_DISABLE))
+    if (!io.SetConfig(BUSY_E22_PIN, GPIO_MODE_INPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_ENABLE, GPIO_INTR_DISABLE))
     {
         return false;
     }
@@ -1704,6 +1704,11 @@ bool E22::checkDeviceConnection(void)
     TxBuffer[0] = E22_OpCode_SetStandby;
     TxBuffer[1] = STDBY_RC;
 
+    while (isBusy())
+    {
+        vTaskDelay(pdMS_TO_TICKS(10));
+    }
+    
     if (!spi->SendMessage(TxBuffer, 2))
     {
         ESP_LOGE(E22TAG, "Error al enviar el comando SetStandby");
@@ -1714,6 +1719,11 @@ bool E22::checkDeviceConnection(void)
 
     TxBuffer[0] = E22_OpCode_GetStatus;
     TxBuffer[1] = 0x00;
+
+    while (isBusy())
+    {
+        vTaskDelay(pdMS_TO_TICKS(10));
+    }
 
     if (!spi->SendMessage(TxBuffer, 2, RxBuffer, 2))
     {
