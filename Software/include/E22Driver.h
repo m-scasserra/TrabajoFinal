@@ -1,20 +1,18 @@
 #ifndef E22DRIVER_H
 #define E22DRIVER_H
 
-#include "Includes.h"
+#include "CommonIncludes.h"
 #include "SPI.h"
+#include "E22Opcodes.h"
 
 #define E22TAG "E22"
 
 // Defines generales
-
 #define MAX_CMD_PARAMS 10
 #define MAX_RESPONSES 10
-
 #define DEFAULT_MSG_TIMEOUT_MS 1000
 
 // Defines para la tarea de FRTOS del E22
-
 #define MAX_E22_CMD_QUEUE 200
 
 // Configuracion del SPI Device E22
@@ -25,7 +23,7 @@
 #define SPI_DUTY_CYCLE 0
 #define CYCLES_CS_BEFORE_TRANS 1
 #define CYCLES_CS_AFTER_TRANS 1
-#define SPI_CLOCK 5000000 // 10MHz SPI Clock
+#define SPI_CLOCK SPI_MASTER_FREQ_10M // 10MHz SPI Clock
 #define SPI_QUEUE_SIZE 10
 #define SPI_INPUT_DELAY 0
 #define SPI_DEVICE_CONFIG_FLAGS SPI_DEVICE_NO_DUMMY
@@ -278,6 +276,8 @@ public:
     } E22Response_t;
 
     bool Begin(void);
+
+    bool readRegisterManual(uint16_t addr, uint8_t *dataOut); // TODO: Delete
 
     bool setPacketType(PacketType_t _packetType);
     bool getPacketType(PacketType_t *packetType);

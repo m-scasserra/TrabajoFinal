@@ -1,5 +1,17 @@
-#include "Includes.h"
+#include "CommonIncludes.h"
 #include "DeviceStatus.h"
+#include "Led.h"
+#include "CLI.h"
+#include "cmd_system.h"
+#include "Hardware.h"
+#include "FileSystem.h"
+#include "E22Opcodes.h"
+#include "E22Driver.h"
+#include "IO.h"
+#include "Network.h"
+#include "DeviceTime.h"
+#include "AutomaticJobs.h"
+
 
 extern "C" void app_main(void)
 {
@@ -29,26 +41,26 @@ extern "C" void app_main(void)
 
     switch (ds.deviceStatus.mode)
     {
-    case NONE:
+    case DEVICESTATUS::NONE:
     {
-        ESP_LOGI(E22TAG, "Modo NONE");
+        ESP_LOGI("Main", "Modo NONE");
     }
     break;
-    case TX:
+    case DEVICESTATUS::TX:
     {
-        ESP_LOGI(E22TAG, "Modo TX");
+        ESP_LOGI("Main", "Modo TX");
         e22.setUpForTx();
     }
     break;
-    case RX:
+    case DEVICESTATUS::RX:
     {
-        ESP_LOGI(E22TAG, "Modo RX");
+        ESP_LOGI("Main", "Modo RX");
         e22.setUpForRx();
     }
     break;
     default:
     {
-        ESP_LOGI(E22TAG, "Modo Desconocido");
+        ESP_LOGI("Main", "Modo Desconocido");
     }
     break;
     }

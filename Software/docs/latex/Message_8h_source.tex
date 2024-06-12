@@ -1,0 +1,54 @@
+\doxysection{Message.\+h}
+\hypertarget{Message_8h_source}{}\label{Message_8h_source}\index{include/Message.h@{include/Message.h}}
+\mbox{\hyperlink{Message_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MESSAGE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MESSAGE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CommonIncludes_8h}{CommonIncludes.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ MESSAGETAG\ "{}MSG"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#pragma\ pack(push,\ 1)}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ time\_t\ \mbox{\hyperlink{structMessage__t_a02752e93587a8cebd083ea13d68251ff}{timeAction}};}
+\DoxyCodeLine{00013\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structMessage__t_af7a33d165663bcf1122776d22f033c06}{RssiPkt}};}
+\DoxyCodeLine{00014\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structMessage__t_aecf1f5813a5f82eee22c5fa4adf66a85}{SnrPkt}};}
+\DoxyCodeLine{00015\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structMessage__t_a5c3340de7d5508ceee5c5ec96d5a9ada}{SignalRssiPkt}};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{//\ This\ is\ the\ message\ payload}}
+\DoxyCodeLine{00017\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structMessage__t_acd0579436470f236754a24ea2ba63e83}{messageId}};}
+\DoxyCodeLine{00018\ \ \ \ \ int32\_t\ \mbox{\hyperlink{structMessage__t_a668d9ec640f1dbe74848434875a55877}{ADCValue}};}
+\DoxyCodeLine{00019\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structMessage__t_a500ec8cba9d897e3333b502c8b068397}{flags}};}
+\DoxyCodeLine{00020\ \}\ \mbox{\hyperlink{structMessage__t}{Message\_t}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#pragma\ pack(pop)}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMESSAGE}{MESSAGE}}}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ las\ funciones\ de\ copia\ y\ asignación}}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classMESSAGE_ac70459575cd16b60f8c32c5e12d4a81c}{MESSAGE}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classMESSAGE}{MESSAGE}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classMESSAGE}{MESSAGE}}\ \&\mbox{\hyperlink{classMESSAGE_ae3aa156c27b58f253539415b85f34c7e}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classMESSAGE}{MESSAGE}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{//\ Función\ para\ acceder\ a\ la\ instancia\ única\ del\ MESSAGE}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classMESSAGE}{MESSAGE}}\ \&\mbox{\hyperlink{classMESSAGE_a4ea04700b7e29a58eddcd15cec60099c}{getInstance}}()}
+\DoxyCodeLine{00033\ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classMESSAGE}{MESSAGE}}\ instance;\ \textcolor{comment}{//\ Única\ instancia}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{structMessage__t}{Message\_t}}\ \mbox{\hyperlink{classMESSAGE_ab65c3098a33600bc942cc5a8dd3dfeb0}{processMessageSent}}(uint8\_t\ arr[]);}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{structMessage__t}{Message\_t}}\ \mbox{\hyperlink{classMESSAGE_a72bbdb88f4e75b7f57be3161f1cf55ac}{processMessageRecieved}}(uint8\_t\ arr[]);}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMESSAGE_ab0d3b3a3e2f8587c26d4be809b212a9e}{saveMessage}}(\mbox{\hyperlink{structMessage__t}{Message\_t}}\ message);}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMESSAGE_ac8c51756bb241747b6ae686044da8802}{readAllPackets}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//\ Constructor\ privado}}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classMESSAGE_ab3931b55e4285df03dbe12fe1906d5db}{MESSAGE}}()\ \{\}}
+\DoxyCodeLine{00046\ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MESSAGE\_H}}
+
+\end{DoxyCode}

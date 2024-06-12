@@ -1,0 +1,77 @@
+\doxysection{Automatic\+Jobs.\+h}
+\hypertarget{AutomaticJobs_8h_source}{}\label{AutomaticJobs_8h_source}\index{include/AutomaticJobs.h@{include/AutomaticJobs.h}}
+\mbox{\hyperlink{AutomaticJobs_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ AUTOMATICJOBS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ AUTOMATICJOBS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CommonIncludes_8h}{CommonIncludes.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ AJTAG\ "{}AUTOJOB"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ MAX\_LINE\_LENGTH\ 200}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ MAX\_SCHEDULE\_LENGTH\ 50}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ MAX\_FUNCTION\_NAME\_LENGTH\ 50}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classAUTOJOB}{AUTOJOB}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ las\ funciones\ de\ copia\ y\ asignación}}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classAUTOJOB_a11de55f9dac6079dfc4c61a033fef91c}{AUTOJOB}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classAUTOJOB}{AUTOJOB}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classAUTOJOB}{AUTOJOB}}\ \&\mbox{\hyperlink{classAUTOJOB_ade8a1b1f1fbde1a2a25412a091d7c1e7}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classAUTOJOB}{AUTOJOB}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classAUTOJOB}{AUTOJOB}}\ \&\mbox{\hyperlink{classAUTOJOB_a3543769cd9eb99b81f46ba2965add7a4}{getInstance}}()}
+\DoxyCodeLine{00020\ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classAUTOJOB}{AUTOJOB}}\ instance;\ \textcolor{comment}{//\ Única\ instancia}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00023\ \ \ \ \ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//\ Define\ a\ callback\ function\ type\ (can\ be\ modified\ to\ fit\ your\ specific\ needs)}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca}{callback\_t}})(void);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{//\ Structure\ to\ store\ a\ callback\ and\ its\ name}}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structAUTOJOB_1_1callbackNode}{callbackNode}}}
+\DoxyCodeLine{00030\ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structAUTOJOB_1_1callbackNode_a20ec85d1528e7ceedb7d39e9947b3f79}{name}};}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca}{callback\_t}}\ \mbox{\hyperlink{structAUTOJOB_1_1callbackNode_ac7211aaff5e02b398995b25a1b780433}{function}};}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structAUTOJOB_1_1callbackNode}{callbackNode}}\ *\mbox{\hyperlink{structAUTOJOB_1_1callbackNode_a712de1c26e09afa2d50aea9549227d9f}{next}};}
+\DoxyCodeLine{00034\ \ \ \ \ \}\ \mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{callbackNode\_t}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structAUTOJOB_1_1callback__node}{callback\_node}}}
+\DoxyCodeLine{00037\ \ \ \ \ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structAUTOJOB_1_1callback__node_a265404c9062d231a9192620d38eb1f81}{name}};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca}{callback\_t}}\ \mbox{\hyperlink{structAUTOJOB_1_1callback__node_ae0dff8cd02dfd5ccf38078c338fcf205}{function}};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structAUTOJOB_1_1callback__node}{callback\_node}}\ *\mbox{\hyperlink{structAUTOJOB_1_1callback__node_a031ad80e4ac79ae9788384d8e2598d0c}{next}};}
+\DoxyCodeLine{00041\ \ \ \ \ \}\ \mbox{\hyperlink{classAUTOJOB_a038304a67e4eb120d47289062ac9a900}{callback\_node\_t}};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAUTOJOB_a80ef52995454ba43ee98e622c6bfb41c}{loadJobsFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAUTOJOB_addfe65b001565e43204a1fcf46259ac4}{saveJobsToFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAUTOJOB_a7a445b89becad6eb23c5fcde2e549cdf}{deleteJobsFromFs}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *functionToDelete);}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAUTOJOB_a73acab1bcb3c865bbc87b4bfc53478d6}{startJobs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAUTOJOB_aee5fc48eae3110e7949170684c61634c}{stopJobs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAUTOJOB_a0bfa105f76673995f17f67eaf1eba0de}{Begin}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAUTOJOB_a717714ab7a6d233dc4470b81d8f52f52}{addAllCallbacks}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAUTOJOB_af8b48d5f6d483754ac8b1ead432fadf4}{printAllCallbacksNames}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//\ Constructor\ privado}}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{classAUTOJOB_a267845c93b8ccfd4b2d100ca064d1b46}{AUTOJOB}}()\ \{\}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ Function\ to\ create\ a\ new\ callback\ node}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{callbackNode\_t}}\ *\mbox{\hyperlink{classAUTOJOB_a81c31d613f75d120ffbb5bc9dd72decd}{createCallbackNode}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name,\ \mbox{\hyperlink{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca}{callback\_t}}\ function);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{comment}{//\ Function\ to\ add\ a\ callback\ to\ the\ list}}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ \mbox{\hyperlink{classAUTOJOB_a8bebe385c8eeb68e70febe7f4866ad36}{addCallback}}(\mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{callbackNode\_t}}\ **head,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name,\ \mbox{\hyperlink{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca}{callback\_t}}\ function);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//\ Function\ to\ find\ a\ callback\ by\ name}}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca}{callback\_t}}\ \mbox{\hyperlink{classAUTOJOB_ad8d0adc8c4923d9bf549f817f80f2cac}{getCallback}}(\mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{callbackNode\_t}}\ *head,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//\ Function\ to\ free\ the\ callback\ list\ (important\ for\ memory\ management)}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAUTOJOB_a81cf2e0bd98f5f34392152336fe258c4}{freeCallbackList}}(\mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{callbackNode\_t}}\ *head);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAUTOJOB_a55dea98dd750aa0267da9f06b22d3ddd}{started}};}
+\DoxyCodeLine{00069\ \};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ AUTOMATICJOBS\_H}}
+
+\end{DoxyCode}

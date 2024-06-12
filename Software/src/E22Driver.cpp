@@ -1,5 +1,10 @@
 #include "E22Driver.h"
 #include "DeviceStatus.h"
+#include "Hardware.h"
+#include "IO.h"
+
+#include "driver/gpio.h"
+
 
 SPI* E22::spi = new SPI();
 TaskHandle_t E22::E22TaskHandle = NULL;
@@ -31,35 +36,35 @@ void E22::E22Task(void *pvParameters)
 {
     E22 *e22 = (E22 *)pvParameters;
 
-    ESP_LOGI(E22TAG, "Apagando E22.");
+    ESP_LOGI(E22TAG, "Shutting down the E22.");
     e22->resetOn();
     vTaskDelay(pdMS_TO_TICKS(1000));
 
     while (e22->isBusy())
     {
-        ESP_LOGI(E22TAG, "Esperando a que el E22 se apague.");
+        ESP_LOGI(E22TAG, "E22 is busy, waiting for it to be ready.");
         vTaskDelay(pdMS_TO_TICKS(10));
     }
 
-    ESP_LOGI(E22TAG, "E22 apagado, lo prendo.");
+    ESP_LOGI(E22TAG, "E22 is off, turning it on.");
     e22->resetOff();
 
     if (!e22->checkDeviceConnection())
     {
-        ESP_LOGE(E22TAG, "E22 no conectado.");
+        ESP_LOGE(E22TAG, "E22 not connected.");
         while (1)
         {
             vTaskDelay(pdMS_TO_TICKS(1000));
         }
     }
-    ESP_LOGI(E22TAG, "E22 conectado.");
+    ESP_LOGI(E22TAG, "E22 connected.");
 
     if (!e22->antennaMismatchCorrection())
     {
-        ESP_LOGE(E22TAG, "E22 no se puede corregir la antena.");
+        ESP_LOGE(E22TAG, "E22 antenna mismatch correction failed.");
     }
 
-    ESP_LOGI(E22TAG, "E22 listo para enviar y recibir.");
+    ESP_LOGI(E22TAG, "E22 ready to work.");
 
     while (1)
     {
@@ -70,82 +75,118 @@ void E22::E22Task(void *pvParameters)
             e22->processCmd();
         }
 
-        vTaskDelay(pdMS_TO_TICKS(100)); // Espero al siguiente CMD
+        // Wait for the next cycle
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 }
 
+
 bool E22::Begin(void)
 {
-    // Configuro el IO necesario para el control del E22
-    E22IOInit();
+    // Initialize the hardware for the E22
+    
+    if (!E22IOInit())
+    {
+        ESP_LOGE(E22TAG, "Error initializing the IO pins for the E22.");
+        return false;
+    }
+    
+    if (!InterruptInit())
+    {
+        ESP_LOGE(E22TAG, "Error initializing the interrupt for the E22.");
+        return false;
+    }
 
-    InterruptInit();
-
-    // Seteo todos los valores de las variables a 0
     memset(&IRQReg, 0, sizeof(IRQReg_t));
     memset(&s_packetParams, 0, sizeof(LoraPacketParams_t));
     memset(&s_modulationParams, 0, sizeof(ModulationParameters_t));
 
-    // Creo la queue de mensajes hacia el E22
+    // Command queue
     xE22CmdQueue = xQueueCreate(MAX_E22_CMD_QUEUE, sizeof(E22Command_t));
-    // Creo la queue de mensajes desde el E22
+    // Response queue
     xE22ResponseQueue = xQueueCreate(MAX_E22_CMD_QUEUE, sizeof(E22Response_t));
 
-    // Creo el semaphore de interrupcciones
+    // Interrupt semaphore start as taken
     xE22InterruptSempahore = xSemaphoreCreateBinary();
+    if (xE22InterruptSempahore == NULL)
+    {
+        ESP_LOGE(E22TAG, "Error creating the E22 interrupt semaphore.");
+        return false;
+    }
     xSemaphoreGive(xE22InterruptSempahore);
     xSemaphoreTake(xE22InterruptSempahore, 0);
 
-    // Creo el semaphore de respuestas de los mensajes
+    // Response semaphore start as taken
     xE22ResponseWaitSempahore = xSemaphoreCreateBinary();
+    if (xE22ResponseWaitSempahore == NULL)
+    {
+        ESP_LOGE(E22TAG, "Error creating the E22 response semaphore.");
+        return false;
+    }
     xSemaphoreGive(xE22ResponseWaitSempahore);
     xSemaphoreTake(xE22ResponseWaitSempahore, 0);
 
     if (xE22CmdQueue == NULL)
     {
-        /* Queue was not created and must not be used. */
+        ESP_LOGE(E22TAG, "Error creating the E22 command queue.");
+        return false;
     }
 
-    // Configuracion del bus SPI
+    if (xE22ResponseQueue == NULL)
+    {
+        ESP_LOGE(E22TAG, "Error creating the E22 response queue.");
+        return false;
+    }
+    
+    // SPI bus configuration
     spi_bus_config_t SPIBusCfg;
-    memset(&SPIBusCfg, 0, sizeof(spi_bus_config_t));   // Seteo el SPIBus en 0 para asegurarme que ningun parametro esta pre iniciado
-    SPIBusCfg.mosi_io_num = SPI_MOSI_PIN;              // Pin del MOSI
-    SPIBusCfg.miso_io_num = SPI_MISO_PIN;              // Pin del MiSO
-    SPIBusCfg.sclk_io_num = SPI_SCK_PIN;               // Pin del SCK
-    SPIBusCfg.quadhd_io_num = -1;                      // No se usa el Write Protect
-    SPIBusCfg.quadwp_io_num = -1;                      // No se usa el Hold
-    SPIBusCfg.data4_io_num = -1;                       // No se usa el spi Data 4 signal porque no estamos en OSPI
-    SPIBusCfg.data5_io_num = -1;                       // No se usa el spi Data 5 signal porque no estamos en OSPI
-    SPIBusCfg.data6_io_num = -1;                       // No se usa el spi Data 6 signal porque no estamos en OSPI
-    SPIBusCfg.data7_io_num = -1;                       // No se usa el spi Data 7 signal porque no estamos en OSPI
-    SPIBusCfg.max_transfer_sz = SPI_MAX_TRANSFER;      // Maximo tamaño de transferencia
-    SPIBusCfg.flags = SPICOMMON_BUSFLAG_MASTER;        // Flag para indicar que el µC es el master en SPI
-    SPIBusCfg.isr_cpu_id = ESP_INTR_CPU_AFFINITY_AUTO; // CPU que se encarga de las interrupciones, en el ESP32-C3 hay un solo CPU
-    SPIBusCfg.intr_flags = SPI_INTR_BUS_FLAGS;         // Flags de configuracion para el bus SPI
+    memset(&SPIBusCfg, 0, sizeof(spi_bus_config_t));
+    SPIBusCfg.mosi_io_num = SPI_MOSI_PIN;               // MOSI pin
+    SPIBusCfg.miso_io_num = SPI_MISO_PIN;               // MISO pin
+    SPIBusCfg.sclk_io_num = SPI_SCK_PIN;                // SCK pin
+    SPIBusCfg.quadhd_io_num = -1;                       // Write protect pin not used
+    SPIBusCfg.quadwp_io_num = -1;                       // Hold pin not used
+    SPIBusCfg.data4_io_num = -1;                        // Data 4 pin not used because we are not in OSPI
+    SPIBusCfg.data5_io_num = -1;                        // Data 5 pin not used because we are not in OSPI
+    SPIBusCfg.data6_io_num = -1;                        // Data 6 pin not used because we are not in OSPI
+    SPIBusCfg.data7_io_num = -1;                        // Data 7 pin not used because we are not in OSPI
+    SPIBusCfg.max_transfer_sz = SPI_MAX_TRANSFER;       // Maximum transfer size
+    SPIBusCfg.flags = SPICOMMON_BUSFLAG_MASTER;         // Flags of the SPI bus
+    SPIBusCfg.isr_cpu_id = ESP_INTR_CPU_AFFINITY_AUTO;  // CPU affinity for the ISR
+    SPIBusCfg.intr_flags = SPI_INTR_BUS_FLAGS;          // Flags for the ISR
 
-    // Configuracion SPI del E22
+    // SPI slave configuration
     spi_device_interface_config_t SPISlaveCfg;
-    memset(&SPISlaveCfg, 0, sizeof(spi_device_interface_config_t)); // Seteo el SPISlaveCfg en 0 para asegurarme que ningun parametro esta pre iniciado
-    SPISlaveCfg.command_bits = SPI_COMMAND_LEN;                     // Largo en bits de loa comandos
-    SPISlaveCfg.address_bits = SPI_ADDR_LEN;                        // Largo en bits de las direcciones de los registros a leer/escribir
-    SPISlaveCfg.dummy_bits = SPI_DUMMY_BITS;                        // Cantidad en bits de DummyBits enviar si la comunicacion fuera HalfDuplex
-    SPISlaveCfg.mode = SPI_MODE;                                    // SPI mode 0
-    SPISlaveCfg.clock_source = SPI_CLK_SRC_APB;                     // Eligo el XTAL como clock source para no tener problemas si cambio la CPU frec
-    SPISlaveCfg.duty_cycle_pos = SPI_DUTY_CYCLE;                    // Duty Cycle de la señal SPI
-    SPISlaveCfg.cs_ena_pretrans = CYCLES_CS_BEFORE_TRANS;           // Ciclos de clock a esperar entre que cambio el CS de valor y empiezo una transaccion
-    SPISlaveCfg.cs_ena_posttrans = CYCLES_CS_AFTER_TRANS;           // Ciclos de clock a esperar entre que termino una transaccion y cambio el CS de valor
-    SPISlaveCfg.clock_speed_hz = SPI_CLOCK;                         // Clock out at 10 MHz
-    SPISlaveCfg.input_delay_ns = SPI_INPUT_DELAY;                   // Delay en nS de la transaccion
+    memset(&SPISlaveCfg, 0, sizeof(spi_device_interface_config_t));
+    SPISlaveCfg.command_bits = SPI_COMMAND_LEN;                     // Length in bits of the command
+    SPISlaveCfg.address_bits = SPI_ADDR_LEN;                        // Length in bits of the address
+    SPISlaveCfg.dummy_bits = SPI_DUMMY_BITS;                        // Length in bits of the dummy bits
+    SPISlaveCfg.mode = SPI_MODE;                                    // SPI mode
+    SPISlaveCfg.clock_source = SPI_CLK_SRC_APB;                     // Clock source
+    SPISlaveCfg.duty_cycle_pos = SPI_DUTY_CYCLE;                    // Duty cycle
+    SPISlaveCfg.cs_ena_pretrans = CYCLES_CS_BEFORE_TRANS;           // Clock cycles to wait after CS is activated to start the transaction
+    SPISlaveCfg.cs_ena_posttrans = CYCLES_CS_AFTER_TRANS;           // Clock cycles to wait after the transaction is done to deactivate CS
+    SPISlaveCfg.clock_speed_hz = SPI_CLOCK;                         // Clock speed in Hz
+    SPISlaveCfg.input_delay_ns = SPI_INPUT_DELAY;                   // Input delay in ns
     SPISlaveCfg.spics_io_num = SPI_CS_E22_PIN;                      // CS pin
-    SPISlaveCfg.flags = SPI_DEVICE_CONFIG_FLAGS;                    // Flags de configuracion para el Device
+    SPISlaveCfg.flags = SPI_DEVICE_CONFIG_FLAGS;                    // Flags for the SPI device
     SPISlaveCfg.queue_size = SPI_QUEUE_SIZE;                        // We want to be able to queue 1 transaction at a time
-    SPISlaveCfg.pre_cb = NULL;                                      // Callback pre transaccion, no se implementa
-    SPISlaveCfg.post_cb = NULL;                                     // Callback post transaccion, no se implementa
+    SPISlaveCfg.pre_cb = NULL;                                      // Callback pre transaccion, not implemented
+    SPISlaveCfg.post_cb = NULL;                                     // Callback post transaccion, not implemented
 
-    spi->Begin(&SPIBusCfg);
-    spi->AddDevice(&SPISlaveCfg);
+    if (!spi->Begin(&SPIBusCfg))
+    {
+        ESP_LOGE(E22TAG, "Error initiating SPI bus.");
+        return false;
+    }
+    
+    if (!spi->AddDevice(&SPISlaveCfg))
+    {
+        ESP_LOGE(E22TAG, "Error adding device to the SPI bus.");
+        return false;
+    }
 
-    ESP_LOGI(E22TAG, "Configuracion del SPI correcta, iniciando tarea del E22");
+    ESP_LOGI(E22TAG, "SPI Configured correctly, initiating E22 task.");
 
     xTaskCreatePinnedToCore(
         E22Task,            // Task function.
@@ -233,41 +274,43 @@ bool E22::processInterrupt(void)
 bool E22::E22IOInit(void)
 {
     IO &io = IO::getInstance();
-    // Configuracion inicial y estado inicial del pin RXEN del E22
+    // Initialize the IO pins for the E22
+
+    // Initial configuration and initial state of the RXEN pin of the E22
     if (!io.SetConfig(RX_EN_E22_PIN, GPIO_MODE_OUTPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_ENABLE, GPIO_INTR_DISABLE))
     {
         return false;
-    };
-    if (io.SetLevel((gpio_num_t)RX_EN_E22_PIN, IO_LOW))
+    }
+    if (!io.SetLevel((gpio_num_t)RX_EN_E22_PIN, IO_LOW))
     {
         return false;
     }
 
-    // Configuracion inicial y estado inicial del pin TXEN del E22
+    // Initial configuration and initial state of the TXEN pin of the E22
     if (!io.SetConfig(TX_EN_E22_PIN, GPIO_MODE_OUTPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_ENABLE, GPIO_INTR_DISABLE))
     {
         return false;
-    };
-    if (io.SetLevel((gpio_num_t)TX_EN_E22_PIN, IO_LOW))
+    }
+    if (!io.SetLevel((gpio_num_t)TX_EN_E22_PIN, IO_LOW))
     {
         return false;
     }
 
-    // Configuracion inicial y estado inicial del pin NRST del E22
-    if (!io.SetConfig(NRST_E22_PIN, GPIO_MODE_OUTPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_DISABLE, GPIO_INTR_DISABLE))
+    // Initial configuration and initial state of the NRST pin of the E22
+    if (!io.SetConfig(NRST_E22_PIN, GPIO_MODE_OUTPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_ENABLE, GPIO_INTR_DISABLE))
     {
         return false;
-    };
-    if (io.SetLevel((gpio_num_t)NRST_E22_PIN, IO_LOW))
+    }
+    if (!io.SetLevel((gpio_num_t)NRST_E22_PIN, IO_LOW))
     {
         return false;
     }
 
-    // Configuracion inicial del pin BUSY del E22
-    if (!io.SetConfig(BUSY_E22_PIN, GPIO_MODE_INPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_DISABLE, GPIO_INTR_DISABLE))
+    // Initial configuration of the BUSY pin of the E22
+    if (!io.SetConfig(BUSY_E22_PIN, GPIO_MODE_INPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_ENABLE, GPIO_INTR_DISABLE))
     {
         return false;
-    };
+    }
 
     return true;
 }
@@ -612,6 +655,37 @@ bool E22::writeRegister(E22_Reg_Addr addr, uint8_t dataIn)
 }
 
 bool E22::readRegister(E22_Reg_Addr addr, uint8_t *dataOut)
+{
+    E22Command_t command;
+    E22Response_t response;
+    memset(&command, 0, sizeof(E22Command_t));
+    memset(&response, 0, sizeof(E22Response_t));
+    command.commandCode = E22_OpCode_ReadRegister;
+    command.paramCount = 5;
+    command.params.paramsArray[0] = (uint8_t)(addr >> 8);
+    command.params.paramsArray[1] = (uint8_t)(addr >> 0);
+    command.hasResponse = true;
+    command.responsesCount = 5;
+
+    if (xQueueSend(xE22CmdQueue, (void *)&command, 0) == pdPASS)
+    {
+        if (xQueueReceive(xE22ResponseQueue, &(response), pdMS_TO_TICKS(10000)) == pdPASS)
+        {
+            processStatus(response.responses.responsesArray[1]);
+            processStatus(response.responses.responsesArray[2]);
+            processStatus(response.responses.responsesArray[3]);
+            *dataOut = response.responses.responsesArray[4];
+            return true;
+        }
+        ESP_LOGE(E22TAG, "Error al leer el comando readRegister a la queue.");
+        return false;
+    }
+
+    ESP_LOGE(E22TAG, "Error al enviar el comando readRegister a la queue.");
+    return false;
+}
+
+bool E22::readRegisterManual(uint16_t addr, uint8_t *dataOut) // TODO: Delete
 {
     E22Command_t command;
     E22Response_t response;
@@ -1630,6 +1704,11 @@ bool E22::checkDeviceConnection(void)
     TxBuffer[0] = E22_OpCode_SetStandby;
     TxBuffer[1] = STDBY_RC;
 
+    while (isBusy())
+    {
+        vTaskDelay(pdMS_TO_TICKS(10));
+    }
+    
     if (!spi->SendMessage(TxBuffer, 2))
     {
         ESP_LOGE(E22TAG, "Error al enviar el comando SetStandby");
@@ -1640,6 +1719,11 @@ bool E22::checkDeviceConnection(void)
 
     TxBuffer[0] = E22_OpCode_GetStatus;
     TxBuffer[1] = 0x00;
+
+    while (isBusy())
+    {
+        vTaskDelay(pdMS_TO_TICKS(10));
+    }
 
     if (!spi->SendMessage(TxBuffer, 2, RxBuffer, 2))
     {
@@ -1898,4 +1982,3 @@ bool E22::IsInTransaction(void)
 {
     return InTransaction;
 }
-

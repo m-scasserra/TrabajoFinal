@@ -1,0 +1,200 @@
+\doxysection{SPI Class Reference}
+\hypertarget{classSPI}{}\label{classSPI}\index{SPI@{SPI}}
+
+
+{\ttfamily \#include $<$SPI.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSPI_a2ba081c29fbdecc704c6bf00b24d5205}{SPI}} ()
+\item 
+bool \mbox{\hyperlink{classSPI_a346740d6b1a56968b34eff772e115987}{Begin}} (spi\+\_\+bus\+\_\+config\+\_\+t \texorpdfstring{$\ast$}{*}SPIBus\+Cfg, spi\+\_\+host\+\_\+device\+\_\+t host\+\_\+id=SPI2\+\_\+\+HOST, spi\+\_\+dma\+\_\+chan\+\_\+t dma\+\_\+chan=SPI\+\_\+\+DMA\+\_\+\+DISABLED)
+\begin{DoxyCompactList}\small\item\em Initializes the \doxylink{classSPI}{SPI} bus. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classSPI_ad269245233960467777c40dd65e9f09d}{Add\+Device}} (spi\+\_\+device\+\_\+interface\+\_\+config\+\_\+t \texorpdfstring{$\ast$}{*}SPISlave\+Cfg)
+\begin{DoxyCompactList}\small\item\em Adds a device to the \doxylink{classSPI}{SPI} bus. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classSPI_ae13afa285e0c21c541221d92ecb0872f}{Send\+Message}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}tx\+\_\+msg, uint8\+\_\+t tx\+\_\+len, uint8\+\_\+t \texorpdfstring{$\ast$}{*}rx\+\_\+msg, uint8\+\_\+t rx\+\_\+len)
+\begin{DoxyCompactList}\small\item\em Sends a message to the slave device. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classSPI_afda93536ddce3ba06042ffa7251d3f9d}{Send\+Message}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}tx\+\_\+msg, uint8\+\_\+t tx\+\_\+len)
+\begin{DoxyCompactList}\small\item\em Sends a message to the slave device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSPI_a5899c86a5a89c06c6d649087194cabb3}{debug\+TXmessage}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}tx\+\_\+msg, uint8\+\_\+t tx\+\_\+len)
+\begin{DoxyCompactList}\small\item\em Debug function to print the message sent. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSPI_adbda98ea06cacebfc6041304514a426e}{debug\+RXmessage}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}rx\+\_\+msg, uint8\+\_\+t rx\+\_\+len)
+\begin{DoxyCompactList}\small\item\em Debug function to print the message received. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classSPI_a462315b7142c6d643c1466582e771841}{SPIInitialized}}
+\begin{DoxyCompactList}\small\item\em Flag to check if the \doxylink{classSPI}{SPI} bus was initialized. \end{DoxyCompactList}\item 
+spi\+\_\+device\+\_\+handle\+\_\+t \mbox{\hyperlink{classSPI_a853a765aa04121875c5b9f5c6b934367}{SPIHandle}}
+\begin{DoxyCompactList}\small\item\em Handle to the \doxylink{classSPI}{SPI} device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classSPI_a2ba081c29fbdecc704c6bf00b24d5205}\index{SPI@{SPI}!SPI@{SPI}}
+\index{SPI@{SPI}!SPI@{SPI}}
+\doxysubsubsection{\texorpdfstring{SPI()}{SPI()}}
+{\footnotesize\ttfamily \label{classSPI_a2ba081c29fbdecc704c6bf00b24d5205} 
+SPI\+::\+SPI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classSPI_ad269245233960467777c40dd65e9f09d}\index{SPI@{SPI}!AddDevice@{AddDevice}}
+\index{AddDevice@{AddDevice}!SPI@{SPI}}
+\doxysubsubsection{\texorpdfstring{AddDevice()}{AddDevice()}}
+{\footnotesize\ttfamily \label{classSPI_ad269245233960467777c40dd65e9f09d} 
+bool SPI\+::\+Add\+Device (\begin{DoxyParamCaption}\item[{spi\+\_\+device\+\_\+interface\+\_\+config\+\_\+t \texorpdfstring{$\ast$}{*}}]{SPISlave\+Cfg}{}\end{DoxyParamCaption})}
+
+
+
+Adds a device to the \doxylink{classSPI}{SPI} bus. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em SPISlave\+Cfg} & \doxylink{classSPI}{SPI} slave configuration \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the slave device was added correctly 
+
+false If there was an error adding the slave device 
+\end{DoxyReturn}
+\Hypertarget{classSPI_a346740d6b1a56968b34eff772e115987}\index{SPI@{SPI}!Begin@{Begin}}
+\index{Begin@{Begin}!SPI@{SPI}}
+\doxysubsubsection{\texorpdfstring{Begin()}{Begin()}}
+{\footnotesize\ttfamily \label{classSPI_a346740d6b1a56968b34eff772e115987} 
+bool SPI\+::\+Begin (\begin{DoxyParamCaption}\item[{spi\+\_\+bus\+\_\+config\+\_\+t \texorpdfstring{$\ast$}{*}}]{SPIBus\+Cfg}{, }\item[{spi\+\_\+host\+\_\+device\+\_\+t}]{host\+\_\+id}{ = {\ttfamily SPI2\+\_\+HOST}, }\item[{spi\+\_\+dma\+\_\+chan\+\_\+t}]{dma\+\_\+chan}{ = {\ttfamily SPI\+\_\+DMA\+\_\+DISABLED}}\end{DoxyParamCaption})}
+
+
+
+Initializes the \doxylink{classSPI}{SPI} bus. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em SPIBus\+Cfg} & \doxylink{classSPI}{SPI} bus configuration \\
+\hline
+{\em host\+\_\+id} & \doxylink{classSPI}{SPI} host device \\
+\hline
+{\em dma\+\_\+chan} & \doxylink{classSPI}{SPI} DMA channel \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the \doxylink{classSPI}{SPI} bus was initialized correctly 
+
+false If there was an error initializing the \doxylink{classSPI}{SPI} bus 
+\end{DoxyReturn}
+\Hypertarget{classSPI_adbda98ea06cacebfc6041304514a426e}\index{SPI@{SPI}!debugRXmessage@{debugRXmessage}}
+\index{debugRXmessage@{debugRXmessage}!SPI@{SPI}}
+\doxysubsubsection{\texorpdfstring{debugRXmessage()}{debugRXmessage()}}
+{\footnotesize\ttfamily \label{classSPI_adbda98ea06cacebfc6041304514a426e} 
+void SPI\+::debug\+RXmessage (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{rx\+\_\+msg}{, }\item[{uint8\+\_\+t}]{rx\+\_\+len}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Debug function to print the message received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rx\+\_\+msg} & Message to be printed \\
+\hline
+{\em rx\+\_\+len} & Length of the message to be printed \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classSPI_a5899c86a5a89c06c6d649087194cabb3}\index{SPI@{SPI}!debugTXmessage@{debugTXmessage}}
+\index{debugTXmessage@{debugTXmessage}!SPI@{SPI}}
+\doxysubsubsection{\texorpdfstring{debugTXmessage()}{debugTXmessage()}}
+{\footnotesize\ttfamily \label{classSPI_a5899c86a5a89c06c6d649087194cabb3} 
+void SPI\+::debug\+TXmessage (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{tx\+\_\+msg}{, }\item[{uint8\+\_\+t}]{tx\+\_\+len}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Debug function to print the message sent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tx\+\_\+msg} & Message to be printed \\
+\hline
+{\em tx\+\_\+len} & Length of the message to be printed \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classSPI_afda93536ddce3ba06042ffa7251d3f9d}\index{SPI@{SPI}!SendMessage@{SendMessage}}
+\index{SendMessage@{SendMessage}!SPI@{SPI}}
+\doxysubsubsection{\texorpdfstring{SendMessage()}{SendMessage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classSPI_afda93536ddce3ba06042ffa7251d3f9d} 
+bool SPI\+::\+Send\+Message (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{tx\+\_\+msg}{, }\item[{uint8\+\_\+t}]{tx\+\_\+len}{}\end{DoxyParamCaption})}
+
+
+
+Sends a message to the slave device. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tx\+\_\+msg} & Message to be sent \\
+\hline
+{\em tx\+\_\+len} & Length of the message to be sent \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the message was sent correctly 
+
+false If there was an error sending the message 
+\end{DoxyReturn}
+\Hypertarget{classSPI_ae13afa285e0c21c541221d92ecb0872f}\index{SPI@{SPI}!SendMessage@{SendMessage}}
+\index{SendMessage@{SendMessage}!SPI@{SPI}}
+\doxysubsubsection{\texorpdfstring{SendMessage()}{SendMessage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classSPI_ae13afa285e0c21c541221d92ecb0872f} 
+bool SPI\+::\+Send\+Message (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{tx\+\_\+msg}{, }\item[{uint8\+\_\+t}]{tx\+\_\+len}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{rx\+\_\+msg}{, }\item[{uint8\+\_\+t}]{rx\+\_\+len}{}\end{DoxyParamCaption})}
+
+
+
+Sends a message to the slave device. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tx\+\_\+msg} & Message to be sent \\
+\hline
+{\em tx\+\_\+len} & Length of the message to be sent \\
+\hline
+{\em rx\+\_\+msg} & Buffer to store the received message \\
+\hline
+{\em rx\+\_\+len} & Length of the buffer to store the received message \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the message was sent and received correctly 
+
+false If there was an error sending or receiving the message 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classSPI_a853a765aa04121875c5b9f5c6b934367}\index{SPI@{SPI}!SPIHandle@{SPIHandle}}
+\index{SPIHandle@{SPIHandle}!SPI@{SPI}}
+\doxysubsubsection{\texorpdfstring{SPIHandle}{SPIHandle}}
+{\footnotesize\ttfamily \label{classSPI_a853a765aa04121875c5b9f5c6b934367} 
+spi\+\_\+device\+\_\+handle\+\_\+t SPI\+::\+SPIHandle\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handle to the \doxylink{classSPI}{SPI} device. 
+
+\Hypertarget{classSPI_a462315b7142c6d643c1466582e771841}\index{SPI@{SPI}!SPIInitialized@{SPIInitialized}}
+\index{SPIInitialized@{SPIInitialized}!SPI@{SPI}}
+\doxysubsubsection{\texorpdfstring{SPIInitialized}{SPIInitialized}}
+{\footnotesize\ttfamily \label{classSPI_a462315b7142c6d643c1466582e771841} 
+bool SPI\+::\+SPIInitialized\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Flag to check if the \doxylink{classSPI}{SPI} bus was initialized. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{SPI_8h}{SPI.\+h}}\item 
+src/\mbox{\hyperlink{SPI_8cpp}{SPI.\+cpp}}\end{DoxyCompactItemize}

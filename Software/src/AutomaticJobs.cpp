@@ -1,7 +1,16 @@
+#include <stddef.h>
+
+#include "cron.h"
+
 #include "AutomaticJobs.h"
-#include "include/cron.h"
-#include "DeviceStatus.h"
 #include "Message.h"
+#include "E22Driver.h"
+#include "Led.h"
+#include "DeviceStatus.h"
+#include "FileSystem.h"
+#include "DeviceTime.h"
+#include "IO.h"
+
 
 bool AUTOJOB::started = false;
 AUTOJOB::callbackNode_t *callbackListHead = NULL;

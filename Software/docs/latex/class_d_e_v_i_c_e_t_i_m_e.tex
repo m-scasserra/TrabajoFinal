@@ -1,0 +1,148 @@
+\doxysection{DEVICETIME Class Reference}
+\hypertarget{class_d_e_v_i_c_e_t_i_m_e}{}\label{class_d_e_v_i_c_e_t_i_m_e}\index{DEVICETIME@{DEVICETIME}}
+
+
+Represents a device time management class.  
+
+
+
+
+{\ttfamily \#include $<$Device\+Time.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_d_e_v_i_c_e_t_i_m_e_a0102c706c732bf73b9ddda6126740891}\label{class_d_e_v_i_c_e_t_i_m_e_a0102c706c732bf73b9ddda6126740891} 
+{\bfseries DEVICETIME} (const \mbox{\hyperlink{class_d_e_v_i_c_e_t_i_m_e}{DEVICETIME}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Deleted copy constructor. \end{DoxyCompactList}\item 
+\Hypertarget{class_d_e_v_i_c_e_t_i_m_e_a542a6bc09a729fda88cb8b0bdb055bb6}\label{class_d_e_v_i_c_e_t_i_m_e_a542a6bc09a729fda88cb8b0bdb055bb6} 
+\mbox{\hyperlink{class_d_e_v_i_c_e_t_i_m_e}{DEVICETIME}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_d_e_v_i_c_e_t_i_m_e}{DEVICETIME}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Deleted assignment operator. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_e_v_i_c_e_t_i_m_e_a881c01143a84127355a23a8772c16eb9}{Begin}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the device time. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_e_v_i_c_e_t_i_m_e_a1ecc36d88dfe321938da64653540ec09}{update\+Time\+From\+Net}} (const char \texorpdfstring{$\ast$}{*}server, uint8\+\_\+t server\+Len)
+\begin{DoxyCompactList}\small\item\em Update the device time from a network server. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_e_v_i_c_e_t_i_m_e_abfe65a8ae6c6d6dfb8b85522162e9681}{print\+Time}} (void)
+\begin{DoxyCompactList}\small\item\em Print the current device time. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_e_v_i_c_e_t_i_m_e_a76b802b345fad934271f65b5ccbf1c7a}{save\+Time\+To\+Fs}} (void)
+\begin{DoxyCompactList}\small\item\em Save the device time to a file system. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_e_v_i_c_e_t_i_m_e_a8ae96730975e273b749c8ff74cae2d52}{load\+Time\+From\+Fs}} (void)
+\begin{DoxyCompactList}\small\item\em Load the device time from a file system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_d_e_v_i_c_e_t_i_m_e}{DEVICETIME}} \& \mbox{\hyperlink{class_d_e_v_i_c_e_t_i_m_e_a9bef32b44fcf43b9d7e16c63c66b62e1}{get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Get the instance of \doxylink{class_d_e_v_i_c_e_t_i_m_e}{DEVICETIME}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a device time management class. 
+
+This class provides functionality for managing the device time, including updating time from a network server, printing the current time, and saving/loading time to/from a file system.
+
+The class follows the Singleton design pattern, ensuring that only one instance of \doxylink{class_d_e_v_i_c_e_t_i_m_e}{DEVICETIME} can exist.
+
+Usage\+:
+\begin{DoxyItemize}
+\item Call \doxylink{class_d_e_v_i_c_e_t_i_m_e_a9bef32b44fcf43b9d7e16c63c66b62e1}{DEVICETIME\+::get\+Instance()} to get the instance of \doxylink{class_d_e_v_i_c_e_t_i_m_e}{DEVICETIME}.
+\item Call \doxylink{class_d_e_v_i_c_e_t_i_m_e_a881c01143a84127355a23a8772c16eb9}{Begin()} to initialize the device time.
+\item Call \doxylink{class_d_e_v_i_c_e_t_i_m_e_a1ecc36d88dfe321938da64653540ec09}{update\+Time\+From\+Net()} to update the device time from a network server.
+\item Call \doxylink{class_d_e_v_i_c_e_t_i_m_e_abfe65a8ae6c6d6dfb8b85522162e9681}{print\+Time()} to print the current device time.
+\item Call \doxylink{class_d_e_v_i_c_e_t_i_m_e_a76b802b345fad934271f65b5ccbf1c7a}{save\+Time\+To\+Fs()} to save the device time to a file system.
+\item Call \doxylink{class_d_e_v_i_c_e_t_i_m_e_a8ae96730975e273b749c8ff74cae2d52}{load\+Time\+From\+Fs()} to load the device time from a file system.
+\end{DoxyItemize}
+
+Note\+: The copy constructor and assignment operator are deleted to prevent copying of \doxylink{class_d_e_v_i_c_e_t_i_m_e}{DEVICETIME} instances. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_d_e_v_i_c_e_t_i_m_e_a881c01143a84127355a23a8772c16eb9}\index{DEVICETIME@{DEVICETIME}!Begin@{Begin}}
+\index{Begin@{Begin}!DEVICETIME@{DEVICETIME}}
+\doxysubsubsection{\texorpdfstring{Begin()}{Begin()}}
+{\footnotesize\ttfamily \label{class_d_e_v_i_c_e_t_i_m_e_a881c01143a84127355a23a8772c16eb9} 
+bool DEVICETIME\+::\+Begin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initialize the device time. 
+
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_d_e_v_i_c_e_t_i_m_e_a9bef32b44fcf43b9d7e16c63c66b62e1}\index{DEVICETIME@{DEVICETIME}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!DEVICETIME@{DEVICETIME}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \label{class_d_e_v_i_c_e_t_i_m_e_a9bef32b44fcf43b9d7e16c63c66b62e1} 
+static \mbox{\hyperlink{class_d_e_v_i_c_e_t_i_m_e}{DEVICETIME}} \& DEVICETIME\+::get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the instance of \doxylink{class_d_e_v_i_c_e_t_i_m_e}{DEVICETIME}. 
+
+\begin{DoxyReturn}{Returns}
+The instance of \doxylink{class_d_e_v_i_c_e_t_i_m_e}{DEVICETIME}. 
+\end{DoxyReturn}
+\Hypertarget{class_d_e_v_i_c_e_t_i_m_e_a8ae96730975e273b749c8ff74cae2d52}\index{DEVICETIME@{DEVICETIME}!loadTimeFromFs@{loadTimeFromFs}}
+\index{loadTimeFromFs@{loadTimeFromFs}!DEVICETIME@{DEVICETIME}}
+\doxysubsubsection{\texorpdfstring{loadTimeFromFs()}{loadTimeFromFs()}}
+{\footnotesize\ttfamily \label{class_d_e_v_i_c_e_t_i_m_e_a8ae96730975e273b749c8ff74cae2d52} 
+bool DEVICETIME\+::load\+Time\+From\+Fs (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Load the device time from a file system. 
+
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_d_e_v_i_c_e_t_i_m_e_abfe65a8ae6c6d6dfb8b85522162e9681}\index{DEVICETIME@{DEVICETIME}!printTime@{printTime}}
+\index{printTime@{printTime}!DEVICETIME@{DEVICETIME}}
+\doxysubsubsection{\texorpdfstring{printTime()}{printTime()}}
+{\footnotesize\ttfamily \label{class_d_e_v_i_c_e_t_i_m_e_abfe65a8ae6c6d6dfb8b85522162e9681} 
+bool DEVICETIME\+::print\+Time (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Print the current device time. 
+
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_d_e_v_i_c_e_t_i_m_e_a76b802b345fad934271f65b5ccbf1c7a}\index{DEVICETIME@{DEVICETIME}!saveTimeToFs@{saveTimeToFs}}
+\index{saveTimeToFs@{saveTimeToFs}!DEVICETIME@{DEVICETIME}}
+\doxysubsubsection{\texorpdfstring{saveTimeToFs()}{saveTimeToFs()}}
+{\footnotesize\ttfamily \label{class_d_e_v_i_c_e_t_i_m_e_a76b802b345fad934271f65b5ccbf1c7a} 
+bool DEVICETIME\+::save\+Time\+To\+Fs (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Save the device time to a file system. 
+
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_d_e_v_i_c_e_t_i_m_e_a1ecc36d88dfe321938da64653540ec09}\index{DEVICETIME@{DEVICETIME}!updateTimeFromNet@{updateTimeFromNet}}
+\index{updateTimeFromNet@{updateTimeFromNet}!DEVICETIME@{DEVICETIME}}
+\doxysubsubsection{\texorpdfstring{updateTimeFromNet()}{updateTimeFromNet()}}
+{\footnotesize\ttfamily \label{class_d_e_v_i_c_e_t_i_m_e_a1ecc36d88dfe321938da64653540ec09} 
+bool DEVICETIME\+::update\+Time\+From\+Net (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{server}{, }\item[{uint8\+\_\+t}]{server\+Len}{}\end{DoxyParamCaption})}
+
+
+
+Update the device time from a network server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & The network server address. \\
+\hline
+{\em server\+Len} & The length of the server address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_device_time_8h}{Device\+Time.\+h}}\item 
+src/Device\+Time.\+cpp\end{DoxyCompactItemize}

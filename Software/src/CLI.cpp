@@ -1,8 +1,17 @@
-#include "argtable3/argtable3.h"
-#include "includes.h"
-#include "sys/queue.h"
+#include "CLI.h"
 #include "DeviceStatus.h"
 #include "Message.h"
+#include "Led.h"
+#include "FileSystem.h"
+#include "IO.h"
+#include "Network.h"
+#include "DeviceTime.h"
+#include "AutomaticJobs.h"
+
+#include "cmd_system.h"
+#include "argtable3/argtable3.h"
+#include "sys/queue.h"
+
 
 CLI::timercmd_args_t CLI::timer_args;
 CLI::configcmd_args_t CLI::config_args;
@@ -524,7 +533,7 @@ int CLI::AutoJobCmdFunc(int argc, char **argv)
     }
     else if (!strcmp(command, "save"))
     {
-        AJ.saveJobsToFs();
+        //AJ.saveJobsToFs();
         return 0;
     }
     else if (!strcmp(command, "load"))
@@ -579,6 +588,18 @@ int CLI::AutoJobCmdFunc(int argc, char **argv)
             free(buffer);
         }
         return 0;
+    }
+    else if (!strcmp(command, "register")) //TODO: Delete
+    {
+        
+        E22 &e22 = E22::getInstance();
+        uint8_t aux = 0;
+        for (uint16_t i = 0; i < 0xFFFF; i++)
+        {
+            aux = 0;
+            e22.readRegisterManual(i, &aux);
+            printf("Reg: %X - %X\n", i, aux);
+        }
     }
     else
     {

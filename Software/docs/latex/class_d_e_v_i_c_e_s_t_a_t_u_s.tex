@@ -1,0 +1,90 @@
+\doxysection{DEVICESTATUS Class Reference}
+\hypertarget{class_d_e_v_i_c_e_s_t_a_t_u_s}{}\label{class_d_e_v_i_c_e_s_t_a_t_u_s}\index{DEVICESTATUS@{DEVICESTATUS}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_d_e_v_i_c_e_s_t_a_t_u_s_1_1_device_status__t}{Device\+Status\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{struct_d_e_v_i_c_e_s_t_a_t_u_s_1_1_e22_status__t}{E22\+Status\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_d_e_v_i_c_e_s_t_a_t_u_s_ae5764709c75451687fbd01845a63062d}\label{class_d_e_v_i_c_e_s_t_a_t_u_s_ae5764709c75451687fbd01845a63062d} 
+{\bfseries DEVICESTATUS} (const \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s}{DEVICESTATUS}} \&)=delete
+\item 
+\Hypertarget{class_d_e_v_i_c_e_s_t_a_t_u_s_ab46a1977a7dfa2360b294778adabcfa0}\label{class_d_e_v_i_c_e_s_t_a_t_u_s_ab46a1977a7dfa2360b294778adabcfa0} 
+\mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s}{DEVICESTATUS}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s}{DEVICESTATUS}} \&)=delete
+\item 
+bool \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s_aa308bb49aba6dc7b5548c944a2648da6}{Begin}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the device status. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s_a20682a6bc93920ec5b407e8ab77c339b}{print\+Status}} (void)
+\begin{DoxyCompactList}\small\item\em Prints the device status. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s_a1db6a5b8ed1f175cafbf5209748d27e9}{load\+Status\+From\+Fs}} (void)
+\begin{DoxyCompactList}\small\item\em Load the status of the device from the file system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_d_e_v_i_c_e_s_t_a_t_u_s_aee1a34fa4f21b88bfccbc9c3a5e49c80}\label{class_d_e_v_i_c_e_s_t_a_t_u_s_aee1a34fa4f21b88bfccbc9c3a5e49c80} 
+static \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s}{DEVICESTATUS}} \& {\bfseries get\+Instance} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_d_e_v_i_c_e_s_t_a_t_u_s_ab5f726ebe34f6bdeff5176b6a9203c46}\label{class_d_e_v_i_c_e_s_t_a_t_u_s_ab5f726ebe34f6bdeff5176b6a9203c46} 
+static \mbox{\hyperlink{struct_d_e_v_i_c_e_s_t_a_t_u_s_1_1_device_status__t}{Device\+Status\+\_\+t}} {\bfseries device\+Status}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_d_e_v_i_c_e_s_t_a_t_u_s_aa308bb49aba6dc7b5548c944a2648da6}\index{DEVICESTATUS@{DEVICESTATUS}!Begin@{Begin}}
+\index{Begin@{Begin}!DEVICESTATUS@{DEVICESTATUS}}
+\doxysubsubsection{\texorpdfstring{Begin()}{Begin()}}
+{\footnotesize\ttfamily \label{class_d_e_v_i_c_e_s_t_a_t_u_s_aa308bb49aba6dc7b5548c944a2648da6} 
+bool DEVICESTATUS\+::\+Begin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the device status. 
+
+\begin{DoxyReturn}{Returns}
+true If the device status was initialized correctly 
+
+false If there was an error initializing the device status 
+\end{DoxyReturn}
+\Hypertarget{class_d_e_v_i_c_e_s_t_a_t_u_s_a1db6a5b8ed1f175cafbf5209748d27e9}\index{DEVICESTATUS@{DEVICESTATUS}!loadStatusFromFs@{loadStatusFromFs}}
+\index{loadStatusFromFs@{loadStatusFromFs}!DEVICESTATUS@{DEVICESTATUS}}
+\doxysubsubsection{\texorpdfstring{loadStatusFromFs()}{loadStatusFromFs()}}
+{\footnotesize\ttfamily \label{class_d_e_v_i_c_e_s_t_a_t_u_s_a1db6a5b8ed1f175cafbf5209748d27e9} 
+bool DEVICESTATUS\+::load\+Status\+From\+Fs (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Load the status of the device from the file system. 
+
+\begin{DoxyReturn}{Returns}
+true If the status was loaded correctly 
+
+false If there was an error loading the status 
+\end{DoxyReturn}
+\Hypertarget{class_d_e_v_i_c_e_s_t_a_t_u_s_a20682a6bc93920ec5b407e8ab77c339b}\index{DEVICESTATUS@{DEVICESTATUS}!printStatus@{printStatus}}
+\index{printStatus@{printStatus}!DEVICESTATUS@{DEVICESTATUS}}
+\doxysubsubsection{\texorpdfstring{printStatus()}{printStatus()}}
+{\footnotesize\ttfamily \label{class_d_e_v_i_c_e_s_t_a_t_u_s_a20682a6bc93920ec5b407e8ab77c339b} 
+bool DEVICESTATUS\+::print\+Status (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Prints the device status. 
+
+\begin{DoxyReturn}{Returns}
+true If the device status was printed correctly 
+
+false If there was an error printing the device status 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Device\+Status.\+h\item 
+src/Device\+Status.\+cpp\end{DoxyCompactItemize}

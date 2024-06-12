@@ -1,0 +1,66 @@
+\doxysection{AUTOJOB Class Reference}
+\hypertarget{class_a_u_t_o_j_o_b}{}\label{class_a_u_t_o_j_o_b}\index{AUTOJOB@{AUTOJOB}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_a_u_t_o_j_o_b_1_1callback__node}{callback\+\_\+node}}
+\item 
+struct \mbox{\hyperlink{struct_a_u_t_o_j_o_b_1_1callback_node}{callback\+Node}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_a_u_t_o_j_o_b_ade8fad7791e616a853947ebf61e5e8ca}\label{class_a_u_t_o_j_o_b_ade8fad7791e616a853947ebf61e5e8ca} 
+typedef void(\texorpdfstring{$\ast$}{*} {\bfseries callback\+\_\+t}) (void)
+\item 
+\Hypertarget{class_a_u_t_o_j_o_b_aed63220685cd78aac3cf99710c8a851e}\label{class_a_u_t_o_j_o_b_aed63220685cd78aac3cf99710c8a851e} 
+typedef struct \mbox{\hyperlink{struct_a_u_t_o_j_o_b_1_1callback_node}{AUTOJOB\+::callback\+Node}} {\bfseries callback\+Node\+\_\+t}
+\item 
+\Hypertarget{class_a_u_t_o_j_o_b_a038304a67e4eb120d47289062ac9a900}\label{class_a_u_t_o_j_o_b_a038304a67e4eb120d47289062ac9a900} 
+typedef struct \mbox{\hyperlink{struct_a_u_t_o_j_o_b_1_1callback__node}{AUTOJOB\+::callback\+\_\+node}} {\bfseries callback\+\_\+node\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_a_u_t_o_j_o_b_a11de55f9dac6079dfc4c61a033fef91c}\label{class_a_u_t_o_j_o_b_a11de55f9dac6079dfc4c61a033fef91c} 
+{\bfseries AUTOJOB} (const \mbox{\hyperlink{class_a_u_t_o_j_o_b}{AUTOJOB}} \&)=delete
+\item 
+\Hypertarget{class_a_u_t_o_j_o_b_ade8a1b1f1fbde1a2a25412a091d7c1e7}\label{class_a_u_t_o_j_o_b_ade8a1b1f1fbde1a2a25412a091d7c1e7} 
+\mbox{\hyperlink{class_a_u_t_o_j_o_b}{AUTOJOB}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_a_u_t_o_j_o_b}{AUTOJOB}} \&)=delete
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_a_u_t_o_j_o_b_a3543769cd9eb99b81f46ba2965add7a4}\label{class_a_u_t_o_j_o_b_a3543769cd9eb99b81f46ba2965add7a4} 
+static \mbox{\hyperlink{class_a_u_t_o_j_o_b}{AUTOJOB}} \& {\bfseries get\+Instance} ()
+\item 
+\Hypertarget{class_a_u_t_o_j_o_b_a80ef52995454ba43ee98e622c6bfb41c}\label{class_a_u_t_o_j_o_b_a80ef52995454ba43ee98e622c6bfb41c} 
+static bool {\bfseries load\+Jobs\+From\+Fs} (void)
+\item 
+\Hypertarget{class_a_u_t_o_j_o_b_addfe65b001565e43204a1fcf46259ac4}\label{class_a_u_t_o_j_o_b_addfe65b001565e43204a1fcf46259ac4} 
+static bool {\bfseries save\+Jobs\+To\+Fs} (void)
+\item 
+\Hypertarget{class_a_u_t_o_j_o_b_a7a445b89becad6eb23c5fcde2e549cdf}\label{class_a_u_t_o_j_o_b_a7a445b89becad6eb23c5fcde2e549cdf} 
+static bool {\bfseries delete\+Jobs\+From\+Fs} (const char \texorpdfstring{$\ast$}{*}function\+To\+Delete)
+\item 
+\Hypertarget{class_a_u_t_o_j_o_b_a73acab1bcb3c865bbc87b4bfc53478d6}\label{class_a_u_t_o_j_o_b_a73acab1bcb3c865bbc87b4bfc53478d6} 
+static bool {\bfseries start\+Jobs} (void)
+\item 
+\Hypertarget{class_a_u_t_o_j_o_b_aee5fc48eae3110e7949170684c61634c}\label{class_a_u_t_o_j_o_b_aee5fc48eae3110e7949170684c61634c} 
+static bool {\bfseries stop\+Jobs} (void)
+\item 
+\Hypertarget{class_a_u_t_o_j_o_b_a0bfa105f76673995f17f67eaf1eba0de}\label{class_a_u_t_o_j_o_b_a0bfa105f76673995f17f67eaf1eba0de} 
+static bool {\bfseries Begin} (void)
+\item 
+\Hypertarget{class_a_u_t_o_j_o_b_a717714ab7a6d233dc4470b81d8f52f52}\label{class_a_u_t_o_j_o_b_a717714ab7a6d233dc4470b81d8f52f52} 
+static bool {\bfseries add\+All\+Callbacks} (void)
+\item 
+\Hypertarget{class_a_u_t_o_j_o_b_af8b48d5f6d483754ac8b1ead432fadf4}\label{class_a_u_t_o_j_o_b_af8b48d5f6d483754ac8b1ead432fadf4} 
+static bool {\bfseries print\+All\+Callbacks\+Names} (void)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Automatic\+Jobs.\+h\item 
+src/Automatic\+Jobs.\+cpp\end{DoxyCompactItemize}

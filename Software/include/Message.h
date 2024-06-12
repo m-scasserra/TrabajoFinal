@@ -1,12 +1,9 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <sys/time.h>
-#include <sys/param.h>
-#include <sys/unistd.h>
-#include <sys/stat.h>
-#include <string.h>
+#ifndef MESSAGE_H
+#define MESSAGE_H
+
+#include "CommonIncludes.h"
+
+#define MESSAGETAG "MSG"
 
 #pragma pack(push, 1)
 
@@ -47,3 +44,5 @@ private:
     // Constructor privado
     MESSAGE() {}
 };
+
+#endif // MESSAGE_H

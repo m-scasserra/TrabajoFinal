@@ -1,0 +1,192 @@
+\doxysection{include/\+E22\+Driver.h File Reference}
+\hypertarget{E22Driver_8h}{}\label{E22Driver_8h}\index{include/E22Driver.h@{include/E22Driver.h}}
+{\ttfamily \#include "{}Common\+Includes.\+h"{}}\newline
+{\ttfamily \#include "{}SPI.\+h"{}}\newline
+{\ttfamily \#include "{}E22\+Opcodes.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classE22}{E22}}
+\item 
+struct \mbox{\hyperlink{structE22_1_1Calibrate__t}{E22\+::\+Calibrate\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structE22_1_1ModulationParameters__t}{E22\+::\+Modulation\+Parameters\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structE22_1_1LoraPacketParams__t}{E22\+::\+Lora\+Packet\+Params\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structE22_1_1IRQReg__t}{E22\+::\+IRQReg\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structE22_1_1E22Command__t}{E22\+::\+E22\+Command\+\_\+t}}
+\item 
+union \mbox{\hyperlink{unionE22_1_1E22Command__t_1_1params__t}{E22\+::\+E22\+Command\+\_\+t\+::params\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structE22_1_1E22Response__t}{E22\+::\+E22\+Response\+\_\+t}}
+\item 
+union \mbox{\hyperlink{unionE22_1_1E22Response__t_1_1responses__t}{E22\+::\+E22\+Response\+\_\+t\+::responses\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_a2a8dac2bdebe8e84dd64ef5164b21979}{E22\+TAG}}~"{}E22"{}
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_a9ffd772d095110a4593679bb686e9498}{MAX\+\_\+\+CMD\+\_\+\+PARAMS}}~10
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_a35c9422685493707ea1df0efa428ebcc}{MAX\+\_\+\+RESPONSES}}~10
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_aa1408f338bbcffb0ccce891f030d9f11}{DEFAULT\+\_\+\+MSG\+\_\+\+TIMEOUT\+\_\+\+MS}}~1000
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_a0fc68e1325e3fb2b251a74c540f2b3b7}{MAX\+\_\+\+E22\+\_\+\+CMD\+\_\+\+QUEUE}}~200
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_acc0a8748a3aceaf131603c4688090440}{SPI\+\_\+\+COMMAND\+\_\+\+LEN}}~8
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_aeb3711ddd78a2fc982b4b0776f2048ad}{SPI\+\_\+\+ADDR\+\_\+\+LEN}}~16
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_a8b0468cbec600f6dbc1e2d389b6fd9fd}{SPI\+\_\+\+DUMMY\+\_\+\+BITS}}~0
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_ab1dcc9464e3fcb94922386e8a7f53f21}{SPI\+\_\+\+MODE}}~0
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_a2db04760a4302189841f5b7af32f4daa}{SPI\+\_\+\+DUTY\+\_\+\+CYCLE}}~0
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_a83dd05ee84c882a3c96177dbc9d60475}{CYCLES\+\_\+\+CS\+\_\+\+BEFORE\+\_\+\+TRANS}}~1
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_a1193643175cadeaa36359055919513fe}{CYCLES\+\_\+\+CS\+\_\+\+AFTER\+\_\+\+TRANS}}~1
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_a2088ee4b3ab36cfe1ad2c379fcbf871a}{SPI\+\_\+\+CLOCK}}~SPI\+\_\+\+MASTER\+\_\+\+FREQ\+\_\+10M
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_a9daf202e9e7774fe8295e70d2f314129}{SPI\+\_\+\+QUEUE\+\_\+\+SIZE}}~10
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_a45bbbe52dee691b9792dbd81103d5c87}{SPI\+\_\+\+INPUT\+\_\+\+DELAY}}~0
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_a6ab974a6db55f077418b44cf3bcd9150}{SPI\+\_\+\+DEVICE\+\_\+\+CONFIG\+\_\+\+FLAGS}}~SPI\+\_\+\+DEVICE\+\_\+\+NO\+\_\+\+DUMMY
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_ac6fa55df18b81eef99c1235026212cfa}{SX126\+X\+\_\+\+RF\+\_\+\+FREQUENCY\+\_\+\+XTAL}}~32000000
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_aaf030a97afd20d7f067392f979c74a59}{SX126\+X\+\_\+\+RF\+\_\+\+FREQUENCY\+\_\+\+SHIFT}}~25
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_a927cbbaeb865689df124db7c4aecbbca}{SX126\+X\+\_\+\+RX\+\_\+\+BASE\+\_\+\+BUFFER\+\_\+\+ADDR}}~0x00
+\item 
+\#define \mbox{\hyperlink{E22Driver_8h_a440cafa0f935835c3950a4b04d27e746}{SX126\+X\+\_\+\+TX\+\_\+\+BASE\+\_\+\+BUFFER\+\_\+\+ADDR}}~0x80
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{E22Driver_8h_a1193643175cadeaa36359055919513fe}\index{E22Driver.h@{E22Driver.h}!CYCLES\_CS\_AFTER\_TRANS@{CYCLES\_CS\_AFTER\_TRANS}}
+\index{CYCLES\_CS\_AFTER\_TRANS@{CYCLES\_CS\_AFTER\_TRANS}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{CYCLES\_CS\_AFTER\_TRANS}{CYCLES\_CS\_AFTER\_TRANS}}
+{\footnotesize\ttfamily \label{E22Driver_8h_a1193643175cadeaa36359055919513fe} 
+\#define CYCLES\+\_\+\+CS\+\_\+\+AFTER\+\_\+\+TRANS~1}
+
+\Hypertarget{E22Driver_8h_a83dd05ee84c882a3c96177dbc9d60475}\index{E22Driver.h@{E22Driver.h}!CYCLES\_CS\_BEFORE\_TRANS@{CYCLES\_CS\_BEFORE\_TRANS}}
+\index{CYCLES\_CS\_BEFORE\_TRANS@{CYCLES\_CS\_BEFORE\_TRANS}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{CYCLES\_CS\_BEFORE\_TRANS}{CYCLES\_CS\_BEFORE\_TRANS}}
+{\footnotesize\ttfamily \label{E22Driver_8h_a83dd05ee84c882a3c96177dbc9d60475} 
+\#define CYCLES\+\_\+\+CS\+\_\+\+BEFORE\+\_\+\+TRANS~1}
+
+\Hypertarget{E22Driver_8h_aa1408f338bbcffb0ccce891f030d9f11}\index{E22Driver.h@{E22Driver.h}!DEFAULT\_MSG\_TIMEOUT\_MS@{DEFAULT\_MSG\_TIMEOUT\_MS}}
+\index{DEFAULT\_MSG\_TIMEOUT\_MS@{DEFAULT\_MSG\_TIMEOUT\_MS}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_MSG\_TIMEOUT\_MS}{DEFAULT\_MSG\_TIMEOUT\_MS}}
+{\footnotesize\ttfamily \label{E22Driver_8h_aa1408f338bbcffb0ccce891f030d9f11} 
+\#define DEFAULT\+\_\+\+MSG\+\_\+\+TIMEOUT\+\_\+\+MS~1000}
+
+\Hypertarget{E22Driver_8h_a2a8dac2bdebe8e84dd64ef5164b21979}\index{E22Driver.h@{E22Driver.h}!E22TAG@{E22TAG}}
+\index{E22TAG@{E22TAG}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{E22TAG}{E22TAG}}
+{\footnotesize\ttfamily \label{E22Driver_8h_a2a8dac2bdebe8e84dd64ef5164b21979} 
+\#define E22\+TAG~"{}E22"{}}
+
+\Hypertarget{E22Driver_8h_a9ffd772d095110a4593679bb686e9498}\index{E22Driver.h@{E22Driver.h}!MAX\_CMD\_PARAMS@{MAX\_CMD\_PARAMS}}
+\index{MAX\_CMD\_PARAMS@{MAX\_CMD\_PARAMS}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_CMD\_PARAMS}{MAX\_CMD\_PARAMS}}
+{\footnotesize\ttfamily \label{E22Driver_8h_a9ffd772d095110a4593679bb686e9498} 
+\#define MAX\+\_\+\+CMD\+\_\+\+PARAMS~10}
+
+\Hypertarget{E22Driver_8h_a0fc68e1325e3fb2b251a74c540f2b3b7}\index{E22Driver.h@{E22Driver.h}!MAX\_E22\_CMD\_QUEUE@{MAX\_E22\_CMD\_QUEUE}}
+\index{MAX\_E22\_CMD\_QUEUE@{MAX\_E22\_CMD\_QUEUE}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_E22\_CMD\_QUEUE}{MAX\_E22\_CMD\_QUEUE}}
+{\footnotesize\ttfamily \label{E22Driver_8h_a0fc68e1325e3fb2b251a74c540f2b3b7} 
+\#define MAX\+\_\+\+E22\+\_\+\+CMD\+\_\+\+QUEUE~200}
+
+\Hypertarget{E22Driver_8h_a35c9422685493707ea1df0efa428ebcc}\index{E22Driver.h@{E22Driver.h}!MAX\_RESPONSES@{MAX\_RESPONSES}}
+\index{MAX\_RESPONSES@{MAX\_RESPONSES}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_RESPONSES}{MAX\_RESPONSES}}
+{\footnotesize\ttfamily \label{E22Driver_8h_a35c9422685493707ea1df0efa428ebcc} 
+\#define MAX\+\_\+\+RESPONSES~10}
+
+\Hypertarget{E22Driver_8h_aeb3711ddd78a2fc982b4b0776f2048ad}\index{E22Driver.h@{E22Driver.h}!SPI\_ADDR\_LEN@{SPI\_ADDR\_LEN}}
+\index{SPI\_ADDR\_LEN@{SPI\_ADDR\_LEN}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_ADDR\_LEN}{SPI\_ADDR\_LEN}}
+{\footnotesize\ttfamily \label{E22Driver_8h_aeb3711ddd78a2fc982b4b0776f2048ad} 
+\#define SPI\+\_\+\+ADDR\+\_\+\+LEN~16}
+
+\Hypertarget{E22Driver_8h_a2088ee4b3ab36cfe1ad2c379fcbf871a}\index{E22Driver.h@{E22Driver.h}!SPI\_CLOCK@{SPI\_CLOCK}}
+\index{SPI\_CLOCK@{SPI\_CLOCK}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_CLOCK}{SPI\_CLOCK}}
+{\footnotesize\ttfamily \label{E22Driver_8h_a2088ee4b3ab36cfe1ad2c379fcbf871a} 
+\#define SPI\+\_\+\+CLOCK~SPI\+\_\+\+MASTER\+\_\+\+FREQ\+\_\+10M}
+
+\Hypertarget{E22Driver_8h_acc0a8748a3aceaf131603c4688090440}\index{E22Driver.h@{E22Driver.h}!SPI\_COMMAND\_LEN@{SPI\_COMMAND\_LEN}}
+\index{SPI\_COMMAND\_LEN@{SPI\_COMMAND\_LEN}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_COMMAND\_LEN}{SPI\_COMMAND\_LEN}}
+{\footnotesize\ttfamily \label{E22Driver_8h_acc0a8748a3aceaf131603c4688090440} 
+\#define SPI\+\_\+\+COMMAND\+\_\+\+LEN~8}
+
+\Hypertarget{E22Driver_8h_a6ab974a6db55f077418b44cf3bcd9150}\index{E22Driver.h@{E22Driver.h}!SPI\_DEVICE\_CONFIG\_FLAGS@{SPI\_DEVICE\_CONFIG\_FLAGS}}
+\index{SPI\_DEVICE\_CONFIG\_FLAGS@{SPI\_DEVICE\_CONFIG\_FLAGS}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_DEVICE\_CONFIG\_FLAGS}{SPI\_DEVICE\_CONFIG\_FLAGS}}
+{\footnotesize\ttfamily \label{E22Driver_8h_a6ab974a6db55f077418b44cf3bcd9150} 
+\#define SPI\+\_\+\+DEVICE\+\_\+\+CONFIG\+\_\+\+FLAGS~SPI\+\_\+\+DEVICE\+\_\+\+NO\+\_\+\+DUMMY}
+
+\Hypertarget{E22Driver_8h_a8b0468cbec600f6dbc1e2d389b6fd9fd}\index{E22Driver.h@{E22Driver.h}!SPI\_DUMMY\_BITS@{SPI\_DUMMY\_BITS}}
+\index{SPI\_DUMMY\_BITS@{SPI\_DUMMY\_BITS}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_DUMMY\_BITS}{SPI\_DUMMY\_BITS}}
+{\footnotesize\ttfamily \label{E22Driver_8h_a8b0468cbec600f6dbc1e2d389b6fd9fd} 
+\#define SPI\+\_\+\+DUMMY\+\_\+\+BITS~0}
+
+\Hypertarget{E22Driver_8h_a2db04760a4302189841f5b7af32f4daa}\index{E22Driver.h@{E22Driver.h}!SPI\_DUTY\_CYCLE@{SPI\_DUTY\_CYCLE}}
+\index{SPI\_DUTY\_CYCLE@{SPI\_DUTY\_CYCLE}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_DUTY\_CYCLE}{SPI\_DUTY\_CYCLE}}
+{\footnotesize\ttfamily \label{E22Driver_8h_a2db04760a4302189841f5b7af32f4daa} 
+\#define SPI\+\_\+\+DUTY\+\_\+\+CYCLE~0}
+
+\Hypertarget{E22Driver_8h_a45bbbe52dee691b9792dbd81103d5c87}\index{E22Driver.h@{E22Driver.h}!SPI\_INPUT\_DELAY@{SPI\_INPUT\_DELAY}}
+\index{SPI\_INPUT\_DELAY@{SPI\_INPUT\_DELAY}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_INPUT\_DELAY}{SPI\_INPUT\_DELAY}}
+{\footnotesize\ttfamily \label{E22Driver_8h_a45bbbe52dee691b9792dbd81103d5c87} 
+\#define SPI\+\_\+\+INPUT\+\_\+\+DELAY~0}
+
+\Hypertarget{E22Driver_8h_ab1dcc9464e3fcb94922386e8a7f53f21}\index{E22Driver.h@{E22Driver.h}!SPI\_MODE@{SPI\_MODE}}
+\index{SPI\_MODE@{SPI\_MODE}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_MODE}{SPI\_MODE}}
+{\footnotesize\ttfamily \label{E22Driver_8h_ab1dcc9464e3fcb94922386e8a7f53f21} 
+\#define SPI\+\_\+\+MODE~0}
+
+\Hypertarget{E22Driver_8h_a9daf202e9e7774fe8295e70d2f314129}\index{E22Driver.h@{E22Driver.h}!SPI\_QUEUE\_SIZE@{SPI\_QUEUE\_SIZE}}
+\index{SPI\_QUEUE\_SIZE@{SPI\_QUEUE\_SIZE}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_QUEUE\_SIZE}{SPI\_QUEUE\_SIZE}}
+{\footnotesize\ttfamily \label{E22Driver_8h_a9daf202e9e7774fe8295e70d2f314129} 
+\#define SPI\+\_\+\+QUEUE\+\_\+\+SIZE~10}
+
+\Hypertarget{E22Driver_8h_aaf030a97afd20d7f067392f979c74a59}\index{E22Driver.h@{E22Driver.h}!SX126X\_RF\_FREQUENCY\_SHIFT@{SX126X\_RF\_FREQUENCY\_SHIFT}}
+\index{SX126X\_RF\_FREQUENCY\_SHIFT@{SX126X\_RF\_FREQUENCY\_SHIFT}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{SX126X\_RF\_FREQUENCY\_SHIFT}{SX126X\_RF\_FREQUENCY\_SHIFT}}
+{\footnotesize\ttfamily \label{E22Driver_8h_aaf030a97afd20d7f067392f979c74a59} 
+\#define SX126\+X\+\_\+\+RF\+\_\+\+FREQUENCY\+\_\+\+SHIFT~25}
+
+\Hypertarget{E22Driver_8h_ac6fa55df18b81eef99c1235026212cfa}\index{E22Driver.h@{E22Driver.h}!SX126X\_RF\_FREQUENCY\_XTAL@{SX126X\_RF\_FREQUENCY\_XTAL}}
+\index{SX126X\_RF\_FREQUENCY\_XTAL@{SX126X\_RF\_FREQUENCY\_XTAL}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{SX126X\_RF\_FREQUENCY\_XTAL}{SX126X\_RF\_FREQUENCY\_XTAL}}
+{\footnotesize\ttfamily \label{E22Driver_8h_ac6fa55df18b81eef99c1235026212cfa} 
+\#define SX126\+X\+\_\+\+RF\+\_\+\+FREQUENCY\+\_\+\+XTAL~32000000}
+
+\Hypertarget{E22Driver_8h_a927cbbaeb865689df124db7c4aecbbca}\index{E22Driver.h@{E22Driver.h}!SX126X\_RX\_BASE\_BUFFER\_ADDR@{SX126X\_RX\_BASE\_BUFFER\_ADDR}}
+\index{SX126X\_RX\_BASE\_BUFFER\_ADDR@{SX126X\_RX\_BASE\_BUFFER\_ADDR}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{SX126X\_RX\_BASE\_BUFFER\_ADDR}{SX126X\_RX\_BASE\_BUFFER\_ADDR}}
+{\footnotesize\ttfamily \label{E22Driver_8h_a927cbbaeb865689df124db7c4aecbbca} 
+\#define SX126\+X\+\_\+\+RX\+\_\+\+BASE\+\_\+\+BUFFER\+\_\+\+ADDR~0x00}
+
+\Hypertarget{E22Driver_8h_a440cafa0f935835c3950a4b04d27e746}\index{E22Driver.h@{E22Driver.h}!SX126X\_TX\_BASE\_BUFFER\_ADDR@{SX126X\_TX\_BASE\_BUFFER\_ADDR}}
+\index{SX126X\_TX\_BASE\_BUFFER\_ADDR@{SX126X\_TX\_BASE\_BUFFER\_ADDR}!E22Driver.h@{E22Driver.h}}
+\doxysubsubsection{\texorpdfstring{SX126X\_TX\_BASE\_BUFFER\_ADDR}{SX126X\_TX\_BASE\_BUFFER\_ADDR}}
+{\footnotesize\ttfamily \label{E22Driver_8h_a440cafa0f935835c3950a4b04d27e746} 
+\#define SX126\+X\+\_\+\+TX\+\_\+\+BASE\+\_\+\+BUFFER\+\_\+\+ADDR~0x80}
+

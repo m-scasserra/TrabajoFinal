@@ -1,0 +1,104 @@
+\doxysection{Device\+Status.\+h}
+\hypertarget{DeviceStatus_8h_source}{}\label{DeviceStatus_8h_source}\index{include/DeviceStatus.h@{include/DeviceStatus.h}}
+\mbox{\hyperlink{DeviceStatus_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ DEVICESTATUS\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ DEVICESTATUS\_H}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CommonIncludes_8h}{CommonIncludes.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{E22Driver_8h}{E22Driver.h}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classDEVICESTATUS}{DEVICESTATUS}}}
+\DoxyCodeLine{00032\ \{}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ las\ funciones\ de\ copia\ y\ asignación}}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classDEVICESTATUS_ae5764709c75451687fbd01845a63062d}{DEVICESTATUS}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classDEVICESTATUS}{DEVICESTATUS}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classDEVICESTATUS}{DEVICESTATUS}}\ \&\mbox{\hyperlink{classDEVICESTATUS_ab46a1977a7dfa2360b294778adabcfa0}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classDEVICESTATUS}{DEVICESTATUS}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classDEVICESTATUS}{DEVICESTATUS}}\ \&\mbox{\hyperlink{classDEVICESTATUS_aee1a34fa4f21b88bfccbc9c3a5e49c80}{getInstance}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00051\ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structDEVICESTATUS_1_1XTalConfig__t_a614d2c5d234fb3f84465942fbd1ad68e}{use}};\ \ \ \ \ \ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structDEVICESTATUS_1_1XTalConfig__t_add674e124cef4eac28e40c3b16a93a5b}{XTALA}};\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structDEVICESTATUS_1_1XTalConfig__t_a1f42295fc4441f1eb15de7730d1cc915}{XTALB}};\ }
+\DoxyCodeLine{00055\ \ \ \ \ \}\ \mbox{\hyperlink{structDEVICESTATUS_1_1XTalConfig__t}{XTalConfig\_t}};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00062\ \ \ \ \ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classDEVICESTATUS_ab5416e11d02f25a5fc3caa7d2943efeca80a2a2715619af9813f5c9574baa7251}{NONE}}\ =\ 0,\ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classDEVICESTATUS_ab5416e11d02f25a5fc3caa7d2943efeca8c6c7995e4e088d25aeb01378e592ef5}{TX}}\ =\ 1,\ \ \ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classDEVICESTATUS_ab5416e11d02f25a5fc3caa7d2943efecafee9119261064b3d10260235c202a49f}{RX}}\ =\ 2\ \ \ \ }
+\DoxyCodeLine{00066\ \ \ \ \ \}\ \mbox{\hyperlink{classDEVICESTATUS_ab5416e11d02f25a5fc3caa7d2943efec}{DeviceMode\_t}};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00073\ \ \ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classE22_ae4b2c476d0e4cbc57624df558cd9dcb5}{E22::tcxoVoltage\_t}}\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_ab064d0e90441ea98c8c3408f0dce211a}{tcxoVoltage}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_a7e6e38d685f2a5db6611f9c8285d47bb}{TXCOdio3Delay}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structE22_1_1LoraPacketParams__t}{E22::LoraPacketParams\_t}}\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_a0b6e2de8dba2ecfacb50a249c644a7e7}{packetParams}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structE22_1_1ModulationParameters__t}{E22::ModulationParameters\_t}}\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_a996e63d60b545e9ab54550ce0a67d968}{modulationParams}};\ \ \ \ \ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classE22_af8f70cb54b09b88f18dc5384fcd3628f}{E22::RxGain\_t}}\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_a9f17936b41731928980b43c71fdb816e}{rxGain}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classE22_af7074451e609cc476acfc6773936bc0a}{E22::ImageCalibrationFreq\_t}}\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_a41f1e40b24677838c2eef837a83f82dc}{imageCalibrationFreq}};\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classE22_af60d647d3b1e32d153b8caa3a34e647b}{E22::PacketType\_t}}\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_ab010954336c6b8950fbd064b5b9e2282}{packetType}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structE22_1_1Calibrate__t}{E22::Calibrate\_t}}\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_ad4b3a2fdc33f6b4c1f53d7ef563541a9}{calibrations}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_ae1f32d7ff4fb583c55350589471f4c78}{frequency}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structDEVICESTATUS_1_1XTalConfig__t}{XTalConfig\_t}}\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_acbda1c5629b20950579456e012fbb6ee}{xtalConfig}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classE22_aa21e0c735888b50785fe5ba5889f819d}{E22::PaConfig\_t}}\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_a443647d451bf204ccb21d9e7c204991a}{paConfig}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classE22_a12c0c8e6227d370dc78e66dcdb1a5e3c}{E22::RampTime\_t}}\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_a839054fa352f5e65c691ecd8aac8057a}{rampTime}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classE22_ae2e94ac87e159fd49df2cec2bc59f9dd}{E22::SyncWordType\_t}}\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_ad80e70eeac3fb5d63cbbd1e9b25878e1}{syncWord}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_ab0a89af6067cb76a5638b10147401500}{transmitTimeout}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t_ab788b632ab47474d41e861092cc407b9}{recieveTimeout}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00089\ \ \ \ \ \}\ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t}{E22Status\_t}};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00096\ \ \ \ \ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structDEVICESTATUS_1_1E22Status__t}{E22Status\_t}}\ \mbox{\hyperlink{structDEVICESTATUS_1_1DeviceStatus__t_a95b4bdea8a2130324584b12f0885d3e9}{E22Status}};\ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structDEVICESTATUS_1_1DeviceStatus__t_a3a7c719024f62b9517e53bfded4a95fb}{automatic}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classDEVICESTATUS_ab5416e11d02f25a5fc3caa7d2943efec}{DeviceMode\_t}}\ \mbox{\hyperlink{structDEVICESTATUS_1_1DeviceStatus__t_aa622c33cdd1a0f63dcf272459442761e}{mode}};\ \ \ \ \ }
+\DoxyCodeLine{00100\ \ \ \ \ \}\ \mbox{\hyperlink{structDEVICESTATUS_1_1DeviceStatus__t}{DeviceStatus\_t}};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_aa308bb49aba6dc7b5548c944a2648da6}{Begin}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_a20682a6bc93920ec5b407e8ab77c339b}{printStatus}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_a1db6a5b8ed1f175cafbf5209748d27e9}{loadStatusFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{classDEVICESTATUS_a608a7cb7dfb31e7b8e4a1ec172eb051b}{DEVICESTATUS}}()\ \{\}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_a4bfeb5aa0d109176be963719219188ab}{loadDeviceFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_a15b0d74232ea2fd1d02dcfde0327c4b5}{loadPacketTypeFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_afe55582e35af3719ef0e2e7ca9881a66}{loadTCXOFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_a23494483e5c6bd70c5a28023891e74e2}{loadCalibrationsFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_a0ee3860defda9332200afaad7df792d5}{loadXTALConfigFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_a85c1af6a4a81e36f5d81babb74bcfae7}{loadFrequencyFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDEVICESTATUS_ae60edd4f6cd744ea0b08419c3e4bb35b}{calculateImageCalibrationFrequency}}(uint32\_t\ frequency);}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_a548ad9ae75d62f4fe71b42715cd97c05}{loadPAConfigFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_a5be2d12f76335322fd8b24bef035fad5}{loadTxParamsFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_aa1b862adad2623310b65f3d1f8114973}{loadModulationParamsFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_afcd635fcf2b4d35ebf47ade3ef6c4e53}{loadPacketParamsFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_adbf64d379a141e203017b1527a53403a}{loadSyncWordFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_af9ea7f8da4272c1ddffd21895539b77c}{loadRxGainFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDEVICESTATUS_a7c363eb9848d155ff083262641ce6a5c}{loadTimeoutFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structDEVICESTATUS_1_1DeviceStatus__t}{DeviceStatus\_t}}\ \mbox{\hyperlink{classDEVICESTATUS_ab5f726ebe34f6bdeff5176b6a9203c46}{deviceStatus}};}
+\DoxyCodeLine{00247\ \};}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DEVICESTATUS\_H}}
+
+\end{DoxyCode}

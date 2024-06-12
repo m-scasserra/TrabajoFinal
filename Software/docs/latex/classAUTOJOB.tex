@@ -1,0 +1,209 @@
+\doxysection{AUTOJOB Class Reference}
+\hypertarget{classAUTOJOB}{}\label{classAUTOJOB}\index{AUTOJOB@{AUTOJOB}}
+
+
+{\ttfamily \#include $<$Automatic\+Jobs.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structAUTOJOB_1_1callback__node}{callback\+\_\+node}}
+\item 
+struct \mbox{\hyperlink{structAUTOJOB_1_1callbackNode}{callback\+Node}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca}{callback\+\_\+t}}) (void)
+\item 
+typedef struct \mbox{\hyperlink{structAUTOJOB_1_1callbackNode}{AUTOJOB\+::callback\+Node}} \mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{callback\+Node\+\_\+t}}
+\item 
+typedef struct \mbox{\hyperlink{structAUTOJOB_1_1callback__node}{AUTOJOB\+::callback\+\_\+node}} \mbox{\hyperlink{classAUTOJOB_a038304a67e4eb120d47289062ac9a900}{callback\+\_\+node\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAUTOJOB_a11de55f9dac6079dfc4c61a033fef91c}{AUTOJOB}} (const \mbox{\hyperlink{classAUTOJOB}{AUTOJOB}} \&)=delete
+\item 
+\mbox{\hyperlink{classAUTOJOB}{AUTOJOB}} \& \mbox{\hyperlink{classAUTOJOB_ade8a1b1f1fbde1a2a25412a091d7c1e7}{operator=}} (const \mbox{\hyperlink{classAUTOJOB}{AUTOJOB}} \&)=delete
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classAUTOJOB}{AUTOJOB}} \& \mbox{\hyperlink{classAUTOJOB_a3543769cd9eb99b81f46ba2965add7a4}{get\+Instance}} ()
+\item 
+static bool \mbox{\hyperlink{classAUTOJOB_a80ef52995454ba43ee98e622c6bfb41c}{load\+Jobs\+From\+Fs}} (void)
+\item 
+static bool \mbox{\hyperlink{classAUTOJOB_addfe65b001565e43204a1fcf46259ac4}{save\+Jobs\+To\+Fs}} (void)
+\item 
+static bool \mbox{\hyperlink{classAUTOJOB_a7a445b89becad6eb23c5fcde2e549cdf}{delete\+Jobs\+From\+Fs}} (const char \texorpdfstring{$\ast$}{*}function\+To\+Delete)
+\item 
+static bool \mbox{\hyperlink{classAUTOJOB_a73acab1bcb3c865bbc87b4bfc53478d6}{start\+Jobs}} (void)
+\item 
+static bool \mbox{\hyperlink{classAUTOJOB_aee5fc48eae3110e7949170684c61634c}{stop\+Jobs}} (void)
+\item 
+static bool \mbox{\hyperlink{classAUTOJOB_a0bfa105f76673995f17f67eaf1eba0de}{Begin}} (void)
+\item 
+static bool \mbox{\hyperlink{classAUTOJOB_a717714ab7a6d233dc4470b81d8f52f52}{add\+All\+Callbacks}} (void)
+\item 
+static bool \mbox{\hyperlink{classAUTOJOB_af8b48d5f6d483754ac8b1ead432fadf4}{print\+All\+Callbacks\+Names}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAUTOJOB_a267845c93b8ccfd4b2d100ca064d1b46}{AUTOJOB}} ()
+\item 
+void \mbox{\hyperlink{classAUTOJOB_a81cf2e0bd98f5f34392152336fe258c4}{free\+Callback\+List}} (\mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{callback\+Node\+\_\+t}} \texorpdfstring{$\ast$}{*}head)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{callback\+Node\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAUTOJOB_a81c31d613f75d120ffbb5bc9dd72decd}{create\+Callback\+Node}} (const char \texorpdfstring{$\ast$}{*}name, \mbox{\hyperlink{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca}{callback\+\_\+t}} function)
+\item 
+static uint32\+\_\+t \mbox{\hyperlink{classAUTOJOB_a8bebe385c8eeb68e70febe7f4866ad36}{add\+Callback}} (\mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{callback\+Node\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}head, const char \texorpdfstring{$\ast$}{*}name, \mbox{\hyperlink{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca}{callback\+\_\+t}} function)
+\item 
+static \mbox{\hyperlink{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca}{callback\+\_\+t}} \mbox{\hyperlink{classAUTOJOB_ad8d0adc8c4923d9bf549f817f80f2cac}{get\+Callback}} (\mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{callback\+Node\+\_\+t}} \texorpdfstring{$\ast$}{*}head, const char \texorpdfstring{$\ast$}{*}name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classAUTOJOB_a55dea98dd750aa0267da9f06b22d3ddd}{started}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classAUTOJOB_a038304a67e4eb120d47289062ac9a900}\index{AUTOJOB@{AUTOJOB}!callback\_node\_t@{callback\_node\_t}}
+\index{callback\_node\_t@{callback\_node\_t}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{callback\_node\_t}{callback\_node\_t}}
+{\footnotesize\ttfamily \label{classAUTOJOB_a038304a67e4eb120d47289062ac9a900} 
+typedef struct \mbox{\hyperlink{structAUTOJOB_1_1callback__node}{AUTOJOB\+::callback\+\_\+node}} \mbox{\hyperlink{classAUTOJOB_a038304a67e4eb120d47289062ac9a900}{AUTOJOB\+::callback\+\_\+node\+\_\+t}}}
+
+\Hypertarget{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca}\index{AUTOJOB@{AUTOJOB}!callback\_t@{callback\_t}}
+\index{callback\_t@{callback\_t}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{callback\_t}{callback\_t}}
+{\footnotesize\ttfamily \label{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca} 
+typedef void(\texorpdfstring{$\ast$}{*} AUTOJOB\+::callback\+\_\+t) (void)}
+
+\Hypertarget{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}\index{AUTOJOB@{AUTOJOB}!callbackNode\_t@{callbackNode\_t}}
+\index{callbackNode\_t@{callbackNode\_t}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{callbackNode\_t}{callbackNode\_t}}
+{\footnotesize\ttfamily \label{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e} 
+typedef struct \mbox{\hyperlink{structAUTOJOB_1_1callbackNode}{AUTOJOB\+::callback\+Node}} \mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{AUTOJOB\+::callback\+Node\+\_\+t}}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classAUTOJOB_a11de55f9dac6079dfc4c61a033fef91c}\index{AUTOJOB@{AUTOJOB}!AUTOJOB@{AUTOJOB}}
+\index{AUTOJOB@{AUTOJOB}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{AUTOJOB()}{AUTOJOB()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classAUTOJOB_a11de55f9dac6079dfc4c61a033fef91c} 
+AUTOJOB\+::\+AUTOJOB (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classAUTOJOB}{AUTOJOB}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classAUTOJOB_a267845c93b8ccfd4b2d100ca064d1b46}\index{AUTOJOB@{AUTOJOB}!AUTOJOB@{AUTOJOB}}
+\index{AUTOJOB@{AUTOJOB}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{AUTOJOB()}{AUTOJOB()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classAUTOJOB_a267845c93b8ccfd4b2d100ca064d1b46} 
+AUTOJOB\+::\+AUTOJOB (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classAUTOJOB_a717714ab7a6d233dc4470b81d8f52f52}\index{AUTOJOB@{AUTOJOB}!addAllCallbacks@{addAllCallbacks}}
+\index{addAllCallbacks@{addAllCallbacks}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{addAllCallbacks()}{addAllCallbacks()}}
+{\footnotesize\ttfamily \label{classAUTOJOB_a717714ab7a6d233dc4470b81d8f52f52} 
+bool AUTOJOB\+::add\+All\+Callbacks (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classAUTOJOB_a8bebe385c8eeb68e70febe7f4866ad36}\index{AUTOJOB@{AUTOJOB}!addCallback@{addCallback}}
+\index{addCallback@{addCallback}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{addCallback()}{addCallback()}}
+{\footnotesize\ttfamily \label{classAUTOJOB_a8bebe385c8eeb68e70febe7f4866ad36} 
+uint32\+\_\+t AUTOJOB\+::add\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{callback\+Node\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{head}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{\mbox{\hyperlink{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca}{callback\+\_\+t}}}]{function}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classAUTOJOB_a0bfa105f76673995f17f67eaf1eba0de}\index{AUTOJOB@{AUTOJOB}!Begin@{Begin}}
+\index{Begin@{Begin}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{Begin()}{Begin()}}
+{\footnotesize\ttfamily \label{classAUTOJOB_a0bfa105f76673995f17f67eaf1eba0de} 
+bool AUTOJOB\+::\+Begin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classAUTOJOB_a81c31d613f75d120ffbb5bc9dd72decd}\index{AUTOJOB@{AUTOJOB}!createCallbackNode@{createCallbackNode}}
+\index{createCallbackNode@{createCallbackNode}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{createCallbackNode()}{createCallbackNode()}}
+{\footnotesize\ttfamily \label{classAUTOJOB_a81c31d613f75d120ffbb5bc9dd72decd} 
+\mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{AUTOJOB\+::callback\+Node\+\_\+t}} \texorpdfstring{$\ast$}{*} AUTOJOB\+::create\+Callback\+Node (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{\mbox{\hyperlink{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca}{callback\+\_\+t}}}]{function}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classAUTOJOB_a7a445b89becad6eb23c5fcde2e549cdf}\index{AUTOJOB@{AUTOJOB}!deleteJobsFromFs@{deleteJobsFromFs}}
+\index{deleteJobsFromFs@{deleteJobsFromFs}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{deleteJobsFromFs()}{deleteJobsFromFs()}}
+{\footnotesize\ttfamily \label{classAUTOJOB_a7a445b89becad6eb23c5fcde2e549cdf} 
+bool AUTOJOB\+::delete\+Jobs\+From\+Fs (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{function\+To\+Delete}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classAUTOJOB_a81cf2e0bd98f5f34392152336fe258c4}\index{AUTOJOB@{AUTOJOB}!freeCallbackList@{freeCallbackList}}
+\index{freeCallbackList@{freeCallbackList}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{freeCallbackList()}{freeCallbackList()}}
+{\footnotesize\ttfamily \label{classAUTOJOB_a81cf2e0bd98f5f34392152336fe258c4} 
+void AUTOJOB\+::free\+Callback\+List (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{callback\+Node\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{head}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classAUTOJOB_ad8d0adc8c4923d9bf549f817f80f2cac}\index{AUTOJOB@{AUTOJOB}!getCallback@{getCallback}}
+\index{getCallback@{getCallback}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{getCallback()}{getCallback()}}
+{\footnotesize\ttfamily \label{classAUTOJOB_ad8d0adc8c4923d9bf549f817f80f2cac} 
+\mbox{\hyperlink{classAUTOJOB_ade8fad7791e616a853947ebf61e5e8ca}{AUTOJOB\+::callback\+\_\+t}} AUTOJOB\+::get\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{callback\+Node\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{head}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classAUTOJOB_a3543769cd9eb99b81f46ba2965add7a4}\index{AUTOJOB@{AUTOJOB}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \label{classAUTOJOB_a3543769cd9eb99b81f46ba2965add7a4} 
+static \mbox{\hyperlink{classAUTOJOB}{AUTOJOB}} \& AUTOJOB\+::get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classAUTOJOB_a80ef52995454ba43ee98e622c6bfb41c}\index{AUTOJOB@{AUTOJOB}!loadJobsFromFs@{loadJobsFromFs}}
+\index{loadJobsFromFs@{loadJobsFromFs}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{loadJobsFromFs()}{loadJobsFromFs()}}
+{\footnotesize\ttfamily \label{classAUTOJOB_a80ef52995454ba43ee98e622c6bfb41c} 
+bool AUTOJOB\+::load\+Jobs\+From\+Fs (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classAUTOJOB_ade8a1b1f1fbde1a2a25412a091d7c1e7}\index{AUTOJOB@{AUTOJOB}!operator=@{operator=}}
+\index{operator=@{operator=}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classAUTOJOB_ade8a1b1f1fbde1a2a25412a091d7c1e7} 
+\mbox{\hyperlink{classAUTOJOB}{AUTOJOB}} \& AUTOJOB\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classAUTOJOB}{AUTOJOB}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classAUTOJOB_af8b48d5f6d483754ac8b1ead432fadf4}\index{AUTOJOB@{AUTOJOB}!printAllCallbacksNames@{printAllCallbacksNames}}
+\index{printAllCallbacksNames@{printAllCallbacksNames}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{printAllCallbacksNames()}{printAllCallbacksNames()}}
+{\footnotesize\ttfamily \label{classAUTOJOB_af8b48d5f6d483754ac8b1ead432fadf4} 
+bool AUTOJOB\+::print\+All\+Callbacks\+Names (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classAUTOJOB_addfe65b001565e43204a1fcf46259ac4}\index{AUTOJOB@{AUTOJOB}!saveJobsToFs@{saveJobsToFs}}
+\index{saveJobsToFs@{saveJobsToFs}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{saveJobsToFs()}{saveJobsToFs()}}
+{\footnotesize\ttfamily \label{classAUTOJOB_addfe65b001565e43204a1fcf46259ac4} 
+bool AUTOJOB\+::save\+Jobs\+To\+Fs (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classAUTOJOB_a73acab1bcb3c865bbc87b4bfc53478d6}\index{AUTOJOB@{AUTOJOB}!startJobs@{startJobs}}
+\index{startJobs@{startJobs}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{startJobs()}{startJobs()}}
+{\footnotesize\ttfamily \label{classAUTOJOB_a73acab1bcb3c865bbc87b4bfc53478d6} 
+bool AUTOJOB\+::start\+Jobs (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classAUTOJOB_aee5fc48eae3110e7949170684c61634c}\index{AUTOJOB@{AUTOJOB}!stopJobs@{stopJobs}}
+\index{stopJobs@{stopJobs}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{stopJobs()}{stopJobs()}}
+{\footnotesize\ttfamily \label{classAUTOJOB_aee5fc48eae3110e7949170684c61634c} 
+bool AUTOJOB\+::stop\+Jobs (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classAUTOJOB_a55dea98dd750aa0267da9f06b22d3ddd}\index{AUTOJOB@{AUTOJOB}!started@{started}}
+\index{started@{started}!AUTOJOB@{AUTOJOB}}
+\doxysubsubsection{\texorpdfstring{started}{started}}
+{\footnotesize\ttfamily \label{classAUTOJOB_a55dea98dd750aa0267da9f06b22d3ddd} 
+bool AUTOJOB\+::started = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{AutomaticJobs_8h}{Automatic\+Jobs.\+h}}\item 
+src/\mbox{\hyperlink{AutomaticJobs_8cpp}{Automatic\+Jobs.\+cpp}}\end{DoxyCompactItemize}

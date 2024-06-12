@@ -1,0 +1,103 @@
+\doxysection{File\+System.\+h}
+\hypertarget{FileSystem_8h_source}{}\label{FileSystem_8h_source}\index{include/FileSystem.h@{include/FileSystem.h}}
+\mbox{\hyperlink{FileSystem_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ FS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ FS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CommonIncludes_8h}{CommonIncludes.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}dev/minIni.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}esp\_littlefs.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ FSTAG\ "{}FS"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ STORAGE\_PARTITION\_NAME\ "{}storage"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ AUTOMATIC\_JOBS\_FOLDER\_PATH\ "{}/storage/AutomaticJobs"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ PACKETS\_RECEIVED\_FOLDER\_PATH\ "{}/storage/Packets"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ MEASUREMENTS\_FOLDER\_PATH\ "{}/storage/Measurements"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ CONFIG\_FOLDER\_PATH\ "{}/storage/Config"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ DEVICE\_CONFIG\_FILE\_PATH\ "{}/storage/Config/deviceConfig.ini"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ TIME\_BIN\_PATH\ "{}/storage/AutomaticJobs/time.bin"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ ADC\_BIN\_PATH\ "{}/storage/Measurements/adc.bin"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ PACKETS\_BIN\_PATH\ "{}/storage/Packets/packets.bin"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ AUTOMATICJOBS\_BIN\_PATH\ "{}/storage/AutomaticJobs/jobs.bin"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ INI\_MAX\_LEN\ 100}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ PATH\_MAX\_LEN\ 100}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ SECTION\_MAX\_LEN\ 100}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ KEY\_MAX\_LEN\ 100}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ VALUE\_MAX\_LEN\ 100}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ MAX\_PATH\_LEN\ 100}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classFS}{FS}}}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ las\ funciones\ de\ copia\ y\ asignación}}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classFS_afde74ae87c729895243c3963cccb179e}{FS}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classFS}{FS}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classFS}{FS}}\ \&\mbox{\hyperlink{classFS_a8d08f30221c28201ef179841881107d5}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classFS}{FS}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//\ Función\ para\ acceder\ a\ la\ instancia\ única\ del\ FS}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classFS}{FS}}\ \&\mbox{\hyperlink{classFS_a7bdd701a6bc1832348a15404f0b40c45}{getInstance}}()}
+\DoxyCodeLine{00039\ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classFS}{FS}}\ instance;\ \textcolor{comment}{//\ Única\ instancia}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFS_a78613c7cb6d19790ba92a015f3dfc7e2}{Begin}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classFS_a5e2641079d04033ae2e1a9481da27511}{getFileSize}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path,\ \textcolor{keywordtype}{long}\ *fileSize);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classFS_ace242f82277bc9d6d99644b8a0962e1d}{getFileBuffer}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path,\ \textcolor{keywordtype}{void}\ *buffer,\ \textcolor{keywordtype}{size\_t}\ sizeBuffer,\ \textcolor{keywordtype}{size\_t}\ sizeFile);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_a6fd2fa4059fea994902424b096892062}{CreateFile}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filePath);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_ae5de7712a507f11c4ea042e0df0b5ce3}{WriteFile}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *content,\ \textcolor{keywordtype}{size\_t}\ contentSize,\ \textcolor{keywordtype}{size\_t}\ contentNumber,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filePath,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *operationType);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_a8ff3e9648f0e6a2d4d12c8a396d7ee8a}{seekAndReadFile}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filePath,\ \textcolor{keywordtype}{void}\ *outputBuffer,\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{int}\ size,\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{int}\ offset,\ \textcolor{keywordtype}{int}\ origin);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_ac6e228ea15f9d1bdf48bc2e54f209eeb}{seekAndWriteFile}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filePath,\ \textcolor{keywordtype}{void}\ *outputBuffer,\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{int}\ size,\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{int}\ offset,\ \textcolor{keywordtype}{int}\ origin);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_a389a9c7db974cc456ab83bd71a988406}{CheckFileExists}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filePath);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_a9ac7d4bf191b285b4271b8393d2424a4}{CheckDirExists}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *dirPath);}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_a275c71151cc53b9094a8221d052b434f}{CreateDir}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *dirPath);}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00148\ \ \ \ \ esp\_err\_t\ \mbox{\hyperlink{classFS_aa444ba1df1eb9141ef5abfe4165d6fa3}{formatPartition}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *PartitionName);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_a2385b5e5c5d39cfc8f5b4a5a47ca759c}{populateDeviceConfigIni}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_a7077edd84196fd2f8195166c972da710}{checkAndCreateDirs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_a1edadd9bb921ed3a0edfa44a57553b69}{Ini\_gets}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *Section,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *Key,\ \textcolor{keywordtype}{char}\ *Result,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *FilePath);}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_a91cb8c4454294552de96f0eda1917396}{Ini\_getl}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *Section,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *Key,\ \textcolor{keywordtype}{long}\ *Result,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *FilePath);}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_aa57bb52c19bbbf4fbc62de52427f1d70}{Ini\_puts}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *Section,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *Key,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *Value,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *FilePath);}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_ab64768f2e4e4f99d7747b52184db3ee6}{Ini\_putl}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *Section,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *Key,\ \textcolor{keywordtype}{long}\ Value,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *FilePath);}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00260\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_a6b88a712f84c2f3c830e3108ebb99946}{Ini\_hassection}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *Section,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *FilePath);}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_a7b9ffbea2820716d4a4f344dec4112e9}{Ini\_haskey}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *Section,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *Key,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *FilePath);}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00280\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_a59b4e422c14c46352bebdf308710d6f4}{ls}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *PartitionName);}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_a732c11eef9d4baf3b8f67de6fd101c8d}{cat}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filePath);}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00297\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFS_abe5178eb57f5142eb5591af43487574b}{catb}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filePath);}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00300\ \ \ \ \ \textcolor{comment}{//\ Constructor\ privado}}
+\DoxyCodeLine{00301\ \ \ \ \ \mbox{\hyperlink{classFS_a9a253ac32976b5bb31080149294f3eb4}{FS}}()\ \{\}}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00312\ \ \ \ \ esp\_err\_t\ \mbox{\hyperlink{classFS_ae715c57a01ebf2d0d2365810f323a2e2}{mountPartition}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *PartitionName);}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00317\ \ \ \ \ \textcolor{keyword}{static}\ SemaphoreHandle\_t\ \mbox{\hyperlink{classFS_ac318aa28d8a8ed7370ba382a22ef2de8}{xFSSemaphore}};}
+\DoxyCodeLine{00318\ \};}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FS\_H}}
+
+\end{DoxyCode}

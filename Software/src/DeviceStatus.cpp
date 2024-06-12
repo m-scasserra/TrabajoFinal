@@ -1,4 +1,8 @@
+#include <string.h>
+
 #include "DeviceStatus.h"
+#include "FileSystem.h"
+
 
 DEVICESTATUS::DeviceStatus_t DEVICESTATUS::deviceStatus;
 

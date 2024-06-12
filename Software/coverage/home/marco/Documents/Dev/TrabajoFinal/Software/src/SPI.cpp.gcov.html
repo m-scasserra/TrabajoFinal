@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - home/marco/Documents/Dev/TrabajoFinal/Software/src/SPI.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../../../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory /home/marco/Documents/Dev/TrabajoFinal/Software/src">/home/marco/Documents/Dev/TrabajoFinal/Software/src</a> - SPI.cpp<span style="font-size: 80%;"> (source / <a href="SPI.cpp.func-c.html" title="Click to go to function table">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">10.4&nbsp;%</td>
+            <td class="headerCovTableEntry">48</td>
+            <td class="headerCovTableEntry">5</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2024-05-23 23:05:34</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryLo">16.7&nbsp;%</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">1</td>
+          </tr>
+                  <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #include &quot;SPI.h&quot;</span>
+<span id="L2"><span class="lineNum">       2</span>              : </span>
+<span id="L3"><span class="lineNum">       3</span>              : </span>
+<span id="L4"><span class="lineNum">       4</span> <span class="tlaGNC tlaBgGNC">           1 : bool SPI::Begin(spi_bus_config_t *SPIBusCfg)</span></span>
+<span id="L5"><span class="lineNum">       5</span>              : {</span>
+<span id="L6"><span class="lineNum">       6</span> <span class="tlaGNC">           1 :     if (SPIInitiated)</span></span>
+<span id="L7"><span class="lineNum">       7</span>              :     {</span>
+<span id="L8"><span class="lineNum">       8</span>              :         ESP_LOGI(SPITAG, &quot;El SPI ya fue inicializado.&quot;);</span>
+<span id="L9"><span class="lineNum">       9</span> <span class="tlaUNC tlaBgUNC">           0 :         return true;</span></span>
+<span id="L10"><span class="lineNum">      10</span>              :     }</span>
+<span id="L11"><span class="lineNum">      11</span>              : </span>
+<span id="L12"><span class="lineNum">      12</span>              :     // Initialize the SPI bus</span>
+<span id="L13"><span class="lineNum">      13</span>              :     ESP_LOGI(SPITAG, &quot;Inicio el bus SPI.&quot;);</span>
+<span id="L14"><span class="lineNum">      14</span> <span class="tlaGNC tlaBgGNC">           1 :     if (spi_bus_initialize(SPI2_HOST, SPIBusCfg, SPI_DMA_DISABLED) != ESP_OK)</span></span>
+<span id="L15"><span class="lineNum">      15</span>              :     {</span>
+<span id="L16"><span class="lineNum">      16</span>              :         ESP_LOGE(SPITAG, &quot;Error al inicializar el SPI Bus.&quot;);</span>
+<span id="L17"><span class="lineNum">      17</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
+<span id="L18"><span class="lineNum">      18</span>              :     }</span>
+<span id="L19"><span class="lineNum">      19</span>              :     ESP_LOGI(SPITAG, &quot;SPI Bus inicializado correctamente.&quot;);</span>
+<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC tlaBgGNC">           1 :     SPIInitiated = true;</span></span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">           1 :     return true;</span></span>
+<span id="L22"><span class="lineNum">      22</span>              : }</span>
+<span id="L23"><span class="lineNum">      23</span>              : </span>
+<span id="L24"><span class="lineNum">      24</span> <span class="tlaUNC tlaBgUNC">           0 : bool SPI::AddDevice(spi_device_interface_config_t *SPISlaveCfg)</span></span>
+<span id="L25"><span class="lineNum">      25</span>              : {</span>
+<span id="L26"><span class="lineNum">      26</span>              :     // Attach the E22 to the SPI bus</span>
+<span id="L27"><span class="lineNum">      27</span>              :     ESP_LOGI(SPITAG, &quot;Agrego el dispositivo SPI&quot;);</span>
+<span id="L28"><span class="lineNum">      28</span>              : </span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaUNC">           0 :     if (spi_bus_add_device(SPI2_HOST, SPISlaveCfg, &amp;SPIHandle) != ESP_OK)</span></span>
+<span id="L30"><span class="lineNum">      30</span>              :     {</span>
+<span id="L31"><span class="lineNum">      31</span>              :         ESP_LOGE(SPITAG, &quot;Error al agregar el dispositivo esclavo al SPI Bus&quot;);</span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L33"><span class="lineNum">      33</span>              :     }</span>
+<span id="L34"><span class="lineNum">      34</span>              :     ESP_LOGI(SPITAG, &quot;El dispositivo esclavo fue agregado correctamente.&quot;);</span>
+<span id="L35"><span class="lineNum">      35</span>              : </span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaUNC">           0 :     return true;</span></span>
+<span id="L37"><span class="lineNum">      37</span>              : }</span>
+<span id="L38"><span class="lineNum">      38</span>              : </span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaUNC">           0 : bool SPI::SendMessage(uint8_t *tx_msg, uint8_t tx_len, uint8_t *rx_msg, uint8_t rx_len)</span></span>
+<span id="L40"><span class="lineNum">      40</span>              : {</span>
+<span id="L41"><span class="lineNum">      41</span>              :     spi_transaction_t message;</span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaUNC">           0 :     memset(&amp;message, 0, sizeof(spi_transaction_t));</span></span>
+<span id="L43"><span class="lineNum">      43</span>              : </span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaUNC">           0 :     message.length = 8 * tx_len;</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaUNC">           0 :     message.rxlength = 8 * rx_len;</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaUNC">           0 :     message.user = NULL;</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaUNC">           0 :     message.tx_buffer = tx_msg;</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaUNC">           0 :     message.rx_buffer = rx_msg;</span></span>
+<span id="L49"><span class="lineNum">      49</span>              : </span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaUNC">           0 :     if (spi_device_polling_transmit(SPIHandle, &amp;message) != ESP_OK)</span></span>
+<span id="L51"><span class="lineNum">      51</span>              :     {</span>
+<span id="L52"><span class="lineNum">      52</span>              :         ESP_LOGE(&quot;SPI&quot;, &quot;Error en spi_device_polling_transmit()&quot;);</span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L54"><span class="lineNum">      54</span>              :     }</span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaUNC">           0 :     debugTXmessage(tx_msg, tx_len);</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaUNC">           0 :     debugRXmessage(rx_msg, rx_len);</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaUNC">           0 :     return true;</span></span>
+<span id="L58"><span class="lineNum">      58</span>              : }</span>
+<span id="L59"><span class="lineNum">      59</span>              : </span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC">           0 : bool SPI::SendMessage(uint8_t *tx_msg, uint8_t tx_len)</span></span>
+<span id="L61"><span class="lineNum">      61</span>              : {</span>
+<span id="L62"><span class="lineNum">      62</span>              :     spi_transaction_t message;</span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaUNC">           0 :     memset(&amp;message, 0, sizeof(spi_transaction_t));</span></span>
+<span id="L64"><span class="lineNum">      64</span>              : </span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaUNC">           0 :     message.length = 8 * tx_len;</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaUNC">           0 :     message.user = NULL;</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaUNC">           0 :     message.tx_buffer = tx_msg;</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaUNC">           0 :     message.rx_buffer = NULL;</span></span>
+<span id="L69"><span class="lineNum">      69</span>              : </span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaUNC">           0 :     if (spi_device_polling_transmit(SPIHandle, &amp;message) != ESP_OK)</span></span>
+<span id="L71"><span class="lineNum">      71</span>              :     {</span>
+<span id="L72"><span class="lineNum">      72</span>              :         ESP_LOGE(&quot;SPI&quot;, &quot;Error en spi_device_polling_transmit()&quot;);</span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L74"><span class="lineNum">      74</span>              :     }</span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaUNC">           0 :     debugTXmessage(tx_msg, tx_len);</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaUNC">           0 :     return true;</span></span>
+<span id="L77"><span class="lineNum">      77</span>              : }</span>
+<span id="L78"><span class="lineNum">      78</span>              : </span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaUNC">           0 : void SPI::debugTXmessage(uint8_t *tx_msg, uint8_t tx_len)</span></span>
+<span id="L80"><span class="lineNum">      80</span>              : {</span>
+<span id="L81"><span class="lineNum">      81</span>              :     // Create a buffer to store the formatted string</span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaUNC">           0 :     char formatted_string[tx_len * 5 + 1]; // Allocate enough space for hex, spaces and null terminator</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaUNC">           0 :     memset(formatted_string, 0, sizeof(formatted_string));</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaUNC">           0 :     int index = 0;</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaUNC">           0 :     for (int i = 0; i &lt; tx_len; i++)</span></span>
+<span id="L86"><span class="lineNum">      86</span>              :     {</span>
+<span id="L87"><span class="lineNum">      87</span>              :         // Format each byte as a two-digit hex string and store it in the buffer</span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaUNC">           0 :         sprintf(formatted_string + index, &quot;0x%02X &quot;, tx_msg[i]);</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaUNC">           0 :         index += 5; // Increment index by 5 for the formatted byte + spaces</span></span>
+<span id="L90"><span class="lineNum">      90</span>              :     }</span>
+<span id="L91"><span class="lineNum">      91</span>              : </span>
+<span id="L92"><span class="lineNum">      92</span>              :     // Print the formatted string with a trailing newline</span>
+<span id="L93"><span class="lineNum">      93</span>              :     ESP_LOGD(SPITAG, &quot;TX message: %s\n&quot;, formatted_string);</span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L95"><span class="lineNum">      95</span>              : </span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaUNC">           0 : void SPI::debugRXmessage(uint8_t *rx_msg, uint8_t rx_len)</span></span>
+<span id="L97"><span class="lineNum">      97</span>              : {</span>
+<span id="L98"><span class="lineNum">      98</span>              :     // Create a buffer to store the formatted string</span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaUNC">           0 :     char formatted_string[rx_len * 5 + 1]; // Allocate enough space for hex, spaces and null terminator</span></span>
+<span id="L100"><span class="lineNum">     100</span>              : </span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaUNC">           0 :     int index = 0;</span></span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaUNC">           0 :     for (int i = 0; i &lt; rx_len; i++)</span></span>
+<span id="L103"><span class="lineNum">     103</span>              :     {</span>
+<span id="L104"><span class="lineNum">     104</span>              :         // Format each byte as a two-digit hex string and store it in the buffer</span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaUNC">           0 :         sprintf(formatted_string + index, &quot;0x%02X &quot;, rx_msg[i]);</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaUNC">           0 :         index += 5; // Increment index by 5 for the formatted byte + spaces</span></span>
+<span id="L107"><span class="lineNum">     107</span>              :     }</span>
+<span id="L108"><span class="lineNum">     108</span>              : </span>
+<span id="L109"><span class="lineNum">     109</span>              :     // Print the formatted string with a trailing newline</span>
+<span id="L110"><span class="lineNum">     110</span>              :     ESP_LOGD(SPITAG, &quot;RX message: %s\n&quot;, formatted_string);</span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaUNC">           0 : }</span></span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.1-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

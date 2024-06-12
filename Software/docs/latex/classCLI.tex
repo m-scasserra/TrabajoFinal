@@ -1,0 +1,299 @@
+\doxysection{CLI Class Reference}
+\hypertarget{classCLI}{}\label{classCLI}\index{CLI@{CLI}}
+
+
+{\ttfamily \#include $<$CLI.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structCLI_1_1AJcmd__args__t}{AJcmd\+\_\+args\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structCLI_1_1configcmd__args__t}{configcmd\+\_\+args\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structCLI_1_1FScmd__args__t}{FScmd\+\_\+args\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structCLI_1_1netcmd__args__t}{netcmd\+\_\+args\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structCLI_1_1timecmd__args__t}{timecmd\+\_\+args\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structCLI_1_1timercmd__args__t}{timercmd\+\_\+args\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCLI_a28f1f88675d3bc7dd23da4853bd8b2bd}{CLI}} (const \mbox{\hyperlink{classCLI}{CLI}} \&)=delete
+\item 
+\mbox{\hyperlink{classCLI}{CLI}} \& \mbox{\hyperlink{classCLI_aee8ac18ab82bac2ec471007d35cd5967}{operator=}} (const \mbox{\hyperlink{classCLI}{CLI}} \&)=delete
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classCLI}{CLI}} \& \mbox{\hyperlink{classCLI_afb0099de9473ff74480fa40cec78a3ac}{get\+Instance}} ()
+\item 
+static void \mbox{\hyperlink{classCLI_a1c802f367eeaa1a0ce4b331322331894}{Begin}} (void)
+\item 
+static void \mbox{\hyperlink{classCLI_abaa4f914f9593131ac91ab18420e88d4}{Print\+Logo}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCLI_a1a5b0f7ec3b242c5c56e4745adbb391e}{CLI}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classCLI_a20521c33b21b0c6eb03d0008c9270b09}{esp\+\_\+console\+\_\+register\+\_\+all\+\_\+commands}} (void)
+\item 
+static esp\+\_\+err\+\_\+t \mbox{\hyperlink{classCLI_a689c8e97e94616abef2130316426866a}{esp\+\_\+console\+\_\+register\+\_\+simple\+\_\+command}} (const char \texorpdfstring{$\ast$}{*}commandtext, const char \texorpdfstring{$\ast$}{*}help, esp\+\_\+console\+\_\+cmd\+\_\+func\+\_\+t func)
+\item 
+static esp\+\_\+err\+\_\+t \mbox{\hyperlink{classCLI_af8acc8fc1d0904aff64a90351dca0253}{esp\+\_\+console\+\_\+register\+\_\+timer\+\_\+command}} (void)
+\item 
+static int \mbox{\hyperlink{classCLI_a6e24c119d1c78371b62493a673035727}{timer\+Cmd\+Func}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static esp\+\_\+err\+\_\+t \mbox{\hyperlink{classCLI_a0d7740c295311f039dca685fc2e10c8b}{esp\+\_\+console\+\_\+register\+\_\+config\+\_\+command}} (void)
+\item 
+static int \mbox{\hyperlink{classCLI_a73b657e6da107810f205b33377ae786e}{config\+Cmd\+Func}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static esp\+\_\+err\+\_\+t \mbox{\hyperlink{classCLI_ab27b17bd981ddf82e727b46593419959}{esp\+\_\+console\+\_\+register\+\_\+\+FS\+\_\+command}} (void)
+\item 
+static int \mbox{\hyperlink{classCLI_ad049cb1d8f8a1dc8a01557b0f8a3d31f}{FSCmd\+Func}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static esp\+\_\+err\+\_\+t \mbox{\hyperlink{classCLI_af0689633ac76d36cc2167615ace2a67c}{esp\+\_\+console\+\_\+register\+\_\+net\+\_\+command}} (void)
+\item 
+static int \mbox{\hyperlink{classCLI_a57d2efb04dd3e405b646a5293405f0c4}{time\+Cmd\+Func}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static esp\+\_\+err\+\_\+t \mbox{\hyperlink{classCLI_a6e4e0ea3b022560824442097df3a4d34}{esp\+\_\+console\+\_\+register\+\_\+time\+\_\+command}} (void)
+\item 
+static int \mbox{\hyperlink{classCLI_adb82c18da1fed90fb05a5499e208aa38}{Auto\+Job\+Cmd\+Func}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static esp\+\_\+err\+\_\+t \mbox{\hyperlink{classCLI_ab32d464d1f6f43c2be8d3441c1219cfd}{esp\+\_\+console\+\_\+register\+\_\+\+Auto\+Job\+\_\+command}} (void)
+\item 
+static int \mbox{\hyperlink{classCLI_a3671452c6580d899420441bb5f6a98bc}{net\+Cmd\+Func}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static int \mbox{\hyperlink{classCLI_ab7d0a57456cbf11e177129934186ff2a}{show\+Status\+CMD}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static int \mbox{\hyperlink{classCLI_a0789cc5a207ae46ad99050538b4b708d}{transmit\+CMD}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static int \mbox{\hyperlink{classCLI_a795104b8e7e3eee28771e4faef7c0bb9}{recieve\+CMD}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static int \mbox{\hyperlink{classCLI_a3903f362ac27ace7588e445f4fe2b3c0}{msg\+CMD}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static void \mbox{\hyperlink{classCLI_ae895346fdd3370ed942e334eb5879186}{Print\+Separator}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structCLI_1_1timercmd__args__t}{timercmd\+\_\+args\+\_\+t}} \mbox{\hyperlink{classCLI_af083e66bd7094e5b3dd05db579d85779}{timer\+\_\+args}}
+\item 
+static \mbox{\hyperlink{structCLI_1_1configcmd__args__t}{configcmd\+\_\+args\+\_\+t}} \mbox{\hyperlink{classCLI_a89e50c3140411c2cb6423943af8a8236}{config\+\_\+args}}
+\item 
+static \mbox{\hyperlink{structCLI_1_1FScmd__args__t}{FScmd\+\_\+args\+\_\+t}} \mbox{\hyperlink{classCLI_ae8f87cecad8a0247cace06cbc7cd0112}{FS\+\_\+args}}
+\item 
+static \mbox{\hyperlink{structCLI_1_1netcmd__args__t}{netcmd\+\_\+args\+\_\+t}} \mbox{\hyperlink{classCLI_a3f8c822c89bb04b91f70ae83a441121a}{net\+\_\+args}}
+\item 
+static \mbox{\hyperlink{structCLI_1_1timecmd__args__t}{timecmd\+\_\+args\+\_\+t}} \mbox{\hyperlink{classCLI_a0294ddb6e89bb6b6712ebd2e6af071e7}{time\+\_\+args}}
+\item 
+static \mbox{\hyperlink{structCLI_1_1AJcmd__args__t}{AJcmd\+\_\+args\+\_\+t}} \mbox{\hyperlink{classCLI_ac37241c6f73c276646c7146b5d3bbb30}{AJ\+\_\+args}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classCLI_a28f1f88675d3bc7dd23da4853bd8b2bd}\index{CLI@{CLI}!CLI@{CLI}}
+\index{CLI@{CLI}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{CLI()}{CLI()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classCLI_a28f1f88675d3bc7dd23da4853bd8b2bd} 
+CLI\+::\+CLI (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classCLI}{CLI}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classCLI_a1a5b0f7ec3b242c5c56e4745adbb391e}\index{CLI@{CLI}!CLI@{CLI}}
+\index{CLI@{CLI}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{CLI()}{CLI()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classCLI_a1a5b0f7ec3b242c5c56e4745adbb391e} 
+CLI\+::\+CLI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classCLI_adb82c18da1fed90fb05a5499e208aa38}\index{CLI@{CLI}!AutoJobCmdFunc@{AutoJobCmdFunc}}
+\index{AutoJobCmdFunc@{AutoJobCmdFunc}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{AutoJobCmdFunc()}{AutoJobCmdFunc()}}
+{\footnotesize\ttfamily \label{classCLI_adb82c18da1fed90fb05a5499e208aa38} 
+int CLI\+::\+Auto\+Job\+Cmd\+Func (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_a1c802f367eeaa1a0ce4b331322331894}\index{CLI@{CLI}!Begin@{Begin}}
+\index{Begin@{Begin}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{Begin()}{Begin()}}
+{\footnotesize\ttfamily \label{classCLI_a1c802f367eeaa1a0ce4b331322331894} 
+void CLI\+::\+Begin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classCLI_a73b657e6da107810f205b33377ae786e}\index{CLI@{CLI}!configCmdFunc@{configCmdFunc}}
+\index{configCmdFunc@{configCmdFunc}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{configCmdFunc()}{configCmdFunc()}}
+{\footnotesize\ttfamily \label{classCLI_a73b657e6da107810f205b33377ae786e} 
+int CLI\+::config\+Cmd\+Func (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_a20521c33b21b0c6eb03d0008c9270b09}\index{CLI@{CLI}!esp\_console\_register\_all\_commands@{esp\_console\_register\_all\_commands}}
+\index{esp\_console\_register\_all\_commands@{esp\_console\_register\_all\_commands}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{esp\_console\_register\_all\_commands()}{esp\_console\_register\_all\_commands()}}
+{\footnotesize\ttfamily \label{classCLI_a20521c33b21b0c6eb03d0008c9270b09} 
+void CLI\+::esp\+\_\+console\+\_\+register\+\_\+all\+\_\+commands (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_ab32d464d1f6f43c2be8d3441c1219cfd}\index{CLI@{CLI}!esp\_console\_register\_AutoJob\_command@{esp\_console\_register\_AutoJob\_command}}
+\index{esp\_console\_register\_AutoJob\_command@{esp\_console\_register\_AutoJob\_command}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{esp\_console\_register\_AutoJob\_command()}{esp\_console\_register\_AutoJob\_command()}}
+{\footnotesize\ttfamily \label{classCLI_ab32d464d1f6f43c2be8d3441c1219cfd} 
+esp\+\_\+err\+\_\+t CLI\+::esp\+\_\+console\+\_\+register\+\_\+\+Auto\+Job\+\_\+command (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_a0d7740c295311f039dca685fc2e10c8b}\index{CLI@{CLI}!esp\_console\_register\_config\_command@{esp\_console\_register\_config\_command}}
+\index{esp\_console\_register\_config\_command@{esp\_console\_register\_config\_command}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{esp\_console\_register\_config\_command()}{esp\_console\_register\_config\_command()}}
+{\footnotesize\ttfamily \label{classCLI_a0d7740c295311f039dca685fc2e10c8b} 
+esp\+\_\+err\+\_\+t CLI\+::esp\+\_\+console\+\_\+register\+\_\+config\+\_\+command (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_ab27b17bd981ddf82e727b46593419959}\index{CLI@{CLI}!esp\_console\_register\_FS\_command@{esp\_console\_register\_FS\_command}}
+\index{esp\_console\_register\_FS\_command@{esp\_console\_register\_FS\_command}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{esp\_console\_register\_FS\_command()}{esp\_console\_register\_FS\_command()}}
+{\footnotesize\ttfamily \label{classCLI_ab27b17bd981ddf82e727b46593419959} 
+esp\+\_\+err\+\_\+t CLI\+::esp\+\_\+console\+\_\+register\+\_\+\+FS\+\_\+command (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_af0689633ac76d36cc2167615ace2a67c}\index{CLI@{CLI}!esp\_console\_register\_net\_command@{esp\_console\_register\_net\_command}}
+\index{esp\_console\_register\_net\_command@{esp\_console\_register\_net\_command}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{esp\_console\_register\_net\_command()}{esp\_console\_register\_net\_command()}}
+{\footnotesize\ttfamily \label{classCLI_af0689633ac76d36cc2167615ace2a67c} 
+esp\+\_\+err\+\_\+t CLI\+::esp\+\_\+console\+\_\+register\+\_\+net\+\_\+command (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_a689c8e97e94616abef2130316426866a}\index{CLI@{CLI}!esp\_console\_register\_simple\_command@{esp\_console\_register\_simple\_command}}
+\index{esp\_console\_register\_simple\_command@{esp\_console\_register\_simple\_command}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{esp\_console\_register\_simple\_command()}{esp\_console\_register\_simple\_command()}}
+{\footnotesize\ttfamily \label{classCLI_a689c8e97e94616abef2130316426866a} 
+esp\+\_\+err\+\_\+t CLI\+::esp\+\_\+console\+\_\+register\+\_\+simple\+\_\+command (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{commandtext}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{help}{, }\item[{esp\+\_\+console\+\_\+cmd\+\_\+func\+\_\+t}]{func}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_a6e4e0ea3b022560824442097df3a4d34}\index{CLI@{CLI}!esp\_console\_register\_time\_command@{esp\_console\_register\_time\_command}}
+\index{esp\_console\_register\_time\_command@{esp\_console\_register\_time\_command}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{esp\_console\_register\_time\_command()}{esp\_console\_register\_time\_command()}}
+{\footnotesize\ttfamily \label{classCLI_a6e4e0ea3b022560824442097df3a4d34} 
+esp\+\_\+err\+\_\+t CLI\+::esp\+\_\+console\+\_\+register\+\_\+time\+\_\+command (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_af8acc8fc1d0904aff64a90351dca0253}\index{CLI@{CLI}!esp\_console\_register\_timer\_command@{esp\_console\_register\_timer\_command}}
+\index{esp\_console\_register\_timer\_command@{esp\_console\_register\_timer\_command}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{esp\_console\_register\_timer\_command()}{esp\_console\_register\_timer\_command()}}
+{\footnotesize\ttfamily \label{classCLI_af8acc8fc1d0904aff64a90351dca0253} 
+static esp\+\_\+err\+\_\+t CLI\+::esp\+\_\+console\+\_\+register\+\_\+timer\+\_\+command (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_ad049cb1d8f8a1dc8a01557b0f8a3d31f}\index{CLI@{CLI}!FSCmdFunc@{FSCmdFunc}}
+\index{FSCmdFunc@{FSCmdFunc}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{FSCmdFunc()}{FSCmdFunc()}}
+{\footnotesize\ttfamily \label{classCLI_ad049cb1d8f8a1dc8a01557b0f8a3d31f} 
+int CLI\+::\+FSCmd\+Func (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_afb0099de9473ff74480fa40cec78a3ac}\index{CLI@{CLI}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \label{classCLI_afb0099de9473ff74480fa40cec78a3ac} 
+static \mbox{\hyperlink{classCLI}{CLI}} \& CLI\+::get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classCLI_a3903f362ac27ace7588e445f4fe2b3c0}\index{CLI@{CLI}!msgCMD@{msgCMD}}
+\index{msgCMD@{msgCMD}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{msgCMD()}{msgCMD()}}
+{\footnotesize\ttfamily \label{classCLI_a3903f362ac27ace7588e445f4fe2b3c0} 
+int CLI\+::msg\+CMD (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_a3671452c6580d899420441bb5f6a98bc}\index{CLI@{CLI}!netCmdFunc@{netCmdFunc}}
+\index{netCmdFunc@{netCmdFunc}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{netCmdFunc()}{netCmdFunc()}}
+{\footnotesize\ttfamily \label{classCLI_a3671452c6580d899420441bb5f6a98bc} 
+int CLI\+::net\+Cmd\+Func (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_aee8ac18ab82bac2ec471007d35cd5967}\index{CLI@{CLI}!operator=@{operator=}}
+\index{operator=@{operator=}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classCLI_aee8ac18ab82bac2ec471007d35cd5967} 
+\mbox{\hyperlink{classCLI}{CLI}} \& CLI\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classCLI}{CLI}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classCLI_abaa4f914f9593131ac91ab18420e88d4}\index{CLI@{CLI}!PrintLogo@{PrintLogo}}
+\index{PrintLogo@{PrintLogo}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{PrintLogo()}{PrintLogo()}}
+{\footnotesize\ttfamily \label{classCLI_abaa4f914f9593131ac91ab18420e88d4} 
+void CLI\+::\+Print\+Logo (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classCLI_ae895346fdd3370ed942e334eb5879186}\index{CLI@{CLI}!PrintSeparator@{PrintSeparator}}
+\index{PrintSeparator@{PrintSeparator}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{PrintSeparator()}{PrintSeparator()}}
+{\footnotesize\ttfamily \label{classCLI_ae895346fdd3370ed942e334eb5879186} 
+void CLI\+::\+Print\+Separator (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_a795104b8e7e3eee28771e4faef7c0bb9}\index{CLI@{CLI}!recieveCMD@{recieveCMD}}
+\index{recieveCMD@{recieveCMD}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{recieveCMD()}{recieveCMD()}}
+{\footnotesize\ttfamily \label{classCLI_a795104b8e7e3eee28771e4faef7c0bb9} 
+int CLI\+::recieve\+CMD (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_ab7d0a57456cbf11e177129934186ff2a}\index{CLI@{CLI}!showStatusCMD@{showStatusCMD}}
+\index{showStatusCMD@{showStatusCMD}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{showStatusCMD()}{showStatusCMD()}}
+{\footnotesize\ttfamily \label{classCLI_ab7d0a57456cbf11e177129934186ff2a} 
+int CLI\+::show\+Status\+CMD (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_a57d2efb04dd3e405b646a5293405f0c4}\index{CLI@{CLI}!timeCmdFunc@{timeCmdFunc}}
+\index{timeCmdFunc@{timeCmdFunc}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{timeCmdFunc()}{timeCmdFunc()}}
+{\footnotesize\ttfamily \label{classCLI_a57d2efb04dd3e405b646a5293405f0c4} 
+int CLI\+::time\+Cmd\+Func (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_a6e24c119d1c78371b62493a673035727}\index{CLI@{CLI}!timerCmdFunc@{timerCmdFunc}}
+\index{timerCmdFunc@{timerCmdFunc}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{timerCmdFunc()}{timerCmdFunc()}}
+{\footnotesize\ttfamily \label{classCLI_a6e24c119d1c78371b62493a673035727} 
+static int CLI\+::timer\+Cmd\+Func (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_a0789cc5a207ae46ad99050538b4b708d}\index{CLI@{CLI}!transmitCMD@{transmitCMD}}
+\index{transmitCMD@{transmitCMD}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{transmitCMD()}{transmitCMD()}}
+{\footnotesize\ttfamily \label{classCLI_a0789cc5a207ae46ad99050538b4b708d} 
+int CLI\+::transmit\+CMD (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classCLI_ac37241c6f73c276646c7146b5d3bbb30}\index{CLI@{CLI}!AJ\_args@{AJ\_args}}
+\index{AJ\_args@{AJ\_args}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{AJ\_args}{AJ\_args}}
+{\footnotesize\ttfamily \label{classCLI_ac37241c6f73c276646c7146b5d3bbb30} 
+\mbox{\hyperlink{structCLI_1_1AJcmd__args__t}{CLI\+::\+AJcmd\+\_\+args\+\_\+t}} CLI\+::\+AJ\+\_\+args\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_a89e50c3140411c2cb6423943af8a8236}\index{CLI@{CLI}!config\_args@{config\_args}}
+\index{config\_args@{config\_args}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{config\_args}{config\_args}}
+{\footnotesize\ttfamily \label{classCLI_a89e50c3140411c2cb6423943af8a8236} 
+\mbox{\hyperlink{structCLI_1_1configcmd__args__t}{CLI\+::configcmd\+\_\+args\+\_\+t}} CLI\+::config\+\_\+args\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_ae8f87cecad8a0247cace06cbc7cd0112}\index{CLI@{CLI}!FS\_args@{FS\_args}}
+\index{FS\_args@{FS\_args}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{FS\_args}{FS\_args}}
+{\footnotesize\ttfamily \label{classCLI_ae8f87cecad8a0247cace06cbc7cd0112} 
+\mbox{\hyperlink{structCLI_1_1FScmd__args__t}{CLI\+::\+FScmd\+\_\+args\+\_\+t}} CLI\+::\+FS\+\_\+args\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_a3f8c822c89bb04b91f70ae83a441121a}\index{CLI@{CLI}!net\_args@{net\_args}}
+\index{net\_args@{net\_args}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{net\_args}{net\_args}}
+{\footnotesize\ttfamily \label{classCLI_a3f8c822c89bb04b91f70ae83a441121a} 
+\mbox{\hyperlink{structCLI_1_1netcmd__args__t}{CLI\+::netcmd\+\_\+args\+\_\+t}} CLI\+::net\+\_\+args\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_a0294ddb6e89bb6b6712ebd2e6af071e7}\index{CLI@{CLI}!time\_args@{time\_args}}
+\index{time\_args@{time\_args}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{time\_args}{time\_args}}
+{\footnotesize\ttfamily \label{classCLI_a0294ddb6e89bb6b6712ebd2e6af071e7} 
+\mbox{\hyperlink{structCLI_1_1timecmd__args__t}{CLI\+::timecmd\+\_\+args\+\_\+t}} CLI\+::time\+\_\+args\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classCLI_af083e66bd7094e5b3dd05db579d85779}\index{CLI@{CLI}!timer\_args@{timer\_args}}
+\index{timer\_args@{timer\_args}!CLI@{CLI}}
+\doxysubsubsection{\texorpdfstring{timer\_args}{timer\_args}}
+{\footnotesize\ttfamily \label{classCLI_af083e66bd7094e5b3dd05db579d85779} 
+\mbox{\hyperlink{structCLI_1_1timercmd__args__t}{CLI\+::timercmd\+\_\+args\+\_\+t}} CLI\+::timer\+\_\+args\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{CLI_8h}{CLI.\+h}}\item 
+src/\mbox{\hyperlink{CLI_8cpp}{CLI.\+cpp}}\end{DoxyCompactItemize}
