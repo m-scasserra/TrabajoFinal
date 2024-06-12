@@ -1,3 +1,7 @@
+/**
+ * @file CommonIncludes.h
+ * @brief Header file containing common includes for the project.
+ */
 #ifndef COMMONINCLUDES_H
 #define COMMONINCLUDES_H
 

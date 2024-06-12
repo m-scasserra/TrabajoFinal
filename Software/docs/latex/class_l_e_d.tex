@@ -1,0 +1,135 @@
+\doxysection{LED Class Reference}
+\hypertarget{class_l_e_d}{}\label{class_l_e_d}\index{LED@{LED}}
+
+
+\doxylink{class_l_e_d}{LED} class for controlling RGB \doxylink{class_l_e_d}{LED} strips using RMT.  
+
+
+
+
+{\ttfamily \#include $<$Led.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_l_e_d_1_1led__strip__encoder__config__t}{led\+\_\+strip\+\_\+encoder\+\_\+config\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Configuration structure for \doxylink{class_l_e_d}{LED} strip encoder. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_l_e_d_1_1rmt__led__strip__encoder__t}{rmt\+\_\+led\+\_\+strip\+\_\+encoder\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Structure for RMT \doxylink{class_l_e_d}{LED} strip encoder. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_l_e_d_aa47b3dfee0275a3586654a7598a5bbc5}\label{class_l_e_d_aa47b3dfee0275a3586654a7598a5bbc5} 
+enum \mbox{\hyperlink{class_l_e_d_aa47b3dfee0275a3586654a7598a5bbc5}{colors}} \{ \newline
+{\bfseries black}
+, {\bfseries red}
+, {\bfseries blue}
+, {\bfseries green}
+, \newline
+{\bfseries white}
+, {\bfseries undefined}
+ \}
+\begin{DoxyCompactList}\small\item\em Pre-\/configured colors for the \doxylink{class_l_e_d}{LED}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_l_e_d_a26ec420d6f685d3dba6293f555d218ff}\label{class_l_e_d_a26ec420d6f685d3dba6293f555d218ff} 
+{\bfseries LED} (const \mbox{\hyperlink{class_l_e_d}{LED}} \&)=delete
+\item 
+\Hypertarget{class_l_e_d_afbaba7e975a64af555407f4c952ae8e7}\label{class_l_e_d_afbaba7e975a64af555407f4c952ae8e7} 
+\mbox{\hyperlink{class_l_e_d}{LED}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_l_e_d}{LED}} \&)=delete
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_l_e_d_af135a2955fc939e9cdf6464f3d6e276e}\label{class_l_e_d_af135a2955fc939e9cdf6464f3d6e276e} 
+static \mbox{\hyperlink{class_l_e_d}{LED}} \& {\bfseries get\+Instance} ()
+\item 
+static void \mbox{\hyperlink{class_l_e_d_a33aa9f6a1e61013737d3cb82a7139f8e}{Set\+Brightness}} (uint8\+\_\+t brillo\+\_\+)
+\begin{DoxyCompactList}\small\item\em Set the brightness level for the \doxylink{class_l_e_d}{LED}. \end{DoxyCompactList}\item 
+\Hypertarget{class_l_e_d_a79dcde2d7aead89c2bb95750fe759c5a}\label{class_l_e_d_a79dcde2d7aead89c2bb95750fe759c5a} 
+static void {\bfseries Begin} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the \doxylink{class_l_e_d}{LED} strip. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_l_e_d_a688d39167cbfe98f80a3595e94a536fd}{Set\+Led\+Color}} (uint8\+\_\+t R, uint8\+\_\+t G, uint8\+\_\+t B)
+\begin{DoxyCompactList}\small\item\em Set the color for the \doxylink{class_l_e_d}{LED}. \end{DoxyCompactList}\item 
+\Hypertarget{class_l_e_d_a270fdb146662eab907e8b05054bafb4d}\label{class_l_e_d_a270fdb146662eab907e8b05054bafb4d} 
+static void {\bfseries Show} (void)
+\begin{DoxyCompactList}\small\item\em Show the \doxylink{class_l_e_d}{LED} color. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_l_e_d_acc66b1cc485086f9b7e58f6ac4c552aa}{Set\+Led\+Color}} (\mbox{\hyperlink{class_l_e_d_aa47b3dfee0275a3586654a7598a5bbc5}{colors}} color)
+\begin{DoxyCompactList}\small\item\em Set the color for the \doxylink{class_l_e_d}{LED}. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_l_e_d_aa47b3dfee0275a3586654a7598a5bbc5}{LED\+::colors}} \mbox{\hyperlink{class_l_e_d_a9638dd822e74b5ece6f41b62c4b18bfd}{Get\+Led\+Color}} (void)
+\begin{DoxyCompactList}\small\item\em Get the color for the \doxylink{class_l_e_d}{LED}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{class_l_e_d}{LED} class for controlling RGB \doxylink{class_l_e_d}{LED} strips using RMT. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_l_e_d_a9638dd822e74b5ece6f41b62c4b18bfd}\index{LED@{LED}!GetLedColor@{GetLedColor}}
+\index{GetLedColor@{GetLedColor}!LED@{LED}}
+\doxysubsubsection{\texorpdfstring{GetLedColor()}{GetLedColor()}}
+{\footnotesize\ttfamily \label{class_l_e_d_a9638dd822e74b5ece6f41b62c4b18bfd} 
+\mbox{\hyperlink{class_l_e_d_aa47b3dfee0275a3586654a7598a5bbc5}{LED\+::colors}} LED\+::\+Get\+Led\+Color (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the color for the \doxylink{class_l_e_d}{LED}. 
+
+\begin{DoxyReturn}{Returns}
+colors Current \doxylink{class_l_e_d}{LED} color 
+\end{DoxyReturn}
+\Hypertarget{class_l_e_d_a33aa9f6a1e61013737d3cb82a7139f8e}\index{LED@{LED}!SetBrightness@{SetBrightness}}
+\index{SetBrightness@{SetBrightness}!LED@{LED}}
+\doxysubsubsection{\texorpdfstring{SetBrightness()}{SetBrightness()}}
+{\footnotesize\ttfamily \label{class_l_e_d_a33aa9f6a1e61013737d3cb82a7139f8e} 
+void LED\+::\+Set\+Brightness (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{brillo\+\_\+}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Set the brightness level for the \doxylink{class_l_e_d}{LED}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em brillo\+\_\+} & Brightness level for the \doxylink{class_l_e_d}{LED} (0-\/100) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_l_e_d_acc66b1cc485086f9b7e58f6ac4c552aa}\index{LED@{LED}!SetLedColor@{SetLedColor}}
+\index{SetLedColor@{SetLedColor}!LED@{LED}}
+\doxysubsubsection{\texorpdfstring{SetLedColor()}{SetLedColor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_l_e_d_acc66b1cc485086f9b7e58f6ac4c552aa} 
+void LED\+::\+Set\+Led\+Color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_l_e_d_aa47b3dfee0275a3586654a7598a5bbc5}{colors}}}]{color}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Set the color for the \doxylink{class_l_e_d}{LED}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & Color to set \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_l_e_d_a688d39167cbfe98f80a3595e94a536fd}\index{LED@{LED}!SetLedColor@{SetLedColor}}
+\index{SetLedColor@{SetLedColor}!LED@{LED}}
+\doxysubsubsection{\texorpdfstring{SetLedColor()}{SetLedColor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_l_e_d_a688d39167cbfe98f80a3595e94a536fd} 
+void LED\+::\+Set\+Led\+Color (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{R}{, }\item[{uint8\+\_\+t}]{G}{, }\item[{uint8\+\_\+t}]{B}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Set the color for the \doxylink{class_l_e_d}{LED}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em R} & Red value (0-\/255) \\
+\hline
+{\em G} & Green value (0-\/255) \\
+\hline
+{\em B} & Blue value (0-\/255) \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_led_8h}{Led.\+h}}\item 
+src/Led.\+cpp\end{DoxyCompactItemize}

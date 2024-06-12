@@ -1,0 +1,64 @@
+\doxysection{IO.\+h}
+\hypertarget{_i_o_8h_source}{}\label{_i_o_8h_source}\index{include/IO.h@{include/IO.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IO\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IO\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_common_includes_8h}{CommonIncludes.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}driver/gpio.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}esp\_adc/adc\_oneshot.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}esp\_adc/adc\_cali.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ IOTAG\ "{}IO"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ IO\_LOW\ 0}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ IO\_HIGH\ 1}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_i_o}{IO}}}
+\DoxyCodeLine{00028\ \{}
+\DoxyCodeLine{00029\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ las\ funciones\ de\ copia\ y\ asignación}}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_i_o}{IO}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_i_o}{IO}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_i_o}{IO}}\ \&operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_i_o}{IO}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ Función\ para\ acceder\ a\ la\ instancia\ única\ del\ IO}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_i_o}{IO}}\ \&getInstance()}
+\DoxyCodeLine{00036\ \ \ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_i_o}{IO}}\ instance;\ \textcolor{comment}{//\ Única\ instancia}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_o_a67d5773f98af042a71d1af29774327d5}{Begin}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_o_aa14d3809f3526b6255519deeefff0bcf}{SetConfig}}(uint64\_t\ pin\_bit\_mask,\ gpio\_mode\_t\ mode,\ gpio\_pullup\_t\ pull\_up\_en,\ gpio\_pulldown\_t\ pull\_down\_en,\ gpio\_int\_type\_t\ intr\_type);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_o_a33feb2cd1180029832d6fb878cb6f1b0}{SetLevel}}(gpio\_num\_t\ gpio\_num,\ uint32\_t\ level);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_o_abc3b4df82efe2da1edd351d23ecb3d69}{GetLevel}}(gpio\_num\_t\ gpio\_num);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_o_a03aac0401b3b74e6867facea753d8687}{ConfigADC}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_o_a78ae07edd70a09c89e348ece72f24f12}{getADCOneShotRaw}}(int32\_t\ *value);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_o_a3f02cd5572810d6e2f83f1c52b98350b}{getADCOneShotConverted}}(int32\_t\ *value);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_o_a3d8fe6bb95541b139380edc05b8e427b}{getAndSaveADCOneShotRaw}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_o_a6176338402ca88d37d4a8d20de8150f9}{getAndSaveADCOneConverted}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{comment}{//\ Constructor\ privado}}
+\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{class_i_o}{IO}}()\ \{\}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keyword}{static}\ adc\_oneshot\_unit\_handle\_t\ adc1\_handle;}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{static}\ adc\_cali\_handle\_t\ adc1\_cali\_chan3\_handle;}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ do\_calibADC1\_chan3;}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ calibratedADC1\_chan3;}
+\DoxyCodeLine{00146\ \};}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ E22DRIVER\_H}}
+
+\end{DoxyCode}

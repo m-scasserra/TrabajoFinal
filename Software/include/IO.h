@@ -10,6 +10,20 @@
 #define IO_LOW 0
 #define IO_HIGH 1
 
+/**
+ * @class IO
+ * @brief This class provides an interface for GPIO and ADC operations.
+ *
+ * The `IO` class is a singleton class that allows access to GPIO and ADC functionalities.
+ * It provides methods for initializing GPIOs, configuring GPIOs, setting and getting GPIO levels,
+ * configuring the ADC, and reading raw and converted values from the ADC.
+ *
+ * The class follows the Singleton design pattern to ensure that only one instance of `IO` can exist.
+ * To access the instance, use the static method `getInstance()`.
+ *
+ * The class also prevents copying and assignment of instances by deleting the copy constructor and
+ * the assignment operator.
+ */
 class IO
 {
 public:
@@ -24,11 +38,9 @@ public:
         return instance;
     }
 
-
-    // Doxygen english comments
     /**
      * @brief Initializes the GPIOs
-     * 
+     *
      * @return true If the GPIOs were initialized correctly
      * @return false If there was an error initializing the GPIOs
      */
@@ -36,7 +48,7 @@ public:
 
     /**
      * @brief Configures a GPIO
-     * 
+     *
      * @param pin_bit_mask GPIO pin mask
      * @param mode GPIO mode
      * @param pull_up_en GPIO pull-up configuration
@@ -49,7 +61,7 @@ public:
 
     /**
      * @brief Sets the level of a GPIO
-     * 
+     *
      * @param gpio_num GPIO number
      * @param level GPIO level
      * @return true If the GPIO level was set correctly
@@ -59,7 +71,7 @@ public:
 
     /**
      * @brief Gets the level of a GPIO
-     * 
+     *
      * @param gpio_num GPIO number
      * @return true If the GPIO level was read correctly
      * @return false If there was an error reading the GPIO level
@@ -68,7 +80,7 @@ public:
 
     /**
      * @brief Configures the ADC
-     * 
+     *
      * @return true If the ADC was configured correctly
      * @return false If there was an error configuring the ADC
      */
@@ -76,7 +88,7 @@ public:
 
     /**
      * @brief Gets the raw value of the ADC
-     * 
+     *
      * @param value Pointer to store the raw value of the ADC
      * @return true If the raw value of the ADC was read correctly
      * @return false If there was an error reading the raw value of the ADC
@@ -85,7 +97,7 @@ public:
 
     /**
      * @brief Gets the converted value of the ADC
-     * 
+     *
      * @param value Pointer to store the converted value of the ADC
      * @return true If the converted value of the ADC was read correctly
      * @return false If there was an error reading the converted value of the ADC
@@ -94,7 +106,7 @@ public:
 
     /**
      * @brief Gets and saves the raw value of the ADC
-     * 
+     *
      * @return true If the raw value of the ADC was read and saved correctly
      * @return false If there was an error reading or saving the raw value of the ADC
      */
@@ -102,7 +114,7 @@ public:
 
     /**
      * @brief Gets and saves the converted value of the ADC
-     * 
+     *
      * @return true If the converted value of the ADC was read and saved correctly
      * @return false If there was an error reading or saving the converted value of the ADC
      */
@@ -111,8 +123,6 @@ public:
 private:
     // Constructor privado
     IO() {}
-
-    // Doxgen english comments
 
     /**
      * @brief Handle to the ADC unit

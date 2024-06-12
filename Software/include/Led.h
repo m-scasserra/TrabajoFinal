@@ -1,3 +1,8 @@
+/**
+ * @file Led.h
+ * @brief Header file for the LED class that controls RGB LED strips using RMT.
+ */
+
 #ifndef LED_H
 #define LED_H
 

@@ -1,0 +1,232 @@
+\doxysection{IO Class Reference}
+\hypertarget{class_i_o}{}\label{class_i_o}\index{IO@{IO}}
+
+
+This class provides an interface for GPIO and ADC operations.  
+
+
+
+
+{\ttfamily \#include $<$IO.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_i_o_a114e98e991ba512c3ef61609363b07b3}\label{class_i_o_a114e98e991ba512c3ef61609363b07b3} 
+{\bfseries IO} (const \mbox{\hyperlink{class_i_o}{IO}} \&)=delete
+\item 
+\Hypertarget{class_i_o_a019e6a95e2757b471b3d43423d9c7838}\label{class_i_o_a019e6a95e2757b471b3d43423d9c7838} 
+\mbox{\hyperlink{class_i_o}{IO}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_i_o}{IO}} \&)=delete
+\item 
+bool \mbox{\hyperlink{class_i_o_a67d5773f98af042a71d1af29774327d5}{Begin}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the GPIOs. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_i_o_aa14d3809f3526b6255519deeefff0bcf}{Set\+Config}} (uint64\+\_\+t pin\+\_\+bit\+\_\+mask, gpio\+\_\+mode\+\_\+t mode, gpio\+\_\+pullup\+\_\+t pull\+\_\+up\+\_\+en, gpio\+\_\+pulldown\+\_\+t pull\+\_\+down\+\_\+en, gpio\+\_\+int\+\_\+type\+\_\+t intr\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Configures a GPIO. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_i_o_a33feb2cd1180029832d6fb878cb6f1b0}{Set\+Level}} (gpio\+\_\+num\+\_\+t gpio\+\_\+num, uint32\+\_\+t level)
+\begin{DoxyCompactList}\small\item\em Sets the level of a GPIO. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_i_o_abc3b4df82efe2da1edd351d23ecb3d69}{Get\+Level}} (gpio\+\_\+num\+\_\+t gpio\+\_\+num)
+\begin{DoxyCompactList}\small\item\em Gets the level of a GPIO. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_i_o_a03aac0401b3b74e6867facea753d8687}{Config\+ADC}} (void)
+\begin{DoxyCompactList}\small\item\em Configures the ADC. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_i_o_a78ae07edd70a09c89e348ece72f24f12}{get\+ADCOne\+Shot\+Raw}} (int32\+\_\+t \texorpdfstring{$\ast$}{*}value)
+\begin{DoxyCompactList}\small\item\em Gets the raw value of the ADC. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_i_o_a3f02cd5572810d6e2f83f1c52b98350b}{get\+ADCOne\+Shot\+Converted}} (int32\+\_\+t \texorpdfstring{$\ast$}{*}value)
+\begin{DoxyCompactList}\small\item\em Gets the converted value of the ADC. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_i_o_a3d8fe6bb95541b139380edc05b8e427b}{get\+And\+Save\+ADCOne\+Shot\+Raw}} (void)
+\begin{DoxyCompactList}\small\item\em Gets and saves the raw value of the ADC. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_i_o_a6176338402ca88d37d4a8d20de8150f9}{get\+And\+Save\+ADCOne\+Converted}} (void)
+\begin{DoxyCompactList}\small\item\em Gets and saves the converted value of the ADC. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_i_o_a2c9686baf915de7058bffdba91ad2412}\label{class_i_o_a2c9686baf915de7058bffdba91ad2412} 
+static \mbox{\hyperlink{class_i_o}{IO}} \& {\bfseries get\+Instance} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class provides an interface for GPIO and ADC operations. 
+
+The {\ttfamily \doxylink{class_i_o}{IO}} class is a singleton class that allows access to GPIO and ADC functionalities. It provides methods for initializing GPIOs, configuring GPIOs, setting and getting GPIO levels, configuring the ADC, and reading raw and converted values from the ADC.
+
+The class follows the Singleton design pattern to ensure that only one instance of {\ttfamily \doxylink{class_i_o}{IO}} can exist. To access the instance, use the static method {\ttfamily get\+Instance()}.
+
+The class also prevents copying and assignment of instances by deleting the copy constructor and the assignment operator. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_i_o_a67d5773f98af042a71d1af29774327d5}\index{IO@{IO}!Begin@{Begin}}
+\index{Begin@{Begin}!IO@{IO}}
+\doxysubsubsection{\texorpdfstring{Begin()}{Begin()}}
+{\footnotesize\ttfamily \label{class_i_o_a67d5773f98af042a71d1af29774327d5} 
+bool IO\+::\+Begin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the GPIOs. 
+
+\begin{DoxyReturn}{Returns}
+true If the GPIOs were initialized correctly 
+
+false If there was an error initializing the GPIOs 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_a03aac0401b3b74e6867facea753d8687}\index{IO@{IO}!ConfigADC@{ConfigADC}}
+\index{ConfigADC@{ConfigADC}!IO@{IO}}
+\doxysubsubsection{\texorpdfstring{ConfigADC()}{ConfigADC()}}
+{\footnotesize\ttfamily \label{class_i_o_a03aac0401b3b74e6867facea753d8687} 
+bool IO\+::\+Config\+ADC (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Configures the ADC. 
+
+\begin{DoxyReturn}{Returns}
+true If the ADC was configured correctly 
+
+false If there was an error configuring the ADC 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_a3f02cd5572810d6e2f83f1c52b98350b}\index{IO@{IO}!getADCOneShotConverted@{getADCOneShotConverted}}
+\index{getADCOneShotConverted@{getADCOneShotConverted}!IO@{IO}}
+\doxysubsubsection{\texorpdfstring{getADCOneShotConverted()}{getADCOneShotConverted()}}
+{\footnotesize\ttfamily \label{class_i_o_a3f02cd5572810d6e2f83f1c52b98350b} 
+bool IO\+::get\+ADCOne\+Shot\+Converted (\begin{DoxyParamCaption}\item[{int32\+\_\+t \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Gets the converted value of the ADC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Pointer to store the converted value of the ADC \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the converted value of the ADC was read correctly 
+
+false If there was an error reading the converted value of the ADC 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_a78ae07edd70a09c89e348ece72f24f12}\index{IO@{IO}!getADCOneShotRaw@{getADCOneShotRaw}}
+\index{getADCOneShotRaw@{getADCOneShotRaw}!IO@{IO}}
+\doxysubsubsection{\texorpdfstring{getADCOneShotRaw()}{getADCOneShotRaw()}}
+{\footnotesize\ttfamily \label{class_i_o_a78ae07edd70a09c89e348ece72f24f12} 
+bool IO\+::get\+ADCOne\+Shot\+Raw (\begin{DoxyParamCaption}\item[{int32\+\_\+t \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Gets the raw value of the ADC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Pointer to store the raw value of the ADC \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the raw value of the ADC was read correctly 
+
+false If there was an error reading the raw value of the ADC 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_a6176338402ca88d37d4a8d20de8150f9}\index{IO@{IO}!getAndSaveADCOneConverted@{getAndSaveADCOneConverted}}
+\index{getAndSaveADCOneConverted@{getAndSaveADCOneConverted}!IO@{IO}}
+\doxysubsubsection{\texorpdfstring{getAndSaveADCOneConverted()}{getAndSaveADCOneConverted()}}
+{\footnotesize\ttfamily \label{class_i_o_a6176338402ca88d37d4a8d20de8150f9} 
+bool IO\+::get\+And\+Save\+ADCOne\+Converted (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Gets and saves the converted value of the ADC. 
+
+\begin{DoxyReturn}{Returns}
+true If the converted value of the ADC was read and saved correctly 
+
+false If there was an error reading or saving the converted value of the ADC 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_a3d8fe6bb95541b139380edc05b8e427b}\index{IO@{IO}!getAndSaveADCOneShotRaw@{getAndSaveADCOneShotRaw}}
+\index{getAndSaveADCOneShotRaw@{getAndSaveADCOneShotRaw}!IO@{IO}}
+\doxysubsubsection{\texorpdfstring{getAndSaveADCOneShotRaw()}{getAndSaveADCOneShotRaw()}}
+{\footnotesize\ttfamily \label{class_i_o_a3d8fe6bb95541b139380edc05b8e427b} 
+bool IO\+::get\+And\+Save\+ADCOne\+Shot\+Raw (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Gets and saves the raw value of the ADC. 
+
+\begin{DoxyReturn}{Returns}
+true If the raw value of the ADC was read and saved correctly 
+
+false If there was an error reading or saving the raw value of the ADC 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_abc3b4df82efe2da1edd351d23ecb3d69}\index{IO@{IO}!GetLevel@{GetLevel}}
+\index{GetLevel@{GetLevel}!IO@{IO}}
+\doxysubsubsection{\texorpdfstring{GetLevel()}{GetLevel()}}
+{\footnotesize\ttfamily \label{class_i_o_abc3b4df82efe2da1edd351d23ecb3d69} 
+bool IO\+::\+Get\+Level (\begin{DoxyParamCaption}\item[{gpio\+\_\+num\+\_\+t}]{gpio\+\_\+num}{}\end{DoxyParamCaption})}
+
+
+
+Gets the level of a GPIO. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gpio\+\_\+num} & GPIO number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the GPIO level was read correctly 
+
+false If there was an error reading the GPIO level 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_aa14d3809f3526b6255519deeefff0bcf}\index{IO@{IO}!SetConfig@{SetConfig}}
+\index{SetConfig@{SetConfig}!IO@{IO}}
+\doxysubsubsection{\texorpdfstring{SetConfig()}{SetConfig()}}
+{\footnotesize\ttfamily \label{class_i_o_aa14d3809f3526b6255519deeefff0bcf} 
+bool IO\+::\+Set\+Config (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{pin\+\_\+bit\+\_\+mask}{, }\item[{gpio\+\_\+mode\+\_\+t}]{mode}{, }\item[{gpio\+\_\+pullup\+\_\+t}]{pull\+\_\+up\+\_\+en}{, }\item[{gpio\+\_\+pulldown\+\_\+t}]{pull\+\_\+down\+\_\+en}{, }\item[{gpio\+\_\+int\+\_\+type\+\_\+t}]{intr\+\_\+type}{}\end{DoxyParamCaption})}
+
+
+
+Configures a GPIO. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pin\+\_\+bit\+\_\+mask} & GPIO pin mask \\
+\hline
+{\em mode} & GPIO mode \\
+\hline
+{\em pull\+\_\+up\+\_\+en} & GPIO pull-\/up configuration \\
+\hline
+{\em pull\+\_\+down\+\_\+en} & GPIO pull-\/down configuration \\
+\hline
+{\em intr\+\_\+type} & GPIO interrupt type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the GPIO was configured correctly 
+
+false If there was an error configuring the GPIO 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_a33feb2cd1180029832d6fb878cb6f1b0}\index{IO@{IO}!SetLevel@{SetLevel}}
+\index{SetLevel@{SetLevel}!IO@{IO}}
+\doxysubsubsection{\texorpdfstring{SetLevel()}{SetLevel()}}
+{\footnotesize\ttfamily \label{class_i_o_a33feb2cd1180029832d6fb878cb6f1b0} 
+bool IO\+::\+Set\+Level (\begin{DoxyParamCaption}\item[{gpio\+\_\+num\+\_\+t}]{gpio\+\_\+num}{, }\item[{uint32\+\_\+t}]{level}{}\end{DoxyParamCaption})}
+
+
+
+Sets the level of a GPIO. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gpio\+\_\+num} & GPIO number \\
+\hline
+{\em level} & GPIO level \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the GPIO level was set correctly 
+
+false If there was an error setting the GPIO level 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/IO.\+h\item 
+src/IO.\+cpp\end{DoxyCompactItemize}

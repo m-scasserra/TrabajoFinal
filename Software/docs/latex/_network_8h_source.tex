@@ -1,0 +1,56 @@
+\doxysection{Network.\+h}
+\hypertarget{_network_8h_source}{}\label{_network_8h_source}\index{include/Network.h@{include/Network.h}}
+\mbox{\hyperlink{_network_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ NETWORK\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ NETWORK\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_common_includes_8h}{CommonIncludes.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}esp\_event.h"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ NETWORKTAG\ "{}NET"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ MAX\_NUMBER\_NETOWRK\_SCAN\ 10}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_n_e_t_w_o_r_k}{NETWORK}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ las\ funciones\ de\ copia\ y\ asignación}}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_n_e_t_w_o_r_k}{NETWORK}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_n_e_t_w_o_r_k}{NETWORK}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{class_n_e_t_w_o_r_k}{NETWORK}}\ \&operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_n_e_t_w_o_r_k}{NETWORK}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_n_e_t_w_o_r_k}{NETWORK}}\ \&\mbox{\hyperlink{class_n_e_t_w_o_r_k_a0e572f25107c60192c799890ce2e5d13}{getInstance}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_n_e_t_w_o_r_k_a6606413ef832b507068b30cf4fbeb4b3}{Begin}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_n_e_t_w_o_r_k_abde265762255c75a5ed75a11ebaf7b03}{startWifiStation}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_n_e_t_w_o_r_k_acdbcb20063adf01fd97d49df482c54df}{stopWifiStation}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_n_e_t_w_o_r_k_a8eb73b3d38ed885021967e8d4a318b3e}{wifiScan}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_n_e_t_w_o_r_k_a76ad43eec6275c6a00419243f0a0405f}{connectToNetwork}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *ssid,\ uint32\_t\ ssidLen,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *password,\ uint32\_t\ passwordLen);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_n_e_t_w_o_r_k_a3120bb381a3291ff5bc0ee8a008f098e}{disconnectFromNetwork}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_n_e_t_w_o_r_k_a6088e6226304f320d257c1af2fe42f1d}{isConnectedToNetwork}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{comment}{//\ Constructor\ privado}}
+\DoxyCodeLine{00095\ \ \ \ \ \mbox{\hyperlink{class_n_e_t_w_o_r_k}{NETWORK}}()\ \{\}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ printAuthMode(\textcolor{keywordtype}{int}\ authmode);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ wifi\_event\_handler(\textcolor{keywordtype}{void}\ *arg,\ esp\_event\_base\_t\ event\_base,\ int32\_t\ event\_id,\ \textcolor{keywordtype}{void}\ *event\_data);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ connectedToNetwork;}
+\DoxyCodeLine{00118\ \ \ \ \ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ wifiStarted;}
+\DoxyCodeLine{00123\ \ \ \ \ }
+\DoxyCodeLine{00124\ \};}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ NETWORK\_H}}
+
+\end{DoxyCode}

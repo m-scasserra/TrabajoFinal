@@ -557,8 +557,6 @@ bool FS::cat(const char *filePath)
     return rc; // Exit successfully
 }
 
-// Doxygen comment
-
 bool FS::catb(const char *filePath)
 {
     FILE *filePointer;
@@ -659,8 +657,6 @@ bool FS::WriteFile(const void *content, size_t contentSize, size_t contentNumber
     }
     return true;
 }
-
-// Doxygen comment
 
 bool FS::seekAndReadFile(const char *filePath, void *outputBuffer, long int size, long int offset, int origin)
 {

@@ -41,7 +41,6 @@ public:
         return instance;
     }
 
-    // Doxygen english comments
     /**
      * @brief Initializes the FileSystem
      *
@@ -50,11 +49,14 @@ public:
      */
     void Begin(void);
 
-    // Doxygen english comments
-
+    /**
+     * @brief Gets the size of a file.
+     * @param path The path of the file.
+     * @param fileSize Pointer to store the file size.
+     * @return 0 if successful, -1 otherwise.
+     */
     int getFileSize(const char *path, long *fileSize);
 
-    // Doxygen english comments
     /**
      * @brief Read the content of a file and store it in a buffer
      *
@@ -66,8 +68,13 @@ public:
      */
     int getFileBuffer(const char *path, void *buffer, size_t sizeBuffer, size_t sizeFile);
 
-    // Doxygen english comments
-
+    /**
+     * @brief Create a file
+     *
+     * @param filePath Path of the file to create
+     * @return true If the file was created correctly
+     * @return false If there was an error creating the file
+     */
     bool CreateFile(const char *filePath);
 
     /**
@@ -141,55 +148,56 @@ public:
     esp_err_t formatPartition(const char *PartitionName);
 
     /**
-        @brief Creates a configuration file (DEVICE_CONFIG_FILE_PATH) with default settings for the device.
-
-        @return true on success, false otherwise.
-        This function populates a file (DEVICE_CONFIG_FILE_PATH) in INI format with default configuration options for the device. The function uses the Ini_puts function (assumed to be defined elsewhere) to write each key-value pair to the file.
-        The following sections and key-value pairs are written to the file:
-            DEVICE
-                AUTOMATIC ([OFF]/ON) - Automatic mode (enabled/disabled)
-                FUNCTION ([NONE]/TX/RX) - Device function (no operation, transmit, receive)
-            PACKETTYPE
-                TYPE ([LORA]/GFSK/LRFHSS) - Packet modulation type
-            TCXO
-                DIO3VOLTAGE (1_6/1_7/[1_8]/2_2/2_4/2_7/3_0/3_3) - Voltage level for DIO3 pin
-                DIO3DELAY ([10]0-262143) - Delay for DIO3 activation (in microseconds)
-            CALIBRATIONS
-                DO ([0x7F]0x00-0x7F) - Calibration value
-            XTAL
-                USE ([Y]/N) - Enable/disable crystal oscillator
-                A ([0x12]0x00-0x2F) - Crystal oscillator parameter A
-                B ([0x12]0x00-0x2F) - Crystal oscillator parameter B
-            FREQUENCY
-                FREQUENCY ([915000000]) - Operating frequency
-            PACONFIG
-                DBM (14/[17]/20/22) - Transmission power (in dBm)
-            TXPARAMS
-                RAMPTIME (10/20/40/80/200/[800]/1700/3400) - Ramp-up time for transmission (in microseconds)
-            MODULATION
-                SF (5/6/[7]/8/9/10/11/12) - Spreading factor for LoRa modulation
-                BW (7/10/15/20/31/41/62/[125]/250/500) - Bandwidth for LoRa modulation
-                CR ([4/5], 4/6, 4/7, 4/8) - Coding rate for LoRa modulation
-            PACKETPARAMS
-                HEADER ([EXPLICIT]/IMPLICIT) - Packet header type
-                PREAMBLELENGTH ([12]) - Preamble length in symbols
-                PAYLOADLENGTH ([9]) - Payload length in bytes
-                CRC ([ON]/OFF) - Enable/disable Cyclic Redundancy Check (CRC)
-                IQTYPE ([STANDARD]/INVERTED) - In-phase/Quadrature (IQ) type
-            SYNCWORD
-                SYNCWORD ([0x3444]/0x1424) - Synchronization word for packet framing
-            RXGAIN
-                RXGAIN ([BOOST]/POWERSAVE) - Receiver gain mode (high sensitivity or low power)
-            TIMEOUT
-                TRANSMIT ([30000]) - Transmission timeout in milliseconds
-                RECEIVE ([30000]) - Receive timeout in milliseconds
-        If any error occurs while writing to the file, the function returns false. */
+     * @brief Creates a configuration file (DEVICE_CONFIG_FILE_PATH) with default settings for the device.
+     * 
+     *@return true on success, false otherwise.
+      This function populates a file (DEVICE_CONFIG_FILE_PATH) in INI format with default configuration options for the device. The function uses the Ini_puts function (assumed to be defined elsewhere) to write each key-value pair to the file.
+      The following sections and key-value pairs are written to the file:
+      DEVICE
+        AUTOMATIC ([OFF]/ON) - Automatic mode (enabled/disabled)
+        FUNCTION ([NONE]/TX/RX) - Device function (no operation, transmit, receive)
+      PACKETTYPE
+        TYPE ([LORA]/GFSK/LRFHSS) - Packet modulation type
+      TCXO
+        DIO3VOLTAGE (1_6/1_7/[1_8]/2_2/2_4/2_7/3_0/3_3) - Voltage level for DIO3 pin
+        DIO3DELAY ([10]0-262143) - Delay for DIO3 activation (in microseconds)
+      CALIBRATIONS
+        DO ([0x7F]0x00-0x7F) - Calibration value
+      XTAL
+        USE ([Y]/N) - Enable/disable crystal oscillator
+        A ([0x12]0x00-0x2F) - Crystal oscillator parameter A
+        B ([0x12]0x00-0x2F) - Crystal oscillator parameter B
+      FREQUENCY
+        FREQUENCY ([915000000]) - Operating frequency
+      PACONFIG
+        DBM (14/[17]/20/22) - Transmission power (in dBm)
+      TXPARAMS
+        RAMPTIME (10/20/40/80/200/[800]/1700/3400) - Ramp-up time for transmission (in microseconds)
+      MODULATION
+        SF (5/6/[7]/8/9/10/11/12) - Spreading factor for LoRa modulation
+        BW (7/10/15/20/31/41/62/[125]/250/500) - Bandwidth for LoRa modulation
+        CR ([4/5], 4/6, 4/7, 4/8) - Coding rate for LoRa modulation
+      PACKETPARAMS
+        HEADER ([EXPLICIT]/IMPLICIT) - Packet header type
+        PREAMBLELENGTH ([12]) - Preamble length in symbols
+        PAYLOADLENGTH ([9]) - Payload length in bytes
+        CRC ([ON]/OFF) - Enable/disable Cyclic Redundancy Check (CRC)
+        IQTYPE ([STANDARD]/INVERTED) - In-phase/Quadrature (IQ) type
+      SYNCWORD
+        SYNCWORD ([0x3444]/0x1424) - Synchronization word for packet framing
+      RXGAIN
+        RXGAIN ([BOOST]/POWERSAVE) - Receiver gain mode (high sensitivity or low power)
+      TIMEOUT
+        TRANSMIT ([30000]) - Transmission timeout in milliseconds
+        RECEIVE ([30000]) - Receive timeout in milliseconds
+      If any error occurs while writing to the file, the function returns false. 
+    */
     bool populateDeviceConfigIni(void);
 
     /**
-    @bref Checks for the existence of required directories and creates them if missing.
-
-    @return true on success, false otherwise.
+    * @brief Checks for the existence of required directories and creates them if missing.
+    *
+    * @return true on success, false otherwise.
     */
     bool checkAndCreateDirs(void);
 
