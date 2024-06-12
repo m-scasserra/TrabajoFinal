@@ -1,8 +1,6 @@
 #ifndef E22OPCODES_H
 #define E22OPCODES_H
 
-#include "Includes.h"
-
 typedef enum {
     E22_OpCode_SetSleep                 = 0x84,
     E22_OpCode_SetStandby               = 0x80,

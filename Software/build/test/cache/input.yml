@@ -1,0 +1,291 @@
+---
+:project:
+  :use_mocks: true
+  :compile_threads: 8
+  :test_threads: 8
+  :use_test_preprocessor: true
+  :test_file_prefix: test_
+  :release_build: false
+  :use_backtrace: :none
+  :debug: false
+  :which_ceedling: gem
+  :ceedling_version: 0.32.0
+  :use_decorators: :auto
+  :build_root: build
+  :default_tasks:
+  - test:all
+  :use_exceptions: true
+  :use_auxiliary_dependencies: true
+:release_build:
+  :use_assembly: false
+  :artifacts: []
+  :output: MyApp.out
+:test_build:
+  :use_assembly: false
+:paths:
+  :test:
+  - "+:test/**"
+  - "-:test/support"
+  :source:
+  - src/**
+  :support:
+  - test/support
+  :include:
+  - include/**
+  :libraries: []
+  :test_toolchain_include: []
+  :release_toolchain_include: []
+:files:
+  :test: []
+  :source: []
+  :assembly: []
+  :support: []
+  :include: []
+:environment: []
+:defines:
+  :use_test_definition: false
+  :test:
+  - TEST
+  - UNITY_INCLUDE_CONFIG_H
+  :preprocess: []
+  :release: []
+:flags: {}
+:libraries:
+  :flag: "-l${1}"
+  :path_flag: "-L ${1}"
+  :test: []
+  :release: []
+  :placement: :end
+  :system: []
+:extension:
+  :header: ".h"
+  :source: ".cpp"
+  :assembly: ".s"
+  :object: ".o"
+  :libraries:
+  - ".a"
+  - ".so"
+  :executable: ".out"
+  :map: ".map"
+  :list: ".lst"
+  :testpass: ".pass"
+  :testfail: ".fail"
+  :dependencies: ".d"
+  :yaml: ".yml"
+:unity:
+  :vendor_path: "/home/marco/.local/share/gem/ruby/3.0.0/gems/ceedling-0.32.0/vendor"
+  :defines:
+  - UNITY_EXCLUDE_FLOAT
+:cmock:
+  :vendor_path: "/home/marco/.local/share/gem/ruby/3.0.0/gems/ceedling-0.32.0/vendor"
+  :includes: []
+  :defines: []
+  :plugins:
+  - :ignore
+  - :callback
+  :verbosity: 2
+  :when_no_prototypes: :warn
+  :mock_path: "./build/mocks"
+  :skeleton_path: ''
+  :mock_prefix: mock_
+  :mock_suffix: ''
+  :strippables:
+  - "(?:__attribute__\\s*\\([ (]*.*?[ )]*\\)+)"
+  :attributes:
+  - __ramfunc
+  - __irq
+  - __fiq
+  - register
+  - extern
+  :c_calling_conventions:
+  - __stdcall
+  - __cdecl
+  - __fastcall
+  :treat_externs: :exclude
+  :treat_inlines: :exclude
+  :treat_as:
+    uint8: HEX8
+    uint16: HEX16
+    uint32: UINT32
+    int8: INT8
+    bool: UINT8
+  :memcmp_if_unknown: true
+  :when_ptr: :compare_data
+  :weak: ''
+  :enforce_strict_ordering: true
+  :fail_on_unexpected_calls: true
+  :callback_include_count: true
+  :callback_after_arg_check: false
+  :exclude_setjmp_h: false
+  :unity_helper: false
+:cexception:
+  :vendor_path: "/home/marco/.local/share/gem/ruby/3.0.0/gems/ceedling-0.32.0/vendor"
+  :defines: []
+:test_runner:
+  :cmdline_args: false
+  :includes: []
+  :defines:
+  - UNITY_EXCLUDE_FLOAT
+  :file_suffix: _runner
+  :mock_prefix: mock_
+  :mock_suffix: ''
+  :enforce_strict_ordering: true
+:tools:
+  :gcc:
+    :executable: g++
+    :arguments:
+      :compile: "-c ${1} -o ${2} -I ${INC_PATHS} ${DEFINES} ${ADDITIONAL_COMPILE_FLAGS}"
+      :link: "${1} -o ${2} ${OBJECTS} ${LIBRARIES} ${ADDITIONAL_LINK_FLAGS}"
+      :test: "-c ${1} -o ${2} -I ${INC_PATHS} ${DEFINES} ${ADDITIONAL_COMPILE_FLAGS}"
+    :name: gcc
+    :stderr_redirect: :none
+    :optional: false
+  :backtrace_reporter:
+    :executable: gdb
+    :name: default_backtrace_reporter
+    :optional: true
+    :arguments:
+    - "-q"
+    - "--eval-command run"
+    - "--eval-command backtrace"
+    - "--batch"
+    - "--args"
+    :stderr_redirect: :none
+  :test_compiler:
+    :executable: gcc
+    :name: default_test_compiler
+    :optional: false
+    :arguments:
+    - ''
+    - -I"${5}"
+    - -D"${6}"
+    - "-DGNU_COMPILER"
+    - "-g"
+    - ''
+    - -c "${1}"
+    - -o "${2}"
+    - "-MMD"
+    - -MF "${4}"
+    :stderr_redirect: :none
+  :test_fixture:
+    :executable: "${1}"
+    :name: default_test_fixture
+    :optional: false
+    :arguments: []
+    :stderr_redirect: :none
+  :test_linker:
+    :executable: gcc
+    :name: default_test_linker
+    :optional: false
+    :arguments:
+    - ''
+    - ''
+    - "${1}"
+    - "${5}"
+    - -o "${2}"
+    - ''
+    - "${4}"
+    - ''
+    :stderr_redirect: :none
+  :test_file_preprocessor:
+    :executable: gcc
+    :name: default_test_file_preprocessor
+    :optional: false
+    :arguments:
+    - ''
+    - "-E"
+    - -I"${4}"
+    - -D"${3}"
+    - "-DGNU_COMPILER"
+    - "-x c"
+    - '"${1}"'
+    - -o "${2}"
+    :stderr_redirect: :none
+  :test_nested_includes_preprocessor:
+    :executable: gcc
+    :name: default_test_nested_includes_preprocessor
+    :optional: false
+    :arguments:
+    - ''
+    - "-E"
+    - "-MM"
+    - "-MG"
+    - "-H"
+    - -I"${2}"
+    - -D"${3}"
+    - "-DGNU_COMPILER"
+    - "-nostdinc"
+    - "-x c"
+    - '"${1}"'
+    :stderr_redirect: :none
+  :test_shallow_includes_preprocessor:
+    :executable: gcc
+    :name: default_test_shallow_includes_preprocessor
+    :optional: false
+    :arguments:
+    - ''
+    - "-E"
+    - "-MM"
+    - "-MG"
+    - "-MP"
+    - -D"${2}"
+    - "-DGNU_COMPILER"
+    - "-nostdinc"
+    - "-x c"
+    - '"${1}"'
+    :stderr_redirect: :none
+:test_compiler:
+  :arguments: []
+:test_assembler:
+  :arguments: []
+:test_linker:
+  :arguments: []
+:test_fixture:
+  :arguments: []
+  :link_objects: []
+:test_includes_preprocessor:
+  :arguments: []
+:test_file_preprocessor:
+  :arguments: []
+:test_file_preprocessor_directives:
+  :arguments: []
+:test_dependencies_generator:
+  :arguments: []
+:release_compiler:
+  :arguments: []
+:release_linker:
+  :arguments: []
+:release_assembler:
+  :arguments: []
+:release_dependencies_generator:
+  :arguments: []
+:plugins:
+  :load_paths:
+  - "/home/marco/.local/share/gem/ruby/3.0.0/gems/ceedling-0.32.0/plugins"
+  :enabled:
+  - module_generator
+  - report_tests_pretty_stdout
+  :display_raw_test_results: false
+  :module_generator_path: "/home/marco/.local/share/gem/ruby/3.0.0/gems/ceedling-0.32.0/plugins/module_generator"
+  :report_tests_pretty_stdout_path: "/home/marco/.local/share/gem/ruby/3.0.0/gems/ceedling-0.32.0/plugins/report_tests_pretty_stdout"
+:report_tests_log_factory:
+  :reports:
+  - json
+  - junit
+  - cppunit
+  - html
+:gcov:
+  :utilities:
+  - gcovr
+  :reports:
+  - HtmlBasic
+  :gcovr:
+    :html_medium_threshold: 75
+    :html_high_threshold: 90
+:module_generator:
+  :project_root: "./"
+  :naming: :snake
+  :boilerplates:
+    :src: ''
+    :inc: ''
+    :tst: ''

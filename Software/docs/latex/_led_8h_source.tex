@@ -1,0 +1,95 @@
+\doxysection{Led.\+h}
+\hypertarget{_led_8h_source}{}\label{_led_8h_source}\index{include/Led.h@{include/Led.h}}
+\mbox{\hyperlink{_led_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ LED\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ LED\_H}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_common_includes_8h}{CommonIncludes.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}driver/rmt\_encoder.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}driver/rmt\_tx.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ Define\ LED\ strip\ configuration\ constants}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ RMT\_LED\_STRIP\_RESOLUTION\_HZ\ 10000000\ }\textcolor{comment}{//\ 10MHz\ resolution,\ 1\ tick\ =\ 0.1us\ (led\ strip\ needs\ a\ high\ resolution)}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ RMT\_RESOL\_TO\_TICKS\ 1000000}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ T0H\ 0.3}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ T0L\ 0.9}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ T1H\ 0.9}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ T1L\ 0.3}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ TRST\ 100}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ LEDTAG\ "{}LED"{}}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_l_e_d}{LED}}}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ las\ funciones\ de\ copia\ y\ asignación}}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{class_l_e_d}{LED}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_l_e_d}{LED}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_l_e_d}{LED}}\ \&operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_l_e_d}{LED}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{//\ Función\ para\ acceder\ a\ la\ instancia\ única\ del\ GPS}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_l_e_d}{LED}}\ \&getInstance()}
+\DoxyCodeLine{00035\ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_l_e_d}{LED}}\ instance;\ \textcolor{comment}{//\ Única\ instancia}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00038\ \ \ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00044\ \ \ \ \ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_l_e_d_1_1led__strip__encoder__config__t_a5c8b35d2cd9f60e198b42569bcf0c026}{resolution}};\ }
+\DoxyCodeLine{00046\ \ \ \ \ \}\ \mbox{\hyperlink{struct_l_e_d_1_1led__strip__encoder__config__t}{led\_strip\_encoder\_config\_t}};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00052\ \ \ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ rmt\_encoder\_t\ base;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ rmt\_encoder\_t\ *bytes\_encoder;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ rmt\_encoder\_t\ *copy\_encoder;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ state;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ rmt\_symbol\_word\_t\ reset\_code;}
+\DoxyCodeLine{00058\ \ \ \ \ \}\ \mbox{\hyperlink{struct_l_e_d_1_1rmt__led__strip__encoder__t}{rmt\_led\_strip\_encoder\_t}};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_l_e_d_aa47b3dfee0275a3586654a7598a5bbc5}{colors}}}
+\DoxyCodeLine{00064\ \ \ \ \ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ black,}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ red,}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ blue,}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ green,}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ white,}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ undefined}
+\DoxyCodeLine{00071\ \ \ \ \ \};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_l_e_d_a33aa9f6a1e61013737d3cb82a7139f8e}{SetBrightness}}(uint8\_t\ brillo\_);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_l_e_d_a79dcde2d7aead89c2bb95750fe759c5a}{Begin}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_l_e_d_a688d39167cbfe98f80a3595e94a536fd}{SetLedColor}}(uint8\_t\ R,\ uint8\_t\ G,\ uint8\_t\ B);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_l_e_d_a270fdb146662eab907e8b05054bafb4d}{Show}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_l_e_d_a688d39167cbfe98f80a3595e94a536fd}{SetLedColor}}(\mbox{\hyperlink{class_l_e_d_aa47b3dfee0275a3586654a7598a5bbc5}{colors}}\ color);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_l_e_d_aa47b3dfee0275a3586654a7598a5bbc5}{LED::colors}}\ \mbox{\hyperlink{class_l_e_d_a9638dd822e74b5ece6f41b62c4b18bfd}{GetLedColor}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{comment}{//\ Constructor\ privado}}
+\DoxyCodeLine{00115\ \ \ \ \ \mbox{\hyperlink{class_l_e_d}{LED}}()\ \{\}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ rmt\_encode\_led\_strip(rmt\_encoder\_t\ *encoder,\ rmt\_channel\_handle\_t\ channel,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *primary\_data,\ \textcolor{keywordtype}{size\_t}\ data\_size,\ rmt\_encode\_state\_t\ *ret\_state);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{static}\ esp\_err\_t\ rmt\_del\_led\_strip\_encoder(rmt\_encoder\_t\ *encoder);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keyword}{static}\ esp\_err\_t\ rmt\_led\_strip\_encoder\_reset(rmt\_encoder\_t\ *encoder);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keyword}{static}\ esp\_err\_t\ rmt\_new\_led\_strip\_encoder(\textcolor{keyword}{const}\ led\_strip\_encoder\_config\_t\ *config,\ rmt\_encoder\_handle\_t\ *ret\_encoder);}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keyword}{static}\ rmt\_channel\_handle\_t\ led\_chan;\ \ \ \ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keyword}{static}\ rmt\_encoder\_handle\_t\ led\_encoder;\ }
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keyword}{static}\ rmt\_transmit\_config\_t\ tx\_config;\ \ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ brillo;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ ledColor[3];\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_l_e_d_aa47b3dfee0275a3586654a7598a5bbc5}{colors}}\ CurrColor;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00159\ \};}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LED\_H}}
+
+\end{DoxyCode}

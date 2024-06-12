@@ -1,0 +1,128 @@
+\doxysection{CLI.\+h}
+\hypertarget{CLI_8h_source}{}\label{CLI_8h_source}\index{include/CLI.h@{include/CLI.h}}
+\mbox{\hyperlink{CLI_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CLI\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CLI\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CommonIncludes_8h}{CommonIncludes.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}esp\_clk\_tree.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}esp\_console.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ CLITAG\ "{}CLI"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ MSG\_QUEUE\_LEN\ 20}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ MSG\_MAX\_LEN\ 200}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ QUEUE\_TIMEOUT\ 100}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ CONSOLE\_PROMPT\ "{}SATE>"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ MAX\_CMDLINE\_LEN\ 60}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classCLI}{CLI}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ las\ funciones\ de\ copia\ y\ asignación}}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classCLI_a28f1f88675d3bc7dd23da4853bd8b2bd}{CLI}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classCLI}{CLI}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classCLI}{CLI}}\ \&\mbox{\hyperlink{classCLI_aee8ac18ab82bac2ec471007d35cd5967}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classCLI}{CLI}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classCLI}{CLI}}\ \&\mbox{\hyperlink{classCLI_afb0099de9473ff74480fa40cec78a3ac}{getInstance}}()}
+\DoxyCodeLine{00027\ \ \ \ \ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classCLI}{CLI}}\ instance;\ \textcolor{comment}{//\ Única\ instancia}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCLI_a1c802f367eeaa1a0ce4b331322331894}{Begin}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCLI_abaa4f914f9593131ac91ab18420e88d4}{PrintLogo}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//\ Constructor\ privado}}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classCLI_a1a5b0f7ec3b242c5c56e4745adbb391e}{CLI}}()\ \{\}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCLI_a20521c33b21b0c6eb03d0008c9270b09}{esp\_console\_register\_all\_commands}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ esp\_err\_t\ \mbox{\hyperlink{classCLI_a689c8e97e94616abef2130316426866a}{esp\_console\_register\_simple\_command}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *commandtext,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *help,\ esp\_console\_cmd\_func\_t\ func);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{static}\ esp\_err\_t\ \mbox{\hyperlink{classCLI_af8acc8fc1d0904aff64a90351dca0253}{esp\_console\_register\_timer\_command}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCLI_a6e24c119d1c78371b62493a673035727}{timerCmdFunc}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv);}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{static}\ esp\_err\_t\ \mbox{\hyperlink{classCLI_a0d7740c295311f039dca685fc2e10c8b}{esp\_console\_register\_config\_command}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCLI_a73b657e6da107810f205b33377ae786e}{configCmdFunc}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv);}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{static}\ esp\_err\_t\ \mbox{\hyperlink{classCLI_ab27b17bd981ddf82e727b46593419959}{esp\_console\_register\_FS\_command}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCLI_ad049cb1d8f8a1dc8a01557b0f8a3d31f}{FSCmdFunc}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{static}\ esp\_err\_t\ \mbox{\hyperlink{classCLI_af0689633ac76d36cc2167615ace2a67c}{esp\_console\_register\_net\_command}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCLI_a57d2efb04dd3e405b646a5293405f0c4}{timeCmdFunc}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv);}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{static}\ esp\_err\_t\ \mbox{\hyperlink{classCLI_a6e4e0ea3b022560824442097df3a4d34}{esp\_console\_register\_time\_command}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCLI_adb82c18da1fed90fb05a5499e208aa38}{AutoJobCmdFunc}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv);}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{static}\ esp\_err\_t\ \mbox{\hyperlink{classCLI_ab32d464d1f6f43c2be8d3441c1219cfd}{esp\_console\_register\_AutoJob\_command}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCLI_a3671452c6580d899420441bb5f6a98bc}{netCmdFunc}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv);}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCLI_ab7d0a57456cbf11e177129934186ff2a}{showStatusCMD}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv);}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCLI_a0789cc5a207ae46ad99050538b4b708d}{transmitCMD}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv);}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCLI_a795104b8e7e3eee28771e4faef7c0bb9}{recieveCMD}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv);}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCLI_a3903f362ac27ace7588e445f4fe2b3c0}{msgCMD}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv);}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCLI_ae895346fdd3370ed942e334eb5879186}{PrintSeparator}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{comment}{//\ Argumentos\ para\ el\ comando\ timer}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structCLI_1_1timercmd__args__t}{timercmd\_args\_t}}}
+\DoxyCodeLine{00068\ \ \ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1timercmd__args__t_aaeeb2e842266abbd0fed5e81df6725b4}{command}};}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1timercmd__args__t_a9e524bab4878cabf907c588334f9eee3}{name}};}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_int\ *\mbox{\hyperlink{structCLI_1_1timercmd__args__t_aff06312f6c996a0901dc7d58823e5b59}{limit}};}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_end\ *\mbox{\hyperlink{structCLI_1_1timercmd__args__t_abb6612a0dfdc32c8d9fe9550bfe0021a}{end}};}
+\DoxyCodeLine{00073\ \ \ \ \ \};}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structCLI_1_1timercmd__args__t}{timercmd\_args\_t}}\ \mbox{\hyperlink{classCLI_af083e66bd7094e5b3dd05db579d85779}{timer\_args}};}
+\DoxyCodeLine{00075\ \ \ \ \ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{comment}{//\ Argumentos\ para\ el\ comando\ config}}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structCLI_1_1configcmd__args__t}{configcmd\_args\_t}}}
+\DoxyCodeLine{00078\ \ \ \ \ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1configcmd__args__t_a7246c48923dcfe74a3d9267f43932505}{command}};}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1configcmd__args__t_af2b71e15b0ab35377b2d2e04a54f8190}{section}};}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1configcmd__args__t_a7a4ad5ff63e9abdb7e97d3d23387aa30}{key}};}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1configcmd__args__t_a76547447ee83fb756de82206e455b918}{value}};}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_end\ *\mbox{\hyperlink{structCLI_1_1configcmd__args__t_adcf97b5719d74c403fc09a60c061b432}{end}};}
+\DoxyCodeLine{00084\ \ \ \ \ \};}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structCLI_1_1configcmd__args__t}{configcmd\_args\_t}}\ \mbox{\hyperlink{classCLI_a89e50c3140411c2cb6423943af8a8236}{config\_args}};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structCLI_1_1FScmd__args__t}{FScmd\_args\_t}}}
+\DoxyCodeLine{00088\ \ \ \ \ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1FScmd__args__t_a6e69a1358893a4e77084c4141b22e273}{command}};}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1FScmd__args__t_a18ac867c6ce47678fc472061fa114ef7}{path}};}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_end\ *\mbox{\hyperlink{structCLI_1_1FScmd__args__t_a4394da733b4372f0de67f8ad204d029b}{end}};}
+\DoxyCodeLine{00092\ \ \ \ \ \};}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structCLI_1_1FScmd__args__t}{FScmd\_args\_t}}\ \mbox{\hyperlink{classCLI_ae8f87cecad8a0247cace06cbc7cd0112}{FS\_args}};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structCLI_1_1netcmd__args__t}{netcmd\_args\_t}}}
+\DoxyCodeLine{00096\ \ \ \ \ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1netcmd__args__t_a23f9b2293acf5a98b27539a813817f31}{command}};}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1netcmd__args__t_a6b0e8cbd3e4693d86c2b118d7dbb42a2}{ssid}};}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1netcmd__args__t_a538a5b9dcef8d821870a7a28499254a5}{pass}};}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_end\ *\mbox{\hyperlink{structCLI_1_1netcmd__args__t_a09c4df5796f883e8cc271b9396ac9d8f}{end}};}
+\DoxyCodeLine{00101\ \ \ \ \ \};}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structCLI_1_1netcmd__args__t}{netcmd\_args\_t}}\ \mbox{\hyperlink{classCLI_a3f8c822c89bb04b91f70ae83a441121a}{net\_args}};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structCLI_1_1timecmd__args__t}{timecmd\_args\_t}}}
+\DoxyCodeLine{00105\ \ \ \ \ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1timecmd__args__t_af86fae65ed759c3bc813792d2d460c1a}{command}};}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1timecmd__args__t_a1b63fa40b6e739ec727f55d0cf1e443e}{ntpserver}};}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_end\ *\mbox{\hyperlink{structCLI_1_1timecmd__args__t_a1e8021d2f2d94fcdbfe0b98d7d1b9168}{end}};}
+\DoxyCodeLine{00109\ \ \ \ \ \};}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structCLI_1_1timecmd__args__t}{timecmd\_args\_t}}\ \mbox{\hyperlink{classCLI_a0294ddb6e89bb6b6712ebd2e6af071e7}{time\_args}};}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structCLI_1_1AJcmd__args__t}{AJcmd\_args\_t}}}
+\DoxyCodeLine{00113\ \ \ \ \ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1AJcmd__args__t_a3e45d1e69b6b7ef5c9e1367be9f3317c}{command}};}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_str\ *\mbox{\hyperlink{structCLI_1_1AJcmd__args__t_aea4096ad4eb969659222cc5ca746297e}{job}};}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }arg\_end\ *\mbox{\hyperlink{structCLI_1_1AJcmd__args__t_a523f7652d1d57fa3fac90299fddcdded}{end}};}
+\DoxyCodeLine{00117\ \ \ \ \ \};}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structCLI_1_1AJcmd__args__t}{AJcmd\_args\_t}}\ \mbox{\hyperlink{classCLI_ac37241c6f73c276646c7146b5d3bbb30}{AJ\_args}};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \};}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CLI}}
+
+\end{DoxyCode}

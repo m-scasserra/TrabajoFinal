@@ -1,0 +1,614 @@
+\doxysection{FS Class Reference}
+\hypertarget{classFS}{}\label{classFS}\index{FS@{FS}}
+
+
+{\ttfamily \#include $<$File\+System.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classFS_afde74ae87c729895243c3963cccb179e}{FS}} (const \mbox{\hyperlink{classFS}{FS}} \&)=delete
+\item 
+\mbox{\hyperlink{classFS}{FS}} \& \mbox{\hyperlink{classFS_a8d08f30221c28201ef179841881107d5}{operator=}} (const \mbox{\hyperlink{classFS}{FS}} \&)=delete
+\item 
+void \mbox{\hyperlink{classFS_a78613c7cb6d19790ba92a015f3dfc7e2}{Begin}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the File\+System. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classFS_a5e2641079d04033ae2e1a9481da27511}{get\+File\+Size}} (const char \texorpdfstring{$\ast$}{*}path, long \texorpdfstring{$\ast$}{*}file\+Size)
+\begin{DoxyCompactList}\small\item\em Gets the size of a file. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classFS_ace242f82277bc9d6d99644b8a0962e1d}{get\+File\+Buffer}} (const char \texorpdfstring{$\ast$}{*}path, void \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t size\+Buffer, size\+\_\+t size\+File)
+\begin{DoxyCompactList}\small\item\em Read the content of a file and store it in a buffer. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_a6fd2fa4059fea994902424b096892062}{Create\+File}} (const char \texorpdfstring{$\ast$}{*}file\+Path)
+\begin{DoxyCompactList}\small\item\em Create a file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_ae5de7712a507f11c4ea042e0df0b5ce3}{Write\+File}} (const void \texorpdfstring{$\ast$}{*}content, size\+\_\+t content\+Size, size\+\_\+t content\+Number, const char \texorpdfstring{$\ast$}{*}file\+Path, const char \texorpdfstring{$\ast$}{*}operation\+Type)
+\begin{DoxyCompactList}\small\item\em Write the content of a buffer to a file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_a8ff3e9648f0e6a2d4d12c8a396d7ee8a}{seek\+And\+Read\+File}} (const char \texorpdfstring{$\ast$}{*}file\+Path, void \texorpdfstring{$\ast$}{*}output\+Buffer, long int size, long int offset, int origin)
+\begin{DoxyCompactList}\small\item\em Reads a specific portion of a file into a provided buffer. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_ac6e228ea15f9d1bdf48bc2e54f209eeb}{seek\+And\+Write\+File}} (const char \texorpdfstring{$\ast$}{*}file\+Path, void \texorpdfstring{$\ast$}{*}output\+Buffer, long int size, long int offset, int origin)
+\begin{DoxyCompactList}\small\item\em Writes a specific portion of data into a file at a specified location. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_a389a9c7db974cc456ab83bd71a988406}{Check\+File\+Exists}} (const char \texorpdfstring{$\ast$}{*}file\+Path)
+\begin{DoxyCompactList}\small\item\em Checks if a file exists in the file system. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_a9ac7d4bf191b285b4271b8393d2424a4}{Check\+Dir\+Exists}} (const char \texorpdfstring{$\ast$}{*}dir\+Path)
+\begin{DoxyCompactList}\small\item\em Checks if a directory exists in the file system. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_a275c71151cc53b9094a8221d052b434f}{Create\+Dir}} (const char \texorpdfstring{$\ast$}{*}dir\+Path)
+\begin{DoxyCompactList}\small\item\em Creates a directory in the file system, but checks for existing directory first. \end{DoxyCompactList}\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{classFS_aa444ba1df1eb9141ef5abfe4165d6fa3}{format\+Partition}} (const char \texorpdfstring{$\ast$}{*}Partition\+Name)
+\begin{DoxyCompactList}\small\item\em Formats a partition. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_a2385b5e5c5d39cfc8f5b4a5a47ca759c}{populate\+Device\+Config\+Ini}} (void)
+\begin{DoxyCompactList}\small\item\em Creates a configuration file (DEVICE\+\_\+\+CONFIG\+\_\+\+FILE\+\_\+\+PATH) with default settings for the device. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_a7077edd84196fd2f8195166c972da710}{check\+And\+Create\+Dirs}} (void)
+\begin{DoxyCompactList}\small\item\em Checks for the existence of required directories and creates them if missing. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_a1edadd9bb921ed3a0edfa44a57553b69}{Ini\+\_\+gets}} (const char \texorpdfstring{$\ast$}{*}Section, const char \texorpdfstring{$\ast$}{*}Key, char \texorpdfstring{$\ast$}{*}Result, const char \texorpdfstring{$\ast$}{*}File\+Path)
+\begin{DoxyCompactList}\small\item\em Gets a string from an INI file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_a91cb8c4454294552de96f0eda1917396}{Ini\+\_\+getl}} (const char \texorpdfstring{$\ast$}{*}Section, const char \texorpdfstring{$\ast$}{*}Key, long \texorpdfstring{$\ast$}{*}Result, const char \texorpdfstring{$\ast$}{*}File\+Path)
+\begin{DoxyCompactList}\small\item\em Gets a string from an INI file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_aa57bb52c19bbbf4fbc62de52427f1d70}{Ini\+\_\+puts}} (const char \texorpdfstring{$\ast$}{*}Section, const char \texorpdfstring{$\ast$}{*}Key, const char \texorpdfstring{$\ast$}{*}Value, const char \texorpdfstring{$\ast$}{*}File\+Path)
+\begin{DoxyCompactList}\small\item\em Writes a string to an INI file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_ab64768f2e4e4f99d7747b52184db3ee6}{Ini\+\_\+putl}} (const char \texorpdfstring{$\ast$}{*}Section, const char \texorpdfstring{$\ast$}{*}Key, long Value, const char \texorpdfstring{$\ast$}{*}File\+Path)
+\begin{DoxyCompactList}\small\item\em Writes a long to an INI file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_a6b88a712f84c2f3c830e3108ebb99946}{Ini\+\_\+hassection}} (const char \texorpdfstring{$\ast$}{*}Section, const char \texorpdfstring{$\ast$}{*}File\+Path)
+\begin{DoxyCompactList}\small\item\em Check if a section exists in an INI file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_a7b9ffbea2820716d4a4f344dec4112e9}{Ini\+\_\+haskey}} (const char \texorpdfstring{$\ast$}{*}Section, const char \texorpdfstring{$\ast$}{*}Key, const char \texorpdfstring{$\ast$}{*}File\+Path)
+\begin{DoxyCompactList}\small\item\em Check if a key exists in an INI file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_a59b4e422c14c46352bebdf308710d6f4}{ls}} (const char \texorpdfstring{$\ast$}{*}Partition\+Name)
+\begin{DoxyCompactList}\small\item\em List the files in a directory. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_a732c11eef9d4baf3b8f67de6fd101c8d}{cat}} (const char \texorpdfstring{$\ast$}{*}file\+Path)
+\begin{DoxyCompactList}\small\item\em Read the content of a file and print it to the console. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classFS_abe5178eb57f5142eb5591af43487574b}{catb}} (const char \texorpdfstring{$\ast$}{*}file\+Path)
+\begin{DoxyCompactList}\small\item\em Reads a file and prints its contents byte by byte in hexadecimal format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classFS}{FS}} \& \mbox{\hyperlink{classFS_a7bdd701a6bc1832348a15404f0b40c45}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classFS_a9a253ac32976b5bb31080149294f3eb4}{FS}} ()
+\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{classFS_ae715c57a01ebf2d0d2365810f323a2e2}{mount\+Partition}} (const char \texorpdfstring{$\ast$}{*}Partition\+Name)
+\begin{DoxyCompactList}\small\item\em Mounts a partition to the VFS. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static Semaphore\+Handle\+\_\+t \mbox{\hyperlink{classFS_ac318aa28d8a8ed7370ba382a22ef2de8}{x\+FSSemaphore}}
+\begin{DoxyCompactList}\small\item\em Handle to the file system semaphore. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classFS_afde74ae87c729895243c3963cccb179e}\index{FS@{FS}!FS@{FS}}
+\index{FS@{FS}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{FS()}{FS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classFS_afde74ae87c729895243c3963cccb179e} 
+FS\+::\+FS (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classFS}{FS}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classFS_a9a253ac32976b5bb31080149294f3eb4}\index{FS@{FS}!FS@{FS}}
+\index{FS@{FS}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{FS()}{FS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classFS_a9a253ac32976b5bb31080149294f3eb4} 
+FS\+::\+FS (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classFS_a78613c7cb6d19790ba92a015f3dfc7e2}\index{FS@{FS}!Begin@{Begin}}
+\index{Begin@{Begin}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{Begin()}{Begin()}}
+{\footnotesize\ttfamily \label{classFS_a78613c7cb6d19790ba92a015f3dfc7e2} 
+void FS\+::\+Begin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the File\+System. 
+
+\begin{DoxyReturn}{Returns}
+true If the File\+System was initialized correctly 
+
+false If there was an error initializing the File\+System 
+\end{DoxyReturn}
+\Hypertarget{classFS_a732c11eef9d4baf3b8f67de6fd101c8d}\index{FS@{FS}!cat@{cat}}
+\index{cat@{cat}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{cat()}{cat()}}
+{\footnotesize\ttfamily \label{classFS_a732c11eef9d4baf3b8f67de6fd101c8d} 
+bool FS\+::cat (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{file\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Read the content of a file and print it to the console. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & Path of the file to read \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the file was read and printed correctly 
+
+false If there was an error reading the file 
+\end{DoxyReturn}
+\Hypertarget{classFS_abe5178eb57f5142eb5591af43487574b}\index{FS@{FS}!catb@{catb}}
+\index{catb@{catb}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{catb()}{catb()}}
+{\footnotesize\ttfamily \label{classFS_abe5178eb57f5142eb5591af43487574b} 
+bool FS\+::catb (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{file\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Reads a file and prints its contents byte by byte in hexadecimal format. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & The path to the file to be read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classFS_a7077edd84196fd2f8195166c972da710}\index{FS@{FS}!checkAndCreateDirs@{checkAndCreateDirs}}
+\index{checkAndCreateDirs@{checkAndCreateDirs}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{checkAndCreateDirs()}{checkAndCreateDirs()}}
+{\footnotesize\ttfamily \label{classFS_a7077edd84196fd2f8195166c972da710} 
+bool FS\+::check\+And\+Create\+Dirs (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Checks for the existence of required directories and creates them if missing. 
+
+\begin{DoxyReturn}{Returns}
+true on success, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classFS_a9ac7d4bf191b285b4271b8393d2424a4}\index{FS@{FS}!CheckDirExists@{CheckDirExists}}
+\index{CheckDirExists@{CheckDirExists}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{CheckDirExists()}{CheckDirExists()}}
+{\footnotesize\ttfamily \label{classFS_a9ac7d4bf191b285b4271b8393d2424a4} 
+bool FS\+::\+Check\+Dir\+Exists (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{dir\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Checks if a directory exists in the file system. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir\+Path} & The path to the directory to be checked. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the directory exists, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classFS_a389a9c7db974cc456ab83bd71a988406}\index{FS@{FS}!CheckFileExists@{CheckFileExists}}
+\index{CheckFileExists@{CheckFileExists}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{CheckFileExists()}{CheckFileExists()}}
+{\footnotesize\ttfamily \label{classFS_a389a9c7db974cc456ab83bd71a988406} 
+bool FS\+::\+Check\+File\+Exists (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{file\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Checks if a file exists in the file system. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & The path to the file to be checked. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the file exists, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classFS_a275c71151cc53b9094a8221d052b434f}\index{FS@{FS}!CreateDir@{CreateDir}}
+\index{CreateDir@{CreateDir}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{CreateDir()}{CreateDir()}}
+{\footnotesize\ttfamily \label{classFS_a275c71151cc53b9094a8221d052b434f} 
+bool FS\+::\+Create\+Dir (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{dir\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Creates a directory in the file system, but checks for existing directory first. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir\+Path} & The path to the directory to be created. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classFS_a6fd2fa4059fea994902424b096892062}\index{FS@{FS}!CreateFile@{CreateFile}}
+\index{CreateFile@{CreateFile}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{CreateFile()}{CreateFile()}}
+{\footnotesize\ttfamily \label{classFS_a6fd2fa4059fea994902424b096892062} 
+bool FS\+::\+Create\+File (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{file\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Create a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & Path of the file to create \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the file was created correctly 
+
+false If there was an error creating the file 
+\end{DoxyReturn}
+\Hypertarget{classFS_aa444ba1df1eb9141ef5abfe4165d6fa3}\index{FS@{FS}!formatPartition@{formatPartition}}
+\index{formatPartition@{formatPartition}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{formatPartition()}{formatPartition()}}
+{\footnotesize\ttfamily \label{classFS_aa444ba1df1eb9141ef5abfe4165d6fa3} 
+esp\+\_\+err\+\_\+t FS\+::format\+Partition (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{Partition\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Formats a partition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Partition\+Name} & Name of the partition to format \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+esp\+\_\+err\+\_\+t ESP\+\_\+\+OK if the partition was formatted correctly 
+
+esp\+\_\+err\+\_\+t ESP\+\_\+\+FAIL if there was an error formatting the partition 
+\end{DoxyReturn}
+\Hypertarget{classFS_ace242f82277bc9d6d99644b8a0962e1d}\index{FS@{FS}!getFileBuffer@{getFileBuffer}}
+\index{getFileBuffer@{getFileBuffer}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{getFileBuffer()}{getFileBuffer()}}
+{\footnotesize\ttfamily \label{classFS_ace242f82277bc9d6d99644b8a0962e1d} 
+int FS\+::get\+File\+Buffer (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{size\+Buffer}{, }\item[{size\+\_\+t}]{size\+File}{}\end{DoxyParamCaption})}
+
+
+
+Read the content of a file and store it in a buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & Path of the file to read \\
+\hline
+{\em buffer\+Out} & Buffer where the content of the file will be stored \\
+\hline
+{\em object\+Size} & Size of the object to read \\
+\hline
+{\em object\+Count} & Number of objects to read \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Number of objects read 
+\end{DoxyReturn}
+\Hypertarget{classFS_a5e2641079d04033ae2e1a9481da27511}\index{FS@{FS}!getFileSize@{getFileSize}}
+\index{getFileSize@{getFileSize}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{getFileSize()}{getFileSize()}}
+{\footnotesize\ttfamily \label{classFS_a5e2641079d04033ae2e1a9481da27511} 
+int FS\+::get\+File\+Size (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{long \texorpdfstring{$\ast$}{*}}]{file\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Gets the size of a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path of the file. \\
+\hline
+{\em file\+Size} & Pointer to store the file size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, -\/1 otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classFS_a7bdd701a6bc1832348a15404f0b40c45}\index{FS@{FS}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \label{classFS_a7bdd701a6bc1832348a15404f0b40c45} 
+static \mbox{\hyperlink{classFS}{FS}} \& FS\+::get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classFS_a91cb8c4454294552de96f0eda1917396}\index{FS@{FS}!Ini\_getl@{Ini\_getl}}
+\index{Ini\_getl@{Ini\_getl}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{Ini\_getl()}{Ini\_getl()}}
+{\footnotesize\ttfamily \label{classFS_a91cb8c4454294552de96f0eda1917396} 
+bool FS\+::\+Ini\+\_\+getl (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{Section}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{Key}{, }\item[{long \texorpdfstring{$\ast$}{*}}]{Result}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{File\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Gets a string from an INI file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Section} & Section of the INI file \\
+\hline
+{\em Key} & Key of the INI file \\
+\hline
+{\em Result} & Result of the INI file \\
+\hline
+{\em File\+Path} & Path of the INI file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the string was read correctly 
+
+false If there was an error reading the string 
+\end{DoxyReturn}
+\Hypertarget{classFS_a1edadd9bb921ed3a0edfa44a57553b69}\index{FS@{FS}!Ini\_gets@{Ini\_gets}}
+\index{Ini\_gets@{Ini\_gets}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{Ini\_gets()}{Ini\_gets()}}
+{\footnotesize\ttfamily \label{classFS_a1edadd9bb921ed3a0edfa44a57553b69} 
+bool FS\+::\+Ini\+\_\+gets (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{Section}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{Key}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{Result}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{File\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Gets a string from an INI file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Section} & Section of the INI file \\
+\hline
+{\em Key} & Key of the INI file \\
+\hline
+{\em Result} & Result of the INI file \\
+\hline
+{\em File\+Path} & Path of the INI file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the string was read correctly 
+
+false If there was an error reading the string 
+\end{DoxyReturn}
+\Hypertarget{classFS_a7b9ffbea2820716d4a4f344dec4112e9}\index{FS@{FS}!Ini\_haskey@{Ini\_haskey}}
+\index{Ini\_haskey@{Ini\_haskey}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{Ini\_haskey()}{Ini\_haskey()}}
+{\footnotesize\ttfamily \label{classFS_a7b9ffbea2820716d4a4f344dec4112e9} 
+bool FS\+::\+Ini\+\_\+haskey (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{Section}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{Key}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{File\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Check if a key exists in an INI file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Section} & Section of the INI file \\
+\hline
+{\em Key} & Key of the INI file \\
+\hline
+{\em File\+Path} & Path of the INI file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the key exists 
+
+false If the key does not exist 
+\end{DoxyReturn}
+\Hypertarget{classFS_a6b88a712f84c2f3c830e3108ebb99946}\index{FS@{FS}!Ini\_hassection@{Ini\_hassection}}
+\index{Ini\_hassection@{Ini\_hassection}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{Ini\_hassection()}{Ini\_hassection()}}
+{\footnotesize\ttfamily \label{classFS_a6b88a712f84c2f3c830e3108ebb99946} 
+bool FS\+::\+Ini\+\_\+hassection (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{Section}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{File\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Check if a section exists in an INI file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Section} & Section of the INI file \\
+\hline
+{\em File\+Path} & Path of the INI file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the section exists 
+
+false If the section does not exist 
+\end{DoxyReturn}
+\Hypertarget{classFS_ab64768f2e4e4f99d7747b52184db3ee6}\index{FS@{FS}!Ini\_putl@{Ini\_putl}}
+\index{Ini\_putl@{Ini\_putl}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{Ini\_putl()}{Ini\_putl()}}
+{\footnotesize\ttfamily \label{classFS_ab64768f2e4e4f99d7747b52184db3ee6} 
+bool FS\+::\+Ini\+\_\+putl (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{Section}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{Key}{, }\item[{long}]{Value}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{File\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Writes a long to an INI file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Section} & Section of the INI file \\
+\hline
+{\em Key} & Key of the INI file \\
+\hline
+{\em Value} & Value to write in the INI file \\
+\hline
+{\em File\+Path} & Path of the INI file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the long was written correctly 
+
+false If there was an error writing the long 
+\end{DoxyReturn}
+\Hypertarget{classFS_aa57bb52c19bbbf4fbc62de52427f1d70}\index{FS@{FS}!Ini\_puts@{Ini\_puts}}
+\index{Ini\_puts@{Ini\_puts}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{Ini\_puts()}{Ini\_puts()}}
+{\footnotesize\ttfamily \label{classFS_aa57bb52c19bbbf4fbc62de52427f1d70} 
+bool FS\+::\+Ini\+\_\+puts (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{Section}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{Key}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{Value}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{File\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Writes a string to an INI file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Section} & Section of the INI file \\
+\hline
+{\em Key} & Key of the INI file \\
+\hline
+{\em Value} & Value to write in the INI file \\
+\hline
+{\em File\+Path} & Path of the INI file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the string was written correctly 
+
+false If there was an error writing the string 
+\end{DoxyReturn}
+\Hypertarget{classFS_a59b4e422c14c46352bebdf308710d6f4}\index{FS@{FS}!ls@{ls}}
+\index{ls@{ls}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{ls()}{ls()}}
+{\footnotesize\ttfamily \label{classFS_a59b4e422c14c46352bebdf308710d6f4} 
+bool FS\+::ls (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{Partition\+Name}{}\end{DoxyParamCaption})}
+
+
+
+List the files in a directory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Partition\+Path} & Path of the directory \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the files were listed correctly 
+
+false If there was an error listing the files 
+\end{DoxyReturn}
+\Hypertarget{classFS_ae715c57a01ebf2d0d2365810f323a2e2}\index{FS@{FS}!mountPartition@{mountPartition}}
+\index{mountPartition@{mountPartition}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{mountPartition()}{mountPartition()}}
+{\footnotesize\ttfamily \label{classFS_ae715c57a01ebf2d0d2365810f323a2e2} 
+esp\+\_\+err\+\_\+t FS\+::mount\+Partition (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{Partition\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Mounts a partition to the VFS. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Partition\+Name} & Name of the partition to mount \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+esp\+\_\+err\+\_\+t ESP\+\_\+\+OK if the partition was mounted correctly 
+
+esp\+\_\+err\+\_\+t ESP\+\_\+\+FAIL if there was an error mounting the partition 
+
+esp\+\_\+err\+\_\+t ESP\+\_\+\+ERR\+\_\+\+NOT\+\_\+\+FOUND if the partition was not found 
+
+esp\+\_\+err\+\_\+t Another error occurred 
+\end{DoxyReturn}
+\Hypertarget{classFS_a8d08f30221c28201ef179841881107d5}\index{FS@{FS}!operator=@{operator=}}
+\index{operator=@{operator=}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classFS_a8d08f30221c28201ef179841881107d5} 
+\mbox{\hyperlink{classFS}{FS}} \& FS\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classFS}{FS}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classFS_a2385b5e5c5d39cfc8f5b4a5a47ca759c}\index{FS@{FS}!populateDeviceConfigIni@{populateDeviceConfigIni}}
+\index{populateDeviceConfigIni@{populateDeviceConfigIni}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{populateDeviceConfigIni()}{populateDeviceConfigIni()}}
+{\footnotesize\ttfamily \label{classFS_a2385b5e5c5d39cfc8f5b4a5a47ca759c} 
+bool FS\+::populate\+Device\+Config\+Ini (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Creates a configuration file (DEVICE\+\_\+\+CONFIG\+\_\+\+FILE\+\_\+\+PATH) with default settings for the device. 
+
+\begin{DoxyReturn}{Returns}
+true on success, false otherwise. This function populates a file (DEVICE\+\_\+\+CONFIG\+\_\+\+FILE\+\_\+\+PATH) in INI format with default configuration options for the device. The function uses the Ini\+\_\+puts function (assumed to be defined elsewhere) to write each key-\/value pair to the file. The following sections and key-\/value pairs are written to the file\+: DEVICE AUTOMATIC (\mbox{[}OFF\mbox{]}/\+ON) -\/ Automatic mode (enabled/disabled) FUNCTION (\mbox{[}NONE\mbox{]}/\+TX/\+RX) -\/ Device function (no operation, transmit, receive) PACKETTYPE TYPE (\mbox{[}LORA\mbox{]}/\+GFSK/\+LRFHSS) -\/ Packet modulation type TCXO DIO3\+VOLTAGE (1\+\_\+6/1\+\_\+7/\mbox{[}1\+\_\+8\mbox{]}/2\+\_\+2/2\+\_\+4/2\+\_\+7/3\+\_\+0/3\+\_\+3) -\/ Voltage level for DIO3 pin DIO3\+DELAY (\mbox{[}10\mbox{]}0-\/262143) -\/ Delay for DIO3 activation (in microseconds) CALIBRATIONS DO (\mbox{[}0x7F\mbox{]}0x00-\/0x7F) -\/ Calibration value XTAL USE (\mbox{[}Y\mbox{]}/N) -\/ Enable/disable crystal oscillator A (\mbox{[}0x12\mbox{]}0x00-\/0x2F) -\/ Crystal oscillator parameter A B (\mbox{[}0x12\mbox{]}0x00-\/0x2F) -\/ Crystal oscillator parameter B FREQUENCY FREQUENCY (\mbox{[}915000000\mbox{]}) -\/ Operating frequency PACONFIG DBM (14/\mbox{[}17\mbox{]}/20/22) -\/ Transmission power (in d\+Bm) TXPARAMS RAMPTIME (10/20/40/80/200/\mbox{[}800\mbox{]}/1700/3400) -\/ Ramp-\/up time for transmission (in microseconds) MODULATION SF (5/6/\mbox{[}7\mbox{]}/8/9/10/11/12) -\/ Spreading factor for Lo\+Ra modulation BW (7/10/15/20/31/41/62/\mbox{[}125\mbox{]}/250/500) -\/ Bandwidth for Lo\+Ra modulation CR (\mbox{[}4/5\mbox{]}, 4/6, 4/7, 4/8) -\/ Coding rate for Lo\+Ra modulation PACKETPARAMS HEADER (\mbox{[}EXPLICIT\mbox{]}/\+IMPLICIT) -\/ Packet header type PREAMBLELENGTH (\mbox{[}12\mbox{]}) -\/ Preamble length in symbols PAYLOADLENGTH (\mbox{[}9\mbox{]}) -\/ Payload length in bytes CRC (\mbox{[}ON\mbox{]}/\+OFF) -\/ Enable/disable Cyclic Redundancy Check (CRC) IQTYPE (\mbox{[}STANDARD\mbox{]}/\+INVERTED) -\/ In-\/phase/\+Quadrature (IQ) type SYNCWORD SYNCWORD (\mbox{[}0x3444\mbox{]}/0x1424) -\/ Synchronization word for packet framing RXGAIN RXGAIN (\mbox{[}BOOST\mbox{]}/\+POWERSAVE) -\/ Receiver gain mode (high sensitivity or low power) TIMEOUT TRANSMIT (\mbox{[}30000\mbox{]}) -\/ Transmission timeout in milliseconds RECEIVE (\mbox{[}30000\mbox{]}) -\/ Receive timeout in milliseconds If any error occurs while writing to the file, the function returns false. 
+\end{DoxyReturn}
+\Hypertarget{classFS_a8ff3e9648f0e6a2d4d12c8a396d7ee8a}\index{FS@{FS}!seekAndReadFile@{seekAndReadFile}}
+\index{seekAndReadFile@{seekAndReadFile}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{seekAndReadFile()}{seekAndReadFile()}}
+{\footnotesize\ttfamily \label{classFS_a8ff3e9648f0e6a2d4d12c8a396d7ee8a} 
+bool FS\+::seek\+And\+Read\+File (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{file\+Path}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{output\+Buffer}{, }\item[{long int}]{size}{, }\item[{long int}]{offset}{, }\item[{int}]{origin}{}\end{DoxyParamCaption})}
+
+
+
+Reads a specific portion of a file into a provided buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & The path to the file to be read. \\
+\hline
+{\em output\+Buffer} & Pointer to the buffer where the data will be stored. \\
+\hline
+{\em size} & The number of bytes to read from the file. \\
+\hline
+{\em offset} & The number of bytes to skip from the beginning of the file (origin dependent). \\
+\hline
+{\em origin} & The reference point for the offset. (SEEK\+\_\+\+SET, SEEK\+\_\+\+CUR, SEEK\+\_\+\+END) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classFS_ac6e228ea15f9d1bdf48bc2e54f209eeb}\index{FS@{FS}!seekAndWriteFile@{seekAndWriteFile}}
+\index{seekAndWriteFile@{seekAndWriteFile}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{seekAndWriteFile()}{seekAndWriteFile()}}
+{\footnotesize\ttfamily \label{classFS_ac6e228ea15f9d1bdf48bc2e54f209eeb} 
+bool FS\+::seek\+And\+Write\+File (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{file\+Path}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{output\+Buffer}{, }\item[{long int}]{size}{, }\item[{long int}]{offset}{, }\item[{int}]{origin}{}\end{DoxyParamCaption})}
+
+
+
+Writes a specific portion of data into a file at a specified location. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & The path to the file to be written. \\
+\hline
+{\em input\+Buffer} & Pointer to the buffer containing the data to be written. \\
+\hline
+{\em size} & The number of bytes to write to the file. \\
+\hline
+{\em offset} & The number of bytes to skip from the beginning of the file (origin dependent). \\
+\hline
+{\em origin} & The reference point for the offset. (SEEK\+\_\+\+SET, SEEK\+\_\+\+CUR, SEEK\+\_\+\+END) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classFS_ae5de7712a507f11c4ea042e0df0b5ce3}\index{FS@{FS}!WriteFile@{WriteFile}}
+\index{WriteFile@{WriteFile}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{WriteFile()}{WriteFile()}}
+{\footnotesize\ttfamily \label{classFS_ae5de7712a507f11c4ea042e0df0b5ce3} 
+bool FS\+::\+Write\+File (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{content}{, }\item[{size\+\_\+t}]{content\+Size}{, }\item[{size\+\_\+t}]{content\+Number}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{file\+Path}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{operation\+Type}{}\end{DoxyParamCaption})}
+
+
+
+Write the content of a buffer to a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em content} & Content to write \\
+\hline
+{\em content\+Size} & Size of the content \\
+\hline
+{\em content\+Number} & Number of contents \\
+\hline
+{\em file\+Path} & Path of the file to write \\
+\hline
+{\em operation\+Type} & Operation type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the content was written correctly 
+
+false If there was an error writing the content 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classFS_ac318aa28d8a8ed7370ba382a22ef2de8}\index{FS@{FS}!xFSSemaphore@{xFSSemaphore}}
+\index{xFSSemaphore@{xFSSemaphore}!FS@{FS}}
+\doxysubsubsection{\texorpdfstring{xFSSemaphore}{xFSSemaphore}}
+{\footnotesize\ttfamily \label{classFS_ac318aa28d8a8ed7370ba382a22ef2de8} 
+Semaphore\+Handle\+\_\+t FS\+::x\+FSSemaphore\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Handle to the file system semaphore. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{FileSystem_8h}{File\+System.\+h}}\item 
+src/\mbox{\hyperlink{FileSystem_8cpp}{File\+System.\+cpp}}\end{DoxyCompactItemize}

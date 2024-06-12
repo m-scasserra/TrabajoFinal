@@ -1,0 +1,176 @@
+\doxysection{src/cmd\+\_\+system\+\_\+common.c File Reference}
+\hypertarget{cmd__system__common_8c}{}\label{cmd__system__common_8c}\index{src/cmd\_system\_common.c@{src/cmd\_system\_common.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$inttypes.\+h$>$}\newline
+{\ttfamily \#include "{}esp\+\_\+log.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+console.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+chip\+\_\+info.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+flash.\+h"{}}\newline
+{\ttfamily \#include "{}argtable3/argtable3.\+h"{}}\newline
+{\ttfamily \#include "{}freertos/\+Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}freertos/task.\+h"{}}\newline
+{\ttfamily \#include "{}cmd\+\_\+system.\+h"{}}\newline
+{\ttfamily \#include "{}sdkconfig.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{cmd__system__common_8c_aae3e8a9e99259b13a9c49d9f06e0528a}{register\+\_\+free}} (void)
+\item 
+static void \mbox{\hyperlink{cmd__system__common_8c_a8bf71e86a609d16bec78cb35a7c62f0b}{register\+\_\+heap}} (void)
+\item 
+static void \mbox{\hyperlink{cmd__system__common_8c_a6b8c3058081822a0528759f33e5e9688}{register\+\_\+version}} (void)
+\item 
+static void \mbox{\hyperlink{cmd__system__common_8c_a3bcfc12484fda614271c905df1e72700}{register\+\_\+restart}} (void)
+\item 
+static void \mbox{\hyperlink{cmd__system__common_8c_a375b552606c34e2a2ab29e53580e6b3b}{register\+\_\+log\+\_\+level}} (void)
+\item 
+void \mbox{\hyperlink{cmd__system__common_8c_a52676b8f4ec7df239bf0ad6dee3b2b1f}{register\+\_\+system\+\_\+common}} (void)
+\item 
+static int \mbox{\hyperlink{cmd__system__common_8c_adf66826a601f141cb1476db31a83db4d}{get\+\_\+version}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static int \mbox{\hyperlink{cmd__system__common_8c_ad99934ba5f82d8a7412bc2d7d4d50d6e}{restart}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static int \mbox{\hyperlink{cmd__system__common_8c_ab44890caa8ab80da5c2ebc447d628fa4}{free\+\_\+mem}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static int \mbox{\hyperlink{cmd__system__common_8c_adf83d172b224209f33d9cda752729443}{heap\+\_\+size}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+static int \mbox{\hyperlink{cmd__system__common_8c_a334c85818049502ee771d20ada06fa8d}{log\+\_\+level}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{cmd__system__common_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}} = "{}cmd\+\_\+system\+\_\+common"{}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>struct arg\_str \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{cmd__system__common_8c_a22a788c3b1dee3f30a31522bc707bcff}{tag}}\\
+\>struct arg\_str \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{cmd__system__common_8c_ad96af575021d7605a45be5f14c39e62b}{level}}\\
+\>struct arg\_end \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{cmd__system__common_8c_a088ac7ffa534015d5b07ddcc7aef9fd4}{end}}\\
+\} \mbox{\hyperlink{cmd__system__common_8c_a40bf29457d525580b278dda87ccce7ff}{log\_level\_args}}\\
+
+\end{tabbing}\item 
+static const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{cmd__system__common_8c_ae11d2ddcdb8928233ef314372127f9eb}{s\+\_\+log\+\_\+level\+\_\+names}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{cmd__system__common_8c_ab44890caa8ab80da5c2ebc447d628fa4}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!free\_mem@{free\_mem}}
+\index{free\_mem@{free\_mem}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{free\_mem()}{free\_mem()}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_ab44890caa8ab80da5c2ebc447d628fa4} 
+static int free\+\_\+mem (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\textquotesingle{}free\textquotesingle{} command prints available heap memory \Hypertarget{cmd__system__common_8c_adf66826a601f141cb1476db31a83db4d}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!get\_version@{get\_version}}
+\index{get\_version@{get\_version}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{get\_version()}{get\_version()}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_adf66826a601f141cb1476db31a83db4d} 
+static int get\+\_\+version (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{cmd__system__common_8c_adf83d172b224209f33d9cda752729443}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!heap\_size@{heap\_size}}
+\index{heap\_size@{heap\_size}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{heap\_size()}{heap\_size()}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_adf83d172b224209f33d9cda752729443} 
+static int heap\+\_\+size (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{cmd__system__common_8c_a334c85818049502ee771d20ada06fa8d}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!log\_level@{log\_level}}
+\index{log\_level@{log\_level}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{log\_level()}{log\_level()}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_a334c85818049502ee771d20ada06fa8d} 
+static int log\+\_\+level (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{cmd__system__common_8c_aae3e8a9e99259b13a9c49d9f06e0528a}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!register\_free@{register\_free}}
+\index{register\_free@{register\_free}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{register\_free()}{register\_free()}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_aae3e8a9e99259b13a9c49d9f06e0528a} 
+static void register\+\_\+free (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{cmd__system__common_8c_a8bf71e86a609d16bec78cb35a7c62f0b}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!register\_heap@{register\_heap}}
+\index{register\_heap@{register\_heap}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{register\_heap()}{register\_heap()}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_a8bf71e86a609d16bec78cb35a7c62f0b} 
+static void register\+\_\+heap (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{cmd__system__common_8c_a375b552606c34e2a2ab29e53580e6b3b}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!register\_log\_level@{register\_log\_level}}
+\index{register\_log\_level@{register\_log\_level}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{register\_log\_level()}{register\_log\_level()}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_a375b552606c34e2a2ab29e53580e6b3b} 
+static void register\+\_\+log\+\_\+level (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{cmd__system__common_8c_a3bcfc12484fda614271c905df1e72700}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!register\_restart@{register\_restart}}
+\index{register\_restart@{register\_restart}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{register\_restart()}{register\_restart()}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_a3bcfc12484fda614271c905df1e72700} 
+static void register\+\_\+restart (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{cmd__system__common_8c_a52676b8f4ec7df239bf0ad6dee3b2b1f}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!register\_system\_common@{register\_system\_common}}
+\index{register\_system\_common@{register\_system\_common}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{register\_system\_common()}{register\_system\_common()}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_a52676b8f4ec7df239bf0ad6dee3b2b1f} 
+void register\+\_\+system\+\_\+common (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cmd__system__common_8c_a6b8c3058081822a0528759f33e5e9688}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!register\_version@{register\_version}}
+\index{register\_version@{register\_version}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{register\_version()}{register\_version()}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_a6b8c3058081822a0528759f33e5e9688} 
+static void register\+\_\+version (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{cmd__system__common_8c_ad99934ba5f82d8a7412bc2d7d4d50d6e}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!restart@{restart}}
+\index{restart@{restart}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{restart()}{restart()}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_ad99934ba5f82d8a7412bc2d7d4d50d6e} 
+static int restart (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\textquotesingle{}restart\textquotesingle{} command restarts the program 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{cmd__system__common_8c_a088ac7ffa534015d5b07ddcc7aef9fd4}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!end@{end}}
+\index{end@{end}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{end}{end}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_a088ac7ffa534015d5b07ddcc7aef9fd4} 
+struct arg\+\_\+end\texorpdfstring{$\ast$}{*} end}
+
+\Hypertarget{cmd__system__common_8c_ad96af575021d7605a45be5f14c39e62b}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!level@{level}}
+\index{level@{level}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{level}{level}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_ad96af575021d7605a45be5f14c39e62b} 
+struct arg\+\_\+str\texorpdfstring{$\ast$}{*} level}
+
+\Hypertarget{cmd__system__common_8c_a40bf29457d525580b278dda87ccce7ff}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!log\_level\_args@{log\_level\_args}}
+\index{log\_level\_args@{log\_level\_args}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{[struct]}{[struct]}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_a40bf29457d525580b278dda87ccce7ff} 
+struct  \{ ... \}  log\+\_\+level\+\_\+args\hspace{0.3cm}{\ttfamily [static]}}
+
+\textquotesingle{}tasks\textquotesingle{} command prints the list of tasks and related information log\+\_\+level command changes log level via esp\+\_\+log\+\_\+level\+\_\+set \Hypertarget{cmd__system__common_8c_ae11d2ddcdb8928233ef314372127f9eb}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!s\_log\_level\_names@{s\_log\_level\_names}}
+\index{s\_log\_level\_names@{s\_log\_level\_names}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{s\_log\_level\_names}{s\_log\_level\_names}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_ae11d2ddcdb8928233ef314372127f9eb} 
+const char\texorpdfstring{$\ast$}{*} s\+\_\+log\+\_\+level\+\_\+names\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}none"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}error"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}warn"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}info"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}debug"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}verbose"{}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{cmd__system__common_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!TAG@{TAG}}
+\index{TAG@{TAG}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{TAG}{TAG}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_a5a85b9c772bbeb480b209a3e6ea92b4c} 
+const char\texorpdfstring{$\ast$}{*} TAG = "{}cmd\+\_\+system\+\_\+common"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{cmd__system__common_8c_a22a788c3b1dee3f30a31522bc707bcff}\index{cmd\_system\_common.c@{cmd\_system\_common.c}!tag@{tag}}
+\index{tag@{tag}!cmd\_system\_common.c@{cmd\_system\_common.c}}
+\doxysubsubsection{\texorpdfstring{tag}{tag}}
+{\footnotesize\ttfamily \label{cmd__system__common_8c_a22a788c3b1dee3f30a31522bc707bcff} 
+struct arg\+\_\+str\texorpdfstring{$\ast$}{*} tag}
+

@@ -1,0 +1,378 @@
+\doxysection{E22 Class Reference}
+\hypertarget{class_e22}{}\label{class_e22}\index{E22@{E22}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_e22_1_1_calibrate__t}{Calibrate\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{struct_e22_1_1_e22_command__t}{E22\+Command\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{struct_e22_1_1_e22_response__t}{E22\+Response\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{struct_e22_1_1_i_r_q_reg__t}{IRQReg\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{struct_e22_1_1_lora_packet_params__t}{Lora\+Packet\+Params\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{struct_e22_1_1_modulation_parameters__t}{Modulation\+Parameters\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_e22_ad1e881c8a4ab5e13d26b9587e0f90c50}\label{class_e22_ad1e881c8a4ab5e13d26b9587e0f90c50} 
+enum {\bfseries Std\+By\+Mode\+\_\+t} \{ {\bfseries STDBY\+\_\+\+RC}
+, {\bfseries STDBY\+\_\+\+XOSC}
+ \}
+\item 
+\Hypertarget{class_e22_af60d647d3b1e32d153b8caa3a34e647b}\label{class_e22_af60d647d3b1e32d153b8caa3a34e647b} 
+enum {\bfseries Packet\+Type\+\_\+t} \{ {\bfseries PACKET\+\_\+\+TYPE\+\_\+\+GFSK} = 0x0
+, {\bfseries PACKET\+\_\+\+TYPE\+\_\+\+LORA} = 0x1
+, {\bfseries PACKET\+\_\+\+TYPE\+\_\+\+LR\+\_\+\+FHSS} = 0x3
+ \}
+\item 
+\Hypertarget{class_e22_ae4b2c476d0e4cbc57624df558cd9dcb5}\label{class_e22_ae4b2c476d0e4cbc57624df558cd9dcb5} 
+enum {\bfseries tcxo\+Voltage\+\_\+t} \{ \newline
+{\bfseries TCXOVOLTAGE\+\_\+1\+\_\+6} = 0x0
+, {\bfseries TCXOVOLTAGE\+\_\+1\+\_\+7} = 0x1
+, {\bfseries TCXOVOLTAGE\+\_\+1\+\_\+8} = 0x2
+, {\bfseries TCXOVOLTAGE\+\_\+2\+\_\+2} = 0x3
+, \newline
+{\bfseries TCXOVOLTAGE\+\_\+2\+\_\+4} = 0x4
+, {\bfseries TCXOVOLTAGE\+\_\+2\+\_\+7} = 0x5
+, {\bfseries TCXOVOLTAGE\+\_\+3\+\_\+0} = 0x6
+, {\bfseries TCXOVOLTAGE\+\_\+3\+\_\+3} = 0x7
+ \}
+\item 
+\Hypertarget{class_e22_af7074451e609cc476acfc6773936bc0a}\label{class_e22_af7074451e609cc476acfc6773936bc0a} 
+enum {\bfseries Image\+Calibration\+Freq\+\_\+t} \{ \newline
+{\bfseries FREQ\+\_\+430\+\_\+440}
+, {\bfseries FREQ\+\_\+470\+\_\+510}
+, {\bfseries FREQ\+\_\+779\+\_\+787}
+, {\bfseries FREQ\+\_\+863\+\_\+870}
+, \newline
+{\bfseries FREQ\+\_\+902\+\_\+928}
+ \}
+\item 
+\Hypertarget{class_e22_af8f70cb54b09b88f18dc5384fcd3628f}\label{class_e22_af8f70cb54b09b88f18dc5384fcd3628f} 
+enum {\bfseries Rx\+Gain\+\_\+t} \{ {\bfseries RX\+\_\+\+POWER\+\_\+\+SAVE} = 0x94
+, {\bfseries RX\+\_\+\+BOOST} = 0x96
+ \}
+\item 
+\Hypertarget{class_e22_aec200d2e0b58e9ca1dd1d0301858bb73}\label{class_e22_aec200d2e0b58e9ca1dd1d0301858bb73} 
+enum {\bfseries Spreding\+Factor\+\_\+t} \{ \newline
+{\bfseries SF\+\_\+5} = 0x5
+, {\bfseries SF\+\_\+6} = 0x6
+, {\bfseries SF\+\_\+7} = 0x7
+, {\bfseries SF\+\_\+8} = 0x8
+, \newline
+{\bfseries SF\+\_\+9} = 0x9
+, {\bfseries SF\+\_\+10} = 0xA
+, {\bfseries SF\+\_\+11} = 0xB
+, {\bfseries SF\+\_\+12} = 0xC
+ \}
+\item 
+\Hypertarget{class_e22_a325a465e38ede2c8b493488bae34a712}\label{class_e22_a325a465e38ede2c8b493488bae34a712} 
+enum {\bfseries Band\+Width\+\_\+t} \{ \newline
+{\bfseries LORA\+\_\+\+BW\+\_\+7} = 0x00
+, {\bfseries LORA\+\_\+\+BW\+\_\+10} = 0x08
+, {\bfseries LORA\+\_\+\+BW\+\_\+15} = 0x01
+, {\bfseries LORA\+\_\+\+BW\+\_\+20} = 0x09
+, \newline
+{\bfseries LORA\+\_\+\+BW\+\_\+31} = 0x02
+, {\bfseries LORA\+\_\+\+BW\+\_\+41} = 0x0A
+, {\bfseries LORA\+\_\+\+BW\+\_\+62} = 0x03
+, {\bfseries LORA\+\_\+\+BW\+\_\+125} = 0x04
+, \newline
+{\bfseries LORA\+\_\+\+BW\+\_\+250} = 0x05
+, {\bfseries LORA\+\_\+\+BW\+\_\+500} = 0x06
+ \}
+\item 
+\Hypertarget{class_e22_ac705f566feb6ac598c6b91191b402017}\label{class_e22_ac705f566feb6ac598c6b91191b402017} 
+enum {\bfseries Coding\+Rate\+\_\+t} \{ {\bfseries LORA\+\_\+\+CR\+\_\+4\+\_\+5} = 0x1
+, {\bfseries LORA\+\_\+\+CR\+\_\+4\+\_\+6} = 0x2
+, {\bfseries LORA\+\_\+\+CR\+\_\+4\+\_\+7} = 0x3
+, {\bfseries LORA\+\_\+\+CR\+\_\+4\+\_\+8} = 0x4
+ \}
+\item 
+\Hypertarget{class_e22_a4ca49205ef4581f10f95e8e5db7d9d53}\label{class_e22_a4ca49205ef4581f10f95e8e5db7d9d53} 
+enum {\bfseries Packet\+Header\+Type\+\_\+t} \{ {\bfseries EXPLICIT\+\_\+\+HEADER} = 0x0
+, {\bfseries IMPLICIT\+\_\+\+HEADER} = 0x1
+ \}
+\item 
+\Hypertarget{class_e22_ad7b7fdf92b59b33ec80aa4ca3afd6d23}\label{class_e22_ad7b7fdf92b59b33ec80aa4ca3afd6d23} 
+enum {\bfseries Packet\+IQType\+\_\+t} \{ {\bfseries STANDARD\+\_\+\+IQ} = 0x0
+, {\bfseries INVERTED\+\_\+\+IQ} = 0x1
+ \}
+\item 
+\Hypertarget{class_e22_ae2e94ac87e159fd49df2cec2bc59f9dd}\label{class_e22_ae2e94ac87e159fd49df2cec2bc59f9dd} 
+enum {\bfseries Sync\+Word\+Type\+\_\+t} \{ {\bfseries PUBLIC\+\_\+\+SYNCWORD}
+, {\bfseries PRIVATE\+\_\+\+SYNCWORD}
+ \}
+\item 
+\Hypertarget{class_e22_a969a1b74e44c1fe9457d30553a29d3bd}\label{class_e22_a969a1b74e44c1fe9457d30553a29d3bd} 
+enum {\bfseries IRQReg\+Bits\+\_\+t} \{ \newline
+{\bfseries TX\+\_\+\+DONE} = 0x1
+, {\bfseries RX\+\_\+\+DONE} = 0x2
+, {\bfseries PREAMBLE\+\_\+\+DETECTED} = 0x4
+, {\bfseries SYNCWORD\+\_\+\+VALID} = 0x8
+, \newline
+{\bfseries HEADER\+\_\+\+VALID} = 0x10
+, {\bfseries HEADER\+\_\+\+ERR} = 0x20
+, {\bfseries CRC\+\_\+\+ERR} = 0x40
+, {\bfseries CAD\+\_\+\+DONE} = 0x80
+, \newline
+{\bfseries CAD\+\_\+\+DETECTED} = 0x100
+, {\bfseries TIMEOUT} = 0x200
+, {\bfseries LRFGSS\+\_\+\+HOP} = 0x4000
+ \}
+\item 
+\Hypertarget{class_e22_aa21e0c735888b50785fe5ba5889f819d}\label{class_e22_aa21e0c735888b50785fe5ba5889f819d} 
+enum {\bfseries Pa\+Config\+\_\+t} \{ {\bfseries PA\+\_\+22\+\_\+\+DBM}
+, {\bfseries PA\+\_\+20\+\_\+\+DBM}
+, {\bfseries PA\+\_\+17\+\_\+\+DBM}
+, {\bfseries PA\+\_\+14\+\_\+\+DBM}
+ \}
+\item 
+\Hypertarget{class_e22_a12c0c8e6227d370dc78e66dcdb1a5e3c}\label{class_e22_a12c0c8e6227d370dc78e66dcdb1a5e3c} 
+enum {\bfseries Ramp\+Time\+\_\+t} \{ \newline
+{\bfseries SET\+\_\+\+RAMP\+\_\+10U} = 0x00
+, {\bfseries SET\+\_\+\+RAMP\+\_\+20U} = 0x01
+, {\bfseries SET\+\_\+\+RAMP\+\_\+40U} = 0x02
+, {\bfseries SET\+\_\+\+RAMP\+\_\+80U} = 0x03
+, \newline
+{\bfseries SET\+\_\+\+RAMP\+\_\+200U} = 0x04
+, {\bfseries SET\+\_\+\+RAMP\+\_\+800U} = 0x05
+, {\bfseries SET\+\_\+\+RAMP\+\_\+1700U} = 0x06
+, {\bfseries SET\+\_\+\+RAMP\+\_\+3400U} = 0x07
+ \}
+\item 
+\Hypertarget{class_e22_aca43a1f4a3d79f9feeea7fea202d9832}\label{class_e22_aca43a1f4a3d79f9feeea7fea202d9832} 
+enum {\bfseries E22\+Set\+Up\+State\+\_\+t} \{ {\bfseries NONE} = 0
+, {\bfseries TX} = 1
+, {\bfseries RX} = 2
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_e22_a3a9f0abce5c8fae0d42935eee124ecab}\label{class_e22_a3a9f0abce5c8fae0d42935eee124ecab} 
+{\bfseries E22} (const \mbox{\hyperlink{class_e22}{E22}} \&)=delete
+\item 
+\Hypertarget{class_e22_a82193209edc8215288def1b22b9c5770}\label{class_e22_a82193209edc8215288def1b22b9c5770} 
+\mbox{\hyperlink{class_e22}{E22}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_e22}{E22}} \&)=delete
+\item 
+\Hypertarget{class_e22_aae975df77d4a9c7e7a252d48dbd568e1}\label{class_e22_aae975df77d4a9c7e7a252d48dbd568e1} 
+bool {\bfseries Begin} (void)
+\item 
+\Hypertarget{class_e22_a374910393e17b78cd74d7acbf2791f57}\label{class_e22_a374910393e17b78cd74d7acbf2791f57} 
+bool {\bfseries set\+Packet\+Type} (Packet\+Type\+\_\+t \+\_\+packet\+Type)
+\item 
+\Hypertarget{class_e22_a9ddb8eff407f0c60f812f492be4c330d}\label{class_e22_a9ddb8eff407f0c60f812f492be4c330d} 
+bool {\bfseries get\+Packet\+Type} (Packet\+Type\+\_\+t \texorpdfstring{$\ast$}{*}packet\+Type)
+\item 
+\Hypertarget{class_e22_ae82abf4f9d60cc6f5150a40250360500}\label{class_e22_ae82abf4f9d60cc6f5150a40250360500} 
+bool {\bfseries write\+Register} (E22\+\_\+\+Reg\+\_\+\+Addr addr, uint8\+\_\+t data\+In)
+\item 
+\Hypertarget{class_e22_a07f6d5d41bb10953bc63e487ece10dac}\label{class_e22_a07f6d5d41bb10953bc63e487ece10dac} 
+bool {\bfseries read\+Register} (E22\+\_\+\+Reg\+\_\+\+Addr addr, uint8\+\_\+t \texorpdfstring{$\ast$}{*}data\+Out)
+\item 
+\Hypertarget{class_e22_afc82ff40b8548ed9ba7e52badab90b1c}\label{class_e22_afc82ff40b8548ed9ba7e52badab90b1c} 
+bool {\bfseries write\+Buffer} (uint8\+\_\+t offset, uint8\+\_\+t data\+In)
+\item 
+\Hypertarget{class_e22_a06b6139e7aa350ce9f1642fec0bb39e1}\label{class_e22_a06b6139e7aa350ce9f1642fec0bb39e1} 
+bool {\bfseries read\+Buffer} (uint8\+\_\+t offset, uint8\+\_\+t \texorpdfstring{$\ast$}{*}data\+Out)
+\item 
+\Hypertarget{class_e22_a62eef7fdced6989e43273d63e58b25ae}\label{class_e22_a62eef7fdced6989e43273d63e58b25ae} 
+bool {\bfseries get\+Status} (void)
+\item 
+\Hypertarget{class_e22_a126eacc4a83c4874c80b25f6d05ed3a1}\label{class_e22_a126eacc4a83c4874c80b25f6d05ed3a1} 
+bool {\bfseries get\+Rssi\+Inst} (void)
+\item 
+\Hypertarget{class_e22_a4b11be7ef0b372227d1c83d941c471ba}\label{class_e22_a4b11be7ef0b372227d1c83d941c471ba} 
+bool {\bfseries set\+Buffer\+Base\+Address} (uint8\+\_\+t Tx\+Base\+Addr, uint8\+\_\+t Rx\+Base\+Addr)
+\item 
+\Hypertarget{class_e22_aaea6a1e37c34c9decb1fae4abb9cbe33}\label{class_e22_aaea6a1e37c34c9decb1fae4abb9cbe33} 
+bool {\bfseries set\+Rx} (uint32\+\_\+t Timeout)
+\item 
+\Hypertarget{class_e22_a5b1a703b9994c16de141416891454681}\label{class_e22_a5b1a703b9994c16de141416891454681} 
+bool {\bfseries set\+Stand\+By} (Std\+By\+Mode\+\_\+t mode)
+\item 
+\Hypertarget{class_e22_a29fa6941a4664d35a075c56aa828748a}\label{class_e22_a29fa6941a4664d35a075c56aa828748a} 
+bool {\bfseries set\+DIO3as\+TCXOCtrl} (tcxo\+Voltage\+\_\+t voltage, uint32\+\_\+t delay)
+\item 
+\Hypertarget{class_e22_a82048c31bd683a06618aef0d6daffab2}\label{class_e22_a82048c31bd683a06618aef0d6daffab2} 
+bool {\bfseries set\+Xtal\+Cap} (uint8\+\_\+t XTA, uint8\+\_\+t XTB)
+\item 
+\Hypertarget{class_e22_a0f2df5514708a2ea62bd06604563624e}\label{class_e22_a0f2df5514708a2ea62bd06604563624e} 
+bool {\bfseries calibrate} (\mbox{\hyperlink{struct_e22_1_1_calibrate__t}{Calibrate\+\_\+t}} calibrations\+To\+Do)
+\item 
+\Hypertarget{class_e22_a774da0d20c44e3ef02e23e5f1433afae}\label{class_e22_a774da0d20c44e3ef02e23e5f1433afae} 
+uint8\+\_\+t {\bfseries calibrations\+To\+Mask} (\mbox{\hyperlink{struct_e22_1_1_calibrate__t}{Calibrate\+\_\+t}} calibrations)
+\item 
+\Hypertarget{class_e22_a312fb22841e1ce0f2fbfef498c63b514}\label{class_e22_a312fb22841e1ce0f2fbfef498c63b514} 
+bool {\bfseries calibrate\+Image} (Image\+Calibration\+Freq\+\_\+t frequency)
+\item 
+\Hypertarget{class_e22_a3f23017b5a521fc298e52622c97d38ed}\label{class_e22_a3f23017b5a521fc298e52622c97d38ed} 
+bool {\bfseries set\+Frequency} (uint32\+\_\+t frequency)
+\item 
+\Hypertarget{class_e22_a0a4769bdfa5a549228e4f7f312b9f6b9}\label{class_e22_a0a4769bdfa5a549228e4f7f312b9f6b9} 
+bool {\bfseries set\+Frequency\+And\+Calibrate} (uint32\+\_\+t frequency)
+\item 
+\Hypertarget{class_e22_af964a7955931b9e45147e6a5b912f33e}\label{class_e22_af964a7955931b9e45147e6a5b912f33e} 
+bool {\bfseries set\+Rx\+Gain} (Rx\+Gain\+\_\+t gain)
+\item 
+\Hypertarget{class_e22_a12e6b18e024eec7f03d6f04c199424a5}\label{class_e22_a12e6b18e024eec7f03d6f04c199424a5} 
+bool {\bfseries set\+Modulation\+Params} (\mbox{\hyperlink{struct_e22_1_1_modulation_parameters__t}{Modulation\+Parameters\+\_\+t}} modulation)
+\item 
+\Hypertarget{class_e22_ad3f1db8655b54d4d823b770a1fb17d7b}\label{class_e22_ad3f1db8655b54d4d823b770a1fb17d7b} 
+bool {\bfseries set\+Packet\+Params} (\mbox{\hyperlink{struct_e22_1_1_lora_packet_params__t}{Lora\+Packet\+Params\+\_\+t}} packet\+Params)
+\item 
+\Hypertarget{class_e22_a13a7f3be3b3cbeb789260f1f778f3489}\label{class_e22_a13a7f3be3b3cbeb789260f1f778f3489} 
+bool {\bfseries set\+Sync\+Word} (Sync\+Word\+Type\+\_\+t sync\+Word)
+\item 
+\Hypertarget{class_e22_aa672c564ca50a99eaedacbda1ab2b12a}\label{class_e22_aa672c564ca50a99eaedacbda1ab2b12a} 
+bool {\bfseries message\+Recieved} (void)
+\item 
+\Hypertarget{class_e22_a6630df2eaeed0e76ba08ed5aaa0851a8}\label{class_e22_a6630df2eaeed0e76ba08ed5aaa0851a8} 
+bool {\bfseries message\+Sent} (void)
+\item 
+\Hypertarget{class_e22_a284a1129d05aff00f0b213f1c9689bfe}\label{class_e22_a284a1129d05aff00f0b213f1c9689bfe} 
+uint8\+\_\+t {\bfseries get\+Message\+Length} (void)
+\item 
+\Hypertarget{class_e22_aad7a88c2b8822a4c2988a22c1024838b}\label{class_e22_aad7a88c2b8822a4c2988a22c1024838b} 
+bool {\bfseries get\+Message\+Rx\+Byte} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}data\+Out)
+\item 
+\Hypertarget{class_e22_a5a6fbcf51d93d6ce3daf0426142a38f8}\label{class_e22_a5a6fbcf51d93d6ce3daf0426142a38f8} 
+bool {\bfseries get\+Message\+Rx\+Length} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}data\+Out, uint8\+\_\+t length)
+\item 
+\Hypertarget{class_e22_af5e36dc7631ab498f646b1c6dca3c334}\label{class_e22_af5e36dc7631ab498f646b1c6dca3c334} 
+bool {\bfseries begin\+Tx\+Packet} (void)
+\item 
+\Hypertarget{class_e22_ab3f7903168f47d5885f0a6d10efad78a}\label{class_e22_ab3f7903168f47d5885f0a6d10efad78a} 
+bool {\bfseries write\+Message\+Tx\+Byte} (uint8\+\_\+t data)
+\item 
+\Hypertarget{class_e22_a8dff61dcb02c323b802708c738b8793d}\label{class_e22_a8dff61dcb02c323b802708c738b8793d} 
+bool {\bfseries write\+Message\+Tx\+Length} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, uint8\+\_\+t length)
+\item 
+\Hypertarget{class_e22_a3e527cef99d8463c3fdf5f4c17b597e3}\label{class_e22_a3e527cef99d8463c3fdf5f4c17b597e3} 
+bool {\bfseries change\+Packet\+Preamble\+Lenght} (uint16\+\_\+t preamble\+Lenght)
+\item 
+\Hypertarget{class_e22_aa3a0130a16b06ce5b7899ffd485dac81}\label{class_e22_aa3a0130a16b06ce5b7899ffd485dac81} 
+bool {\bfseries change\+Packet\+Header\+Type} (Packet\+Header\+Type\+\_\+t header\+Type)
+\item 
+\Hypertarget{class_e22_a92424b941454bb9f24a5d208b462e3f2}\label{class_e22_a92424b941454bb9f24a5d208b462e3f2} 
+bool {\bfseries change\+Packet\+Payload\+Length} (uint8\+\_\+t payload\+Length)
+\item 
+\Hypertarget{class_e22_ae54724cc4b609088a19f5e8c42596587}\label{class_e22_ae54724cc4b609088a19f5e8c42596587} 
+bool {\bfseries change\+Packet\+Crc\+Type} (bool crc\+Type)
+\item 
+\Hypertarget{class_e22_a2b42fb99eebe2ef0d6b9a1542bae1827}\label{class_e22_a2b42fb99eebe2ef0d6b9a1542bae1827} 
+bool {\bfseries change\+Packet\+IQType} (Packet\+IQType\+\_\+t iq\+Type)
+\item 
+\Hypertarget{class_e22_a86c0e1302ed6d0bc6953693e6f895000}\label{class_e22_a86c0e1302ed6d0bc6953693e6f895000} 
+bool {\bfseries set\+Tx} (uint32\+\_\+t Timeout)
+\item 
+\Hypertarget{class_e22_ae67e9bb087a22c24e1c04e4a3edf5ca7}\label{class_e22_ae67e9bb087a22c24e1c04e4a3edf5ca7} 
+bool {\bfseries transmit\+Packet} (uint32\+\_\+t Timeout)
+\item 
+\Hypertarget{class_e22_a020c891ac06c9f9cdb632a7669807242}\label{class_e22_a020c891ac06c9f9cdb632a7669807242} 
+bool {\bfseries receive\+Packet} (uint32\+\_\+t Timeout)
+\item 
+\Hypertarget{class_e22_af5cf9eac9a7c3053ff3ed69a0e8fde66}\label{class_e22_af5cf9eac9a7c3053ff3ed69a0e8fde66} 
+void {\bfseries set\+Msg\+Timeoutms} (uint32\+\_\+t new\+Msg\+Timeoutms)
+\item 
+\Hypertarget{class_e22_a813c20def4b02445cd865c124bbac5ad}\label{class_e22_a813c20def4b02445cd865c124bbac5ad} 
+bool {\bfseries set\+Pa\+Config} (Pa\+Config\+\_\+t Pa\+Config)
+\item 
+\Hypertarget{class_e22_a5062afb5592005b806d4e043b075d315}\label{class_e22_a5062afb5592005b806d4e043b075d315} 
+bool {\bfseries set\+Tx\+Params} (Ramp\+Time\+\_\+t Ramp\+Time)
+\item 
+\Hypertarget{class_e22_ac0e0b24253427e7fdb0e8b09257e6dc6}\label{class_e22_ac0e0b24253427e7fdb0e8b09257e6dc6} 
+bool {\bfseries fix\+Inverted\+Iq} (Packet\+IQType\+\_\+t iq\+Type)
+\item 
+\Hypertarget{class_e22_a03a5a21bb38b0fe9988c3f51134f1fb4}\label{class_e22_a03a5a21bb38b0fe9988c3f51134f1fb4} 
+bool {\bfseries fix\+Modulation\+Quality} (void)
+\item 
+\Hypertarget{class_e22_a3ad8ef2e64556669ef753503d68761f8}\label{class_e22_a3ad8ef2e64556669ef753503d68761f8} 
+bool {\bfseries set\+Dio\+Irq\+Params} (\mbox{\hyperlink{struct_e22_1_1_i_r_q_reg__t}{IRQReg\+\_\+t}} IRQMask, \mbox{\hyperlink{struct_e22_1_1_i_r_q_reg__t}{IRQReg\+\_\+t}} DIO1\+Mask, \mbox{\hyperlink{struct_e22_1_1_i_r_q_reg__t}{IRQReg\+\_\+t}} DIO2\+Mask, \mbox{\hyperlink{struct_e22_1_1_i_r_q_reg__t}{IRQReg\+\_\+t}} DIO3\+Mask)
+\item 
+\Hypertarget{class_e22_af5a37a494728ca7e0f177369362611af}\label{class_e22_af5a37a494728ca7e0f177369362611af} 
+bool {\bfseries get\+Packet\+Status} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}Rssi\+Pkt, uint8\+\_\+t \texorpdfstring{$\ast$}{*}Snr\+Pkt, uint8\+\_\+t \texorpdfstring{$\ast$}{*}Signal\+Rssi\+Pkt)
+\item 
+\Hypertarget{class_e22_af2b8d09c00d940a1a3bc4213bbc20ec3}\label{class_e22_af2b8d09c00d940a1a3bc4213bbc20ec3} 
+bool {\bfseries Is\+In\+Transaction} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_e22_a6bac3fa8e8f2c5cb669dff88862441d9}\label{class_e22_a6bac3fa8e8f2c5cb669dff88862441d9} 
+static \mbox{\hyperlink{class_e22}{E22}} \& {\bfseries get\+Instance} ()
+\item 
+\Hypertarget{class_e22_ac15d8645a9bee1dd82151539348adb1e}\label{class_e22_ac15d8645a9bee1dd82151539348adb1e} 
+static \mbox{\hyperlink{struct_e22_1_1_calibrate__t}{Calibrate\+\_\+t}} {\bfseries calibrations\+From\+Mask} (uint8\+\_\+t calibrations\+Mask)
+\item 
+\Hypertarget{class_e22_a5add4cb0d227db7a33ae09174ed4801b}\label{class_e22_a5add4cb0d227db7a33ae09174ed4801b} 
+static bool {\bfseries set\+Up\+For\+Rx} (void)
+\item 
+\Hypertarget{class_e22_a3830bbc08dc079e3376be2320613eef8}\label{class_e22_a3830bbc08dc079e3376be2320613eef8} 
+static bool {\bfseries set\+Up\+For\+Tx} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{struct_e22_1_1_i_r_q_reg__t}{IRQReg\+\_\+t}} \mbox{\hyperlink{class_e22_ab1337bcfebcebf5ce0fd22eaf244b3cc}{IRQREGFULL}}
+\item 
+const \mbox{\hyperlink{struct_e22_1_1_i_r_q_reg__t}{IRQReg\+\_\+t}} \mbox{\hyperlink{class_e22_a51fd33fd5481932a2058e03056e75432}{IRQREGEMPTY}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_e22_a51fd33fd5481932a2058e03056e75432}\index{E22@{E22}!IRQREGEMPTY@{IRQREGEMPTY}}
+\index{IRQREGEMPTY@{IRQREGEMPTY}!E22@{E22}}
+\doxysubsubsection{\texorpdfstring{IRQREGEMPTY}{IRQREGEMPTY}}
+{\footnotesize\ttfamily \label{class_e22_a51fd33fd5481932a2058e03056e75432} 
+const \mbox{\hyperlink{struct_e22_1_1_i_r_q_reg__t}{IRQReg\+\_\+t}} E22\+::\+IRQREGEMPTY}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .txDone\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .rxDone\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .preambleDetected\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .syncWordValid\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .headerValid\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .headerErr\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .crcErr\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .cadDone\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .cadDetected\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .timeout\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .lrFhssHop\ =\ \textcolor{keyword}{false}\}}
+
+\end{DoxyCode}
+\Hypertarget{class_e22_ab1337bcfebcebf5ce0fd22eaf244b3cc}\index{E22@{E22}!IRQREGFULL@{IRQREGFULL}}
+\index{IRQREGFULL@{IRQREGFULL}!E22@{E22}}
+\doxysubsubsection{\texorpdfstring{IRQREGFULL}{IRQREGFULL}}
+{\footnotesize\ttfamily \label{class_e22_ab1337bcfebcebf5ce0fd22eaf244b3cc} 
+const \mbox{\hyperlink{struct_e22_1_1_i_r_q_reg__t}{IRQReg\+\_\+t}} E22\+::\+IRQREGFULL}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .txDone\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .rxDone\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .preambleDetected\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .syncWordValid\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .headerValid\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .headerErr\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .crcErr\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .cadDone\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .cadDetected\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .timeout\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .lrFhssHop\ =\ \textcolor{keyword}{true}\}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/E22\+Driver.\+h\item 
+src/E22\+Driver.\+cpp\end{DoxyCompactItemize}

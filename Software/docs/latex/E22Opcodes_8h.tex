@@ -1,0 +1,953 @@
+\doxysection{include/\+E22\+Opcodes.h File Reference}
+\hypertarget{E22Opcodes_8h}{}\label{E22Opcodes_8h}\index{include/E22Opcodes.h@{include/E22Opcodes.h}}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2}{E22\+\_\+\+Op\+Code\+\_\+\+Cmd\+\_\+t}} \{ \newline
+\mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a98c5b1e4df065d33609077fe8b0e05f1}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Sleep}} = 0x84
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a652e3ab3934b31d2d270621a5256c731}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Standby}} = 0x80
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ae6ba4dc91f5ba90f0db09e9e5e4f9313}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+FS}} = 0x\+C1
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ad357c2cfded568117cc3252f52475939}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+TX}} = 0x83
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a286219d076c83ddccf76e8c5e3f8a849}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+RX}} = 0x82
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2af63c93b2b4e404ec33167dc6d54f3651}{E22\+\_\+\+Op\+Code\+\_\+\+Stop\+Timer\+On\+Preamble}} = 0x9F
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ade703434073aca420752c7acf5ffa99d}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Rx\+Duty\+Cycle}} = 0x94
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a48e447409330c18a55841a35ba469af1}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Cad}} = 0x\+C5
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a8aec7d1f2658c001e6343fc819632cae}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Tx\+Continuous\+Wave}} = 0x\+D1
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ab9d121ae7c4d436c2dfeaeb4f18bd1d9}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Infinite\+Preamble}} = 0x\+D2
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ae6f059a796d95b332efa18616d87da43}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Regulator\+Mode}} = 0x96
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2af07ff560fe5e41c6e4cc7ec013825779}{E22\+\_\+\+Op\+Code\+\_\+\+Calibrate}} = 0x89
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2aa9a72bb6f2acb434b2c098cb4fa3dabf}{E22\+\_\+\+Op\+Code\+\_\+\+Calibrate\+Image}} = 0x98
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ae34060d941e6e862459b29a35ef1f2fb}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Pa\+Config}} = 0x95
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a0cee53a8fb8abfcd6a10d50f39942918}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Rx\+Tx\+Fallback\+Mode}} = 0x93
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ad81fc9fd9e5612ae2f68e63a19da11e6}{E22\+\_\+\+Op\+Code\+\_\+\+Write\+Register}} = 0x0D
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a377f0ee2c859cb8dba20030becb4bbc0}{E22\+\_\+\+Op\+Code\+\_\+\+Read\+Register}} = 0x1D
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2acf4c3515ace30b339eef9dca3ca14771}{E22\+\_\+\+Op\+Code\+\_\+\+Write\+Buffer}} = 0x0E
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ac541006d7d054e624afc687793fc385a}{E22\+\_\+\+Op\+Code\+\_\+\+Read\+Buffer}} = 0x1E
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a203cbeed2658337e763a0c38bf495659}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Dio\+Irq\+Params}} = 0x08
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a7a794697f6f40068444c8bb7c4229a37}{E22\+\_\+\+Op\+Code\+\_\+\+Get\+Irq\+Status}} = 0x12
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ad34043ee6a9ff8a2f7a6ce7e5a4778eb}{E22\+\_\+\+Op\+Code\+\_\+\+Clear\+Irq\+Status}} = 0x02
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a16f5a365d3353554ff2ba3c84e271498}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+DIO2\+As\+Rf\+Switch\+Ctrl}} = 0x9D
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2aa2c7e32f06931295e7901a72c930f220}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+DIO3\+As\+Tcxo\+Ctrl}} = 0x97
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a1a0fd5e707b38ea96f36c88beee2d445}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Rf\+Frequency}} = 0x86
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a6133fbdef53818d92e23dd88d33abb3b}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Packet\+Type}} = 0x8A
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a2de2d238c4c66c2bf866238400d09de4}{E22\+\_\+\+Op\+Code\+\_\+\+Get\+Packet\+Type}} = 0x11
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a39420b62d6b7f2fc1d5a38d0cc816493}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Tx\+Params}} = 0x8E
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2abac611bc864745fded948e5fb9480459}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Modulation\+Params}} = 0x8B
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a8c1b4db6673a9ede5edfa1b7e713ba40}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Packet\+Params}} = 0x8C
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ad26a68c829a2670aed39e688e30025eb}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Cad\+Params}} = 0x88
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a15abd1657f3c5f8d243aa12ab0fd33b1}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Buffer\+Base\+Address}} = 0x8F
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a91c08a3ddb273c507532d3e3eea0926a}{E22\+\_\+\+Op\+Code\+\_\+\+Set\+Lo\+Ra\+Symb\+Num\+Timeout}} = 0x\+A0
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a992219843b0d9a778297cf97bb48742e}{E22\+\_\+\+Op\+Code\+\_\+\+Get\+Status}} = 0x\+C0
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ad9a7b38f1d67ffdd2a1d613e394c010f}{E22\+\_\+\+Op\+Code\+\_\+\+Get\+Rssi\+Inst}} = 0x15
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2afbf18a7f0f85480249018d4439da6461}{E22\+\_\+\+Op\+Code\+\_\+\+Get\+Rx\+Buffer\+Status}} = 0x13
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a7184c6a3d15f022de16af99be4ae3b61}{E22\+\_\+\+Op\+Code\+\_\+\+Get\+Packet\+Status}} = 0x14
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2acaf526399c865958820bfc16c8c79115}{E22\+\_\+\+Op\+Code\+\_\+\+Get\+Device\+Errors}} = 0x17
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2aab190b1f24f64fdc1f89db835628e130}{E22\+\_\+\+Op\+Code\+\_\+\+Clear\+Device\+Errors}} = 0x07
+, \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a2b39034c5591783ed05a6ee9d5e6ed9d}{E22\+\_\+\+Op\+Code\+\_\+\+Get\+Stats}} = 0x10
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a16eccdc4e61eb35464e25d83bd4986f0}{E22\+\_\+\+Op\+Code\+\_\+\+Reset\+Stats}} = 0x00
+ \}
+\item 
+enum \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9}{E22\+\_\+\+Reg\+\_\+\+Addr}} \{ \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac4711c3456efe7a3372988f24d5b8f1d}{E22\+\_\+\+Reg\+\_\+\+Hopping\+Enable}} = 0x0385
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a6948faf35a898194c4c0ddff3dc79153}{E22\+\_\+\+Reg\+\_\+\+Packet\+Lenght}} = 0x0386
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a00fa5c5d39d3687fe17791627f106089}{E22\+\_\+\+Reg\+\_\+\+Nb\+Hopping\+Blocks}} = 0x0387
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a51335c2d8b3f63e57120ed4c51e08605}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols0\+\_\+0}} = 0x0388
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ad509221da6a3589e1cd4c424fe9149a5}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols0\+\_\+1}} = 0x0389
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a446d6c9c8cbc4defa151541f229c617c}{E22\+\_\+\+Reg\+\_\+\+Freq0\+\_\+0}} = 0x038A
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ab5df1f5b80e768366126ce6d55547c56}{E22\+\_\+\+Reg\+\_\+\+Freq0\+\_\+1}} = 0x038B
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9abc97fcf827df2ae8a3f764abb03d5679}{E22\+\_\+\+Reg\+\_\+\+Freq0\+\_\+2}} = 0x038C
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a72be9768515ad12f6604b202b7290063}{E22\+\_\+\+Reg\+\_\+\+Freq0\+\_\+3}} = 0x038D
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ad4f44071c13ce2cc8c66f0cec7892a04}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols1\+\_\+0}} = 0x038E
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a0bf465c2729f4068cbd2e87fe155b4db}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols1\+\_\+1}} = 0x038F
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9abe6ba8652856ec1cd713f870ce3718df}{E22\+\_\+\+Reg\+\_\+\+Freq1\+\_\+0}} = 0x0390
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a4e17607299f65dfb043f8cf4e8f0d23a}{E22\+\_\+\+Reg\+\_\+\+Freq1\+\_\+1}} = 0x0391
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a32ec2cdf893ac2c1931f9f912ec0e326}{E22\+\_\+\+Reg\+\_\+\+Freq1\+\_\+2}} = 0x0392
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a905d83ac5d64428077a6ec68954a3486}{E22\+\_\+\+Reg\+\_\+\+Freq1\+\_\+3}} = 0x0393
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a1970ec21b15bd7f7377634596eb07671}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols2\+\_\+0}} = 0x0394
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a21a5908926c5946a4b0cc6fa0fca38d9}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols2\+\_\+1}} = 0x0395
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a99f8b4da9203a226f33ede3241ed439a}{E22\+\_\+\+Reg\+\_\+\+Freq2\+\_\+0}} = 0x0396
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a4d0f3e4e812c4b87dabdaf3e346b3d66}{E22\+\_\+\+Reg\+\_\+\+Freq2\+\_\+1}} = 0x0397
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a6db7ae3d7911ee126696c8086aed5b77}{E22\+\_\+\+Reg\+\_\+\+Freq2\+\_\+2}} = 0x0398
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a2d6b172c966425b58ba0bcbe66316dea}{E22\+\_\+\+Reg\+\_\+\+Freq2\+\_\+3}} = 0x0399
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a995b2835638aeb45d628a9cc2f41f8c6}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols3\+\_\+0}} = 0x039A
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a167ca264a850674b29a5a1895f0ea320}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols3\+\_\+1}} = 0x039B
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ab589e864631dfc98a04e6d5aa82764f0}{E22\+\_\+\+Reg\+\_\+\+Freq3\+\_\+0}} = 0x039C
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9afed231be5d9a82d67b5515251b45ef30}{E22\+\_\+\+Reg\+\_\+\+Freq3\+\_\+1}} = 0x039D
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a054978639f73c5ec5f632b60f9de8321}{E22\+\_\+\+Reg\+\_\+\+Freq3\+\_\+2}} = 0x039E
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a2d06471a41b8840e2b00a403f9d529ea}{E22\+\_\+\+Reg\+\_\+\+Freq3\+\_\+3}} = 0x039F
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aeaef91221edd9d5bd412888db015cd67}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols4\+\_\+0}} = 0x03\+A0
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a282077132c195ed18a2ce1e54a460beb}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols4\+\_\+1}} = 0x03\+A1
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a586ad0adc204a354be319661c992a8b1}{E22\+\_\+\+Reg\+\_\+\+Freq4\+\_\+0}} = 0x03\+A2
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a3156ac471cec8e79893c3e0e15d1fdb8}{E22\+\_\+\+Reg\+\_\+\+Freq4\+\_\+1}} = 0x03\+A3
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a16ba1c2a2186003329dcbce7e807c2d4}{E22\+\_\+\+Reg\+\_\+\+Freq4\+\_\+2}} = 0x03\+A4
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a7920de65b58756f7cd3306de38978e69}{E22\+\_\+\+Reg\+\_\+\+Freq4\+\_\+3}} = 0x03\+A5
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a4e1d549b579c9116b59cc5d34d1ef205}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols5\+\_\+0}} = 0x03\+A6
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9afe49a6a0e56afc5851dcd129b482c35a}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols5\+\_\+1}} = 0x03\+A7
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a5c62c38e5bc961c760dcad42519a2f00}{E22\+\_\+\+Reg\+\_\+\+Freq5\+\_\+0}} = 0x03\+A8
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a9896552ab75d7e8a1bcde25a3a8db7c4}{E22\+\_\+\+Reg\+\_\+\+Freq5\+\_\+1}} = 0x03\+A9
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a919e89648c29ece6056725d030623a29}{E22\+\_\+\+Reg\+\_\+\+Freq5\+\_\+2}} = 0x03\+AA
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a8adae7bd8ecd491e3b2208b22b685e43}{E22\+\_\+\+Reg\+\_\+\+Freq5\+\_\+3}} = 0x03\+AB
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ab7cea1e95eb5b56d45fab01ea2dca0a9}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols6\+\_\+0}} = 0x03\+AC
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a592359b81d4aa786f6f12bb6c07ccc22}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols6\+\_\+1}} = 0x03\+AD
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ada6aa5c5e5ef04e1770c3f7856877aaa}{E22\+\_\+\+Reg\+\_\+\+Freq6\+\_\+0}} = 0x03\+AE
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a1fe907423f47673c620958ed26996e59}{E22\+\_\+\+Reg\+\_\+\+Freq6\+\_\+1}} = 0x03\+AF
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ad3c14e6522b837241aa012929c9b4b31}{E22\+\_\+\+Reg\+\_\+\+Freq6\+\_\+2}} = 0x03\+B0
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a4179dcbc608f74185d097d847288cc1c}{E22\+\_\+\+Reg\+\_\+\+Freq6\+\_\+3}} = 0x03\+B1
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aabf7fac5bd21aaebeb2ad307d1eea62d}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols7\+\_\+0}} = 0x03\+B2
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a87664b52d4a502d886c95cd13e1736ab}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols7\+\_\+1}} = 0x03\+B3
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a58a582179336e75d5fa845e9b0218391}{E22\+\_\+\+Reg\+\_\+\+Freq7\+\_\+0}} = 0x03\+B4
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a112825f913d0a6e8a85b036c957036d7}{E22\+\_\+\+Reg\+\_\+\+Freq7\+\_\+1}} = 0x03\+B5
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9acb64dadcd65a38bf96d60549f0bf3a8e}{E22\+\_\+\+Reg\+\_\+\+Freq7\+\_\+2}} = 0x03\+B6
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a582da683b756ca168f59b6eed1194e23}{E22\+\_\+\+Reg\+\_\+\+Freq7\+\_\+3}} = 0x03\+B7
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a4d9b4db81d79a49722745efd502a7ec6}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols8\+\_\+0}} = 0x03\+B8
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a9b2515b249c3ced18232be52b9ceb1db}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols8\+\_\+1}} = 0x03\+B9
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a67981b81ac01321a24b93322577df36e}{E22\+\_\+\+Reg\+\_\+\+Freq8\+\_\+0}} = 0x03\+BA
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a890699d94617db2202f25d8cc9ef3295}{E22\+\_\+\+Reg\+\_\+\+Freq8\+\_\+1}} = 0x03\+BB
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9af6344383cff8a4139bc2deae83187ae8}{E22\+\_\+\+Reg\+\_\+\+Freq8\+\_\+2}} = 0x03\+BC
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac6e4f0400424344f224900ec894bcf52}{E22\+\_\+\+Reg\+\_\+\+Freq8\+\_\+3}} = 0x03\+BD
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a775fcce8758c9bf1b0e05b94fcbfcb3d}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols9\+\_\+0}} = 0x03\+BE
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aa874d202c6b0ba9656d645ebb0b55196}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols9\+\_\+1}} = 0x03\+BF
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a4bede474a2d1df7a12cc8bafb9e8e6d7}{E22\+\_\+\+Reg\+\_\+\+Freq9\+\_\+0}} = 0x03\+C0
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a73e05bf68d539b7d465690aa1e8cbace}{E22\+\_\+\+Reg\+\_\+\+Freq9\+\_\+1}} = 0x03\+C1
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a87ab51aacf1460d1445074139e768b18}{E22\+\_\+\+Reg\+\_\+\+Freq9\+\_\+2}} = 0x03\+C2
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a00654deb8891c79905cf39a0710195d1}{E22\+\_\+\+Reg\+\_\+\+Freq9\+\_\+3}} = 0x03\+C3
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a5464485b5a1726295a8b50b0e2eb442a}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols10\+\_\+0}} = 0x03\+C4
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac177b4a2f8cdaa4a2e61d2b6cbd09ede}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols10\+\_\+1}} = 0x03\+C5
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a0c45cecb9274291dede116799c53e3c1}{E22\+\_\+\+Reg\+\_\+\+Freq10\+\_\+0}} = 0x03\+C6
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a2b969e61f5550c1fefd3fa2375c224b2}{E22\+\_\+\+Reg\+\_\+\+Freq10\+\_\+1}} = 0x03\+C7
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a2de2ae016fdcef68278681f8a3a24cf2}{E22\+\_\+\+Reg\+\_\+\+Freq10\+\_\+2}} = 0x03\+C8
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ae0d6199459e40786f787c2b521339ff2}{E22\+\_\+\+Reg\+\_\+\+Freq10\+\_\+3}} = 0x03\+C9
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a04f5a84a7988023235555e5a776b3b71}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols11\+\_\+0}} = 0x03\+CA
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a3bd0c71f88dacee2996ee890d712863c}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols11\+\_\+1}} = 0x03\+CB
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ae2776b61a58ed131652081b29d349570}{E22\+\_\+\+Reg\+\_\+\+Freq11\+\_\+0}} = 0x03\+CC
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a324cdf2db3420434c8ef5d8d6864a878}{E22\+\_\+\+Reg\+\_\+\+Freq11\+\_\+1}} = 0x03\+CD
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aaa0c6b2a0f9306eb4a67881accab2019}{E22\+\_\+\+Reg\+\_\+\+Freq11\+\_\+2}} = 0x03\+CE
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a9e6ca4a717080e29404e3af4297edb10}{E22\+\_\+\+Reg\+\_\+\+Freq11\+\_\+3}} = 0x03\+CF
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a7b1229a7eff5df51f3990db509e010c9}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols12\+\_\+0}} = 0x03\+D0
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a47247a7610a270badf62ff865cd4b3d5}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols12\+\_\+1}} = 0x03\+D1
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a70c267fba21af37f622db510706ad689}{E22\+\_\+\+Reg\+\_\+\+Freq12\+\_\+0}} = 0x03\+D2
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a5d4184ded2f87be2e61ceed1507ebc95}{E22\+\_\+\+Reg\+\_\+\+Freq12\+\_\+1}} = 0x03\+D3
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ae85434418ef54f5d68c0fae9476da835}{E22\+\_\+\+Reg\+\_\+\+Freq12\+\_\+2}} = 0x03\+D4
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ad836cb5d889cae8707486e73ccd32f98}{E22\+\_\+\+Reg\+\_\+\+Freq12\+\_\+3}} = 0x03\+D5
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a59d864881b8bd926dd0e5068a1669823}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols13\+\_\+0}} = 0x03\+D6
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a30161f9a29adacff8e256da86e8b72f0}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols13\+\_\+1}} = 0x03\+D7
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac78996168fd3acc2d14f1011c41e0c3d}{E22\+\_\+\+Reg\+\_\+\+Freq13\+\_\+0}} = 0x03\+D8
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a3f715bc821deaa8f4eb6866ba600b68f}{E22\+\_\+\+Reg\+\_\+\+Freq13\+\_\+1}} = 0x03\+D9
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aa36dd520d0f5a8a17a46a25ab7f06363}{E22\+\_\+\+Reg\+\_\+\+Freq13\+\_\+2}} = 0x03\+DA
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a3005273611c2429d83a65d219edf37d4}{E22\+\_\+\+Reg\+\_\+\+Freq13\+\_\+3}} = 0x03\+DB
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a40b0c5b4009afe74f576f5fe905065aa}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols14\+\_\+0}} = 0x03\+DC
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a2ff1ecfaaa00f4594f93e8d57c696bbd}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols14\+\_\+1}} = 0x03\+DD
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a0d0fe80b030a2720b56dd8086cb863fa}{E22\+\_\+\+Reg\+\_\+\+Freq14\+\_\+0}} = 0x03\+DE
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aa53ad9b74eff5a79f4a6914ea558e96e}{E22\+\_\+\+Reg\+\_\+\+Freq14\+\_\+1}} = 0x03\+DF
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ad0ae876883be0b191d787c0d5ca832b3}{E22\+\_\+\+Reg\+\_\+\+Freq14\+\_\+2}} = 0x03\+E0
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a4adccf79d9ccd225807f3cc397f2ad00}{E22\+\_\+\+Reg\+\_\+\+Freq14\+\_\+3}} = 0x03\+E1
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9acc7c3969d2735c29c915dd80106c2bc2}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols15\+\_\+0}} = 0x03\+E2
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a3562dcca92a34cdd2832e569d3121e37}{E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols15\+\_\+1}} = 0x03\+E3
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aba81c96b2c2d55b3a0f51211f69f98a0}{E22\+\_\+\+Reg\+\_\+\+Freq15\+\_\+0}} = 0x03\+E4
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a9103a66baff4d0bf6f36d48e1e24b44c}{E22\+\_\+\+Reg\+\_\+\+Freq15\+\_\+1}} = 0x03\+E5
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a05adc2c4788d911bf67489e8e2563a4d}{E22\+\_\+\+Reg\+\_\+\+Freq15\+\_\+2}} = 0x03\+E6
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9af4d03c71ca16a902d17f7788c81fe4df}{E22\+\_\+\+Reg\+\_\+\+Freq15\+\_\+3}} = 0x03\+E7
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac05aee2945feb0120be156d25e6152bc}{E22\+\_\+\+Reg\+\_\+\+DIOx\+Output\+Enable}} = 0x0580
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a7f4a5da317948267ef9c7d9cc9a3f283}{E22\+\_\+\+Reg\+\_\+\+DIOx\+Input\+Enable}} = 0x0583
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aed69eb0f03c81c7792f776c70738b96b}{E22\+\_\+\+Reg\+\_\+\+DIOx\+Pull\+Up\+Control}} = 0x0584
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a71399c1773fb6be6b86acfa2d7fa9522}{E22\+\_\+\+Reg\+\_\+\+DIOx\+Pull\+Down\+Control}} = 0x0585
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aad24fee5c33fb20c2fb654631f6b0a85}{E22\+\_\+\+Reg\+\_\+\+Whitening\+Initial\+Value\+MSB}} = 0x06\+B8
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a566fd17a7e59d6b65fcaa4cf3564f869}{E22\+\_\+\+Reg\+\_\+\+Whitening\+Initial\+Value\+LSB}} = 0x06\+B9
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aad75c3a94b76e5675d59fa9532132ec0}{E22\+\_\+\+Reg\+\_\+\+CRCMSBInitial\+Value0}} = 0x06\+BC
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a5a91b804022b525764658d56f1e1b930}{E22\+\_\+\+Reg\+\_\+\+CRCLSBInitial\+Value0}} = 0x09\+BD
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a39514dfd7d6db399293a167cc333bc2f}{E22\+\_\+\+Reg\+\_\+\+CRCMSBPolynomial\+Value0}} = 0x06\+BE
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac8a634b072ec5dd121b0a782e5addb64}{E22\+\_\+\+Reg\+\_\+\+CRCLSBPolynomial\+Value0}} = 0x06\+BF
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac7540931666836e549512a941229d540}{E22\+\_\+\+Reg\+\_\+\+Sync\+Word0}} = 0x06\+C0
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a7a0d69032cfc7936319a6573e1b3d4e5}{E22\+\_\+\+Reg\+\_\+\+Sync\+Word1}} = 0x06\+C1
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a059b54f983243c9f19af7bb22a5d5be5}{E22\+\_\+\+Reg\+\_\+\+Sync\+Word2}} = 0x06\+C2
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a0e7076609936414a4ac8b9b04e9fff9c}{E22\+\_\+\+Reg\+\_\+\+Sync\+Word3}} = 0x06\+C3
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a2c640b459938e0661c18e848805e7e22}{E22\+\_\+\+Reg\+\_\+\+Sync\+Word4}} = 0x06\+C4
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a510ad63a273724ebad115cb2f23d5328}{E22\+\_\+\+Reg\+\_\+\+Sync\+Word5}} = 0x06\+C5
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ab051d8b6a80723373d717bd1be8d70b4}{E22\+\_\+\+Reg\+\_\+\+Sync\+Word6}} = 0x06\+C6
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a7997ee8e3871c023df8e25e93c602b3a}{E22\+\_\+\+Reg\+\_\+\+Sync\+Word7}} = 0x06\+C7
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aad068e85b07399f9d8bab33ac11294fb}{E22\+\_\+\+Reg\+\_\+\+Node\+Address}} = 0x06\+CD
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac561de3096453b0cd318a17ead0af58e}{E22\+\_\+\+Reg\+\_\+\+Broadcast\+Address}} = 0x06\+CE
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a6629c6842be900559b8904153eba14f0}{E22\+\_\+\+Reg\+\_\+\+IQPolarity\+Setup}} = 0x0736
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a898e5028943c9178643f369ef88b1b02}{E22\+\_\+\+Reg\+\_\+\+Lo\+Ra\+Sync\+Word\+MSB}} = 0x0740
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ab9ce443de4a52bc3a45b00b4467b885e}{E22\+\_\+\+Reg\+\_\+\+Lo\+Ra\+Sync\+Word\+LSB}} = 0x0741
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ad5b3331ce0b161b28860534dbb51d4dc}{E22\+\_\+\+Reg\+\_\+\+Random\+Number\+Gen0}} = 0x0819
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aa705dd0452b6f961a29b62509abb90cd}{E22\+\_\+\+Reg\+\_\+\+Random\+Number\+Gen1}} = 0x081A
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aad500c3009622270314416c650f3b682}{E22\+\_\+\+Reg\+\_\+\+Random\+Number\+Gen2}} = 0x081B
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aeea4af28dc0a4a4aa3a78d0424c7d847}{E22\+\_\+\+Reg\+\_\+\+Random\+Number\+Gen3}} = 0x081C
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9af4cd27b97f03ea247c2f73f8238b16fa}{E22\+\_\+\+Reg\+\_\+\+Tx\+Modulation}} = 0x0889
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a82b6066ae4e5d6a051abaaac5e18d1ec}{E22\+\_\+\+Reg\+\_\+\+Rx\+Gain}} = 0x08\+AC
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9acfb614b4c89621dd292b0592eddfd8c6}{E22\+\_\+\+Reg\+\_\+\+Tx\+Clamp\+Config}} = 0x08\+D8
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a03e9afca7d889cc50d8b8ad41893b54c}{E22\+\_\+\+Reg\+\_\+\+OCPConfiguration}} = 0x08\+E7
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a9f4ceb1746b808c627f88ac9aca4f45e}{E22\+\_\+\+Reg\+\_\+\+RTCControl}} = 0x0902
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a96a913e84a46d002b998a9c205b23913}{E22\+\_\+\+Reg\+\_\+\+XTATrim}} = 0x0911
+, \newline
+\mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aed89e4d4748e2d5902336caddb142646}{E22\+\_\+\+Reg\+\_\+\+XTBTrim}} = 0x0912
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a71b1f17f641ee641fb399f1b343fe569}{E22\+\_\+\+Reg\+\_\+\+DIO3\+Output\+Voltage\+Control}} = 0x0920
+, \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aecec5308b60f30fdee049267ecb7e568}{E22\+\_\+\+Reg\+\_\+\+Event\+Mask}} = 0x0944
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_Cmd\_t@{E22\_OpCode\_Cmd\_t}}
+\index{E22\_OpCode\_Cmd\_t@{E22\_OpCode\_Cmd\_t}!E22Opcodes.h@{E22Opcodes.h}}
+\doxysubsubsection{\texorpdfstring{E22\_OpCode\_Cmd\_t}{E22\_OpCode\_Cmd\_t}}
+{\footnotesize\ttfamily \label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+enum \mbox{\hyperlink{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2}{E22\+\_\+\+Op\+Code\+\_\+\+Cmd\+\_\+t}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetSleep@{E22\_OpCode\_SetSleep}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetSleep@{E22\_OpCode\_SetSleep}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a98c5b1e4df065d33609077fe8b0e05f1}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Sleep&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetStandby@{E22\_OpCode\_SetStandby}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetStandby@{E22\_OpCode\_SetStandby}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a652e3ab3934b31d2d270621a5256c731}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Standby&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetFS@{E22\_OpCode\_SetFS}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetFS@{E22\_OpCode\_SetFS}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ae6ba4dc91f5ba90f0db09e9e5e4f9313}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+FS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetTX@{E22\_OpCode\_SetTX}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetTX@{E22\_OpCode\_SetTX}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ad357c2cfded568117cc3252f52475939}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+TX&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetRX@{E22\_OpCode\_SetRX}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetRX@{E22\_OpCode\_SetRX}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a286219d076c83ddccf76e8c5e3f8a849}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+RX&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_StopTimerOnPreamble@{E22\_OpCode\_StopTimerOnPreamble}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_StopTimerOnPreamble@{E22\_OpCode\_StopTimerOnPreamble}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2af63c93b2b4e404ec33167dc6d54f3651}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Stop\+Timer\+On\+Preamble&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetRxDutyCycle@{E22\_OpCode\_SetRxDutyCycle}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetRxDutyCycle@{E22\_OpCode\_SetRxDutyCycle}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ade703434073aca420752c7acf5ffa99d}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Rx\+Duty\+Cycle&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetCad@{E22\_OpCode\_SetCad}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetCad@{E22\_OpCode\_SetCad}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a48e447409330c18a55841a35ba469af1}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Cad&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetTxContinuousWave@{E22\_OpCode\_SetTxContinuousWave}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetTxContinuousWave@{E22\_OpCode\_SetTxContinuousWave}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a8aec7d1f2658c001e6343fc819632cae}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Tx\+Continuous\+Wave&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetInfinitePreamble@{E22\_OpCode\_SetInfinitePreamble}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetInfinitePreamble@{E22\_OpCode\_SetInfinitePreamble}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ab9d121ae7c4d436c2dfeaeb4f18bd1d9}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Infinite\+Preamble&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetRegulatorMode@{E22\_OpCode\_SetRegulatorMode}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetRegulatorMode@{E22\_OpCode\_SetRegulatorMode}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ae6f059a796d95b332efa18616d87da43}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Regulator\+Mode&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_Calibrate@{E22\_OpCode\_Calibrate}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_Calibrate@{E22\_OpCode\_Calibrate}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2af07ff560fe5e41c6e4cc7ec013825779}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Calibrate&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_CalibrateImage@{E22\_OpCode\_CalibrateImage}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_CalibrateImage@{E22\_OpCode\_CalibrateImage}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2aa9a72bb6f2acb434b2c098cb4fa3dabf}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Calibrate\+Image&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetPaConfig@{E22\_OpCode\_SetPaConfig}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetPaConfig@{E22\_OpCode\_SetPaConfig}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ae34060d941e6e862459b29a35ef1f2fb}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Pa\+Config&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetRxTxFallbackMode@{E22\_OpCode\_SetRxTxFallbackMode}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetRxTxFallbackMode@{E22\_OpCode\_SetRxTxFallbackMode}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a0cee53a8fb8abfcd6a10d50f39942918}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Rx\+Tx\+Fallback\+Mode&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_WriteRegister@{E22\_OpCode\_WriteRegister}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_WriteRegister@{E22\_OpCode\_WriteRegister}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ad81fc9fd9e5612ae2f68e63a19da11e6}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Write\+Register&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_ReadRegister@{E22\_OpCode\_ReadRegister}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_ReadRegister@{E22\_OpCode\_ReadRegister}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a377f0ee2c859cb8dba20030becb4bbc0}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Read\+Register&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_WriteBuffer@{E22\_OpCode\_WriteBuffer}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_WriteBuffer@{E22\_OpCode\_WriteBuffer}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2acf4c3515ace30b339eef9dca3ca14771}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Write\+Buffer&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_ReadBuffer@{E22\_OpCode\_ReadBuffer}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_ReadBuffer@{E22\_OpCode\_ReadBuffer}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ac541006d7d054e624afc687793fc385a}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Read\+Buffer&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetDioIrqParams@{E22\_OpCode\_SetDioIrqParams}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetDioIrqParams@{E22\_OpCode\_SetDioIrqParams}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a203cbeed2658337e763a0c38bf495659}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Dio\+Irq\+Params&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_GetIrqStatus@{E22\_OpCode\_GetIrqStatus}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_GetIrqStatus@{E22\_OpCode\_GetIrqStatus}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a7a794697f6f40068444c8bb7c4229a37}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Get\+Irq\+Status&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_ClearIrqStatus@{E22\_OpCode\_ClearIrqStatus}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_ClearIrqStatus@{E22\_OpCode\_ClearIrqStatus}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ad34043ee6a9ff8a2f7a6ce7e5a4778eb}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Clear\+Irq\+Status&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetDIO2AsRfSwitchCtrl@{E22\_OpCode\_SetDIO2AsRfSwitchCtrl}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetDIO2AsRfSwitchCtrl@{E22\_OpCode\_SetDIO2AsRfSwitchCtrl}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a16f5a365d3353554ff2ba3c84e271498}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+DIO2\+As\+Rf\+Switch\+Ctrl&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetDIO3AsTcxoCtrl@{E22\_OpCode\_SetDIO3AsTcxoCtrl}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetDIO3AsTcxoCtrl@{E22\_OpCode\_SetDIO3AsTcxoCtrl}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2aa2c7e32f06931295e7901a72c930f220}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+DIO3\+As\+Tcxo\+Ctrl&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetRfFrequency@{E22\_OpCode\_SetRfFrequency}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetRfFrequency@{E22\_OpCode\_SetRfFrequency}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a1a0fd5e707b38ea96f36c88beee2d445}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Rf\+Frequency&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetPacketType@{E22\_OpCode\_SetPacketType}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetPacketType@{E22\_OpCode\_SetPacketType}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a6133fbdef53818d92e23dd88d33abb3b}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Packet\+Type&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_GetPacketType@{E22\_OpCode\_GetPacketType}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_GetPacketType@{E22\_OpCode\_GetPacketType}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a2de2d238c4c66c2bf866238400d09de4}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Get\+Packet\+Type&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetTxParams@{E22\_OpCode\_SetTxParams}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetTxParams@{E22\_OpCode\_SetTxParams}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a39420b62d6b7f2fc1d5a38d0cc816493}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Tx\+Params&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetModulationParams@{E22\_OpCode\_SetModulationParams}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetModulationParams@{E22\_OpCode\_SetModulationParams}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2abac611bc864745fded948e5fb9480459}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Modulation\+Params&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetPacketParams@{E22\_OpCode\_SetPacketParams}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetPacketParams@{E22\_OpCode\_SetPacketParams}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a8c1b4db6673a9ede5edfa1b7e713ba40}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Packet\+Params&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetCadParams@{E22\_OpCode\_SetCadParams}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetCadParams@{E22\_OpCode\_SetCadParams}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ad26a68c829a2670aed39e688e30025eb}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Cad\+Params&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetBufferBaseAddress@{E22\_OpCode\_SetBufferBaseAddress}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetBufferBaseAddress@{E22\_OpCode\_SetBufferBaseAddress}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a15abd1657f3c5f8d243aa12ab0fd33b1}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Buffer\+Base\+Address&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_SetLoRaSymbNumTimeout@{E22\_OpCode\_SetLoRaSymbNumTimeout}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_SetLoRaSymbNumTimeout@{E22\_OpCode\_SetLoRaSymbNumTimeout}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a91c08a3ddb273c507532d3e3eea0926a}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Set\+Lo\+Ra\+Symb\+Num\+Timeout&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_GetStatus@{E22\_OpCode\_GetStatus}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_GetStatus@{E22\_OpCode\_GetStatus}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a992219843b0d9a778297cf97bb48742e}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Get\+Status&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_GetRssiInst@{E22\_OpCode\_GetRssiInst}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_GetRssiInst@{E22\_OpCode\_GetRssiInst}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2ad9a7b38f1d67ffdd2a1d613e394c010f}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Get\+Rssi\+Inst&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_GetRxBufferStatus@{E22\_OpCode\_GetRxBufferStatus}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_GetRxBufferStatus@{E22\_OpCode\_GetRxBufferStatus}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2afbf18a7f0f85480249018d4439da6461}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Get\+Rx\+Buffer\+Status&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_GetPacketStatus@{E22\_OpCode\_GetPacketStatus}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_GetPacketStatus@{E22\_OpCode\_GetPacketStatus}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a7184c6a3d15f022de16af99be4ae3b61}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Get\+Packet\+Status&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_GetDeviceErrors@{E22\_OpCode\_GetDeviceErrors}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_GetDeviceErrors@{E22\_OpCode\_GetDeviceErrors}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2acaf526399c865958820bfc16c8c79115}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Get\+Device\+Errors&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_ClearDeviceErrors@{E22\_OpCode\_ClearDeviceErrors}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_ClearDeviceErrors@{E22\_OpCode\_ClearDeviceErrors}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2aab190b1f24f64fdc1f89db835628e130}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Clear\+Device\+Errors&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_GetStats@{E22\_OpCode\_GetStats}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_GetStats@{E22\_OpCode\_GetStats}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a2b39034c5591783ed05a6ee9d5e6ed9d}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Get\+Stats&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_OpCode\_ResetStats@{E22\_OpCode\_ResetStats}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_OpCode\_ResetStats@{E22\_OpCode\_ResetStats}}}\Hypertarget{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2a16eccdc4e61eb35464e25d83bd4986f0}\label{E22Opcodes_8h_aeadaf47a8581c861a4b0ded67aa009f2} 
+E22\+\_\+\+Op\+Code\+\_\+\+Reset\+Stats&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Addr@{E22\_Reg\_Addr}}
+\index{E22\_Reg\_Addr@{E22\_Reg\_Addr}!E22Opcodes.h@{E22Opcodes.h}}
+\doxysubsubsection{\texorpdfstring{E22\_Reg\_Addr}{E22\_Reg\_Addr}}
+{\footnotesize\ttfamily \label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+enum \mbox{\hyperlink{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9}{E22\+\_\+\+Reg\+\_\+\+Addr}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_HoppingEnable@{E22\_Reg\_HoppingEnable}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_HoppingEnable@{E22\_Reg\_HoppingEnable}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac4711c3456efe7a3372988f24d5b8f1d}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Hopping\+Enable&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_PacketLenght@{E22\_Reg\_PacketLenght}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_PacketLenght@{E22\_Reg\_PacketLenght}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a6948faf35a898194c4c0ddff3dc79153}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Packet\+Lenght&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbHoppingBlocks@{E22\_Reg\_NbHoppingBlocks}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbHoppingBlocks@{E22\_Reg\_NbHoppingBlocks}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a00fa5c5d39d3687fe17791627f106089}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Hopping\+Blocks&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols0\_0@{E22\_Reg\_NbSymbols0\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols0\_0@{E22\_Reg\_NbSymbols0\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a51335c2d8b3f63e57120ed4c51e08605}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols0\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols0\_1@{E22\_Reg\_NbSymbols0\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols0\_1@{E22\_Reg\_NbSymbols0\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ad509221da6a3589e1cd4c424fe9149a5}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols0\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq0\_0@{E22\_Reg\_Freq0\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq0\_0@{E22\_Reg\_Freq0\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a446d6c9c8cbc4defa151541f229c617c}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq0\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq0\_1@{E22\_Reg\_Freq0\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq0\_1@{E22\_Reg\_Freq0\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ab5df1f5b80e768366126ce6d55547c56}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq0\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq0\_2@{E22\_Reg\_Freq0\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq0\_2@{E22\_Reg\_Freq0\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9abc97fcf827df2ae8a3f764abb03d5679}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq0\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq0\_3@{E22\_Reg\_Freq0\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq0\_3@{E22\_Reg\_Freq0\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a72be9768515ad12f6604b202b7290063}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq0\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols1\_0@{E22\_Reg\_NbSymbols1\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols1\_0@{E22\_Reg\_NbSymbols1\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ad4f44071c13ce2cc8c66f0cec7892a04}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols1\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols1\_1@{E22\_Reg\_NbSymbols1\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols1\_1@{E22\_Reg\_NbSymbols1\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a0bf465c2729f4068cbd2e87fe155b4db}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols1\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq1\_0@{E22\_Reg\_Freq1\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq1\_0@{E22\_Reg\_Freq1\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9abe6ba8652856ec1cd713f870ce3718df}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq1\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq1\_1@{E22\_Reg\_Freq1\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq1\_1@{E22\_Reg\_Freq1\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a4e17607299f65dfb043f8cf4e8f0d23a}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq1\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq1\_2@{E22\_Reg\_Freq1\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq1\_2@{E22\_Reg\_Freq1\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a32ec2cdf893ac2c1931f9f912ec0e326}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq1\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq1\_3@{E22\_Reg\_Freq1\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq1\_3@{E22\_Reg\_Freq1\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a905d83ac5d64428077a6ec68954a3486}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq1\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols2\_0@{E22\_Reg\_NbSymbols2\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols2\_0@{E22\_Reg\_NbSymbols2\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a1970ec21b15bd7f7377634596eb07671}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols2\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols2\_1@{E22\_Reg\_NbSymbols2\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols2\_1@{E22\_Reg\_NbSymbols2\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a21a5908926c5946a4b0cc6fa0fca38d9}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols2\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq2\_0@{E22\_Reg\_Freq2\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq2\_0@{E22\_Reg\_Freq2\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a99f8b4da9203a226f33ede3241ed439a}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq2\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq2\_1@{E22\_Reg\_Freq2\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq2\_1@{E22\_Reg\_Freq2\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a4d0f3e4e812c4b87dabdaf3e346b3d66}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq2\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq2\_2@{E22\_Reg\_Freq2\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq2\_2@{E22\_Reg\_Freq2\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a6db7ae3d7911ee126696c8086aed5b77}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq2\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq2\_3@{E22\_Reg\_Freq2\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq2\_3@{E22\_Reg\_Freq2\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a2d6b172c966425b58ba0bcbe66316dea}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq2\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols3\_0@{E22\_Reg\_NbSymbols3\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols3\_0@{E22\_Reg\_NbSymbols3\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a995b2835638aeb45d628a9cc2f41f8c6}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols3\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols3\_1@{E22\_Reg\_NbSymbols3\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols3\_1@{E22\_Reg\_NbSymbols3\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a167ca264a850674b29a5a1895f0ea320}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols3\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq3\_0@{E22\_Reg\_Freq3\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq3\_0@{E22\_Reg\_Freq3\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ab589e864631dfc98a04e6d5aa82764f0}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq3\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq3\_1@{E22\_Reg\_Freq3\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq3\_1@{E22\_Reg\_Freq3\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9afed231be5d9a82d67b5515251b45ef30}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq3\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq3\_2@{E22\_Reg\_Freq3\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq3\_2@{E22\_Reg\_Freq3\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a054978639f73c5ec5f632b60f9de8321}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq3\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq3\_3@{E22\_Reg\_Freq3\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq3\_3@{E22\_Reg\_Freq3\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a2d06471a41b8840e2b00a403f9d529ea}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq3\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols4\_0@{E22\_Reg\_NbSymbols4\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols4\_0@{E22\_Reg\_NbSymbols4\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aeaef91221edd9d5bd412888db015cd67}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols4\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols4\_1@{E22\_Reg\_NbSymbols4\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols4\_1@{E22\_Reg\_NbSymbols4\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a282077132c195ed18a2ce1e54a460beb}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols4\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq4\_0@{E22\_Reg\_Freq4\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq4\_0@{E22\_Reg\_Freq4\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a586ad0adc204a354be319661c992a8b1}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq4\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq4\_1@{E22\_Reg\_Freq4\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq4\_1@{E22\_Reg\_Freq4\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a3156ac471cec8e79893c3e0e15d1fdb8}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq4\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq4\_2@{E22\_Reg\_Freq4\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq4\_2@{E22\_Reg\_Freq4\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a16ba1c2a2186003329dcbce7e807c2d4}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq4\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq4\_3@{E22\_Reg\_Freq4\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq4\_3@{E22\_Reg\_Freq4\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a7920de65b58756f7cd3306de38978e69}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq4\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols5\_0@{E22\_Reg\_NbSymbols5\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols5\_0@{E22\_Reg\_NbSymbols5\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a4e1d549b579c9116b59cc5d34d1ef205}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols5\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols5\_1@{E22\_Reg\_NbSymbols5\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols5\_1@{E22\_Reg\_NbSymbols5\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9afe49a6a0e56afc5851dcd129b482c35a}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols5\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq5\_0@{E22\_Reg\_Freq5\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq5\_0@{E22\_Reg\_Freq5\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a5c62c38e5bc961c760dcad42519a2f00}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq5\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq5\_1@{E22\_Reg\_Freq5\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq5\_1@{E22\_Reg\_Freq5\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a9896552ab75d7e8a1bcde25a3a8db7c4}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq5\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq5\_2@{E22\_Reg\_Freq5\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq5\_2@{E22\_Reg\_Freq5\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a919e89648c29ece6056725d030623a29}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq5\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq5\_3@{E22\_Reg\_Freq5\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq5\_3@{E22\_Reg\_Freq5\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a8adae7bd8ecd491e3b2208b22b685e43}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq5\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols6\_0@{E22\_Reg\_NbSymbols6\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols6\_0@{E22\_Reg\_NbSymbols6\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ab7cea1e95eb5b56d45fab01ea2dca0a9}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols6\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols6\_1@{E22\_Reg\_NbSymbols6\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols6\_1@{E22\_Reg\_NbSymbols6\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a592359b81d4aa786f6f12bb6c07ccc22}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols6\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq6\_0@{E22\_Reg\_Freq6\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq6\_0@{E22\_Reg\_Freq6\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ada6aa5c5e5ef04e1770c3f7856877aaa}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq6\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq6\_1@{E22\_Reg\_Freq6\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq6\_1@{E22\_Reg\_Freq6\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a1fe907423f47673c620958ed26996e59}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq6\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq6\_2@{E22\_Reg\_Freq6\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq6\_2@{E22\_Reg\_Freq6\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ad3c14e6522b837241aa012929c9b4b31}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq6\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq6\_3@{E22\_Reg\_Freq6\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq6\_3@{E22\_Reg\_Freq6\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a4179dcbc608f74185d097d847288cc1c}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq6\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols7\_0@{E22\_Reg\_NbSymbols7\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols7\_0@{E22\_Reg\_NbSymbols7\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aabf7fac5bd21aaebeb2ad307d1eea62d}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols7\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols7\_1@{E22\_Reg\_NbSymbols7\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols7\_1@{E22\_Reg\_NbSymbols7\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a87664b52d4a502d886c95cd13e1736ab}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols7\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq7\_0@{E22\_Reg\_Freq7\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq7\_0@{E22\_Reg\_Freq7\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a58a582179336e75d5fa845e9b0218391}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq7\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq7\_1@{E22\_Reg\_Freq7\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq7\_1@{E22\_Reg\_Freq7\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a112825f913d0a6e8a85b036c957036d7}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq7\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq7\_2@{E22\_Reg\_Freq7\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq7\_2@{E22\_Reg\_Freq7\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9acb64dadcd65a38bf96d60549f0bf3a8e}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq7\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq7\_3@{E22\_Reg\_Freq7\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq7\_3@{E22\_Reg\_Freq7\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a582da683b756ca168f59b6eed1194e23}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq7\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols8\_0@{E22\_Reg\_NbSymbols8\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols8\_0@{E22\_Reg\_NbSymbols8\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a4d9b4db81d79a49722745efd502a7ec6}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols8\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols8\_1@{E22\_Reg\_NbSymbols8\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols8\_1@{E22\_Reg\_NbSymbols8\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a9b2515b249c3ced18232be52b9ceb1db}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols8\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq8\_0@{E22\_Reg\_Freq8\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq8\_0@{E22\_Reg\_Freq8\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a67981b81ac01321a24b93322577df36e}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq8\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq8\_1@{E22\_Reg\_Freq8\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq8\_1@{E22\_Reg\_Freq8\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a890699d94617db2202f25d8cc9ef3295}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq8\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq8\_2@{E22\_Reg\_Freq8\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq8\_2@{E22\_Reg\_Freq8\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9af6344383cff8a4139bc2deae83187ae8}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq8\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq8\_3@{E22\_Reg\_Freq8\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq8\_3@{E22\_Reg\_Freq8\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac6e4f0400424344f224900ec894bcf52}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq8\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols9\_0@{E22\_Reg\_NbSymbols9\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols9\_0@{E22\_Reg\_NbSymbols9\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a775fcce8758c9bf1b0e05b94fcbfcb3d}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols9\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols9\_1@{E22\_Reg\_NbSymbols9\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols9\_1@{E22\_Reg\_NbSymbols9\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aa874d202c6b0ba9656d645ebb0b55196}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols9\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq9\_0@{E22\_Reg\_Freq9\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq9\_0@{E22\_Reg\_Freq9\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a4bede474a2d1df7a12cc8bafb9e8e6d7}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq9\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq9\_1@{E22\_Reg\_Freq9\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq9\_1@{E22\_Reg\_Freq9\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a73e05bf68d539b7d465690aa1e8cbace}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq9\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq9\_2@{E22\_Reg\_Freq9\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq9\_2@{E22\_Reg\_Freq9\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a87ab51aacf1460d1445074139e768b18}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq9\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq9\_3@{E22\_Reg\_Freq9\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq9\_3@{E22\_Reg\_Freq9\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a00654deb8891c79905cf39a0710195d1}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq9\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols10\_0@{E22\_Reg\_NbSymbols10\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols10\_0@{E22\_Reg\_NbSymbols10\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a5464485b5a1726295a8b50b0e2eb442a}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols10\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols10\_1@{E22\_Reg\_NbSymbols10\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols10\_1@{E22\_Reg\_NbSymbols10\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac177b4a2f8cdaa4a2e61d2b6cbd09ede}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols10\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq10\_0@{E22\_Reg\_Freq10\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq10\_0@{E22\_Reg\_Freq10\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a0c45cecb9274291dede116799c53e3c1}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq10\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq10\_1@{E22\_Reg\_Freq10\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq10\_1@{E22\_Reg\_Freq10\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a2b969e61f5550c1fefd3fa2375c224b2}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq10\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq10\_2@{E22\_Reg\_Freq10\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq10\_2@{E22\_Reg\_Freq10\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a2de2ae016fdcef68278681f8a3a24cf2}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq10\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq10\_3@{E22\_Reg\_Freq10\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq10\_3@{E22\_Reg\_Freq10\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ae0d6199459e40786f787c2b521339ff2}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq10\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols11\_0@{E22\_Reg\_NbSymbols11\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols11\_0@{E22\_Reg\_NbSymbols11\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a04f5a84a7988023235555e5a776b3b71}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols11\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols11\_1@{E22\_Reg\_NbSymbols11\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols11\_1@{E22\_Reg\_NbSymbols11\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a3bd0c71f88dacee2996ee890d712863c}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols11\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq11\_0@{E22\_Reg\_Freq11\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq11\_0@{E22\_Reg\_Freq11\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ae2776b61a58ed131652081b29d349570}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq11\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq11\_1@{E22\_Reg\_Freq11\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq11\_1@{E22\_Reg\_Freq11\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a324cdf2db3420434c8ef5d8d6864a878}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq11\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq11\_2@{E22\_Reg\_Freq11\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq11\_2@{E22\_Reg\_Freq11\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aaa0c6b2a0f9306eb4a67881accab2019}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq11\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq11\_3@{E22\_Reg\_Freq11\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq11\_3@{E22\_Reg\_Freq11\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a9e6ca4a717080e29404e3af4297edb10}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq11\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols12\_0@{E22\_Reg\_NbSymbols12\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols12\_0@{E22\_Reg\_NbSymbols12\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a7b1229a7eff5df51f3990db509e010c9}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols12\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols12\_1@{E22\_Reg\_NbSymbols12\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols12\_1@{E22\_Reg\_NbSymbols12\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a47247a7610a270badf62ff865cd4b3d5}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols12\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq12\_0@{E22\_Reg\_Freq12\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq12\_0@{E22\_Reg\_Freq12\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a70c267fba21af37f622db510706ad689}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq12\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq12\_1@{E22\_Reg\_Freq12\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq12\_1@{E22\_Reg\_Freq12\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a5d4184ded2f87be2e61ceed1507ebc95}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq12\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq12\_2@{E22\_Reg\_Freq12\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq12\_2@{E22\_Reg\_Freq12\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ae85434418ef54f5d68c0fae9476da835}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq12\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq12\_3@{E22\_Reg\_Freq12\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq12\_3@{E22\_Reg\_Freq12\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ad836cb5d889cae8707486e73ccd32f98}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq12\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols13\_0@{E22\_Reg\_NbSymbols13\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols13\_0@{E22\_Reg\_NbSymbols13\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a59d864881b8bd926dd0e5068a1669823}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols13\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols13\_1@{E22\_Reg\_NbSymbols13\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols13\_1@{E22\_Reg\_NbSymbols13\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a30161f9a29adacff8e256da86e8b72f0}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols13\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq13\_0@{E22\_Reg\_Freq13\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq13\_0@{E22\_Reg\_Freq13\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac78996168fd3acc2d14f1011c41e0c3d}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq13\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq13\_1@{E22\_Reg\_Freq13\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq13\_1@{E22\_Reg\_Freq13\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a3f715bc821deaa8f4eb6866ba600b68f}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq13\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq13\_2@{E22\_Reg\_Freq13\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq13\_2@{E22\_Reg\_Freq13\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aa36dd520d0f5a8a17a46a25ab7f06363}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq13\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq13\_3@{E22\_Reg\_Freq13\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq13\_3@{E22\_Reg\_Freq13\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a3005273611c2429d83a65d219edf37d4}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq13\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols14\_0@{E22\_Reg\_NbSymbols14\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols14\_0@{E22\_Reg\_NbSymbols14\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a40b0c5b4009afe74f576f5fe905065aa}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols14\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols14\_1@{E22\_Reg\_NbSymbols14\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols14\_1@{E22\_Reg\_NbSymbols14\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a2ff1ecfaaa00f4594f93e8d57c696bbd}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols14\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq14\_0@{E22\_Reg\_Freq14\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq14\_0@{E22\_Reg\_Freq14\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a0d0fe80b030a2720b56dd8086cb863fa}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq14\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq14\_1@{E22\_Reg\_Freq14\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq14\_1@{E22\_Reg\_Freq14\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aa53ad9b74eff5a79f4a6914ea558e96e}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq14\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq14\_2@{E22\_Reg\_Freq14\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq14\_2@{E22\_Reg\_Freq14\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ad0ae876883be0b191d787c0d5ca832b3}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq14\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq14\_3@{E22\_Reg\_Freq14\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq14\_3@{E22\_Reg\_Freq14\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a4adccf79d9ccd225807f3cc397f2ad00}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq14\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols15\_0@{E22\_Reg\_NbSymbols15\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols15\_0@{E22\_Reg\_NbSymbols15\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9acc7c3969d2735c29c915dd80106c2bc2}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols15\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NbSymbols15\_1@{E22\_Reg\_NbSymbols15\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NbSymbols15\_1@{E22\_Reg\_NbSymbols15\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a3562dcca92a34cdd2832e569d3121e37}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Nb\+Symbols15\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq15\_0@{E22\_Reg\_Freq15\_0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq15\_0@{E22\_Reg\_Freq15\_0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aba81c96b2c2d55b3a0f51211f69f98a0}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq15\+\_\+0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq15\_1@{E22\_Reg\_Freq15\_1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq15\_1@{E22\_Reg\_Freq15\_1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a9103a66baff4d0bf6f36d48e1e24b44c}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq15\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq15\_2@{E22\_Reg\_Freq15\_2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq15\_2@{E22\_Reg\_Freq15\_2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a05adc2c4788d911bf67489e8e2563a4d}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq15\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_Freq15\_3@{E22\_Reg\_Freq15\_3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_Freq15\_3@{E22\_Reg\_Freq15\_3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9af4d03c71ca16a902d17f7788c81fe4df}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Freq15\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_DIOxOutputEnable@{E22\_Reg\_DIOxOutputEnable}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_DIOxOutputEnable@{E22\_Reg\_DIOxOutputEnable}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac05aee2945feb0120be156d25e6152bc}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+DIOx\+Output\+Enable&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_DIOxInputEnable@{E22\_Reg\_DIOxInputEnable}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_DIOxInputEnable@{E22\_Reg\_DIOxInputEnable}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a7f4a5da317948267ef9c7d9cc9a3f283}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+DIOx\+Input\+Enable&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_DIOxPullUpControl@{E22\_Reg\_DIOxPullUpControl}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_DIOxPullUpControl@{E22\_Reg\_DIOxPullUpControl}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aed69eb0f03c81c7792f776c70738b96b}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+DIOx\+Pull\+Up\+Control&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_DIOxPullDownControl@{E22\_Reg\_DIOxPullDownControl}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_DIOxPullDownControl@{E22\_Reg\_DIOxPullDownControl}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a71399c1773fb6be6b86acfa2d7fa9522}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+DIOx\+Pull\+Down\+Control&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_WhiteningInitialValueMSB@{E22\_Reg\_WhiteningInitialValueMSB}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_WhiteningInitialValueMSB@{E22\_Reg\_WhiteningInitialValueMSB}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aad24fee5c33fb20c2fb654631f6b0a85}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Whitening\+Initial\+Value\+MSB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_WhiteningInitialValueLSB@{E22\_Reg\_WhiteningInitialValueLSB}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_WhiteningInitialValueLSB@{E22\_Reg\_WhiteningInitialValueLSB}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a566fd17a7e59d6b65fcaa4cf3564f869}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Whitening\+Initial\+Value\+LSB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_CRCMSBInitialValue0@{E22\_Reg\_CRCMSBInitialValue0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_CRCMSBInitialValue0@{E22\_Reg\_CRCMSBInitialValue0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aad75c3a94b76e5675d59fa9532132ec0}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+CRCMSBInitial\+Value0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_CRCLSBInitialValue0@{E22\_Reg\_CRCLSBInitialValue0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_CRCLSBInitialValue0@{E22\_Reg\_CRCLSBInitialValue0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a5a91b804022b525764658d56f1e1b930}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+CRCLSBInitial\+Value0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_CRCMSBPolynomialValue0@{E22\_Reg\_CRCMSBPolynomialValue0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_CRCMSBPolynomialValue0@{E22\_Reg\_CRCMSBPolynomialValue0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a39514dfd7d6db399293a167cc333bc2f}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+CRCMSBPolynomial\+Value0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_CRCLSBPolynomialValue0@{E22\_Reg\_CRCLSBPolynomialValue0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_CRCLSBPolynomialValue0@{E22\_Reg\_CRCLSBPolynomialValue0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac8a634b072ec5dd121b0a782e5addb64}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+CRCLSBPolynomial\+Value0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_SyncWord0@{E22\_Reg\_SyncWord0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_SyncWord0@{E22\_Reg\_SyncWord0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac7540931666836e549512a941229d540}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Sync\+Word0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_SyncWord1@{E22\_Reg\_SyncWord1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_SyncWord1@{E22\_Reg\_SyncWord1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a7a0d69032cfc7936319a6573e1b3d4e5}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Sync\+Word1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_SyncWord2@{E22\_Reg\_SyncWord2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_SyncWord2@{E22\_Reg\_SyncWord2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a059b54f983243c9f19af7bb22a5d5be5}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Sync\+Word2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_SyncWord3@{E22\_Reg\_SyncWord3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_SyncWord3@{E22\_Reg\_SyncWord3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a0e7076609936414a4ac8b9b04e9fff9c}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Sync\+Word3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_SyncWord4@{E22\_Reg\_SyncWord4}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_SyncWord4@{E22\_Reg\_SyncWord4}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a2c640b459938e0661c18e848805e7e22}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Sync\+Word4&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_SyncWord5@{E22\_Reg\_SyncWord5}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_SyncWord5@{E22\_Reg\_SyncWord5}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a510ad63a273724ebad115cb2f23d5328}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Sync\+Word5&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_SyncWord6@{E22\_Reg\_SyncWord6}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_SyncWord6@{E22\_Reg\_SyncWord6}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ab051d8b6a80723373d717bd1be8d70b4}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Sync\+Word6&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_SyncWord7@{E22\_Reg\_SyncWord7}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_SyncWord7@{E22\_Reg\_SyncWord7}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a7997ee8e3871c023df8e25e93c602b3a}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Sync\+Word7&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_NodeAddress@{E22\_Reg\_NodeAddress}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_NodeAddress@{E22\_Reg\_NodeAddress}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aad068e85b07399f9d8bab33ac11294fb}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Node\+Address&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_BroadcastAddress@{E22\_Reg\_BroadcastAddress}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_BroadcastAddress@{E22\_Reg\_BroadcastAddress}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ac561de3096453b0cd318a17ead0af58e}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Broadcast\+Address&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_IQPolaritySetup@{E22\_Reg\_IQPolaritySetup}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_IQPolaritySetup@{E22\_Reg\_IQPolaritySetup}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a6629c6842be900559b8904153eba14f0}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+IQPolarity\+Setup&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_LoRaSyncWordMSB@{E22\_Reg\_LoRaSyncWordMSB}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_LoRaSyncWordMSB@{E22\_Reg\_LoRaSyncWordMSB}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a898e5028943c9178643f369ef88b1b02}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Lo\+Ra\+Sync\+Word\+MSB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_LoRaSyncWordLSB@{E22\_Reg\_LoRaSyncWordLSB}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_LoRaSyncWordLSB@{E22\_Reg\_LoRaSyncWordLSB}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ab9ce443de4a52bc3a45b00b4467b885e}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Lo\+Ra\+Sync\+Word\+LSB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_RandomNumberGen0@{E22\_Reg\_RandomNumberGen0}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_RandomNumberGen0@{E22\_Reg\_RandomNumberGen0}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9ad5b3331ce0b161b28860534dbb51d4dc}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Random\+Number\+Gen0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_RandomNumberGen1@{E22\_Reg\_RandomNumberGen1}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_RandomNumberGen1@{E22\_Reg\_RandomNumberGen1}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aa705dd0452b6f961a29b62509abb90cd}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Random\+Number\+Gen1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_RandomNumberGen2@{E22\_Reg\_RandomNumberGen2}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_RandomNumberGen2@{E22\_Reg\_RandomNumberGen2}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aad500c3009622270314416c650f3b682}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Random\+Number\+Gen2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_RandomNumberGen3@{E22\_Reg\_RandomNumberGen3}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_RandomNumberGen3@{E22\_Reg\_RandomNumberGen3}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aeea4af28dc0a4a4aa3a78d0424c7d847}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Random\+Number\+Gen3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_TxModulation@{E22\_Reg\_TxModulation}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_TxModulation@{E22\_Reg\_TxModulation}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9af4cd27b97f03ea247c2f73f8238b16fa}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Tx\+Modulation&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_RxGain@{E22\_Reg\_RxGain}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_RxGain@{E22\_Reg\_RxGain}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a82b6066ae4e5d6a051abaaac5e18d1ec}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Rx\+Gain&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_TxClampConfig@{E22\_Reg\_TxClampConfig}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_TxClampConfig@{E22\_Reg\_TxClampConfig}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9acfb614b4c89621dd292b0592eddfd8c6}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Tx\+Clamp\+Config&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_OCPConfiguration@{E22\_Reg\_OCPConfiguration}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_OCPConfiguration@{E22\_Reg\_OCPConfiguration}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a03e9afca7d889cc50d8b8ad41893b54c}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+OCPConfiguration&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_RTCControl@{E22\_Reg\_RTCControl}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_RTCControl@{E22\_Reg\_RTCControl}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a9f4ceb1746b808c627f88ac9aca4f45e}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+RTCControl&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_XTATrim@{E22\_Reg\_XTATrim}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_XTATrim@{E22\_Reg\_XTATrim}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a96a913e84a46d002b998a9c205b23913}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+XTATrim&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_XTBTrim@{E22\_Reg\_XTBTrim}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_XTBTrim@{E22\_Reg\_XTBTrim}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aed89e4d4748e2d5902336caddb142646}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+XTBTrim&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_DIO3OutputVoltageControl@{E22\_Reg\_DIO3OutputVoltageControl}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_DIO3OutputVoltageControl@{E22\_Reg\_DIO3OutputVoltageControl}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9a71b1f17f641ee641fb399f1b343fe569}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+DIO3\+Output\+Voltage\+Control&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E22\_Reg\_EventMask@{E22\_Reg\_EventMask}!E22Opcodes.h@{E22Opcodes.h}}\index{E22Opcodes.h@{E22Opcodes.h}!E22\_Reg\_EventMask@{E22\_Reg\_EventMask}}}\Hypertarget{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9aecec5308b60f30fdee049267ecb7e568}\label{E22Opcodes_8h_a00ea338f799a32f46c19668fa477b2c9} 
+E22\+\_\+\+Reg\+\_\+\+Event\+Mask&\\
+\hline
+
+\end{DoxyEnumFields}

@@ -1,0 +1,101 @@
+\doxysection{Device\+Status.\+h}
+\hypertarget{_device_status_8h_source}{}\label{_device_status_8h_source}\index{include/DeviceStatus.h@{include/DeviceStatus.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DEVICESTATUS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DEVICESTATUS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_common_includes_8h}{CommonIncludes.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}E22Driver.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ STATUSTAG\ "{}STATUS"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{bool}\ use;}
+\DoxyCodeLine{00013\ \ \ \ \ uint8\_t\ XTALA;}
+\DoxyCodeLine{00014\ \ \ \ \ uint8\_t\ XTALB;}
+\DoxyCodeLine{00015\ \}\ \mbox{\hyperlink{struct_x_tal_config__t}{XTalConfig\_t}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ NONE\ =\ 0,}
+\DoxyCodeLine{00020\ \ \ \ \ TX\ =\ 1,}
+\DoxyCodeLine{00021\ \ \ \ \ RX\ =\ 2}
+\DoxyCodeLine{00022\ \}\ DeviceMode\_t;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s}{DEVICESTATUS}}}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ las\ funciones\ de\ copia\ y\ asignación}}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s}{DEVICESTATUS}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s}{DEVICESTATUS}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s}{DEVICESTATUS}}\ \&operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s}{DEVICESTATUS}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s}{DEVICESTATUS}}\ \&getInstance()}
+\DoxyCodeLine{00033\ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s}{DEVICESTATUS}}\ instance;\ \textcolor{comment}{//\ Única\ instancia}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00039\ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ E22::tcxoVoltage\_t\ tcxoVoltage;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ uint32\_t\ TXCOdio3Delay;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_e22_1_1_lora_packet_params__t}{E22::LoraPacketParams\_t}}\ packetParams;}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_e22_1_1_modulation_parameters__t}{E22::ModulationParameters\_t}}\ modulationParams;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ E22::RxGain\_t\ rxGain;}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ E22::ImageCalibrationFreq\_t\ imageCalibrationFreq;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ E22::PacketType\_t\ packetType;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_e22_1_1_calibrate__t}{E22::Calibrate\_t}}\ calibrations;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ uint32\_t\ frequency;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_x_tal_config__t}{XTalConfig\_t}}\ xtalConfig;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ E22::PaConfig\_t\ paConfig;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ E22::RampTime\_t\ rampTime;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ E22::SyncWordType\_t\ syncWord;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ uint32\_t\ transmitTimeout;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ uint32\_t\ recieveTimeout;}
+\DoxyCodeLine{00055\ \ \ \ \ \}\ \mbox{\hyperlink{struct_d_e_v_i_c_e_s_t_a_t_u_s_1_1_e22_status__t}{E22Status\_t}};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00058\ \ \ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_d_e_v_i_c_e_s_t_a_t_u_s_1_1_e22_status__t}{E22Status\_t}}\ E22Status;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ automatic;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ DeviceMode\_t\ mode;}
+\DoxyCodeLine{00062\ \ \ \ \ \}\ \mbox{\hyperlink{struct_d_e_v_i_c_e_s_t_a_t_u_s_1_1_device_status__t}{DeviceStatus\_t}};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s_aa308bb49aba6dc7b5548c944a2648da6}{Begin}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s_a20682a6bc93920ec5b407e8ab77c339b}{printStatus}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s_a1db6a5b8ed1f175cafbf5209748d27e9}{loadStatusFromFs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_d_e_v_i_c_e_s_t_a_t_u_s_1_1_device_status__t}{DeviceStatus\_t}}\ deviceStatus;}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//\ Constructor\ privado}}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{class_d_e_v_i_c_e_s_t_a_t_u_s}{DEVICESTATUS}}()\ \{\}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ loadDeviceFromFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//\ Doxygen\ comments}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ loadPacketTypeFromFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ loadTCXOFromFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ loadCalibrationsFromFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ loadXTALConfigFromFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ loadFrequencyFromFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ calculateImageCalibrationFrequency(uint32\_t\ frequency);}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ loadPAConfigFromFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ loadTxParamsFromFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ loadModulationParamsFromFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ loadPacketParamsFromFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ loadSyncWordFromFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ loadRxGainFromFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ loadTimeoutFromFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00117\ \};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DEVICESTATUS\_H}}
+
+\end{DoxyCode}

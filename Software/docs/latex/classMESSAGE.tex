@@ -1,0 +1,91 @@
+\doxysection{MESSAGE Class Reference}
+\hypertarget{classMESSAGE}{}\label{classMESSAGE}\index{MESSAGE@{MESSAGE}}
+
+
+{\ttfamily \#include $<$Message.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMESSAGE_ac70459575cd16b60f8c32c5e12d4a81c}{MESSAGE}} (const \mbox{\hyperlink{classMESSAGE}{MESSAGE}} \&)=delete
+\item 
+\mbox{\hyperlink{classMESSAGE}{MESSAGE}} \& \mbox{\hyperlink{classMESSAGE_ae3aa156c27b58f253539415b85f34c7e}{operator=}} (const \mbox{\hyperlink{classMESSAGE}{MESSAGE}} \&)=delete
+\item 
+\mbox{\hyperlink{structMessage__t}{Message\+\_\+t}} \mbox{\hyperlink{classMESSAGE_ab65c3098a33600bc942cc5a8dd3dfeb0}{process\+Message\+Sent}} (uint8\+\_\+t arr\mbox{[}$\,$\mbox{]})
+\item 
+\mbox{\hyperlink{structMessage__t}{Message\+\_\+t}} \mbox{\hyperlink{classMESSAGE_a72bbdb88f4e75b7f57be3161f1cf55ac}{process\+Message\+Recieved}} (uint8\+\_\+t arr\mbox{[}$\,$\mbox{]})
+\item 
+bool \mbox{\hyperlink{classMESSAGE_ab0d3b3a3e2f8587c26d4be809b212a9e}{save\+Message}} (\mbox{\hyperlink{structMessage__t}{Message\+\_\+t}} message)
+\item 
+bool \mbox{\hyperlink{classMESSAGE_ac8c51756bb241747b6ae686044da8802}{read\+All\+Packets}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classMESSAGE}{MESSAGE}} \& \mbox{\hyperlink{classMESSAGE_a4ea04700b7e29a58eddcd15cec60099c}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMESSAGE_ab3931b55e4285df03dbe12fe1906d5db}{MESSAGE}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classMESSAGE_ac70459575cd16b60f8c32c5e12d4a81c}\index{MESSAGE@{MESSAGE}!MESSAGE@{MESSAGE}}
+\index{MESSAGE@{MESSAGE}!MESSAGE@{MESSAGE}}
+\doxysubsubsection{\texorpdfstring{MESSAGE()}{MESSAGE()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classMESSAGE_ac70459575cd16b60f8c32c5e12d4a81c} 
+MESSAGE\+::\+MESSAGE (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classMESSAGE}{MESSAGE}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classMESSAGE_ab3931b55e4285df03dbe12fe1906d5db}\index{MESSAGE@{MESSAGE}!MESSAGE@{MESSAGE}}
+\index{MESSAGE@{MESSAGE}!MESSAGE@{MESSAGE}}
+\doxysubsubsection{\texorpdfstring{MESSAGE()}{MESSAGE()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classMESSAGE_ab3931b55e4285df03dbe12fe1906d5db} 
+MESSAGE\+::\+MESSAGE (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classMESSAGE_a4ea04700b7e29a58eddcd15cec60099c}\index{MESSAGE@{MESSAGE}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!MESSAGE@{MESSAGE}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \label{classMESSAGE_a4ea04700b7e29a58eddcd15cec60099c} 
+static \mbox{\hyperlink{classMESSAGE}{MESSAGE}} \& MESSAGE\+::get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classMESSAGE_ae3aa156c27b58f253539415b85f34c7e}\index{MESSAGE@{MESSAGE}!operator=@{operator=}}
+\index{operator=@{operator=}!MESSAGE@{MESSAGE}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classMESSAGE_ae3aa156c27b58f253539415b85f34c7e} 
+\mbox{\hyperlink{classMESSAGE}{MESSAGE}} \& MESSAGE\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classMESSAGE}{MESSAGE}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classMESSAGE_a72bbdb88f4e75b7f57be3161f1cf55ac}\index{MESSAGE@{MESSAGE}!processMessageRecieved@{processMessageRecieved}}
+\index{processMessageRecieved@{processMessageRecieved}!MESSAGE@{MESSAGE}}
+\doxysubsubsection{\texorpdfstring{processMessageRecieved()}{processMessageRecieved()}}
+{\footnotesize\ttfamily \label{classMESSAGE_a72bbdb88f4e75b7f57be3161f1cf55ac} 
+\mbox{\hyperlink{structMessage__t}{Message\+\_\+t}} MESSAGE\+::process\+Message\+Recieved (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{arr}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+\Hypertarget{classMESSAGE_ab65c3098a33600bc942cc5a8dd3dfeb0}\index{MESSAGE@{MESSAGE}!processMessageSent@{processMessageSent}}
+\index{processMessageSent@{processMessageSent}!MESSAGE@{MESSAGE}}
+\doxysubsubsection{\texorpdfstring{processMessageSent()}{processMessageSent()}}
+{\footnotesize\ttfamily \label{classMESSAGE_ab65c3098a33600bc942cc5a8dd3dfeb0} 
+\mbox{\hyperlink{structMessage__t}{Message\+\_\+t}} MESSAGE\+::process\+Message\+Sent (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{arr}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+\Hypertarget{classMESSAGE_ac8c51756bb241747b6ae686044da8802}\index{MESSAGE@{MESSAGE}!readAllPackets@{readAllPackets}}
+\index{readAllPackets@{readAllPackets}!MESSAGE@{MESSAGE}}
+\doxysubsubsection{\texorpdfstring{readAllPackets()}{readAllPackets()}}
+{\footnotesize\ttfamily \label{classMESSAGE_ac8c51756bb241747b6ae686044da8802} 
+bool MESSAGE\+::read\+All\+Packets (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classMESSAGE_ab0d3b3a3e2f8587c26d4be809b212a9e}\index{MESSAGE@{MESSAGE}!saveMessage@{saveMessage}}
+\index{saveMessage@{saveMessage}!MESSAGE@{MESSAGE}}
+\doxysubsubsection{\texorpdfstring{saveMessage()}{saveMessage()}}
+{\footnotesize\ttfamily \label{classMESSAGE_ab0d3b3a3e2f8587c26d4be809b212a9e} 
+bool MESSAGE\+::save\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMessage__t}{Message\+\_\+t}}}]{message}{}\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{Message_8h}{Message.\+h}}\item 
+src/\mbox{\hyperlink{Message_8cpp}{Message.\+cpp}}\end{DoxyCompactItemize}

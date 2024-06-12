@@ -1,4 +1,8 @@
 #include "DeviceTime.h"
+#include "FileSystem.h"
+#include "Network.h"
+
+#include "esp_netif_sntp.h"
 
 bool DEVICETIME::Begin(void)
 {

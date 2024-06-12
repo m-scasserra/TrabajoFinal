@@ -1,0 +1,77 @@
+\doxysection{Automatic\+Jobs.\+h}
+\hypertarget{_automatic_jobs_8h_source}{}\label{_automatic_jobs_8h_source}\index{include/AutomaticJobs.h@{include/AutomaticJobs.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ AUTOMATICJOBS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ AUTOMATICJOBS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_common_includes_8h}{CommonIncludes.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ AJTAG\ "{}AUTOJOB"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ MAX\_LINE\_LENGTH\ 200}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ MAX\_SCHEDULE\_LENGTH\ 50}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ MAX\_FUNCTION\_NAME\_LENGTH\ 50}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_a_u_t_o_j_o_b}{AUTOJOB}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ las\ funciones\ de\ copia\ y\ asignación}}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_a_u_t_o_j_o_b}{AUTOJOB}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_a_u_t_o_j_o_b}{AUTOJOB}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_a_u_t_o_j_o_b}{AUTOJOB}}\ \&operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_a_u_t_o_j_o_b}{AUTOJOB}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_a_u_t_o_j_o_b}{AUTOJOB}}\ \&getInstance()}
+\DoxyCodeLine{00020\ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_a_u_t_o_j_o_b}{AUTOJOB}}\ instance;\ \textcolor{comment}{//\ Única\ instancia}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00023\ \ \ \ \ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//\ Define\ a\ callback\ function\ type\ (can\ be\ modified\ to\ fit\ your\ specific\ needs)}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{typedef}\ void\ (*callback\_t)(void);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{//\ Structure\ to\ store\ a\ callback\ and\ its\ name}}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_a_u_t_o_j_o_b_1_1callback_node}{callbackNode}}}
+\DoxyCodeLine{00030\ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *name;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ callback\_t\ function;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_a_u_t_o_j_o_b_1_1callback_node}{callbackNode}}\ *next;}
+\DoxyCodeLine{00034\ \ \ \ \ \}\ \mbox{\hyperlink{struct_a_u_t_o_j_o_b_1_1callback_node}{callbackNode\_t}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_a_u_t_o_j_o_b_1_1callback__node}{callback\_node}}}
+\DoxyCodeLine{00037\ \ \ \ \ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *name;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ callback\_t\ function;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_a_u_t_o_j_o_b_1_1callback__node}{callback\_node}}\ *next;}
+\DoxyCodeLine{00041\ \ \ \ \ \}\ \mbox{\hyperlink{struct_a_u_t_o_j_o_b_1_1callback__node}{callback\_node\_t}};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ loadJobsFromFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ saveJobsToFs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ deleteJobsFromFs(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *functionToDelete);}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ startJobs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ stopJobs(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ Begin(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ addAllCallbacks(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ printAllCallbacksNames(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//\ Constructor\ privado}}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{class_a_u_t_o_j_o_b}{AUTOJOB}}()\ \{\}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ Function\ to\ create\ a\ new\ callback\ node}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{static}\ callbackNode\_t\ *createCallbackNode(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name,\ callback\_t\ function);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{comment}{//\ Function\ to\ add\ a\ callback\ to\ the\ list}}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ addCallback(callbackNode\_t\ **head,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name,\ callback\_t\ function);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//\ Function\ to\ find\ a\ callback\ by\ name}}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ callback\_t\ getCallback(callbackNode\_t\ *head,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//\ Function\ to\ free\ the\ callback\ list\ (important\ for\ memory\ management)}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ freeCallbackList(callbackNode\_t\ *head);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ started;}
+\DoxyCodeLine{00069\ \};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ AUTOMATICJOBS\_H}}
+
+\end{DoxyCode}

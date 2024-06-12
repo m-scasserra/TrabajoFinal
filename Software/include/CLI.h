@@ -1,8 +1,9 @@
 #ifndef CLI_H
 #define CLI_H
 
-#include "Includes.h"
+#include "CommonIncludes.h"
 #include "esp_clk_tree.h"
+#include "esp_console.h"
 
 #define CLITAG "CLI"
 

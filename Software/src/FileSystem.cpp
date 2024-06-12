@@ -31,7 +31,7 @@ void FS::Begin(void)
                 return;
             }
             ESP_LOGI(FSTAG, "Se ha creado el archivo %s", DEVICE_CONFIG_FILE_PATH);
-            
+
             ESP_LOGI(FSTAG, "Populando archivo %s", DEVICE_CONFIG_FILE_PATH);
             if (!populateDeviceConfigIni())
             {
@@ -732,46 +732,6 @@ bool FS::seekAndWriteFile(const char *filePath, void *inputBuffer, long int size
 
 bool FS::populateDeviceConfigIni(void)
 {
-    // Populo el config.ini de los valores predeterminados
-    /*
-    [DEVICE]
-        AUTOMATIC=[OFF]/ON
-        FUNCTION=[NONE]/TX/RX
-    [PACKETTYPE]
-        TYPE=[LORA]/GFSK/LRFHSS
-    [TCXO]
-        DIO3VOLTAGE=[1_8]/1_6/1_7/1_8/2_2/2_4/2_7/3_0/3_3
-        DIO3DELAY=[10]/0-262143
-    [CALIBRATIONS]
-        DO=[0x7F]/0x00-0x7F
-    [XTAL]
-        USE=[Y]/N
-        A=[0x12]/0x00-0x2F
-        B=[0x12]/0x00-0x2F
-    [FREQUENCY]
-        FREQUENCY=[915000000]
-    [PACONFIG]
-        DBM=[17]/14/20/22
-    [TXPARAMS]
-        RAMPTIME=[800]/10/20/40/80/200/800/1700/3400
-    [MODULATION]
-        SF=[7]/5/6/7/8/9/10/11/12
-        BW=[125]/7/10/15/20/31/41/62/125/250/500
-        CR=[4/5]/"4/6"/"4/7"/"4/8"
-    [PACKETPARAMS]
-        HEADER=[EXPLICIT]/IMPLICIT
-        PREAMBLELENGTH=[12]
-        PAYLOADLENGTH=[9]
-        CRC=[ON]/OFF
-        IQTYPE=[STANDARD]/INVERTED
-    [SYNCWORD]
-        SYNCWORD=[0x3444]/0x1424
-    [RXGAIN]
-        RXGAIN=[BOOST]/POWERSAVE
-    [TIMEOUT]
-        TRANSMIT=[30000]
-        RECIEVE=[30000]
-    */
     if (!Ini_puts("DEVICE", "AUTOMATIC", "OFF", DEVICE_CONFIG_FILE_PATH))
         return false;
     if (!Ini_puts("DEVICE", "FUNCTION", "NONE", DEVICE_CONFIG_FILE_PATH))

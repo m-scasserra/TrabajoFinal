@@ -1,0 +1,94 @@
+\doxysection{include/\+Led.h File Reference}
+\hypertarget{Led_8h}{}\label{Led_8h}\index{include/Led.h@{include/Led.h}}
+
+
+Header file for the \doxylink{classLED}{LED} class that controls RGB \doxylink{classLED}{LED} strips using RMT.  
+
+
+{\ttfamily \#include "{}Common\+Includes.\+h"{}}\newline
+{\ttfamily \#include "{}driver/rmt\+\_\+encoder.\+h"{}}\newline
+{\ttfamily \#include "{}driver/rmt\+\_\+tx.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classLED}{LED}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classLED}{LED} class for controlling RGB \doxylink{classLED}{LED} strips using RMT. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structLED_1_1led__strip__encoder__config__t}{LED\+::led\+\_\+strip\+\_\+encoder\+\_\+config\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Configuration structure for \doxylink{classLED}{LED} strip encoder. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structLED_1_1rmt__led__strip__encoder__t}{LED\+::rmt\+\_\+led\+\_\+strip\+\_\+encoder\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Structure for RMT \doxylink{classLED}{LED} strip encoder. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{Led_8h_a2530d5f0a966e6061e3a175c01e7f8ce}{RMT\+\_\+\+LED\+\_\+\+STRIP\+\_\+\+RESOLUTION\+\_\+\+HZ}}~10000000
+\item 
+\#define \mbox{\hyperlink{Led_8h_a5cead2bee5c86d43a1d60f1b1db21367}{RMT\+\_\+\+RESOL\+\_\+\+TO\+\_\+\+TICKS}}~1000000
+\item 
+\#define \mbox{\hyperlink{Led_8h_a1b15781780446cc96c3529e67ffd155b}{T0H}}~0.\+3
+\item 
+\#define \mbox{\hyperlink{Led_8h_aaa6df9b03f5c83a82da353df9bb19a60}{T0L}}~0.\+9
+\item 
+\#define \mbox{\hyperlink{Led_8h_ae0de4e06e642a9dfa3d6f273a5c8e23b}{T1H}}~0.\+9
+\item 
+\#define \mbox{\hyperlink{Led_8h_aad296a317c61b4367f690d958fb2ee12}{T1L}}~0.\+3
+\item 
+\#define \mbox{\hyperlink{Led_8h_acfeb8f3dd3d14647429e9717a1d7b185}{TRST}}~100
+\item 
+\#define \mbox{\hyperlink{Led_8h_a1b00ad28d362acbb795a2d416c20c15f}{LEDTAG}}~"{}LED"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file for the \doxylink{classLED}{LED} class that controls RGB \doxylink{classLED}{LED} strips using RMT. 
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{Led_8h_a1b00ad28d362acbb795a2d416c20c15f}\index{Led.h@{Led.h}!LEDTAG@{LEDTAG}}
+\index{LEDTAG@{LEDTAG}!Led.h@{Led.h}}
+\doxysubsubsection{\texorpdfstring{LEDTAG}{LEDTAG}}
+{\footnotesize\ttfamily \label{Led_8h_a1b00ad28d362acbb795a2d416c20c15f} 
+\#define LEDTAG~"{}LED"{}}
+
+\Hypertarget{Led_8h_a2530d5f0a966e6061e3a175c01e7f8ce}\index{Led.h@{Led.h}!RMT\_LED\_STRIP\_RESOLUTION\_HZ@{RMT\_LED\_STRIP\_RESOLUTION\_HZ}}
+\index{RMT\_LED\_STRIP\_RESOLUTION\_HZ@{RMT\_LED\_STRIP\_RESOLUTION\_HZ}!Led.h@{Led.h}}
+\doxysubsubsection{\texorpdfstring{RMT\_LED\_STRIP\_RESOLUTION\_HZ}{RMT\_LED\_STRIP\_RESOLUTION\_HZ}}
+{\footnotesize\ttfamily \label{Led_8h_a2530d5f0a966e6061e3a175c01e7f8ce} 
+\#define RMT\+\_\+\+LED\+\_\+\+STRIP\+\_\+\+RESOLUTION\+\_\+\+HZ~10000000}
+
+\Hypertarget{Led_8h_a5cead2bee5c86d43a1d60f1b1db21367}\index{Led.h@{Led.h}!RMT\_RESOL\_TO\_TICKS@{RMT\_RESOL\_TO\_TICKS}}
+\index{RMT\_RESOL\_TO\_TICKS@{RMT\_RESOL\_TO\_TICKS}!Led.h@{Led.h}}
+\doxysubsubsection{\texorpdfstring{RMT\_RESOL\_TO\_TICKS}{RMT\_RESOL\_TO\_TICKS}}
+{\footnotesize\ttfamily \label{Led_8h_a5cead2bee5c86d43a1d60f1b1db21367} 
+\#define RMT\+\_\+\+RESOL\+\_\+\+TO\+\_\+\+TICKS~1000000}
+
+\Hypertarget{Led_8h_a1b15781780446cc96c3529e67ffd155b}\index{Led.h@{Led.h}!T0H@{T0H}}
+\index{T0H@{T0H}!Led.h@{Led.h}}
+\doxysubsubsection{\texorpdfstring{T0H}{T0H}}
+{\footnotesize\ttfamily \label{Led_8h_a1b15781780446cc96c3529e67ffd155b} 
+\#define T0H~0.\+3}
+
+\Hypertarget{Led_8h_aaa6df9b03f5c83a82da353df9bb19a60}\index{Led.h@{Led.h}!T0L@{T0L}}
+\index{T0L@{T0L}!Led.h@{Led.h}}
+\doxysubsubsection{\texorpdfstring{T0L}{T0L}}
+{\footnotesize\ttfamily \label{Led_8h_aaa6df9b03f5c83a82da353df9bb19a60} 
+\#define T0L~0.\+9}
+
+\Hypertarget{Led_8h_ae0de4e06e642a9dfa3d6f273a5c8e23b}\index{Led.h@{Led.h}!T1H@{T1H}}
+\index{T1H@{T1H}!Led.h@{Led.h}}
+\doxysubsubsection{\texorpdfstring{T1H}{T1H}}
+{\footnotesize\ttfamily \label{Led_8h_ae0de4e06e642a9dfa3d6f273a5c8e23b} 
+\#define T1H~0.\+9}
+
+\Hypertarget{Led_8h_aad296a317c61b4367f690d958fb2ee12}\index{Led.h@{Led.h}!T1L@{T1L}}
+\index{T1L@{T1L}!Led.h@{Led.h}}
+\doxysubsubsection{\texorpdfstring{T1L}{T1L}}
+{\footnotesize\ttfamily \label{Led_8h_aad296a317c61b4367f690d958fb2ee12} 
+\#define T1L~0.\+3}
+
+\Hypertarget{Led_8h_acfeb8f3dd3d14647429e9717a1d7b185}\index{Led.h@{Led.h}!TRST@{TRST}}
+\index{TRST@{TRST}!Led.h@{Led.h}}
+\doxysubsubsection{\texorpdfstring{TRST}{TRST}}
+{\footnotesize\ttfamily \label{Led_8h_acfeb8f3dd3d14647429e9717a1d7b185} 
+\#define TRST~100}
+

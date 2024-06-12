@@ -1,0 +1,76 @@
+\doxysection{include/\+CLI.h File Reference}
+\hypertarget{CLI_8h}{}\label{CLI_8h}\index{include/CLI.h@{include/CLI.h}}
+{\ttfamily \#include "{}Common\+Includes.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+clk\+\_\+tree.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+console.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classCLI}{CLI}}
+\item 
+struct \mbox{\hyperlink{structCLI_1_1timercmd__args__t}{CLI\+::timercmd\+\_\+args\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structCLI_1_1configcmd__args__t}{CLI\+::configcmd\+\_\+args\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structCLI_1_1FScmd__args__t}{CLI\+::\+FScmd\+\_\+args\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structCLI_1_1netcmd__args__t}{CLI\+::netcmd\+\_\+args\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structCLI_1_1timecmd__args__t}{CLI\+::timecmd\+\_\+args\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structCLI_1_1AJcmd__args__t}{CLI\+::\+AJcmd\+\_\+args\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{CLI_8h_a41317cd5f0a316c14eea87179f1c62de}{CLITAG}}~"{}CLI"{}
+\item 
+\#define \mbox{\hyperlink{CLI_8h_a832dbdbcada9082f08c02ff4847ca28a}{MSG\+\_\+\+QUEUE\+\_\+\+LEN}}~20
+\item 
+\#define \mbox{\hyperlink{CLI_8h_a2ad9de7ccad1dc3102460a8090f17ed0}{MSG\+\_\+\+MAX\+\_\+\+LEN}}~200
+\item 
+\#define \mbox{\hyperlink{CLI_8h_aee65e63e3724152381527e6029aedaff}{QUEUE\+\_\+\+TIMEOUT}}~100
+\item 
+\#define \mbox{\hyperlink{CLI_8h_a7a318deefabcc610fc5fbe2e83987a2d}{CONSOLE\+\_\+\+PROMPT}}~"{}SATE$>$"{}
+\item 
+\#define \mbox{\hyperlink{CLI_8h_ab354567e92705c5a4ac162908f45fdb5}{MAX\+\_\+\+CMDLINE\+\_\+\+LEN}}~60
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{CLI_8h_a41317cd5f0a316c14eea87179f1c62de}\index{CLI.h@{CLI.h}!CLITAG@{CLITAG}}
+\index{CLITAG@{CLITAG}!CLI.h@{CLI.h}}
+\doxysubsubsection{\texorpdfstring{CLITAG}{CLITAG}}
+{\footnotesize\ttfamily \label{CLI_8h_a41317cd5f0a316c14eea87179f1c62de} 
+\#define CLITAG~"{}CLI"{}}
+
+\Hypertarget{CLI_8h_a7a318deefabcc610fc5fbe2e83987a2d}\index{CLI.h@{CLI.h}!CONSOLE\_PROMPT@{CONSOLE\_PROMPT}}
+\index{CONSOLE\_PROMPT@{CONSOLE\_PROMPT}!CLI.h@{CLI.h}}
+\doxysubsubsection{\texorpdfstring{CONSOLE\_PROMPT}{CONSOLE\_PROMPT}}
+{\footnotesize\ttfamily \label{CLI_8h_a7a318deefabcc610fc5fbe2e83987a2d} 
+\#define CONSOLE\+\_\+\+PROMPT~"{}SATE$>$"{}}
+
+\Hypertarget{CLI_8h_ab354567e92705c5a4ac162908f45fdb5}\index{CLI.h@{CLI.h}!MAX\_CMDLINE\_LEN@{MAX\_CMDLINE\_LEN}}
+\index{MAX\_CMDLINE\_LEN@{MAX\_CMDLINE\_LEN}!CLI.h@{CLI.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_CMDLINE\_LEN}{MAX\_CMDLINE\_LEN}}
+{\footnotesize\ttfamily \label{CLI_8h_ab354567e92705c5a4ac162908f45fdb5} 
+\#define MAX\+\_\+\+CMDLINE\+\_\+\+LEN~60}
+
+\Hypertarget{CLI_8h_a2ad9de7ccad1dc3102460a8090f17ed0}\index{CLI.h@{CLI.h}!MSG\_MAX\_LEN@{MSG\_MAX\_LEN}}
+\index{MSG\_MAX\_LEN@{MSG\_MAX\_LEN}!CLI.h@{CLI.h}}
+\doxysubsubsection{\texorpdfstring{MSG\_MAX\_LEN}{MSG\_MAX\_LEN}}
+{\footnotesize\ttfamily \label{CLI_8h_a2ad9de7ccad1dc3102460a8090f17ed0} 
+\#define MSG\+\_\+\+MAX\+\_\+\+LEN~200}
+
+\Hypertarget{CLI_8h_a832dbdbcada9082f08c02ff4847ca28a}\index{CLI.h@{CLI.h}!MSG\_QUEUE\_LEN@{MSG\_QUEUE\_LEN}}
+\index{MSG\_QUEUE\_LEN@{MSG\_QUEUE\_LEN}!CLI.h@{CLI.h}}
+\doxysubsubsection{\texorpdfstring{MSG\_QUEUE\_LEN}{MSG\_QUEUE\_LEN}}
+{\footnotesize\ttfamily \label{CLI_8h_a832dbdbcada9082f08c02ff4847ca28a} 
+\#define MSG\+\_\+\+QUEUE\+\_\+\+LEN~20}
+
+\Hypertarget{CLI_8h_aee65e63e3724152381527e6029aedaff}\index{CLI.h@{CLI.h}!QUEUE\_TIMEOUT@{QUEUE\_TIMEOUT}}
+\index{QUEUE\_TIMEOUT@{QUEUE\_TIMEOUT}!CLI.h@{CLI.h}}
+\doxysubsubsection{\texorpdfstring{QUEUE\_TIMEOUT}{QUEUE\_TIMEOUT}}
+{\footnotesize\ttfamily \label{CLI_8h_aee65e63e3724152381527e6029aedaff} 
+\#define QUEUE\+\_\+\+TIMEOUT~100}
+

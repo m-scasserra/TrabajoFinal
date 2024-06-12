@@ -1,0 +1,64 @@
+\doxysection{src/\+Automatic\+Jobs.cpp File Reference}
+\hypertarget{AutomaticJobs_8cpp}{}\label{AutomaticJobs_8cpp}\index{src/AutomaticJobs.cpp@{src/AutomaticJobs.cpp}}
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include "{}cron.\+h"{}}\newline
+{\ttfamily \#include "{}Automatic\+Jobs.\+h"{}}\newline
+{\ttfamily \#include "{}Message.\+h"{}}\newline
+{\ttfamily \#include "{}E22\+Driver.\+h"{}}\newline
+{\ttfamily \#include "{}Led.\+h"{}}\newline
+{\ttfamily \#include "{}Device\+Status.\+h"{}}\newline
+{\ttfamily \#include "{}File\+System.\+h"{}}\newline
+{\ttfamily \#include "{}Device\+Time.\+h"{}}\newline
+{\ttfamily \#include "{}IO.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{AutomaticJobs_8cpp_a2cf3b8d4ca1a45843f32cd4ea3120c93}{test\+\_\+cron\+\_\+job\+\_\+sample\+\_\+callback}} (cron\+\_\+job \texorpdfstring{$\ast$}{*}job)
+\item 
+void \mbox{\hyperlink{AutomaticJobs_8cpp_a0377a46407007918c28037af20e16de2}{transmit\+Cron\+Job\+Callback}} (cron\+\_\+job \texorpdfstring{$\ast$}{*}job)
+\item 
+void \mbox{\hyperlink{AutomaticJobs_8cpp_ad9862214c7c322d13997e2183b28bce0}{recieve\+Cron\+Job\+Callback}} (cron\+\_\+job \texorpdfstring{$\ast$}{*}job)
+\item 
+void \mbox{\hyperlink{AutomaticJobs_8cpp_a0645a0c161b463619c79df49d6b42048}{save\+Time\+Cron\+Job\+Callback}} (cron\+\_\+job \texorpdfstring{$\ast$}{*}job)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{AUTOJOB\+::callback\+Node\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{AutomaticJobs_8cpp_ace779cd8a5fae90ae4b1471693023281}{callback\+List\+Head}} = NULL
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{AutomaticJobs_8cpp_ad9862214c7c322d13997e2183b28bce0}\index{AutomaticJobs.cpp@{AutomaticJobs.cpp}!recieveCronJobCallback@{recieveCronJobCallback}}
+\index{recieveCronJobCallback@{recieveCronJobCallback}!AutomaticJobs.cpp@{AutomaticJobs.cpp}}
+\doxysubsubsection{\texorpdfstring{recieveCronJobCallback()}{recieveCronJobCallback()}}
+{\footnotesize\ttfamily \label{AutomaticJobs_8cpp_ad9862214c7c322d13997e2183b28bce0} 
+void recieve\+Cron\+Job\+Callback (\begin{DoxyParamCaption}\item[{cron\+\_\+job \texorpdfstring{$\ast$}{*}}]{job}{}\end{DoxyParamCaption})}
+
+\Hypertarget{AutomaticJobs_8cpp_a0645a0c161b463619c79df49d6b42048}\index{AutomaticJobs.cpp@{AutomaticJobs.cpp}!saveTimeCronJobCallback@{saveTimeCronJobCallback}}
+\index{saveTimeCronJobCallback@{saveTimeCronJobCallback}!AutomaticJobs.cpp@{AutomaticJobs.cpp}}
+\doxysubsubsection{\texorpdfstring{saveTimeCronJobCallback()}{saveTimeCronJobCallback()}}
+{\footnotesize\ttfamily \label{AutomaticJobs_8cpp_a0645a0c161b463619c79df49d6b42048} 
+void save\+Time\+Cron\+Job\+Callback (\begin{DoxyParamCaption}\item[{cron\+\_\+job \texorpdfstring{$\ast$}{*}}]{job}{}\end{DoxyParamCaption})}
+
+\Hypertarget{AutomaticJobs_8cpp_a2cf3b8d4ca1a45843f32cd4ea3120c93}\index{AutomaticJobs.cpp@{AutomaticJobs.cpp}!test\_cron\_job\_sample\_callback@{test\_cron\_job\_sample\_callback}}
+\index{test\_cron\_job\_sample\_callback@{test\_cron\_job\_sample\_callback}!AutomaticJobs.cpp@{AutomaticJobs.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_cron\_job\_sample\_callback()}{test\_cron\_job\_sample\_callback()}}
+{\footnotesize\ttfamily \label{AutomaticJobs_8cpp_a2cf3b8d4ca1a45843f32cd4ea3120c93} 
+void test\+\_\+cron\+\_\+job\+\_\+sample\+\_\+callback (\begin{DoxyParamCaption}\item[{cron\+\_\+job \texorpdfstring{$\ast$}{*}}]{job}{}\end{DoxyParamCaption})}
+
+\Hypertarget{AutomaticJobs_8cpp_a0377a46407007918c28037af20e16de2}\index{AutomaticJobs.cpp@{AutomaticJobs.cpp}!transmitCronJobCallback@{transmitCronJobCallback}}
+\index{transmitCronJobCallback@{transmitCronJobCallback}!AutomaticJobs.cpp@{AutomaticJobs.cpp}}
+\doxysubsubsection{\texorpdfstring{transmitCronJobCallback()}{transmitCronJobCallback()}}
+{\footnotesize\ttfamily \label{AutomaticJobs_8cpp_a0377a46407007918c28037af20e16de2} 
+void transmit\+Cron\+Job\+Callback (\begin{DoxyParamCaption}\item[{cron\+\_\+job \texorpdfstring{$\ast$}{*}}]{job}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{AutomaticJobs_8cpp_ace779cd8a5fae90ae4b1471693023281}\index{AutomaticJobs.cpp@{AutomaticJobs.cpp}!callbackListHead@{callbackListHead}}
+\index{callbackListHead@{callbackListHead}!AutomaticJobs.cpp@{AutomaticJobs.cpp}}
+\doxysubsubsection{\texorpdfstring{callbackListHead}{callbackListHead}}
+{\footnotesize\ttfamily \label{AutomaticJobs_8cpp_ace779cd8a5fae90ae4b1471693023281} 
+\mbox{\hyperlink{classAUTOJOB_aed63220685cd78aac3cf99710c8a851e}{AUTOJOB\+::callback\+Node\+\_\+t}}\texorpdfstring{$\ast$}{*} callback\+List\+Head = NULL}
+

@@ -1,5 +1,4 @@
 #include "Message.h"
-#include <sys/time.h>
 #include "FileSystem.h"
 
 Message_t MESSAGE::processMessageSent(uint8_t arr[])
@@ -50,11 +49,11 @@ bool MESSAGE::saveMessage(Message_t message)
 
     if (!fs.WriteFile(&message, sizeof(Message_t), 1, PACKETS_BIN_PATH, "a+"))
     {
-        ESP_LOGE(IOTAG, "Error al guardar el valor del paquete");
+        ESP_LOGE(MESSAGETAG, "Error al guardar el valor del paquete");
         return false;
     }
 
-    ESP_LOGI(IOTAG, "Se guardó el paquete");
+    ESP_LOGI(MESSAGETAG, "Se guardó el paquete");
     return true;
 }
 
@@ -74,7 +73,7 @@ bool MESSAGE::readAllPackets(void)
 
             if (!fs.seekAndReadFile(PACKETS_BIN_PATH, &aux, sizeof(Message_t), i, SEEK_SET))
             {
-                ESP_LOGE(IOTAG, "Error al leer el paquete %ld", i);
+                ESP_LOGE(MESSAGETAG, "Error al leer el paquete %ld", i);
                 return false;
             }
 
